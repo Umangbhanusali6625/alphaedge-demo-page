@@ -3,7 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta name="description" content="Apply for admission to AlphaEdge Pro Academy. Learn institutional participation systems, high-probability order-flow trading, and advanced market theories.">
+  <meta name="keywords" content="AlphaEdge Admissions, Institutional Trading, UOP Theory, Delta Theory, Blaster Theory, Stock Market Course, Trading Academy">
+  <meta name="robots" content="index, follow">
   <title>AlphaEdge Academy | Institutional Trading Admissions</title>
+  <link rel="icon" type="image/png" href="./image/ChatGPT Image Aug 29, 2026, 05_40_40 PM.png">
   <!-- Tailwind CSS v3 with Plugins -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <!-- Tailwind Custom Configuration -->
@@ -105,13 +109,7 @@
         <div class="h-4 w-px bg-slate-800 hidden sm:block"></div>
         <!-- Logo -->
         <div class="flex items-center gap-2.5">
-          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 via-emerald-400 to-teal-300 p-0.5 flex items-center justify-center shadow-lg shadow-emerald-500/20">
-            <div class="w-full h-full bg-obsidian-950 rounded-[10px] flex items-center justify-center">
-              <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
-              </svg>
-            </div>
-          </div>
+          <img alt="AlphaEdge Logo" class="w-10 h-10 object-contain drop-shadow-xl" src="./image/ChatGPT Image Aug 29, 2026, 05_40_40 PM.png">
           <div class="flex flex-col">
             <span class="text-base font-bold tracking-tight text-white flex items-center gap-1.5">
               Alpha<span class="text-emerald-400">Edge</span>
@@ -130,10 +128,11 @@
     <div class="absolute -top-12 left-1/2 -translate-x-1/2 w-full max-w-5xl h-64 bg-emerald-500/10 blur-[130px] rounded-full pointer-events-none"></div>
     <div class="w-full max-w-4xl relative z-10">
       <!-- Form Heading & Enrollment Status -->
-      <div class="text-center mb-8 sm:mb-10">
+      <div class="text-center mb-8 sm:mb-10 flex flex-col items-center">
+        <img alt="AlphaEdge Logo" class="w-24 h-24 md:w-32 md:h-32 mb-6 object-contain drop-shadow-xl" src="./image/ChatGPT Image Aug 29, 2026, 05_40_40 PM.png">
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-950/40 text-emerald-300 text-xs font-mono font-medium mb-3 shadow-inner">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-          Institutional Trading Cohort • Q3 Batch
+          UOP Theory Course
         </div>
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
           Join <span class="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">AlphaEdge Academy</span>
@@ -246,25 +245,33 @@
 
       <!-- Hidden Iframe to capture the Google Form response silently -->
       <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { 
-        const submitBtn = document.querySelector('button[type=\'submit\']');
-        submitBtn.innerHTML = `
-            <svg class=\'w-5 h-5 text-obsidian-950\' fill=\'none\' stroke=\'currentColor\' viewBox=\'0 0 24 24\'>
-              <path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'3\' d=\'M5 13l4 4L19 7\' />
-            </svg>
-            APPLICATION SUBMITTED SUCCESSFULLY!
-        `;
-        submitBtn.classList.remove('from-brand-accent', 'via-emerald-400', 'to-teal-400');
-        submitBtn.classList.add('bg-emerald-400');
+        document.getElementById('alphaEdgeForm').classList.add('hidden');
+        document.getElementById('successMessage').classList.remove('hidden');
+        document.getElementById('successMessage').classList.add('flex');
+        
         setTimeout(() => {
-            alert('Your information has been submitted successfully.'); 
-            window.location='index.html'; 
-        }, 500);
+            window.location.href = 'index.html'; 
+        }, 4000);
       }"></iframe>
 
       <!-- Main Application Form Card -->
       <div class="glass-panel rounded-2xl shadow-2xl p-6 sm:p-10 relative overflow-hidden border border-slate-700/60">
         <!-- Subtle Top Accent Line -->
         <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-emerald-500 to-transparent"></div>
+        <!-- Success Message (Initially Hidden) -->
+        <div id="successMessage" class="hidden flex-col items-center justify-center py-12 text-center animate-[pulse_1s_ease-in-out]">
+          <div class="w-20 h-20 bg-emerald-500/20 rounded-full flex items-center justify-center mb-6 border border-emerald-500/30 shadow-[0_0_30px_-5px_rgba(16,185,129,0.3)]">
+            <svg class="w-10 h-10 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white mb-3 tracking-tight">Application Submitted!</h2>
+          <p class="text-slate-400 max-w-sm mx-auto mb-8 leading-relaxed">Thank you for applying to AlphaEdge Pro Academy. Your information has been securely received.</p>
+          <a href="index.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-800 text-white font-medium hover:bg-slate-700 transition-colors border border-slate-700">
+            Return Home Now
+          </a>
+        </div>
+
         <form id="alphaEdgeForm" action="https://docs.google.com/forms/d/e/1FAIpQLSe_u8EJwbZhpNLL764-n6IoktGNsKgHQ6-c-4-zPbRSaZnnXQ/formResponse" method="POST" target="hidden_iframe" onsubmit="return validateForm(event);" class="space-y-10">
           
           <!-- SECTION 1: Personal Information -->
@@ -602,5 +609,27 @@
     </div>
   </main>
   <!-- END: MainContent -->
+  
+  <!-- Footer -->
+  <footer class="bg-obsidian-950/80 backdrop-blur-xl border-t border-slate-800 py-6 mt-auto relative z-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="text-xs text-slate-500 font-mono text-center md:text-left">
+        <p>© 2026 AlphaEdge Pro Academy. All rights reserved.</p>
+      </div>
+      <div class="flex flex-col items-center sm:items-end mt-6 md:mt-0">
+        <h3 class="text-white font-bold text-xs uppercase tracking-widest mb-3 hidden md:block">Contact Us</h3>
+        <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-6 text-xs font-mono text-slate-400">
+          <a href="mailto:Alphaedgeproacademy@gmail.com" class="hover:text-emerald-400 transition-colors flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            Alphaedgeproacademy@gmail.com
+          </a>
+          <a href="tel:+919033403340" class="hover:text-emerald-400 transition-colors flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+            9033403340
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
