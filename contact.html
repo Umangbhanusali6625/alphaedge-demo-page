@@ -7,7 +7,7 @@
   <meta name="keywords" content="AlphaEdge Admissions, Institutional Trading, UOP Theory, Delta Theory, Blaster Theory, Stock Market Course, Trading Academy">
   <meta name="robots" content="index, follow">
   <title>AlphaEdge Academy | Institutional Trading Admissions</title>
-  <link rel="icon" type="image/png" href="./image/ChatGPT Image Aug 29, 2026, 05_40_40 PM.png">
+  <link rel="icon" type="image/png" href="./image/ChatGPT%20Image%20Sep%2028,%202026,%2005_35_33%20PM.png">
   <!-- Tailwind CSS v3 with Plugins -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <!-- Tailwind Custom Configuration -->
@@ -63,10 +63,13 @@
     
     /* Candlestick Grid Backdrop Pattern */
     .market-grid-pattern {
-      background-size: 40px 40px;
+      background-color: #040911;
       background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+        linear-gradient(to bottom, rgba(4, 9, 17, 0.75), rgba(4, 9, 17, 0.95)),
+        url('./image/professional-trading-bg.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
     }
 
     /* Glass card custom treatment */
@@ -92,11 +95,23 @@
       transform: scale(1);
     }
   </style>
+
+<style>
+  body {
+    background-color: #040911 !important;
+    background-image: 
+      linear-gradient(to bottom, rgba(4, 9, 17, 0.75), rgba(4, 9, 17, 0.95)),
+      url('./image/professional-trading-bg.png') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-attachment: fixed !important;
+  }
+</style>
 </head>
 <body class="min-h-screen text-slate-200 font-sans antialiased selection:bg-emerald-500 selection:text-black market-grid-pattern flex flex-col justify-between overflow-x-hidden">
   
   <!-- BEGIN: TopNavigation -->
-  <header class="sticky top-0 z-50 w-full border-b border-slate-800/80 bg-obsidian-950/80 backdrop-blur-xl">
+  <header class="sticky top-0 z-50 w-full border-b border-slate-800/80 bg-black">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <!-- Back Link & Brand Mark -->
       <div class="flex items-center space-x-6">
@@ -109,7 +124,7 @@
         <div class="h-4 w-px bg-slate-800 hidden sm:block"></div>
         <!-- Logo -->
         <div class="flex items-center gap-2.5">
-          <img alt="AlphaEdge Logo" class="w-10 h-10 object-contain drop-shadow-xl" src="./image/ChatGPT Image Aug 29, 2026, 05_40_40 PM.png">
+          <img alt="AlphaEdge Logo" class="w-10 h-10 object-contain drop-shadow-xl" src="./image/alpha-edge-logo.png">
           <div class="flex flex-col">
             <span class="text-base font-bold tracking-tight text-white flex items-center gap-1.5">
               Alpha<span class="text-emerald-400">Edge</span>
@@ -129,7 +144,7 @@
     <div class="w-full max-w-4xl relative z-10">
       <!-- Form Heading & Enrollment Status -->
       <div class="text-center mb-8 sm:mb-10 flex flex-col items-center">
-        <img alt="AlphaEdge Logo" class="w-24 h-24 md:w-32 md:h-32 mb-6 object-contain drop-shadow-xl" src="./image/ChatGPT Image Aug 29, 2026, 05_40_40 PM.png">
+        <img alt="AlphaEdge Logo" class="w-24 h-24 md:w-32 md:h-32 mb-6 object-contain drop-shadow-xl" src="./image/alpha-edge-logo.png">
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-950/40 text-emerald-300 text-xs font-mono font-medium mb-3 shadow-inner">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
           UOP Theory Course
@@ -385,12 +400,12 @@
                 <div class="relative">
                   <select class="w-full px-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm text-white focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition appearance-none cursor-pointer" id="occupation" name="entry.902051597" required="">
                     <option class="text-slate-500" disabled="" selected="" value="">Select occupation</option>
-                    <option value="Student">Student / Academic</option>
-                    <option value="Employee">Working Professional / Corporate</option>
-                    <option value="Business Owner">Business Owner / Entrepreneur</option>
-                    <option value="Housewife">Housewife</option>
-                    <option value="Full Time Trader">Full-Time Independent Trader</option>
-                    <option value="Others">Others</option>
+                    <option class="bg-obsidian-900 text-white" value="Student">Student / Academic</option>
+                    <option class="bg-obsidian-900 text-white" value="Employee">Working Professional / Corporate</option>
+                    <option class="bg-obsidian-900 text-white" value="Business Owner">Business Owner / Entrepreneur</option>
+                    <option class="bg-obsidian-900 text-white" value="Housewife">Housewife</option>
+                    <option class="bg-obsidian-900 text-white" value="Full Time Trader">Full-Time Independent Trader</option>
+                    <option class="bg-obsidian-900 text-white" value="Others">Others</option>
                   </select>
                   <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -408,11 +423,11 @@
                 <div class="relative">
                   <select class="w-full px-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm text-white focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition appearance-none cursor-pointer" id="experience" name="entry.1209887136" required="">
                     <option class="text-slate-500" disabled="" selected="" value="">Select level</option>
-                    <option value="Begineer">Beginner</option>
-                    <option value="0-6 Months">0-6 Months</option>
-                    <option value="6-12 MOnths">6-12 Months</option>
-                    <option value="1-3 Years">1-3 Years</option>
-                    <option value="More Than 3 Years">More Than 3 Years</option>
+                    <option class="bg-obsidian-900 text-white" value="Begineer">Beginner</option>
+                    <option class="bg-obsidian-900 text-white" value="0-6 Months">0-6 Months</option>
+                    <option class="bg-obsidian-900 text-white" value="6-12 MOnths">6-12 Months</option>
+                    <option class="bg-obsidian-900 text-white" value="1-3 Years">1-3 Years</option>
+                    <option class="bg-obsidian-900 text-white" value="More Than 3 Years">More Than 3 Years</option>
                   </select>
                   <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -547,16 +562,16 @@
                 </label>
                 <div class="relative">
                   <select class="w-full px-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm text-white focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition appearance-none cursor-pointer" id="indicatorList" name="entry.1541197092">
-                    <option value="" selected="">None / Skip Indicator Access</option>
-                    <option value="Index + UOP Dashboard v2.1 (Only For Nifty Index)">Index + UOP Dashboard v2.1</option>
-                    <option value="Prodesk Data V2.1 (U.O.P BASED -Only For Nifty Weekly Options)">Prodesk Data V2.1</option>
-                    <option value="AlphaEdge MarketViewer V2.1">AlphaEdge MarketViewer V2.1</option>
-                    <option value="AlphaEdge APA +Momentum V2.1">AlphaEdge APA +Momentum V2.1</option>
-                    <option value="AlphaEdge Protector V2.1">AlphaEdge Protector V2.1</option>
-                    <option value="AlphaEdge Market Mover V1.1">AlphaEdge Market Mover V1.1</option>
-                    <option value="Alpha Edge NSA (All In One Time Frame) v2.1">Alpha Edge NSA (All In One Time Frame) v2.1</option>
-                    <option value="Alpha Edge Market Predictor V2.1">Alpha Edge Market Predictor V2.1</option>
-                    <option value="Alpha Forex Expertise v2.1">Alpha Forex Expertise v2.1</option>
+                    <option class="bg-obsidian-900 text-white" value="" selected="">None / Skip Indicator Access</option>
+                    <option class="bg-obsidian-900 text-white" value="Index + UOP Dashboard v2.1 (Only For Nifty Index)">Index + UOP Dashboard v2.1</option>
+                    <option class="bg-obsidian-900 text-white" value="Prodesk Data V2.1 (U.O.P BASED -Only For Nifty Weekly Options)">Prodesk Data V2.1</option>
+                    <option class="bg-obsidian-900 text-white" value="AlphaEdge MarketViewer V2.1">AlphaEdge MarketViewer V2.1</option>
+                    <option class="bg-obsidian-900 text-white" value="AlphaEdge APA +Momentum V2.1">AlphaEdge APA +Momentum V2.1</option>
+                    <option class="bg-obsidian-900 text-white" value="AlphaEdge Protector V2.1">AlphaEdge Protector V2.1</option>
+                    <option class="bg-obsidian-900 text-white" value="AlphaEdge Market Mover V1.1">AlphaEdge Market Mover V1.1</option>
+                    <option class="bg-obsidian-900 text-white" value="Alpha Edge NSA (All In One Time Frame) v2.1">Alpha Edge NSA (All In One Time Frame) v2.1</option>
+                    <option class="bg-obsidian-900 text-white" value="Alpha Edge Market Predictor V2.1">Alpha Edge Market Predictor V2.1</option>
+                    <option class="bg-obsidian-900 text-white" value="Alpha Forex Expertise v2.1">Alpha Forex Expertise v2.1</option>
                   </select>
                   <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -574,8 +589,8 @@
                 <div class="relative">
                   <select class="w-full px-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm text-white focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition appearance-none cursor-pointer" id="preferredBatch" name="entry.146731371" required="">
                     <option class="text-slate-500" disabled="" value="" selected="">Select batch</option>
-                    <option value="Offline Classroom (Weekend)">Offline Classroom (Weekend)</option>
-                    <option value="Online Live">Online Live</option>
+                    <option class="bg-obsidian-900 text-white" value="Offline Classroom (Weekend)">Offline Classroom (Weekend)</option>
+                    <option class="bg-obsidian-900 text-white" value="Online Live">Online Live</option>
                   </select>
                   <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -611,13 +626,13 @@
   <!-- END: MainContent -->
   
   <!-- Footer -->
-  <footer class="bg-obsidian-950/80 backdrop-blur-xl border-t border-slate-800 py-6 mt-auto relative z-20">
+  <footer class="bg-black border-t border-slate-800 py-6 mt-auto relative z-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
       <div class="text-xs text-slate-500 font-mono text-center md:text-left">
         <p>© 2026 AlphaEdge Pro Academy. All rights reserved.</p>
       </div>
       <div class="flex flex-col items-center sm:items-end mt-6 md:mt-0">
-        <h3 class="text-white font-bold text-xs uppercase tracking-widest mb-3 hidden md:block">Contact Us</h3>
+        <h3 class="text-white font-bold text-xs uppercase tracking-widest mb-3 hidden md:block">Admission</h3>
         <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-6 text-xs font-mono text-slate-400">
           <a href="mailto:Alphaedgeproacademy@gmail.com" class="hover:text-emerald-400 transition-colors flex items-center gap-1.5">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
@@ -633,3 +648,11 @@
   </footer>
 </body>
 </html>
+
+
+
+
+
+
+
+

@@ -1,109 +1,1222 @@
 <!DOCTYPE html>
-<html class="dark" lang="en" style="">
-
+<html lang="en" class="scroll-pt-[160px] scroll-smooth overflow-x-hidden">
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta name="description" content="AlphaEdge Pro Academy provides precise execution and elite performance in the stock and share market. Join our advanced trading platform for serious investors.">
-    <meta name="keywords" content="AlphaEdge, Pro Academy, Strategic Trading, Stock Market, Share Market, Trading Platform, UOP Theory, Institutional Trading">
-    <meta name="robots" content="index, follow">
-    <title>AlphaEdge Pro Academy - Strategic Trading Platform</title>
-    <link rel="icon" type="image/png" href="./image/ChatGPT Image Aug 29, 2026, 05_40_40 PM.png">
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet">
+<style type="text/tailwindcss">
+    /* Prominent Hover Highlight for Options and Buttons */
+    nav a, #mobile-menu-items a {
+        transition: all 0.2s ease-in-out;
+        padding: 6px 12px;
+        border-radius: 6px;
+    }
+    nav a:hover, #mobile-menu-items a:hover {
+        color: #fff !important;
+        background-color: rgba(243, 197, 120, 0.15);
+        box-shadow: 0 0 15px rgba(243, 197, 120, 0.3);
+        transform: scale(1.05);
+    }
+    button:hover, .btn:hover, a.inline-flex:hover, a.bg-gradient-to-r:hover, .glow-effect:hover {
+        transform: scale(1.03) !important;
+        box-shadow: 0 0 25px rgba(243, 197, 120, 0.6) !important;
+        border-color: rgba(243, 197, 120, 0.8) !important;
+        z-index: 10;
+    }
 
-    <!-- Tailwind Configuration -->
-    <script src="script.js"></script>
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-    <!-- Custom CSS -->
-    <link href="styles.css" rel="stylesheet">
+@layer utilities {
+  .bg-grid-pattern {
+      background-image:
+          linear-gradient(to right, rgba(134, 224, 203, 0.06) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(134, 224, 203, 0.06) 1px, transparent 1px);
+      background-size: 32px 32px;
+  }
+  
+  .glassmorphism {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 8px 32px 0 rgba(0, 108, 73, 0.05);
+  }
+  
+  .glassmorphism-dark {
+      background: rgba(44, 48, 59, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  .text-gradient {
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-image: linear-gradient(135deg, #006c49 0%, #10b981 100%);
+  }
+}
+
+.glow-effect {
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.glow-effect::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    transition: box-shadow 0.4s ease;
+    z-index: -1;
+}
+
+.glow-effect:hover::after {
+    box-shadow: 0 0 25px 5px rgba(16, 185, 129, 0.15);
+}
+
+.glow-effect:hover {
+    transform: translateY(-4px);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.animate-fade-in-up {
+    opacity: 0; /* starts hidden */
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+@keyframes float {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(2deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.animate-float {
+    animation: float 7s ease-in-out infinite;
+}
+
+.card-hover {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card-hover:hover, div.hover\:shadow-md:hover, div.hover\:-translate-y-1:hover {
+    transform: translateY(-8px) scale(1.02) !important;
+    box-shadow: 0 15px 45px -10px rgba(243, 197, 120, 0.4) !important;
+    border-color: rgba(243, 197, 120, 0.8) !important;
+    z-index: 10;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #faf8ff; 
+}
+::-webkit-scrollbar-thumb {
+  background: #bbcabf; 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6c7a71; 
+}
+
+
+
+
+/* Extracted from index.html */
+@layer base {
+      html, body { margin: 0; padding: 0; scroll-behavior: smooth; }
+      
+      main > :first-child { margin-top: 0 !important; }
+      main > :last-child { margin-bottom: 0 !important; }
+    }
+    ::-webkit-scrollbar { display: none; }
+
+</style>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-fixed": "#0f0069",
+            "secondary-fixed-dim": "#c3c0ff",
+            "tertiary-fixed": "#ffddb8",
+            "on-surface-variant": "#cbd5e1",
+            "background": "#071727",
+            "on-tertiary-fixed": "#2a1700",
+            "surface-container-highest": "#1c3245",
+            "secondary-fixed": "#e2dfff",
+            "surface-bright": "#0d2a3c",
+            "primary": "#86e0cb",
+            "surface-container-high": "#143044",
+            "surface": "#071727",
+            "primary-fixed-dim": "#4edea3",
+            "error": "#ff6c77",
+            "on-secondary": "#1e1b4b",
+            "inverse-primary": "#4edea3",
+            "on-background": "#f0f7f9",
+            "tertiary-fixed-dim": "#ffb95f",
+            "tertiary-container": "#e29100",
+            "on-primary": "#031c17",
+            "inverse-surface": "#f0f7f9",
+            "on-secondary-fixed-variant": "#3323cc",
+            "surface-container": "#0b2034",
+            "on-tertiary": "#ffffff",
+            "surface-container-lowest": "#03080e",
+            "surface-dim": "#071727",
+            "on-tertiary-container": "#523200",
+            "outline": "#8ea5b6",
+            "secondary": "#a5b4fc",
+            "secondary-container": "#818cf8",
+            "on-tertiary-fixed-variant": "#653e00",
+            "on-error-container": "#ff6c77",
+            "surface-container-low": "#091c2d",
+            "error-container": "#4a0b12",
+            "on-primary-fixed-variant": "#005236",
+            "tertiary": "#f4c873",
+            "on-error": "#ffffff",
+            "on-secondary-container": "#fffbff",
+            "inverse-on-surface": "#071727",
+            "primary-fixed": "#6ffbbe",
+            "on-primary-fixed": "#002113",
+            "surface-tint": "#006c49",
+            "surface-variant": "#dfe2f1",
+            "on-surface": "#f0f7f9",
+            "primary-container": "#0c453b",
+            "on-primary-container": "#86e0cb",
+            "outline-variant": "#94a3b8"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "2xl": "1rem",
+            "3xl": "1.5rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "headline-lg": ["DM Sans"],
+            "body-sm": ["DM Sans"],
+            "body-lg": ["DM Sans"],
+            "display-hero": ["DM Sans"],
+            "headline-md": ["DM Sans"],
+            "body-md": ["DM Sans"],
+            "label-mono": ["JetBrains Mono"],
+            "headline-sm": ["DM Sans"]
+          }
+        }
+      }
+    };
+
+</script>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="web_standard" name="shell-type"/>
+  <title>About Alpha Edge Pro Academy - Leadership &amp; Proprietary Frameworks</title>
+  <link rel="icon" type="image/png" href="./image/ChatGPT Image Sep 28, 2026, 05_35_33 PM.png">
+  
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  
+  <!-- Link our custom styles -->
+
+<style>
+  body {
+    background-color: #040911 !important;
+    background-image: 
+      linear-gradient(to bottom, rgba(4, 9, 17, 0.75), rgba(4, 9, 17, 0.95)),
+      url('./image/professional-trading-bg.png') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-attachment: fixed !important;
+  }
+</style>
 </head>
 
-<body
-    class="bg-background text-on-background font-body-md min-h-screen flex flex-col relative overflow-x-hidden antialiased"
-    style="background-image: linear-gradient(rgba(16, 20, 21, 0.4), rgba(16, 20, 21, 0.4)), url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAMO4Bl8mFAKh-Z4D_ZVbB44V2AziFH6-zb1PMyENj2IfKafso6d6Mua1fx3O_OSoqIb896xN5BRMnta8LiWIbwLt-ibng3a7lpRP4N2JTLeeGjykAje-Xgij0ZD8wMzOibrbTSD6sTFpAuUJkelt7fpfH0ROkoV_Nmou3ZU_PVtDX5Z9oMAmLgAg7sCxqKGln_2vTxdAKF-p_1gohuJeyMROheieZ17YDSNK6HoODmVAYEHsmJg6CX&quot;); background-size: cover; background-position: center center; background-attachment: fixed; background-repeat: no-repeat;">
-    <!-- Abstract Background -->
+<body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container/30 overflow-x-hidden w-full">
+<!-- Persisted Top Header -->
 
+<header id="main-nav-pill" class="fixed top-0 left-0 right-0 z-[100] w-full bg-[#03060a] border-b border-white/5 transition-all duration-300">
+  <div class="max-w-[1500px] mx-auto px-4 md:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="index.html" class="flex items-center shrink-0">
+      <img src="./image/ChatGPT Image Sep 28, 2026, 05_35_33 PM.png" alt="Alpha Edge Pro Academy" class="h-12 md:h-16 w-auto object-contain">
+    </a>
 
-    <!-- Main Content -->
-    <main
-        class="flex-grow flex flex-col justify-center relative z-10 px-margin-mobile md:px-margin-desktop py-24 md:py-32">
-        <div class="max-w-4xl mx-auto w-full text-center">
-            <!-- Brand & Logo -->
-            <div class="flex flex-col items-center justify-center mb-12">
-                <img alt="AlphaEdge Logo" class="w-28 h-28 md:w-40 md:h-40 mb-6 object-contain drop-shadow-xl"
-                    src="./image/ChatGPT Image Aug 29, 2026, 05_40_40 PM.png">
-                <h1 class="font-display-lg text-display-lg tracking-tighter text-on-background">AlphaEdge Pro
-                    Academy<br>&nbsp;UOP Theory</h1>
+    <!-- Desktop Navigation Links -->
+    <nav class="hidden lg:flex items-center gap-6 xl:gap-8 text-white/90 font-sans text-[14.5px] font-semibold tracking-wide">
+      <a href="index.html" class="hover:text-[#f3c578] transition-colors">Home</a>
+      <a href="#leadership-founders" class="hover:text-[#f3c578] transition-colors">About Us</a>
+      <a href="#proprietary-frameworks" class="hover:text-[#f3c578] transition-colors">Courses</a>
+      <a href="uop-theory.html" class="hover:text-[#f3c578] transition-colors">Indicators</a>
+      <a href="https://youtube.com/@alphaedgeproacademy?si=Hr1wo6zXJ-npMSxC" target="_blank" rel="noopener noreferrer" class="hover:text-[#f3c578] transition-colors">Videos</a>
+      <a href="study-guides.html" class="hover:text-[#f3c578] transition-colors">Resources</a>
+    </nav>
+
+    <!-- Action Button & Mobile Menu Toggle -->
+    <div class="flex items-center gap-4 shrink-0">
+      <a href="contact.html" class="hidden sm:inline-flex items-center justify-center px-7 py-3 bg-gradient-to-r from-[#d39316] to-[#f3c578] text-black font-extrabold text-[12px] tracking-[0.2em] uppercase hover:brightness-110 transition-all rounded-sm shadow-[0_4px_15px_rgba(211,147,22,0.3)]">
+        ADMISSION
+      </a>
+      
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-menu-btn" class="lg:hidden p-2 text-white hover:text-[#f3c578] transition-colors">
+        <span class="material-symbols-outlined text-[28px]" id="menu-icon">menu</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Menu -->
+  <div id="mobile-menu-items" class="hidden lg:hidden bg-[#03060a] border-t border-white/5 w-full absolute top-full left-0 max-h-[75vh] overflow-y-auto">
+    <div class="flex flex-col py-4 px-6 gap-4 text-slate-300 font-medium tracking-wide">
+      <a href="index.html" class="block hover:text-[#f3c578]">Home</a>
+      <a href="#leadership-founders" class="block hover:text-[#f3c578]">About Us</a>
+      <a href="#proprietary-frameworks" class="block hover:text-[#f3c578]">Courses</a>
+      <a href="uop-theory.html" class="block hover:text-[#f3c578]">Indicators</a>
+      <a href="https://youtube.com/@alphaedgeproacademy?si=Hr1wo6zXJ-npMSxC" target="_blank" rel="noopener noreferrer" class="block hover:text-[#f3c578]">Videos</a>
+      <a href="study-guides.html" class="block hover:text-[#f3c578]">Resources</a>
+      <a href="contact.html" class="block text-center mt-4 px-6 py-3 bg-gradient-to-r from-[#d39316] to-[#f3c578] text-black font-bold text-xs tracking-widest uppercase">ADMISSION</a>
+    </div>
+  </div>
+</header>
+<main class="w-full max-w-[100vw] overflow-x-hidden pt-[140px] md:pt-[120px] bg-transparent min-h-screen">
+  <div class="flex flex-col w-full">
+    <!-- SECTION 1: HERO & QUANTITATIVE DISCIPLINE MANIFESTO -->
+    <section class="relative w-full overflow-hidden bg-transparent pb-24 pt-8 bg-grid-pattern">
+          <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+
+    </div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 animate-fade-in-up">
+        <!-- Institutional Proof Pill & Status -->
+        <div class="flex flex-wrap items-center gap-3 mb-6">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 text-primary font-label-mono text-label-mono">
+            <span class="inline-block w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            <span>NISM SERIES VIII CERTIFIED FACULTY &amp; RESEARCH DESK</span>
+          </div>
+          <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-badge text-label-badge uppercase tracking-wider">
+            <span class="material-symbols-outlined text-[15px] text-tertiary-container">military_tech</span>
+            <span>21+ Years Quantitative History</span>
+          </div>
+          <div class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant font-label-badge text-label-badge uppercase tracking-wider">
+            <span class="material-symbols-outlined text-[15px] text-secondary">database</span>
+            <span>6 In-House Mathematical Models</span>
+          </div>
+        </div>
+        <!-- Hero Grid Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <!-- Left: Strategic Narrative -->
+          <div class="lg:col-span-7 flex flex-col gap-6">
+            <h1 class="font-display-hero text-4xl md:text-5xl lg:text-[64px] leading-tight text-on-surface tracking-tight">
+              Building Market Knowledge <br/>
+              <span class="text-primary underline decoration-primary/30 decoration-wavy decoration-2">Beyond Conventional</span> Learning.
+            </h1>
+            <div class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed flex flex-col gap-4">
+              <p>
+                <strong>Alpha Edge Pro Academy</strong> is a professional stock market education institute dedicated to developing <strong>disciplined, knowledgeable, and market-ready traders</strong> through structured education, practical market experience, advanced analytical frameworks, risk management, trading psychology, and technology-driven learning.
+              </p>
+              <p>
+                With <strong>21+ years of market-data and trading experience</strong>, Alpha Edge Pro Academy has developed a specialized approach to understanding market behaviour by combining extensive historical data, practical market observation, structured theories, and real-time market applications.
+              </p>
             </div>
-            <!-- Headlines -->
-            <div class="space-y-6 mb-16">
-                <h2
-                    class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background">
-                    The Future of Strategic Trading is Coming.
-                </h2>
-                <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">
-                    Experience precision execution and elite performance in the stock and share market. We're building
-                    the most advanced trading platform for serious investors.
-                </p>
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+              <a class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-primary text-on-primary font-headline-sm text-headline-sm shadow-md shadow-primary/20 hover:bg-primary/90 transition-all duration-200 glow-effect" href="#proprietary-frameworks">
+                <span>Explore Proprietary Courses</span>
+                <span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+              </a>
+              <a class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-surface-container-high text-on-surface font-headline-sm text-headline-sm hover:bg-surface-container-highest transition-all duration-200" href="#leadership-founders">
+                <span class="material-symbols-outlined text-[18px] text-primary">groups</span>
+                <span>Meet Founders &amp; Leadership</span>
+              </a>
             </div>
-            <!-- Contact Action -->
-            <div class="max-w-md mx-auto mb-16 flex flex-col items-center justify-center gap-8">
-                <a href="contact.html"
-                    class="bg-secondary text-on-secondary px-8 py-4 rounded-full font-label-sm uppercase tracking-widest hover:bg-secondary-fixed transition-all duration-300 glow-effect flex items-center gap-2 group">
-                    <span>Apply for Admission</span>
-                    <span
-                        class="material-symbols-outlined transform group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                </a>
-                
-                <div class="flex flex-col items-center p-6 bg-surface-container-low/50 backdrop-blur-md rounded-2xl border border-outline-variant/30 w-full max-w-sm">
-                    <h3 class="text-on-surface font-semibold mb-4 uppercase tracking-widest text-xs">Or Contact Us Directly</h3>
-                    <div class="flex flex-col gap-4 text-on-surface-variant font-data-mono text-sm w-full">
-                        <a href="mailto:Alphaedgeproacademy@gmail.com" class="hover:text-primary transition-colors flex items-center justify-center gap-2 bg-surface-container py-2.5 rounded-lg border border-outline-variant/20 hover:border-primary/30">
-                            <span class="material-symbols-outlined text-base">mail</span>
-                            Alphaedgeproacademy@gmail.com
-                        </a>
-                        <a href="tel:+919033403340" class="hover:text-primary transition-colors flex items-center justify-center gap-2 bg-surface-container py-2.5 rounded-lg border border-outline-variant/20 hover:border-primary/30">
-                            <span class="material-symbols-outlined text-base">call</span>
-                            +91 9033403340
-                        </a>
-                    </div>
+            <!-- Micro Highlights Bar -->
+            <div class="grid grid-cols-3 gap-4 pt-6 border-t-0 bg-transparentest p-5 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+              <div class="flex flex-col">
+                <span class="font-label-mono text-label-mono text-outline uppercase">Pedagogy Style</span>
+                <span class="font-headline-sm text-headline-sm text-on-surface mt-0.5">Zero Tips / Calls</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant">Pure system mechanics</span>
+              </div>
+              <div class="flex flex-col">
+                <span class="font-label-mono text-label-mono text-outline uppercase">Execution Base</span>
+                <span class="font-headline-sm text-headline-sm text-on-surface mt-0.5">Live Desk Rooms</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant">Real-market tape reading</span>
+              </div>
+              <div class="flex flex-col">
+                <span class="font-label-mono text-label-mono text-outline uppercase">Continuity</span>
+                <span class="font-headline-sm text-headline-sm text-on-surface mt-0.5">Lifetime Lab</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant">Daily market briefings</span>
+              </div>
+            </div>
+          </div>
+          <!-- Right: Institutional Thesis & Active Strategy Engine Card -->
+          <div class="lg:col-span-5 flex flex-col gap-6 relative">
+            <div class="relative bg-inverse-surface text-inverse-on-surface rounded-3xl p-8 shadow-2xl overflow-hidden card-hover delay-200">
+              <!-- Ambient Grid lines in card -->
+              <div class="absolute -right-16 -top-16 w-56 h-56 rounded-full bg-primary/20 blur-3xl pointer-events-none animate-float"></div>
+              <div class="absolute -left-16 -bottom-16 w-48 h-48 rounded-full bg-secondary/20 blur-3xl pointer-events-none animate-float delay-300"></div>
+              <div class="relative z-10 flex flex-col gap-6">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2 font-label-mono text-label-mono text-primary-container">
+                    <span class="material-symbols-outlined text-[18px]">verified</span>
+                    <span>THE FOUNDATIONAL THESIS</span>
+                  </div>
+                  <span class="px-2.5 py-0.5 rounded-full bg-transparentest/10 font-label-mono text-label-badge text-inverse-on-surface/80">RESEARCH LAB V4.2</span>
                 </div>
+                <blockquote class="font-headline-md text-[22px] text-inverse-on-surface leading-snug">
+                  "Trading is not about shortcuts or speculation. It is about knowledge, process, discipline, risk management, and continuous learning."
+                </blockquote>
+                <div class="pt-4 flex items-center justify-between border-t-0 bg-inverse-on-surface/5 p-4 rounded-xl">
+                  <div>
+                    <p class="font-headline-sm text-headline-sm text-inverse-on-surface">Alpha Edge Pro Research Desk</p>
+                    <p class="font-label-mono text-label-mono text-inverse-on-surface/70">Historical Price &amp; Volume Analytics Division</p>
+                  </div>
+                  <div class="w-10 h-10 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center font-bold shadow-md">
+                    <span class="material-symbols-outlined text-[20px]">candlestick_chart</span>
+                  </div>
+                </div>
+                <!-- Mathematical Market Model Preview -->
+                <div class="space-y-2 pt-2">
+                  <div class="flex justify-between font-label-mono text-label-mono text-inverse-on-surface/80">
+                    <span>Unit of Price (U.O.P.) Convergence</span>
+                    <span class="text-primary-container">94.2% Structural Reliability</span>
+                  </div>
+                  <div class="w-full h-2 rounded-full bg-inverse-on-surface/10 overflow-hidden">
+                    <div class="h-full bg-primary-fixed-dim rounded-full" style="width: 94.2%"></div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <!-- Trust Signals -->
-
+            <!-- Secondary Quick Proof Card -->
+            <div class="bg-transparentest p-6 rounded-2xl shadow-sm flex items-center gap-4 hover:-translate-y-1 transition-transform">
+              <div class="w-12 h-12 rounded-xl bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-[26px]">psychology</span>
+              </div>
+              <div class="flex flex-col">
+                <span class="font-label-mono text-label-mono text-outline uppercase tracking-wider">Trading Mentorship Philosophy</span>
+                <p class="font-headline-sm text-[16px] text-on-surface leading-tight mt-1">Learn the Market. Understand the Framework. Build the Discipline.</p>
+              </div>
+            </div>
+          </div>
         </div>
-    </main>
-
-
-    <footer class="bg-surface-container-lowest py-8 border-t border-outline-variant/20 relative z-10 w-full mt-auto">
-        <div
-            class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max mx-auto gap-gutter">
-            <div class="font-data-mono text-label-sm text-on-surface-variant text-center md:text-left mb-4 md:mb-0">
-                <p>© 2026 AlphaEdge Pro Academy. All rights reserved.</p>
-                <p class="mt-1 text-on-surface/60">Precise execution. Elite performance.</p>
+        <!-- Quantitative Proof Metrics Strip -->
+        <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 animate-fade-in-up delay-300">
+          <div class="bg-transparentest p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col group">
+            <div class="flex items-center justify-between text-primary mb-2">
+              <span class="material-symbols-outlined text-[28px] group-hover:scale-110 transition-transform">query_stats</span>
+              <span class="font-label-mono text-label-mono text-primary bg-primary/10 px-2 py-0.5 rounded">HISTORICAL</span>
             </div>
-            
-            <div class="flex flex-col md:items-end text-label-sm text-on-surface-variant font-data-mono text-center md:text-right mt-6 md:mt-0">
-                <h3 class="text-on-surface font-semibold mb-2 uppercase tracking-widest text-xs hidden md:block">Contact Us</h3>
-                <a href="mailto:Alphaedgeproacademy@gmail.com" class="hover:text-primary transition-colors flex items-center gap-2 justify-center md:justify-end">
-                    <span class="material-symbols-outlined text-sm">mail</span>
-                    Alphaedgeproacademy@gmail.com
-                </a>
-                <a href="tel:+919033403340" class="hover:text-primary transition-colors flex items-center gap-2 justify-center md:justify-end mt-1">
-                    <span class="material-symbols-outlined text-sm">call</span>
-                    +91 9033403340
-                </a>
+            <span class="font-display-hero text-4xl md:text-5xl lg:text-[64px] leading-tight text-on-surface leading-none">21+</span>
+            <span class="font-headline-sm text-headline-sm text-on-surface mt-2">Years Market Experience</span>
+            <span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Real-time data observation &amp; quant studies</span>
+          </div>
+          <div class="bg-transparentest p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col group">
+            <div class="flex items-center justify-between text-secondary mb-2">
+              <span class="material-symbols-outlined text-[28px] group-hover:scale-110 transition-transform">group</span>
+              <span class="font-label-mono text-label-mono text-secondary bg-secondary/10 px-2 py-0.5 rounded">ALUMNI</span>
             </div>
+            <span class="font-display-hero text-4xl md:text-5xl lg:text-[64px] leading-tight text-on-surface leading-none">2,000+</span>
+            <span class="font-headline-sm text-headline-sm text-on-surface mt-2">Traders Mentored</span>
+            <span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Aspiring individuals to institutional desk traders</span>
+          </div>
+          <div class="bg-transparentest p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col group">
+            <div class="flex items-center justify-between text-tertiary-container mb-2">
+              <span class="material-symbols-outlined text-[28px] group-hover:scale-110 transition-transform">token</span>
+              <span class="font-label-mono text-label-mono text-tertiary-container bg-tertiary-fixed px-2 py-0.5 rounded">PROPRIETARY</span>
+            </div>
+            <span class="font-display-hero text-4xl md:text-5xl lg:text-[64px] leading-tight text-on-surface leading-none">6</span>
+            <span class="font-headline-sm text-headline-sm text-on-surface mt-2">In-House Frameworks</span>
+            <span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Mathematically modeled distinct market edges</span>
+          </div>
+          <div class="bg-transparentest p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col group">
+            <div class="flex items-center justify-between text-primary mb-2">
+              <span class="material-symbols-outlined text-[28px] group-hover:scale-110 transition-transform">workspace_premium</span>
+              <span class="font-label-mono text-label-mono text-primary bg-primary/10 px-2 py-0.5 rounded">ACCREDITED</span>
+            </div>
+            <span class="font-display-hero text-4xl md:text-5xl lg:text-[64px] leading-tight text-on-surface leading-none">VIII</span>
+            <span class="font-headline-sm text-headline-sm text-on-surface mt-2">NISM Series Standard</span>
+            <span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Equity derivatives &amp; risk compliance verified</span>
+          </div>
         </div>
+      </div>
+    </section>
+    
+    <!-- SECTION 2: INSTITUTIONAL OVERVIEW & THE DIFFERENTIATION -->
+    <section class="w-full bg-transparent py-24 border-y border-outline/10">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col gap-16 animate-fade-in-up">
+        <!-- Section Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div class="max-w-2xl">
+            <span class="font-label-mono text-label-mono text-primary uppercase tracking-wider font-semibold">ACADEMIC CHARTER &amp; PHILOSOPHY</span>
+            <h2 class="font-headline-lg text-3xl md:text-4xl lg:text-5xl leading-tight text-on-surface mt-2">
+              What Makes Alpha Edge Pro Radically Different From Conventional Institutes
+            </h2>
+          </div>
+          <div class="font-body-md text-body-md text-on-surface-variant max-w-md bg-transparent p-4 rounded-xl shadow-sm border border-outline/10 flex flex-col gap-3">
+            <p>These theories and frameworks are <strong>developed in-house by Alpha Edge Pro Academy</strong> through our own research, historical market databases, practical observations, and years of market experience.</p>
+            <p>They are not presented as copied strategies or repackaged concepts from social-media content. Our curriculum is built around <strong>proprietary methodologies developed within our academy</strong>, forming an important part of our educational identity.</p>
+          </div>
+        </div>
+        
+        <!-- Comparison Matrix Grid: Conventional vs Alpha Edge Pro -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <!-- Conventional Retail Course Box -->
+          <div class="bg-transparent p-8 rounded-3xl flex flex-col gap-6 relative overflow-hidden border border-outline/10 shadow-sm hover:shadow-md transition-all">
+            <div class="flex items-center justify-between">
+              <span class="font-label-badge text-label-badge text-error uppercase tracking-wider bg-error-container px-3 py-1 rounded-full font-bold">Standard Industry Approach</span>
+              <span class="material-symbols-outlined text-error text-[26px]">cancel</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md text-on-surface">Conventional Retail Market Courses</h3>
+            <ul class="space-y-4 font-body-md text-body-md text-on-surface-variant">
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-error text-[18px] shrink-0 mt-0.5">close</span>
+                <span>Teaching lagging indicators (RSI, MACD, generic Bollinger Bands) that delay execution.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-error text-[18px] shrink-0 mt-0.5">close</span>
+                <span>Propagating copycat Telegram signals, buy/sell call culture, and dependent guessing.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-error text-[18px] shrink-0 mt-0.5">close</span>
+                <span>Ignoring order book mechanics, institutional resting liquidity, and option premium decay.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-error text-[18px] shrink-0 mt-0.5">close</span>
+                <span>Zero risk-of-ruin mathematical models; zero post-course live market screen supervision.</span>
+              </li>
+            </ul>
+            <div class="mt-auto p-4 rounded-xl bg-transparentest text-error font-label-mono text-label-mono border border-error/10">
+              RESULT: Over 90% of retail participants experience capital drawdown within 90 days due to indicator noise.
+            </div>
+          </div>
+          
+          <!-- The Alpha Edge Institutional Pedagogy Box -->
+          <div class="bg-transparent p-8 rounded-3xl flex flex-col gap-6 relative overflow-hidden border border-outline/10 shadow-sm hover:-translate-y-1 transition-all">
+            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-primary/5 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="flex items-center justify-between relative z-10">
+              <span class="font-label-badge text-label-badge text-primary bg-primary/10 border border-primary/20 px-3 py-1 rounded-full font-bold uppercase tracking-wider shadow-sm">Alpha Edge Standard</span>
+              <span class="material-symbols-outlined text-primary text-[26px]">check_circle</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md text-on-surface relative z-10">100% In-House Proprietary Methodologies</h3>
+            <ul class="space-y-4 font-body-md text-body-md text-on-surface-variant relative z-10">
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5 drop-shadow-md">done_all</span>
+                <span>Calculated Unit of Price (U.O.P.) equations that reveal institutional inventory rotation.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5 drop-shadow-md">done_all</span>
+                <span>Zero trade calls. We cultivate fully independent quantitative and discretionary market operators.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5 drop-shadow-md">done_all</span>
+                <span>Advanced option volatility surfaces, Delta velocity tracking, and institutional Box Theory ranges.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5 drop-shadow-md">done_all</span>
+                <span>Direct execution desk mentorship in offline live terminals across India and interactive digital suites.</span>
+              </li>
+            </ul>
+            <div class="mt-auto p-4 rounded-xl bg-transparentest text-primary font-label-mono text-label-mono border border-primary/20 relative z-10">
+              OUTCOME: Disciplined, self-sufficient participants with quantified edge and statistical trade expectancy.
+            </div>
+          </div>
+        </div>
+        
+        <!-- Core Academic Statement Banner -->
+        <div class="bg-surface-container-highest p-8 lg:p-12 rounded-3xl flex flex-col md:flex-row items-center gap-8 shadow-inner border border-outline/10">
+          <div class="w-16 h-16 rounded-2xl bg-primary text-on-primary flex items-center justify-center shrink-0 shadow-lg shadow-primary/30">
+            <span class="material-symbols-outlined text-[36px]">lightbulb</span>
+          </div>
+          <div class="flex flex-col gap-2">
+            <span class="font-label-mono text-label-mono text-primary font-bold uppercase tracking-wider">The Primary Academic Objective</span>
+            <p class="font-headline-md text-headline-md text-on-surface leading-snug">
+              "Our objective is to teach students how to understand a market framework and apply it systematically, rather than simply following trade calls or isolated market tips."
+            </p>
+            <span class="font-label-mono text-label-mono text-on-surface-variant">— Alpha Edge Pro Executive Board of Studies</span>
+          </div>
+        </div>
+        
+        <!-- Mission & Vision Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-transparentest p-8 rounded-3xl shadow-md border border-outline/5 flex flex-col gap-4 card-hover">
+            <div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center shadow-sm">
+              <span class="material-symbols-outlined text-[24px]">flag</span>
+            </div>
+            <h3 class="font-headline-md text-[24px] text-on-surface">Our Institutional Mission</h3>
+            <div class="font-body-md text-body-md text-on-surface-variant leading-relaxed flex flex-col gap-2">
+              <p>Our mission is to <strong>bridge the gap between financial-market theory and practical trading education</strong>.</p>
+              <p>We aim to help aspiring traders develop the knowledge, discipline, analytical skills, risk awareness, and professional mindset required to participate in financial markets responsibly.</p>
+              <p>Rather than promoting shortcuts, we focus on building a <strong>repeatable learning process</strong>—one that encourages students to understand <em>why</em> a market behaves in a particular way, how to analyse changing conditions, and how to manage risk while making independent decisions.</p>
+            </div>
+          </div>
+          <div class="bg-transparentest p-8 rounded-3xl shadow-md border border-outline/5 flex flex-col gap-4 card-hover">
+            <div class="w-12 h-12 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center shadow-sm">
+              <span class="material-symbols-outlined text-[24px]">visibility</span>
+            </div>
+            <h3 class="font-headline-md text-[24px] text-on-surface">Our Institutional Vision</h3>
+            <div class="font-body-md text-body-md text-on-surface-variant leading-relaxed flex flex-col gap-2">
+              <p>To build a community of <strong>educated, disciplined, technology-enabled, and research-oriented market participants</strong> who approach financial markets with preparation, structure, and professional responsibility.</p>
+              <p>At Alpha Edge Pro Academy, we do not believe that successful market participation comes from one indicator, one strategy, or one prediction.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Institutional Formula Equation Strip -->
+        <div class="bg-surface-container p-6 lg:p-8 rounded-2xl flex flex-col gap-4 shadow-sm border border-outline/10 overflow-hidden relative">
+          <div class="absolute right-0 bottom-0 w-32 h-32 bg-primary/5 rounded-full blur-[20px] pointer-events-none"></div>
+          <span class="font-label-mono text-label-mono text-outline uppercase font-semibold relative z-10">The Alpha Edge Pro Consistency Formula</span>
+          <div class="flex flex-wrap items-center gap-2 md:gap-3 font-headline-sm text-[16px] text-on-surface relative z-10">
+            <span class="bg-transparentest px-3 py-1.5 rounded-lg shadow-sm border border-outline/5 hover:border-primary/30 transition-colors">Knowledge</span>
+            <span class="text-primary font-bold">+</span>
+            <span class="bg-transparentest px-3 py-1.5 rounded-lg shadow-sm border border-outline/5 hover:border-primary/30 transition-colors">Methodology</span>
+            <span class="text-primary font-bold">+</span>
+            <span class="bg-transparentest px-3 py-1.5 rounded-lg shadow-sm border border-outline/5 hover:border-primary/30 transition-colors">Discipline</span>
+            <span class="text-primary font-bold">+</span>
+            <span class="bg-transparentest px-3 py-1.5 rounded-lg shadow-sm border border-outline/5 hover:border-primary/30 transition-colors">Psychology</span>
+            <span class="text-primary font-bold">+</span>
+            <span class="bg-transparentest px-3 py-1.5 rounded-lg shadow-sm border border-outline/5 hover:border-primary/30 transition-colors">Risk Management</span>
+            <span class="text-primary font-bold">+</span>
+            <span class="bg-transparentest px-3 py-1.5 rounded-lg shadow-sm border border-outline/5 hover:border-primary/30 transition-colors">Continuous Learning</span>
+            <span class="text-tertiary-container font-black text-xl">=</span>
+            <span class="bg-primary text-on-primary px-4 py-2 rounded-lg shadow-md shadow-primary/30 font-bold ml-2 glow-effect">Consistent Market Mastery</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- SECTION 3: THE 6 PROPRIETARY TRADING FRAMEWORKS & COURSES -->
+    <section class="w-full bg-transparent py-24 scroll-mt-24" id="proprietary-frameworks">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col gap-16 animate-fade-in-up">
+        <!-- Section Title & Narrative -->
+        <div class="flex flex-col gap-4 max-w-3xl">
+          <div class="inline-flex items-center gap-2 font-label-mono text-label-mono text-primary font-semibold bg-primary/10 w-max px-3 py-1 rounded-full">
+            <span class="material-symbols-outlined text-[18px]">model_training</span>
+            <span>INTELLECTUAL PROPERTY &amp; RESEARCH DESK</span>
+          </div>
+          <h2 class="font-headline-lg text-3xl md:text-4xl lg:text-5xl leading-tight text-on-surface">
+            Our Proprietary Trading Education Frameworks &amp; Courses
+          </h2>
+          <p class="font-body-lg text-body-lg text-on-surface-variant">
+            Developed in-house through extensive historical databases, real-time tape observation, and 21+ years of quantitative research. These 7 distinct models provide actionable clarity across instruments and market cycles.
+          </p>
+        </div>
+        
+        <!-- Framework Cards Bento-Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- 1. U.O.P. Theory Card -->
+          <div class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 group card-hover">
+            <div class="flex items-center justify-between border-b border-outline/10 pb-4">
+              <span class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-label-mono font-bold shadow-sm">01</span>
+              <span class="font-label-badge text-label-badge uppercase tracking-wider bg-primary/10 text-primary px-3 py-1.5 rounded-full">Index + Options</span>
+            </div>
+            <div>
+              <h3 class="font-headline-md text-xl md:text-[26px] leading-tight text-on-surface group-hover:text-primary transition-colors font-bold"><a href="uop-theory.html" class="hover:underline after:content-['\2197'] after:ml-2 after:text-lg">U.O.P. Theory</a></h3>
+              <p class="font-label-mono text-label-mono text-outline mt-1 font-semibold">Universal Optimal Participation</p>
+            </div>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Decodes price &amp; premium behaviour in index futures and options markets. Transforms unstructured tape movement into systematic mathematical decision units.
+            </p>
+            <div class="space-y-2.5 pt-2 bg-transparent/50 border border-outline/5 p-4 rounded-2xl">
+              <span class="font-label-badge text-label-badge uppercase tracking-wider text-outline block mb-2">Core Analytical Focus</span>
+              <div class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm">
+                <span class="material-symbols-outlined text-primary text-[16px] bg-primary/10 rounded-full p-0.5">check</span>
+                <span>Option Premium Decay Mechanics</span>
+              </div>
+              <div class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm">
+                <span class="material-symbols-outlined text-primary text-[16px] bg-primary/10 rounded-full p-0.5">check</span>
+                <span>Real-Time Delta Speed Shifts</span>
+              </div>
+              <div class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm">
+                <span class="material-symbols-outlined text-primary text-[16px] bg-primary/10 rounded-full p-0.5">check</span>
+                <span>Intraday Index Volatility Units</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 2. Box Theory Matrix Card -->
+          <div class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 group card-hover">
+            <div class="flex items-center justify-between border-b border-outline/10 pb-4">
+              <span class="w-10 h-10 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center font-label-mono font-bold shadow-sm">02</span>
+              <span class="font-label-badge text-label-badge uppercase tracking-wider bg-secondary/10 text-secondary px-3 py-1.5 rounded-full">Index + Options</span>
+            </div>
+            <div>
+              <h3 class="font-headline-md text-xl md:text-[26px] leading-tight text-on-surface group-hover:text-secondary transition-colors font-bold">Box Theory Matrix</h3>
+              <p class="font-label-mono text-label-mono text-outline mt-1 font-semibold">Institutional Zone Confinement</p>
+            </div>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Maps precise structural boundary limits, range containment zones, and dynamic option strike liquidity pockets before directional expansions occur.
+            </p>
+            <div class="space-y-2.5 pt-2 bg-transparent/50 border border-outline/5 p-4 rounded-2xl">
+              <span class="font-label-badge text-label-badge uppercase tracking-wider text-outline block mb-2">Core Analytical Focus</span>
+              <div class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm">
+                <span class="material-symbols-outlined text-secondary text-[16px] bg-secondary/10 rounded-full p-0.5">check</span>
+                <span>Institutional Liquidity Clustered Zones</span>
+              </div>
+              <div class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm">
+                <span class="material-symbols-outlined text-secondary text-[16px] bg-secondary/10 rounded-full p-0.5">check</span>
+                <span>Range Accumulation vs False Breakouts</span>
+              </div>
+              <div class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm">
+                <span class="material-symbols-outlined text-secondary text-[16px] bg-secondary/10 rounded-full p-0.5">check</span>
+                <span>Straddle/Strangle Premium Compaction</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 3. Momentum Plus APA System -->
+          <div class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 group card-hover">
+            <div class="flex items-center justify-between border-b border-outline/10 pb-4">
+              <span class="w-10 h-10 rounded-xl bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-label-mono font-bold shadow-sm">03</span>
+              <span class="font-label-badge text-label-badge uppercase tracking-wider bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1.5 rounded-full">Index • Equities • MCX</span>
+            </div>
+            <div>
+              <h3 class="font-headline-md text-xl md:text-[26px] leading-tight text-on-surface group-hover:text-tertiary-container transition-colors font-bold"><a href="apa-theory.html" class="hover:underline after:content-['\2197'] after:ml-2 after:text-lg">Momentum Plus APA</a></h3>
+              <p class="font-label-mono text-label-mono text-outline mt-1 font-semibold">Accelerated Price Action</p>
+            </div>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              A high-velocity framework isolating institutional order acceleration across indices, large-cap equities, and high-beta commodity derivatives.
+            </p>
+            <div class="space-y-2.5 pt-2 bg-transparent/50 border border-outline/5 p-4 rounded-2xl">
+              <span class="font-label-badge text-label-badge uppercase tracking-wider text-outline block mb-2">Core Analytical Focus</span>
+              <div class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm">
+                <span class="material-symbols-outlined text-tertiary-container text-[16px] bg-tertiary-fixed rounded-full p-0.5">check</span>
+                <span>Cross-Asset Rate-of-Change Velocity</span>
+              </div>
+              <div class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm">
+                <span class="material-symbols-outlined text-tertiary-container text-[16px] bg-tertiary-fixed rounded-full p-0.5">check</span>
+                <span>Institutional Volume Flow Signatures</span>
+              </div>
+              <div class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm">
+                <span class="material-symbols-outlined text-tertiary-container text-[16px] bg-tertiary-fixed rounded-full p-0.5">check</span>
+                <span>Exhaustion vs Continuation Identification</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 4. Blaster Theory -->
+          <div class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 group card-hover">
+            <div class="flex items-center justify-between border-b border-outline/10 pb-4">
+              <span class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-label-mono font-bold shadow-sm">04</span>
+              <span class="font-label-badge text-label-badge uppercase tracking-wider bg-primary/10 text-primary px-3 py-1.5 rounded-full">Stocks + Commodities</span>
+            </div>
+            <div>
+              <h3 class="font-headline-md text-xl md:text-[26px] leading-tight text-on-surface group-hover:text-primary transition-colors font-bold">Blaster Theory</h3>
+              <p class="font-label-mono text-label-mono text-outline mt-1 font-semibold">Explosive Breakout Engine</p>
+            </div>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Engineered to analyze significant parabolic market expansions and structured breakout triggers after prolonged low-volatility coiling periods.
+            </p>
+            <div class="space-y-2.5 pt-2 bg-transparent/50 border border-outline/5 p-4 rounded-2xl">
+              <span class="font-label-badge text-label-badge uppercase tracking-wider text-outline block mb-2">Core Analytical Focus</span>
+              <div class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm">
+                <span class="material-symbols-outlined text-primary text-[16px] bg-primary/10 rounded-full p-0.5">check</span>
+                <span>Volatility Squeeze Expansion Indicators</span>
+              </div>
+              <div class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm">
+                <span class="material-symbols-outlined text-primary text-[16px] bg-primary/10 rounded-full p-0.5">check</span>
+                <span>High-Probability Range Expansion Models</span>
+              </div>
+              <div class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm">
+                <span class="material-symbols-outlined text-primary text-[16px] bg-primary/10 rounded-full p-0.5">check</span>
+                <span>Sectoral Rotation Energy Scans</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 5. Delta Theory -->
+          <div class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 group card-hover">
+            <div class="flex items-center justify-between border-b border-outline/10 pb-4">
+              <span class="w-10 h-10 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center font-label-mono font-bold shadow-sm">05</span>
+              <span class="font-label-badge text-label-badge uppercase tracking-wider bg-secondary/10 text-secondary px-3 py-1.5 rounded-full">Pure Equity Stock Analysis</span>
+            </div>
+            <div>
+              <h3 class="font-headline-md text-xl md:text-[26px] leading-tight text-on-surface group-hover:text-secondary transition-colors font-bold">Delta Theory</h3>
+              <p class="font-label-mono text-label-mono text-outline mt-1 font-semibold">Systematic Stock Momentum</p>
+            </div>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Provides a non-lagging structural approach to individual stock swings, identifying smart-money positioning before retail screener alerts trigger.
+            </p>
+            <div class="space-y-2.5 pt-2 bg-transparent/50 border border-outline/5 p-4 rounded-2xl">
+              <span class="font-label-badge text-label-badge uppercase tracking-wider text-outline block mb-2">Core Analytical Focus</span>
+              <div class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm">
+                <span class="material-symbols-outlined text-secondary text-[16px] bg-secondary/10 rounded-full p-0.5">check</span>
+                <span>Stock Swing Candidate Profiling</span>
+              </div>
+              <div class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm">
+                <span class="material-symbols-outlined text-secondary text-[16px] bg-secondary/10 rounded-full p-0.5">check</span>
+                <span>Volume-Weighted Structural Momentum</span>
+              </div>
+              <div class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm">
+                <span class="material-symbols-outlined text-secondary text-[16px] bg-secondary/10 rounded-full p-0.5">check</span>
+                <span>Relative Outperformance Matrix</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 6. FLAGSHIP: Road Map Theory V2.1 -->
+          <div class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 group card-hover">
+            <div class="flex items-center justify-between border-b border-outline/10 pb-4">
+              <span class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-label-mono font-bold shadow-sm">06</span>
+              <span class="font-label-badge text-label-badge uppercase tracking-wider bg-primary/10 text-primary px-3 py-1.5 rounded-full">FLAGSHIP MULTI-ASSET</span>
+            </div>
+            <div>
+              <h3 class="font-headline-md text-xl md:text-[26px] leading-tight text-on-surface group-hover:text-primary transition-colors font-bold">Road Map Theory V2.1</h3>
+              <p class="font-label-mono text-label-mono text-outline mt-1 font-semibold">Multi-Asset Macro Navigation Architecture</p>
+            </div>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              The definitive master framework uniting domestic indices, equities, global commodities, crypto derivatives, and foreign exchange into one unified trade roadmap.
+            </p>
+            <div class="space-y-2.5 pt-2 bg-transparent/50 border border-outline/5 p-4 rounded-2xl">
+              <span class="font-label-badge text-label-badge uppercase tracking-wider text-outline block mb-2">Universal Analytical Focus</span>
+              <div class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm">
+                <span class="material-symbols-outlined text-primary text-[16px] bg-primary/10 rounded-full p-0.5">check</span>
+                <span>Multi-Timeframe Macro Alignment</span>
+              </div>
+              <div class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm">
+                <span class="material-symbols-outlined text-primary text-[16px] bg-primary/10 rounded-full p-0.5">check</span>
+                <span>Equities, MCX, Forex &amp; Crypto Inter-market</span>
+              </div>
+              <div class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm">
+                <span class="material-symbols-outlined text-primary text-[16px] bg-primary/10 rounded-full p-0.5">check</span>
+                <span>Execution Precision &amp; Target Mapping</span>
+              </div>
+            </div>
+          </div>
+          <!-- 7. Extension of UOP Theory -->
+          <div class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 group card-hover">
+            <div class="flex items-center justify-between border-b border-outline/10 pb-4">
+              <span class="w-10 h-10 rounded-xl bg-tertiary/10 text-tertiary flex items-center justify-center font-label-mono font-bold shadow-sm">07</span>
+              <span class="font-label-badge text-label-badge uppercase tracking-wider bg-tertiary/10 text-tertiary px-3 py-1.5 rounded-full">Advanced Option Analytics</span>
+            </div>
+            <div>
+              <h3 class="font-headline-md text-xl md:text-[26px] leading-tight text-on-surface group-hover:text-tertiary transition-colors font-bold">Extension of UOP Theory</h3>
+              <p class="font-label-mono text-label-mono text-outline mt-1 font-semibold">Advanced Premium Navigation</p>
+            </div>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Builds upon the foundational U.O.P. framework, diving deeper into advanced positioning, real-time premium shifts, and dynamic risk management techniques.
+            </p>
+            <div class="space-y-2.5 pt-2 bg-transparent/50 border border-outline/5 p-4 rounded-2xl">
+              <span class="font-label-badge text-label-badge uppercase tracking-wider text-outline block mb-2">Core Analytical Focus</span>
+              <div class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm">
+                <span class="material-symbols-outlined text-tertiary text-[16px] bg-tertiary/10 rounded-full p-0.5">check</span>
+                <span>Advanced Target Identification</span>
+              </div>
+              <div class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm">
+                <span class="material-symbols-outlined text-tertiary text-[16px] bg-tertiary/10 rounded-full p-0.5">check</span>
+                <span>Dynamic Premium Shifts</span>
+              </div>
+              <div class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm">
+                <span class="material-symbols-outlined text-tertiary text-[16px] bg-tertiary/10 rounded-full p-0.5">check</span>
+                <span>Complex Validation Sequences</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- SECTION 3.5: STUDY GUIDES LIBRARY -->
+    <section class="w-full bg-transparent py-16 scroll-mt-24 border-y border-outline/10">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-8 animate-fade-in-up">
+        <div class="flex flex-col gap-4 max-w-2xl">
+          <span class="font-label-mono text-label-mono text-secondary uppercase tracking-wider font-semibold bg-secondary/10 px-3 py-1 rounded-full w-max">FREE RESOURCES</span>
+          <h2 class="font-headline-lg text-3xl md:text-4xl lg:text-5xl leading-tight text-on-surface">
+            AlphaEdge Study Guides Library
+          </h2>
+          <p class="font-body-lg text-body-lg text-on-surface-variant">
+            Access our comprehensive collection of visual study guides covering Candlestick Patterns, Bullish &amp; Bearish Chart Patterns, Breakout Strategies, and Options. 
+          </p>
+        </div>
+        <div class="flex shrink-0">
+          <a href="study-guides.html" class="bg-secondary text-on-secondary hover:bg-secondary/90 transition-colors px-8 py-4 rounded-xl font-bold flex items-center gap-3 shadow-lg hover:-translate-y-1 transform duration-300">
+            <span class="material-symbols-outlined text-[24px]">library_books</span>
+            <span class="text-lg">Explore Study Library</span>
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- SECTION 4: THE 11 PRACTICAL EDUCATION PILLARS -->
+    <section class="w-full bg-transparent py-24 scroll-mt-24 border-y border-outline/10" id="education-pillars">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col gap-16 animate-fade-in-up">
+        <div class="flex flex-col gap-4 max-w-3xl">
+          <span class="font-label-mono text-label-mono text-primary uppercase tracking-wider font-semibold">FROM THEORY TO DESK EXECUTION</span>
+          <h2 class="font-headline-lg text-3xl md:text-4xl lg:text-5xl leading-tight text-on-surface">
+            The 11 Practical Learning Pillars of Alpha Edge Pro
+          </h2>
+          <p class="font-body-lg text-body-lg text-on-surface-variant">
+            At Alpha Edge Pro Academy, we believe that learning becomes meaningful when theoretical concepts can be connected with actual market behaviour. Our training therefore combines:
+          </p>
+        </div>
+        
+        <!-- 11 Pillars Interactive Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <!-- Pillar 1 -->
+          <div class="bg-transparentest p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col gap-3 border border-outline/5 card-hover">
+            <div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center shadow-inner">
+              <span class="material-symbols-outlined text-[26px]">candlestick_chart</span>
+            </div>
+            <span class="font-label-mono text-label-mono text-outline font-bold tracking-widest text-[10px]">PILLAR 01</span>
+            <h4 class="font-headline-sm text-[18px] text-on-surface font-bold leading-tight">Market Structure &amp; Price Behaviour</h4>
+            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Mastering order-book balance, liquidity displacement, fair value gaps, and micro-structure dynamics.
+            </p>
+          </div>
+          
+          <!-- Pillar 2 -->
+          <div class="bg-transparentest p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col gap-3 border border-outline/5 card-hover">
+            <div class="w-12 h-12 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center shadow-inner">
+              <span class="material-symbols-outlined text-[26px]">trending_up</span>
+            </div>
+            <span class="font-label-mono text-label-mono text-outline font-bold tracking-widest text-[10px]">PILLAR 02</span>
+            <h4 class="font-headline-sm text-[18px] text-on-surface font-bold leading-tight">Advanced Trading Methodologies</h4>
+            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Systematic discretionary workflows paired with multi-factor confluence screening models.
+            </p>
+          </div>
+          
+          <!-- Pillar 3 -->
+          <div class="bg-transparentest p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col gap-3 border border-outline/5 card-hover">
+            <div class="w-12 h-12 rounded-xl bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center shadow-inner">
+              <span class="material-symbols-outlined text-[26px]">calculate</span>
+            </div>
+            <span class="font-label-mono text-label-mono text-outline font-bold tracking-widest text-[10px]">PILLAR 03</span>
+            <h4 class="font-headline-sm text-[18px] text-on-surface font-bold leading-tight">Options &amp; Premium Analysis</h4>
+            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Greeks tracking, implied volatility shifts, skew curves, gamma squeezes, and non-directional structuring.
+            </p>
+          </div>
+          
+          <!-- Pillar 4 -->
+          <div class="bg-transparentest p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col gap-3 border border-outline/5 card-hover">
+            <div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center shadow-inner">
+              <span class="material-symbols-outlined text-[26px]">account_balance</span>
+            </div>
+            <span class="font-label-mono text-label-mono text-outline font-bold tracking-widest text-[10px]">PILLAR 04</span>
+            <h4 class="font-headline-sm text-[18px] text-on-surface font-bold leading-tight">Institutional Participation</h4>
+            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Identifying FII/DII footprint patterns, proprietary desk accumulation, and resting limit block discovery.
+            </p>
+          </div>
+          
+          <!-- Pillar 5 -->
+          <div class="bg-transparentest p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col gap-3 border border-outline/5 card-hover">
+            <div class="w-12 h-12 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center shadow-inner">
+              <span class="material-symbols-outlined text-[26px]">psychology_alt</span>
+            </div>
+            <span class="font-label-mono text-label-mono text-outline font-bold tracking-widest text-[10px]">PILLAR 05</span>
+            <h4 class="font-headline-sm text-[18px] text-on-surface font-bold leading-tight">Trading Psychology &amp; Discipline</h4>
+            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Neutralizing FOMO, revenge trading, loss aversion, and cultivating emotional neutrality under drawdown.
+            </p>
+          </div>
+          
+          <!-- Pillar 6 -->
+          <div class="bg-transparentest p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col gap-3 border border-outline/5 card-hover">
+            <div class="w-12 h-12 rounded-xl bg-error-container text-error flex items-center justify-center shadow-inner">
+              <span class="material-symbols-outlined text-[26px]">shield</span>
+            </div>
+            <span class="font-label-mono text-label-mono text-outline font-bold tracking-widest text-[10px]">PILLAR 06</span>
+            <h4 class="font-headline-sm text-[18px] text-on-surface font-bold leading-tight">Risk Management &amp; Sizing</h4>
+            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Kelly criterion sizing, stop-loss mathematical placement, portfolio beta control, and capital safety limits.
+            </p>
+          </div>
+          
+          <!-- Pillar 7 -->
+          <div class="bg-transparentest p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col gap-3 border border-outline/5 card-hover">
+            <div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center shadow-inner">
+              <span class="material-symbols-outlined text-[26px]">smart_toy</span>
+            </div>
+            <span class="font-label-mono text-label-mono text-outline font-bold tracking-widest text-[10px]">PILLAR 07</span>
+            <h4 class="font-headline-sm text-[18px] text-on-surface font-bold leading-tight">AI-Powered Analytical Tools</h4>
+            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Leveraging custom algorithmic screeners, automated order-book filters, and machine-assisted backtesting.
+            </p>
+          </div>
+          
+          <!-- Pillar 8 -->
+          <div class="bg-transparentest p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col gap-3 border border-outline/5 card-hover">
+            <div class="w-12 h-12 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center shadow-inner">
+              <span class="material-symbols-outlined text-[26px]">history_edu</span>
+            </div>
+            <span class="font-label-mono text-label-mono text-outline font-bold tracking-widest text-[10px]">PILLAR 08</span>
+            <h4 class="font-headline-sm text-[18px] text-on-surface font-bold leading-tight">Historical Data &amp; Research</h4>
+            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Evaluating historical market regimes from 2003 to 2026 to understand outlier volatility behaviors.
+            </p>
+          </div>
+          
+          <!-- Pillar 9 -->
+          <div class="bg-transparentest p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col gap-3 border border-outline/5 card-hover">
+            <div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center shadow-inner">
+              <span class="material-symbols-outlined text-[26px]">live_tv</span>
+            </div>
+            <span class="font-label-mono text-label-mono text-outline font-bold tracking-widest text-[10px]">PILLAR 09</span>
+            <h4 class="font-headline-sm text-[18px] text-on-surface font-bold leading-tight">Live Market Learning Desks</h4>
+            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Real-time trade sessions during market hours (09:15 - 15:30 IST) with direct mentor execution observation.
+            </p>
+          </div>
+          
+          <!-- Pillar 10 -->
+          <div class="bg-transparentest p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col gap-3 border border-outline/5 card-hover">
+            <div class="w-12 h-12 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center shadow-inner">
+              <span class="material-symbols-outlined text-[26px]">computer</span>
+            </div>
+            <span class="font-label-mono text-label-mono text-outline font-bold tracking-widest text-[10px]">PILLAR 10</span>
+            <h4 class="font-headline-sm text-[18px] text-on-surface font-bold leading-tight">Practical Market Applications</h4>
+            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Hands-on terminal execution setups and journal logging under supervised live market conditions.
+            </p>
+          </div>
+          
+          <!-- Pillar 11 (Spans 2 columns on wide screens) -->
+          <div class="bg-gradient-to-br from-primary/10 to-primary/5 p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col gap-3 sm:col-span-2 border border-primary/20 card-hover">
+            <div class="w-12 h-12 rounded-xl bg-primary text-on-primary flex items-center justify-center shadow-md shadow-primary/30">
+              <span class="material-symbols-outlined text-[26px]">sync</span>
+            </div>
+            <span class="font-label-mono text-label-mono text-primary font-bold tracking-widest text-[10px]">PILLAR 11</span>
+            <h4 class="font-headline-sm text-[20px] text-primary-fixed-variant font-bold leading-tight">Continuous Mentorship &amp; Learning</h4>
+            <p class="font-body-sm text-[14px] text-on-surface-variant leading-relaxed font-medium">
+              Structured support tailored to the student's learning journey and professional market evolution. Education doesn't stop after the curriculum ends; we scale and adapt with your progress in real-time.
+            </p>
+          </div>
+        </div>
+        <div class="mt-8 bg-transparentest p-6 rounded-2xl shadow-sm border border-outline/10 text-center mx-auto max-w-4xl">
+          <p class="font-body-lg text-body-lg text-on-surface-variant font-medium">
+            Students are introduced to structured methods of analysing markets rather than relying solely on predictions, tips, or emotional decision-making.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: LEADERSHIP & FOUNDERS -->
+    <section class="w-full bg-transparent py-24 scroll-mt-24" id="leadership-founders">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col gap-16 animate-fade-in-up">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div class="flex flex-col gap-4 max-w-3xl">
+            <span class="font-label-mono text-label-mono text-secondary uppercase tracking-wider font-semibold bg-secondary/10 px-3 py-1 rounded-full w-max">EXECUTIVE BOARD</span>
+            <h2 class="font-headline-lg text-3xl md:text-4xl lg:text-5xl leading-tight text-on-surface mt-2">
+              Founded on Data Research, Engineering &amp; Systematic Execution
+            </h2>
+            <div class="font-body-lg text-body-lg text-on-surface-variant flex flex-col gap-3">
+              <p>The combined experience of <strong>Amit Patel and Pragnesh Savaliya</strong> brings together extensive market-data research, practical trading experience, systematic analysis, and technology-driven approaches.</p>
+              <p>Together, they are focused on building an education platform where traders can learn through <strong>structured methodologies, practical market application, data analysis, technology, risk awareness, and disciplined decision-making</strong>.</p>
+              <p class="font-bold text-primary mt-2">Experience. Research. Technology. Education. Discipline.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <!-- Founder 1 -->
+          <div class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 card-hover group">
+            <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+              <div class="w-40 h-40 md:w-48 md:h-48 rounded-full bg-surface-container flex items-center justify-center shrink-0 border-4 border-primary/20 overflow-hidden shadow-lg relative">
+                <img src="./image/founder-amit-patel.jpeg" alt="Amit Patel" class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500">
+              </div>
+              <div class="flex flex-col items-center sm:items-start text-center sm:text-left gap-1 mt-2">
+                <div class="flex gap-2 mb-2">
+                  <span class="font-label-badge text-[10px] bg-primary text-on-primary px-3 py-1 rounded-full uppercase tracking-wider font-bold">Founder</span>
+                  <span class="font-label-badge text-[10px] bg-primary/10 text-primary px-3 py-1 rounded-full uppercase tracking-wider font-bold">21+ Yrs Exp</span>
+                </div>
+                <h3 class="font-headline-md text-[28px] text-on-surface font-bold tracking-tight">Amit Patel</h3>
+                <span class="font-label-mono text-xs text-emerald-400 font-semibold tracking-wide">Data Analyst &amp; Market Research Professional</span>
+                <div class="font-body-md text-[14px] text-on-surface-variant mt-3 leading-relaxed flex flex-col gap-2">
+                  <p>With <strong>21+ years of experience in market data and financial-market analysis</strong>, Amit Patel is the Founder of Alpha Edge Pro Academy and the driving force behind its research-oriented approach to trading education.</p>
+                  <p>As a <strong>Data Analyst and Market Research Professional</strong>, he has dedicated years to studying market behaviour, historical data, price movements, and structured trading methodologies.</p>
+                  <p>His experience has contributed to the development of Alpha Edge Pro Academy's proprietary educational frameworks, including <strong>U.O.P. Theory, Box Theory, Momentum Plus APA, Blaster Theory, Delta Theory, and Road Map Theory V2.1</strong>.</p>
+                  <p>Over the years, Amit Patel has trained <strong>2,000+ students through online and offline learning programs</strong>, with an emphasis on practical market understanding, analytical thinking, disciplined execution, and structured trading education.</p>
+                </div>
+              </div>
+            </div>
+            <div class="bg-transparent/50 p-5 rounded-2xl grid grid-cols-1 sm:grid-cols-2 gap-3 mt-auto border border-outline/5">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-primary">check_circle</span>
+                <span class="font-body-sm text-[13px] text-on-surface font-medium">21+ Years Experience</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-primary">check_circle</span>
+                <span class="font-body-sm text-[13px] text-on-surface font-medium">NISM Series VIII Certified</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-primary">check_circle</span>
+                <span class="font-body-sm text-[13px] text-on-surface font-medium">Architect of Frameworks</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Founder 2 -->
+          <div class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 card-hover group">
+            <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+              <div class="w-40 h-40 md:w-48 md:h-48 rounded-full bg-surface-container flex items-center justify-center shrink-0 border-4 border-secondary/20 overflow-hidden shadow-lg relative">
+                <img src="./image/cofounder-pragnesh.jpeg" alt="Pragnesh Savaliya" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500">
+              </div>
+              <div class="flex flex-col items-center sm:items-start text-center sm:text-left gap-1 mt-2">
+                <div class="flex gap-2 mb-2">
+                  <span class="font-label-badge text-[10px] bg-secondary text-on-secondary px-3 py-1 rounded-full uppercase tracking-wider font-bold">Co-Founder</span>
+                  <span class="font-label-badge text-[10px] bg-secondary/10 text-secondary px-3 py-1 rounded-full uppercase tracking-wider font-bold">8+ Yrs Exp</span>
+                </div>
+                <h3 class="font-headline-md text-[28px] text-on-surface font-bold tracking-tight">Pragnesh Savaliya</h3>
+                <span class="font-label-mono text-xs text-blue-400 font-semibold tracking-wide">Mechanical Engineer &amp; Systematic Trader</span>
+                <div class="font-body-md text-[14px] text-on-surface-variant mt-3 leading-relaxed flex flex-col gap-2">
+                  <p>Pragnesh Savaliya, a <strong>Mechanical Engineering professional</strong>, is the Co-Founder of Alpha Edge Pro Academy and brings <strong>8+ years of experience</strong> in financial markets, trading technology, and systematic market analysis.</p>
+                  <p>With experience in <strong>proprietary desk trading and algorithmic trading</strong>, he contributes a technology-driven and systematic perspective to the academy's educational ecosystem.</p>
+                  <p>His areas of expertise include <strong>algorithmic trading, systematic market analysis, trading automation, and technology-based market research</strong>. His contribution supports the academy's objective of integrating modern technology and analytical tools into practical trading education.</p>
+                </div>
+              </div>
+            </div>
+            <div class="bg-transparent/50 p-5 rounded-2xl grid grid-cols-1 sm:grid-cols-2 gap-3 mt-auto border border-outline/5">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span>
+                <span class="font-body-sm text-[13px] text-on-surface font-medium">8+ Years Algo Experience</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span>
+                <span class="font-body-sm text-[13px] text-on-surface font-medium">NISM Series VIII Certified</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span>
+                <span class="font-body-sm text-[13px] text-on-surface font-medium">Proprietary Trading Desk</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="w-full bg-[#0B111E] text-white py-16 border-t border-white/5 relative overflow-hidden">
+      <!-- Decorative background blur -->
+      <div class="absolute top-0 right-1/4 w-[400px] h-[400px] bg-emerald-500/5 rounded-full blur-[80px] pointer-events-none"></div>
+      
+      <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col gap-12 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center">
+              <a href="index.html">
+                <img src="./image/ChatGPT Image Sep 28, 2026, 05_35_33 PM.png" alt="Alpha Edge Pro Academy" class="h-14 md:h-16 w-auto object-contain">
+              </a>
+            </div>
+            <p class="font-body-sm text-slate-400 leading-relaxed max-w-sm mt-2">
+              Building a nationwide community of educated, disciplined, technology-enabled, and research-oriented market participants.
+            </p>
+          </div>
+          <div class="flex flex-col gap-4">
+            <span class="font-label-mono text-[11px] uppercase tracking-widest text-emerald-500 font-bold mb-1">Navigation</span>
+            <nav class="flex flex-col gap-3">
+              <a href="#" class="font-body-sm text-[14px] text-slate-300 hover:text-white transition-colors">Home</a>
+              <a href="#proprietary-frameworks" class="font-body-sm text-[14px] text-slate-300 hover:text-white transition-colors">Frameworks &amp; Courses</a>
+              <a href="study-guides.html" class="font-body-sm text-[14px] text-slate-300 hover:text-white transition-colors">Study Guides Library</a>
+              <a href="ultraviewer-guide.html" class="font-body-sm text-[14px] text-slate-300 hover:text-white transition-colors">UltraViewer Guide</a>
+              <a href="apa-theory.html" class="font-body-sm text-[14px] text-slate-300 hover:text-white transition-colors">APA Theory</a>
+              <a href="uop-theory.html" class="font-body-sm text-[14px] text-slate-300 hover:text-white transition-colors">U.O.P. Theory</a>
+              <a href="#leadership-founders" class="font-body-sm text-[14px] text-slate-300 hover:text-white transition-colors">Leadership</a>
+              <a href="https://youtube.com/@alphaedgeproacademy?si=Hr1wo6zXJ-npMSxC" target="_blank" rel="noopener noreferrer" class="font-body-sm text-[14px] text-slate-300 hover:text-white transition-colors">YouTube Channel</a>
+              <a href="contact.html" class="font-body-sm text-[14px] text-slate-300 hover:text-white transition-colors">Admission</a>
+            </nav>
+          </div>
+          <div class="flex flex-col gap-4">
+            <span class="font-label-mono text-[11px] uppercase tracking-widest text-emerald-500 font-bold mb-1">Admission</span>
+            <div class="flex flex-col gap-3">
+              <a href="mailto:Alphaedgeproacademy@gmail.com" class="font-body-sm text-[14px] text-slate-300 hover:text-white transition-colors flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">mail</span> Alphaedgeproacademy@gmail.com
+              </a>
+              <a href="tel:+919328682611" class="font-body-sm text-[14px] text-slate-300 hover:text-white transition-colors flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">call</span> +91 93286 82611
+              </a>
+              <a href="tel:+917600896555" class="font-body-sm text-[14px] text-slate-300 hover:text-white transition-colors flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">call</span> +91 7600 896 555
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 font-label-mono text-xs text-slate-500">
+          <span>© 2026 Alpha Edge Pro Academy. All rights reserved.</span>
+          <span class="tracking-wider">Learn the Market. Understand the Framework. Build the Discipline.</span>
+        </div>
+      </div>
     </footer>
-
-
+  </div>
+</main>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuBtn = document.getElementById('mobile-menu-btn');
+      const menuItems = document.getElementById('mobile-menu-items');
+      const menuIcon = document.getElementById('menu-icon');
+      
+      if (menuBtn) {
+        menuBtn.addEventListener('click', () => {
+          menuItems.classList.toggle('hidden');
+          if (menuItems.classList.contains('hidden')) {
+            menuIcon.textContent = 'menu';
+          } else {
+            menuIcon.textContent = 'close';
+          }
+        });
+      }
+      
+      const menuLinks = menuItems.querySelectorAll('a');
+      menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth < 1024) {
+            menuItems.classList.add('hidden');
+            menuIcon.textContent = 'menu';
+          }
+        });
+      });
+    });
+  </script>
 </body>
-
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
