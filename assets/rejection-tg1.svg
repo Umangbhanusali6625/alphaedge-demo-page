@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 660" role="img" aria-labelledby="title desc">
+<title id="title">CE premium rejection from MAIN UP TG 1 at 291.00</title>
+<desc id="desc">Teaching illustration. Premium rises above Side Up 3 with TCL confirmation, passes any earlier main targets, touches MAIN UP TG 1 at 291.00, then pulls back. The TCL is illustrative and a target touch does not confirm a reversal.</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#071625"/><stop offset="1" stop-color="#0c2940"/></linearGradient><linearGradient id="move" x2="1" y2="0"><stop stop-color="#7de6a6"/><stop offset=".62" stop-color="#69ccea"/><stop offset="1" stop-color="#efa182"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<rect width="1100" height="660" rx="22" fill="url(#bg)"/><rect x="1" y="1" width="1098" height="658" rx="21" fill="none" stroke="#486374"/>
+<g font-family="Arial,sans-serif"><text x="42" y="52" fill="#f2bd66" font-size="17" font-weight="700" letter-spacing="3">AlphaEdgePro · U.O.P THEORY</text>
+<text x="42" y="96" fill="#f5f4ee" font-size="29" font-weight="700">24050 CE · Rejection from MAIN UP TG 1</text>
+<text x="42" y="127" fill="#a8bdc9" font-size="16">Scenario 1 of 3 · First target · failure to hold · premium levels, not NIFTY spot points</text></g>
+<g font-family="Arial,sans-serif" font-size="17" font-weight="700"><line x1="280" x2="1010" y1="227" y2="227" stroke="#f0b56c" stroke-width="3"/><text x="42" y="233" fill="#f0b56c">MAIN UP TG 1</text><text x="1008" y="233" fill="#f0b56c" text-anchor="end">291.00</text>
+<line x1="280" x2="1010" y1="485" y2="485" stroke="#67c8e8" stroke-width="2" stroke-dasharray="9 7"/><text x="42" y="491" fill="#67c8e8">SIDE UP 3</text><text x="1008" y="491" fill="#67c8e8" text-anchor="end">250.14</text>
+</g>
+<path d="M300 497 C490 485 650 466 910 432" fill="none" stroke="#f5f3eb" stroke-width="2" stroke-dasharray="5 6" opacity=".85"/>
+<rect x="302" y="551" width="170" height="28" rx="6" fill="#17384a"/><text x="313" y="571" fill="#fff" font-family="Arial,sans-serif" font-size="16" font-weight="700">TCL · illustrative</text>
+<path d="M307 508 C350 490 395 481 430 466 S535 370 586 295 S650 227 697 227 S735 256 760 294 S827 395 884 430" fill="none" stroke="url(#move)" stroke-width="6" stroke-linecap="round" filter="url(#glow)"/>
+<circle cx="430" cy="466" r="6" fill="#baf0cc" stroke="#071625" stroke-width="2"/><circle cx="697" cy="227" r="8" fill="#ffad90" stroke="#071625" stroke-width="2"/><circle cx="884" cy="430" r="6" fill="#fff" stroke="#071625" stroke-width="2"/>
+<rect x="626" y="142" width="236" height="29" rx="6" fill="#46302d"/><text x="639" y="162" fill="#ffc5af" font-family="Arial,sans-serif" font-size="16" font-weight="700">Touches MAIN UP TG 1 · 291.00</text>
+<rect x="777" y="474" width="267" height="29" rx="6" fill="#283b49"/><text x="789" y="494" fill="#f5f4ee" font-family="Arial,sans-serif" font-size="16" font-weight="700">Pullback toward TCL</text>
+<line x1="42" x2="1055" y1="600" y2="600" stroke="#486374"/>
+<text x="42" y="627" fill="#d0dfe3" font-family="Arial,sans-serif" font-size="15">If price cannot hold TG 1, wait for reversal evidence. TG 2 remains conditional.</text>
+<text x="42" y="648" fill="#a8bdc9" font-family="Arial,sans-serif" font-size="13">Paths and TCL placement are schematic. Wait for price and TCL confirmation; no reversal is guaranteed.</text>
+</svg>

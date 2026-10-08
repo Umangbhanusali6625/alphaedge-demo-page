@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 660" role="img" aria-labelledby="title desc">
+<title id="title">CE premium rejection from MAIN UP TG 2 at 341.48</title>
+<desc id="desc">Teaching illustration. Premium rises above Side Up 3 with TCL confirmation, passes any earlier main targets, touches MAIN UP TG 2 at 341.48, then pulls back. The TCL is illustrative and a target touch does not confirm a reversal.</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#071625"/><stop offset="1" stop-color="#0c2940"/></linearGradient><linearGradient id="move" x2="1" y2="0"><stop stop-color="#7de6a6"/><stop offset=".62" stop-color="#69ccea"/><stop offset="1" stop-color="#efa182"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<rect width="1100" height="660" rx="22" fill="url(#bg)"/><rect x="1" y="1" width="1098" height="658" rx="21" fill="none" stroke="#486374"/>
+<g font-family="Arial,sans-serif"><text x="42" y="52" fill="#f2bd66" font-size="17" font-weight="700" letter-spacing="3">AlphaEdgePro · U.O.P THEORY</text>
+<text x="42" y="96" fill="#f5f4ee" font-size="29" font-weight="700">24050 CE · Rejection from MAIN UP TG 2</text>
+<text x="42" y="127" fill="#a8bdc9" font-size="16">Scenario 2 of 3 · CE full profit-booking reference · premium levels, not NIFTY spot points</text></g>
+<g font-family="Arial,sans-serif" font-size="17" font-weight="700"><line x1="280" x2="1010" y1="210" y2="210" stroke="#f0b56c" stroke-width="3"/><text x="42" y="216" fill="#f0b56c">MAIN UP TG 2</text><text x="1008" y="216" fill="#f0b56c" text-anchor="end">341.48</text>
+<line x1="280" x2="1010" y1="388" y2="388" stroke="#91d9a4" stroke-width="2" stroke-dasharray="9 7"/><text x="42" y="394" fill="#91d9a4">MAIN UP TG 1</text><text x="1008" y="394" fill="#91d9a4" text-anchor="end">291.00</text>
+<line x1="280" x2="1010" y1="526" y2="526" stroke="#67c8e8" stroke-width="2" stroke-dasharray="9 7"/><text x="42" y="532" fill="#67c8e8">SIDE UP 3</text><text x="1008" y="532" fill="#67c8e8" text-anchor="end">250.14</text>
+</g>
+<path d="M300 530 C490 507 650 452 920 397" fill="none" stroke="#f5f3eb" stroke-width="2" stroke-dasharray="5 6" opacity=".85"/>
+<rect x="302" y="551" width="170" height="28" rx="6" fill="#17384a"/><text x="313" y="571" fill="#fff" font-family="Arial,sans-serif" font-size="16" font-weight="700">TCL · illustrative</text>
+<path d="M307 535 C370 520 426 473 476 388 S565 318 606 300 S680 215 718 210 S760 230 782 277 S836 348 892 380" fill="none" stroke="url(#move)" stroke-width="6" stroke-linecap="round" filter="url(#glow)"/>
+<circle cx="476" cy="388" r="6" fill="#baf0cc" stroke="#071625" stroke-width="2"/><circle cx="718" cy="210" r="8" fill="#ffad90" stroke="#071625" stroke-width="2"/><circle cx="892" cy="380" r="6" fill="#fff" stroke="#071625" stroke-width="2"/>
+<rect x="626" y="142" width="236" height="29" rx="6" fill="#46302d"/><text x="639" y="162" fill="#ffc5af" font-family="Arial,sans-serif" font-size="16" font-weight="700">Touches MAIN UP TG 2 · 341.48</text>
+<rect x="777" y="474" width="267" height="29" rx="6" fill="#283b49"/><text x="789" y="494" fill="#f5f4ee" font-family="Arial,sans-serif" font-size="16" font-weight="700">Pullback after TG 2</text>
+<line x1="42" x2="1055" y1="600" y2="600" stroke="#486374"/>
+<text x="42" y="627" fill="#d0dfe3" font-family="Arial,sans-serif" font-size="15">For this CE example, TG 2 is generally the method’s full profit-booking zone.</text>
+<text x="42" y="648" fill="#a8bdc9" font-family="Arial,sans-serif" font-size="13">Paths and TCL placement are schematic. Wait for price and TCL confirmation; no reversal is guaranteed.</text>
+</svg>

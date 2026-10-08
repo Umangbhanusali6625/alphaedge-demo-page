@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 630" role="img" aria-labelledby="title desc">
+<title id="title">Gap-down scenario: selected PE and CE in different U.O.P premium zones</title>
+<desc id="desc">Conditional gap-down illustration. A selected put may have premium in the U.O.P Deep ITM main-upside target region. A selected call may have premium in the U.O.P OTM main-downside region. If the call premium holds Main Down TG 3 with TCL support, a rebound remains possible. A confirmed break of Main Down TG 3 with TCL invalidates that hold scenario. These zone names do not change actual moneyness.</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#071625"/><stop offset="1" stop-color="#0c2940"/></linearGradient></defs>
+<rect width="1160" height="630" rx="22" fill="url(#bg)"/><rect x="1" y="1" width="1158" height="628" rx="21" fill="none" stroke="#486374"/>
+<g font-family="Arial,sans-serif">
+<text x="42" y="54" fill="#f2bd66" font-size="17" font-weight="700" letter-spacing="3">AlphaEdgePro · U.O.P THEORY</text>
+<text x="42" y="99" fill="#f5f4ee" font-size="29" font-weight="700">GAP-DOWN · PE upside / CE downside</text>
+<text x="42" y="131" fill="#a8bdc9" font-size="16">Scenario map for learning · zone assignment requires each option's live U.O.P levels and TCL</text>
+<rect x="42" y="165" width="514" height="365" rx="15" fill="#163b35" stroke="#74d298" stroke-width="2"/>
+<text x="67" y="205" fill="#b1edc4" font-size="21" font-weight="700">A · Selected PE premium</text>
+<text x="67" y="235" fill="#e3f2e8" font-size="16">U.O.P “Deep ITM” premium zone</text>
+<line x1="82" x2="510" y1="288" y2="288" stroke="#83d9a3" stroke-width="2"/><text x="94" y="279" fill="#d8f5e1" font-size="17" font-weight="700">MAIN UP TG 3</text>
+<line x1="82" x2="510" y1="340" y2="340" stroke="#83d9a3" stroke-width="2"/><text x="94" y="331" fill="#d8f5e1" font-size="17" font-weight="700">MAIN UP TG 2</text>
+<line x1="82" x2="510" y1="392" y2="392" stroke="#83d9a3" stroke-width="2"/><text x="94" y="383" fill="#d8f5e1" font-size="17" font-weight="700">MAIN UP TG 1</text>
+<path d="M350 465 C374 432 395 393 417 363 S452 314 467 295" fill="none" stroke="#a8f2bc" stroke-width="5" stroke-linecap="round"/>
+<circle cx="417" cy="363" r="7" fill="#fff"/>
+<text x="67" y="497" fill="#c6e8d1" font-size="16">Assess target response and protect gains.</text>
+<rect x="604" y="165" width="514" height="365" rx="15" fill="#332a39" stroke="#d9929c" stroke-width="2"/>
+<text x="629" y="205" fill="#ffc3ca" font-size="21" font-weight="700">B · Selected CE premium</text>
+<text x="629" y="235" fill="#f0dfe4" font-size="16">U.O.P “OTM” premium zone</text>
+<line x1="647" x2="1080" y1="289" y2="289" stroke="#d9929c" stroke-width="2"/><text x="660" y="280" fill="#f8d8dd" font-size="17" font-weight="700">MAIN DOWN TG 1</text>
+<line x1="647" x2="1080" y1="342" y2="342" stroke="#d9929c" stroke-width="2"/><text x="660" y="333" fill="#f8d8dd" font-size="17" font-weight="700">MAIN DOWN TG 2</text>
+<line x1="647" x2="1080" y1="397" y2="397" stroke="#f1bd75" stroke-width="3"/><text x="660" y="388" fill="#f8d8dd" font-size="17" font-weight="700">MAIN DOWN TG 3</text>
+<path d="M910 290 C945 324 949 370 973 397 S1014 373 1046 338" fill="none" stroke="#f1bd75" stroke-width="5" stroke-linecap="round"/>
+<circle cx="973" cy="397" r="8" fill="#fff"/>
+<text x="629" y="465" fill="#f2d4db" font-size="16">TG 3 + TCL hold → recovery remains possible.</text>
+<text x="629" y="496" fill="#f2d4db" font-size="16">Break with TCL → reassess that idea.</text>
+<line x1="42" x2="1118" y1="558" y2="558" stroke="#486374"/>
+<text x="42" y="588" fill="#c5d7de" font-size="17">Actual ITM status = spot versus strike. U.O.P zone names describe the premium roadmap.</text>
+<text x="42" y="612" fill="#9fbac7" font-size="14">Schematic only. Verify each option’s live U.O.P targets, TCL, spot and strike after the gap.</text>
+</g></svg>

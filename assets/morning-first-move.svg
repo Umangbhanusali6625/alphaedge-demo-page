@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 660" role="img" aria-labelledby="title desc">
+<title id="title">24050 CE first morning premium move</title>
+<desc id="desc">Illustrative premium path. Low between Optimal 170.74 and Participation 197.88, then Participation 197.88 to Side Up 1 225.01, Side Up 2 237.58, a spike to Side Up 3 250.14, and a pullback to an illustrative Trend Confirmation Line near 234. Main upside targets are not shown.</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#071625"/><stop offset="1" stop-color="#0c2940"/></linearGradient><linearGradient id="path" x2="1" y2="0"><stop stop-color="#7de6a6"/><stop offset=".7" stop-color="#69ccea"/><stop offset="1" stop-color="#efa182"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<rect width="1100" height="660" rx="22" fill="url(#bg)"/><rect x="1" y="1" width="1098" height="658" rx="21" fill="none" stroke="#486374"/>
+<text x="42" y="53" fill="#f2bd66" font-family="Arial,sans-serif" font-size="17" font-weight="700" letter-spacing="3">AlphaEdgePro · U.O.P THEORY</text>
+<text x="42" y="96" fill="#f5f4ee" font-family="Arial,sans-serif" font-size="30" font-weight="700">24050 CE · First morning premium move</text>
+<text x="42" y="127" fill="#a8bdc9" font-family="Arial,sans-serif" font-size="16">Illustration for 9:15–10:00 AM · premium levels, not NIFTY spot points</text>
+<g font-family="Arial,sans-serif" font-size="18" font-weight="700">
+<line x1="280" x2="1010" y1="588" y2="588" stroke="#ed8d86" stroke-width="2" opacity=".72"/><text x="42" y="594" fill="#eea49e">UNIVERSAL</text><text x="1008" y="594" fill="#eea49e" text-anchor="end">145.61</text>
+<line x1="280" x2="1010" y1="485" y2="485" stroke="#eabf72" stroke-width="2" opacity=".72"/><text x="42" y="491" fill="#f1ca88">OPTIMAL</text><text x="1008" y="491" fill="#f1ca88" text-anchor="end">170.74</text>
+<line x1="280" x2="1010" y1="373" y2="373" stroke="#89d99d" stroke-width="3"/><text x="42" y="379" fill="#a4e8b6">PARTICIPATION</text><text x="1008" y="379" fill="#a4e8b6" text-anchor="end">197.88</text>
+<line x1="280" x2="1010" y1="261" y2="261" stroke="#5ec4ed" stroke-width="2" stroke-dasharray="9 7"/><text x="42" y="267" fill="#9bdbf4">SIDE UP 1</text><text x="1008" y="267" fill="#9bdbf4" text-anchor="end">225.01</text>
+<line x1="280" x2="1010" y1="209" y2="209" stroke="#5ec4ed" stroke-width="2" stroke-dasharray="9 7"/><text x="42" y="215" fill="#9bdbf4">SIDE UP 2</text><text x="1008" y="215" fill="#9bdbf4" text-anchor="end">237.58</text>
+<line x1="280" x2="1010" y1="158" y2="158" stroke="#5ec4ed" stroke-width="2" stroke-dasharray="9 7"/><text x="42" y="164" fill="#9bdbf4">SIDE UP 3</text><text x="1008" y="164" fill="#9bdbf4" text-anchor="end">250.14</text>
+</g>
+<line x1="280" x2="1010" y1="225" y2="225" stroke="#fff" stroke-width="2" stroke-dasharray="4 5" opacity=".85"/><rect x="731" y="229" width="269" height="29" rx="5" fill="#132d3e"/><text x="744" y="249" fill="#fff" font-family="Arial,sans-serif" font-size="16" font-weight="700">TCL near Side Up 2*</text>
+<path d="M310 431 C340 428 361 389 390 373 S456 291 489 261 S567 216 610 209 S690 166 720 158 S785 205 865 225" fill="none" stroke="url(#path)" stroke-width="6" stroke-linecap="round" filter="url(#glow)"/>
+<circle cx="310" cy="431" r="7" fill="#fff"/><circle cx="489" cy="261" r="7" fill="#6bd4ee"/><circle cx="610" cy="209" r="7" fill="#6bd4ee"/><circle cx="720" cy="158" r="8" fill="#ffb17e"/><circle cx="865" cy="225" r="8" fill="#fff"/>
+<g font-family="Arial,sans-serif" font-size="15" font-weight="700"><rect x="305" y="398" width="169" height="27" rx="6" fill="#153a35"/><text x="315" y="417" fill="#b8e9c7">Low between O and P</text><rect x="418" y="299" width="244" height="30" rx="6" fill="#12344a"/><text x="429" y="320" fill="#ace4f4">Morning Breakfast · Up 1–2</text><rect x="730" y="117" width="171" height="28" rx="6" fill="#3d3031"/><text x="741" y="137" fill="#ffc0ac">Side Up 3 spike</text><rect x="817" y="283" width="157" height="28" rx="6" fill="#223949"/><text x="829" y="303" fill="#fff">Pullback to TCL</text></g>
+<text x="42" y="635" fill="#a8bdc9" font-family="Arial,sans-serif" font-size="14">* TCL placement and path are illustrative; TCL changes with market data. Side Up 3 need not reverse.</text>
+</svg>
