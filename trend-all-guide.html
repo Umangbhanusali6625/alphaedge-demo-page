@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d19">
+  <meta name="description" content="Alpha Edge Trend All TradingView Indicator: Multi-timeframe trend heatmap scanner across NIFTY 50, BANK NIFTY, Indian Equities, and MCX commodities for institutional trend alignment.">
+  <title>Alpha Edge Trend All | Multi-Timeframe Multi-Asset Trend Matrix</title>
+  <link rel="icon" type="image/png" href="./image/alphaedge-main-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #040911;
+      --panel: #0d1726;
+      --panel2: #111f34;
+      --edge: rgba(255, 255, 255, 0.1);
+      --text: #f3f7ff;
+      --muted: #94a3b8;
+      --cyan: #35d1c4;
+      --blue: #52a9ff;
+      --red: #ff6c77;
+      --gold: #f4c873;
+      --green: #22c55e;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      background-image: 
+        linear-gradient(to bottom, rgba(4, 9, 17, 0.82), rgba(4, 9, 17, 0.96)),
+        url('./image/professional-trading-bg.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: var(--text);
+      font: 16px/1.6 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+    }
+    a { color: inherit; }
+    button { font: inherit; }
+    .wrap { max-width: 1200px; margin: auto; padding: 0 28px; }
+    
+    /* Top Header */
+    .top {
+      border-bottom: 1px solid var(--edge);
+      background: rgba(8, 13, 25, 0.85);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .top .wrap {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+    .brand img {
+      height: 52px;
+      width: auto;
+      object-fit: contain;
+    }
+    .nav {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+    }
+    .nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 650;
+      transition: color 0.2s;
+    }
+    .nav a:hover { color: var(--gold); }
+    .nav a.active { color: var(--gold); }
+    .nav .source {
+      border: 1px solid rgba(244, 200, 115, 0.4);
+      border-radius: 8px;
+      color: var(--gold);
+      padding: 7px 14px;
+      background: rgba(244, 200, 115, 0.08);
+    }
+    .nav .source:hover {
+      background: var(--gold);
+      color: #07111c;
+    }
+    .back-to-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 6px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: all 0.2s;
+      white-space: nowrap;
+      background: rgba(244, 200, 115, 0.08);
+    }
+    .back-to-home:hover {
+      background: var(--gold);
+      color: #07111c;
+      box-shadow: 0 0 16px rgba(244, 200, 115, 0.35);
+      transform: translateY(-1px);
+    }
+    
+    /* Indicator Suite Subnav */
+    .indicator-subnav {
+      background: #08121f;
+      border-bottom: 1px solid var(--edge);
+      padding: 10px 0;
+    }
+    .indicator-subnav .wrap {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      align-items: center;
+    }
+    .indicator-subnav span {
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 800;
+      margin-right: 8px;
+      white-space: nowrap;
+    }
+    .indicator-subnav a {
+      font-size: 0.84rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--muted);
+      border: 1px solid transparent;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .indicator-subnav a:hover {
+      color: white;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .indicator-subnav a.current {
+      color: var(--cyan);
+      background: rgba(53, 209, 196, 0.1);
+      border-color: rgba(53, 209, 196, 0.3);
+    }
+    
+    /* Hero */
+    .hero {
+      padding: 72px 0 60px;
+      display: grid;
+      grid-template-columns: 1fr 1.08fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .eyebrow {
+      color: var(--cyan);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .eyebrow:before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 10px var(--cyan);
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 4.4vw, 4.2rem);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      margin: 0 0 20px;
+      font-weight: 800;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--cyan), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .lead {
+      font-size: 1.12rem;
+      color: #cbd5e1;
+      max-width: 520px;
+      line-height: 1.68;
+      margin: 0 0 28px;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 10px 22px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 750;
+      font-size: 0.92rem;
+      transition: all 0.2s;
+    }
+    .primary {
+      background: linear-gradient(135deg, #10b981, #35d1c4);
+      color: #03141b;
+      box-shadow: 0 8px 24px rgba(53, 209, 196, 0.25);
+    }
+    .primary:hover {
+      box-shadow: 0 12px 30px rgba(53, 209, 196, 0.4);
+      transform: translateY(-1px);
+    }
+    .secondary {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #e2e8f0;
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    
+    /* Chart Box */
+    .chart-box {
+      border: 1px solid rgba(53, 209, 196, 0.3);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #09121d;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+    }
+    .chart-box img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .chart-caption {
+      padding: 14px 18px;
+      background: #08101a;
+      border-top: 1px solid var(--edge);
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    
+    /* Sections */
+    .section {
+      padding: 76px 0;
+      border-top: 1px solid var(--edge);
+    }
+    .section h2 {
+      font-size: clamp(2rem, 3.2vw, 3rem);
+      letter-spacing: -0.03em;
+      line-height: 1.18;
+      margin: 0 0 14px;
+    }
+    .section-intro {
+      color: var(--muted);
+      max-width: 720px;
+      margin: 0 0 36px;
+      font-size: 1.05rem;
+    }
+    
+    /* Pillars Grid */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .pillar-card {
+      padding: 30px;
+      border: 1px solid var(--edge);
+      background: linear-gradient(145deg, #0d1726, #09111b);
+      border-radius: 14px;
+      position: relative;
+      transition: all 0.3s;
+    }
+    .pillar-card:hover {
+      border-color: rgba(53, 209, 196, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    }
+    .pillar-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      font-weight: 800;
+      color: var(--cyan);
+      margin-bottom: 12px;
+    }
+    .pillar-card h3 {
+      font-size: 1.35rem;
+      margin: 0 0 12px;
+      letter-spacing: -0.02em;
+    }
+    .pillar-card p {
+      color: #94a3b8;
+      margin: 0;
+      line-height: 1.6;
+    }
+    .metric-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(53, 209, 196, 0.1);
+      color: var(--cyan);
+      border: 1px solid rgba(53, 209, 196, 0.25);
+    }
+    
+    /* Heatmap Table */
+    .table-card {
+      border: 1px solid var(--edge);
+      border-radius: 14px;
+      background: #09121d;
+      overflow: hidden;
+      margin-top: 28px;
+    }
+    .table-head {
+      padding: 16px 22px;
+      background: #0d192a;
+      border-bottom: 1px solid var(--edge);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .table-head h4 { margin: 0; font-size: 1.05rem; }
+    .table-head span { font-size: 0.78rem; font-family: 'JetBrains Mono', monospace; color: var(--gold); }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; text-align: left; }
+    th {
+      background: #08101a;
+      padding: 12px 18px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      border-bottom: 1px solid var(--edge);
+    }
+    td {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+    }
+    tr:hover td { background: rgba(255, 255, 255, 0.02); }
+    .tag-bull {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: rgba(34, 197, 94, 0.15);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+    .tag-bear {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    .tag-neutral {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: rgba(148, 163, 184, 0.15);
+      color: #cbd5e1;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+    }
+    .score-badge {
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+    }
+    .score-high { background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid #22c55e; }
+    .score-low { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; }
+    
+    /* Indian Case Study */
+    .case-card {
+      border: 1px solid rgba(244, 200, 115, 0.3);
+      border-radius: 16px;
+      background: linear-gradient(145deg, #0f1929, #070e17);
+      padding: 36px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      align-items: center;
+      margin-top: 36px;
+    }
+    .case-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .metric-item {
+      padding: 14px 18px;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .metric-label { font-size: 0.74rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .metric-val { font-size: 1.25rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; color: var(--cyan); margin-top: 4px; }
+    .metric-val.gold { color: var(--gold); }
+    
+    /* Suite Switcher */
+    .suite-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .suite-card {
+      padding: 22px;
+      border: 1px solid var(--edge);
+      border-radius: 12px;
+      background: #09121d;
+      text-decoration: none;
+      transition: all 0.25s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 160px;
+    }
+    .suite-card:hover {
+      border-color: var(--cyan);
+      transform: translateY(-2px);
+      background: #0e1b2b;
+    }
+    .suite-card.current {
+      border-color: var(--gold);
+      background: rgba(244, 200, 115, 0.06);
+    }
+    .suite-card span { font-size: 0.74rem; font-family: 'JetBrains Mono', monospace; color: var(--muted); }
+    .suite-card h4 { margin: 8px 0; font-size: 1.05rem; color: white; }
+    .suite-card small { color: var(--cyan); font-weight: 700; }
+    
+    /* Footer */
+    .foot {
+      border-top: 1px solid var(--edge);
+      padding: 34px 0 46px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    .foot .wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding: 48px 0; }
+      .pillars-grid, .suite-cards, .case-card { grid-template-columns: 1fr; }
+      .nav a:not(.source) { display: none; }
+    }
+    @media (max-width: 600px) {
+      .back-to-home .back-text { display: none; }
+      .wrap { padding: 0 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header Navigation -->
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="index.html">
+        <img src="./image/alphaedge-main-logo.png" alt="Alpha Edge Pro Academy">
+      </a>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <nav class="nav" aria-label="Main navigation">
+          <a href="#heatmap">Trend Heatmap</a>
+          <a href="#capabilities">Scanner Capabilities</a>
+          <a href="#case-study">Bank Nifty Blueprint</a>
+        </nav>
+        <a href="index.html" class="back-to-home">
+          <span class="back-icon">&larr;</span>
+          <span class="back-text">Back to Home</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Indicator Suite Subnav Bar -->
+  <nav class="indicator-subnav">
+    <div class="wrap">
+      <span>Proprietary Suite:</span>
+      <a href="ultraviewer-guide.html">1. Ultraviewer V2.1</a>
+      <a href="uop-theory.html">2. Alpha Edge UOP Theory V2.1</a>
+      <a href="advance-feature-guide.html">3. Alpha Edge Advance Feature V2.1</a>
+      <a href="trend-all-guide.html" class="current">4. Alpha Edge Trend All</a>
+    </div>
+  </nav>
+
+  <!-- Main Hero Section -->
+  <main>
+    <div class="wrap">
+      <div class="hero">
+        <div>
+          <div class="eyebrow">INDICATOR GUIDE · V2.1 TREND ALL</div>
+          <h1>Alpha Edge <span>Trend All</span></h1>
+          <p class="lead">
+            A comprehensive multi-timeframe and multi-asset trend scanner: uniting 5m, 15m, 1-Hour, Daily, and Weekly trends for NIFTY 50, BANK NIFTY, large-caps, and MCX commodities onto a single high-definition TradingView panel. Never trade against the institutional tide.
+          </p>
+          <div class="actions">
+            <a class="btn primary" href="#heatmap">View Trend Heatmap</a>
+            <a class="btn secondary" href="#case-study">See Bank Nifty Case Study</a>
+          </div>
+        </div>
+        <div class="chart-box">
+          <img src="theory-assets/trend-all-indicator.png" alt="Alpha Edge Trend All Multi-Timeframe Heatmap on Indian Assets" width="1024" height="600">
+          <div class="chart-caption">
+            <span><strong>Alpha Edge Trend All Dashboard</strong> · Multi-Timeframe Institutional Heatmap</span>
+            <span>NSE + MCX Multi-Market Scanner</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 1: The 4 Core Capabilities -->
+    <section id="capabilities" class="section">
+      <div class="wrap">
+        <div class="eyebrow">CORE CAPABILITIES</div>
+        <h2>Multi-Dimensional Confluence Engine</h2>
+        <p class="section-intro">
+          Most intraday traders fail because they enter long on a 5-minute green candle while the 1-hour and Daily charts are trending violently downward. The Alpha Edge Trend All indicator solves this by enforcing full cross-timeframe alignment.
+        </p>
+
+        <div class="pillars-grid">
+          <!-- Pillar 1 -->
+          <div class="pillar-card">
+            <div class="pillar-num">FEATURE 01 · MULTI-TIMEFRAME</div>
+            <h3>5-Tier Timeframe Heatmap</h3>
+            <p>
+              Simultaneously scans 5m (Intraday trigger), 15m (Tactical trend), 1-Hour (Structural swing), Daily (Macro trend), and Weekly (Institutional baseline). If all 5 tiers are green, upside probability exceeds 80%.
+            </p>
+            <div class="metric-badge">Timeframes: 5m · 15m · 1H · Daily · Weekly</div>
+          </div>
+
+          <!-- Pillar 2 -->
+          <div class="pillar-card">
+            <div class="pillar-num">FEATURE 02 · COVERAGE</div>
+            <h3>Multi-Asset Domestic Coverage</h3>
+            <p>
+              Pre-configured for key Indian market instruments: NIFTY 50, BANK NIFTY, FINNIFTY, MIDCPNIFTY, RELIANCE, TATAMOTORS, HDFCBANK, TRENT, and high-beta MCX commodities (Crude Oil, Gold, Natural Gas).
+            </p>
+            <div class="metric-badge">Coverage: Index Futures · Equities · MCX</div>
+          </div>
+
+          <!-- Pillar 3 -->
+          <div class="pillar-card">
+            <div class="pillar-num">FEATURE 03 · SCORING</div>
+            <h3>Trend Confluence Score (-5 to +5)</h3>
+            <p>
+              Converts complex multi-timeframe states into an intuitive institutional score: +5 indicates absolute bullish unanimity, -5 indicates total bearish breakdown, and 0 marks choppy neutral compression.
+            </p>
+            <div class="metric-badge">Filter: Execute only when Score &ge; +4 or &le; -4</div>
+          </div>
+
+          <!-- Pillar 4 -->
+          <div class="pillar-card">
+            <div class="pillar-num">FEATURE 04 · NOISE REDUCTION</div>
+            <h3>Choppiness / False Breakout Trap Filter</h3>
+            <p>
+              When higher timeframes are in conflict (e.g. 1H Bullish but Daily Bearish), the indicator highlights the asset in neutral amber, warning traders to avoid deploying aggressive capital until clarity returns.
+            </p>
+            <div class="metric-badge">Protection: Sideways Compression Detection</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Real-Time Heatmap Scanner View -->
+    <section id="heatmap" class="section" style="background: rgba(13, 23, 38, 0.4);">
+      <div class="wrap">
+        <div class="eyebrow">LIVE HEATMAP SIMULATION</div>
+        <h2>Alpha Edge Trend All Matrix Display</h2>
+        <p class="section-intro">
+          How institutional participants view the Indian market tape at a glance inside TradingView.
+        </p>
+
+        <div class="table-card">
+          <div class="table-head">
+            <h4>ALPHA EDGE TREND ALL | MULTI-TIMEFRAME CONFLUENCE MATRIX</h4>
+            <span>SESSION: NSE INTRADAY LIVE SCAN</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>INSTRUMENT</th>
+                  <th>SPOT / LTP</th>
+                  <th>5-MIN</th>
+                  <th>15-MIN</th>
+                  <th>1-HOUR</th>
+                  <th>DAILY</th>
+                  <th>WEEKLY</th>
+                  <th>SCORE</th>
+                  <th>SIGNAL BIAS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>NIFTY 50</strong></td>
+                  <td>₹24,850.25</td>
+                  <td><span class="tag-bull">BULLISH</span></td>
+                  <td><span class="tag-bull">BULLISH</span></td>
+                  <td><span class="tag-bull">BULLISH</span></td>
+                  <td><span class="tag-bull">BULLISH</span></td>
+                  <td><span class="tag-bull">BULLISH</span></td>
+                  <td><span class="score-badge score-high">+5 / 5</span></td>
+                  <td style="color:#4ade80;font-weight:700;">EXPANSION BUY</td>
+                </tr>
+                <tr>
+                  <td><strong>BANK NIFTY</strong></td>
+                  <td>₹51,850.00</td>
+                  <td><span class="tag-bull">BULLISH</span></td>
+                  <td><span class="tag-bull">BULLISH</span></td>
+                  <td><span class="tag-bull">BULLISH</span></td>
+                  <td><span class="tag-bull">BULLISH</span></td>
+                  <td><span class="tag-bull">BULLISH</span></td>
+                  <td><span class="score-badge score-high">+5 / 5</span></td>
+                  <td style="color:#4ade80;font-weight:700;">EXPANSION BUY</td>
+                </tr>
+                <tr>
+                  <td><strong>FINNIFTY</strong></td>
+                  <td>₹23,420.50</td>
+                  <td><span class="tag-bull">BULLISH</span></td>
+                  <td><span class="tag-bull">BULLISH</span></td>
+                  <td><span class="tag-bull">BULLISH</span></td>
+                  <td><span class="tag-neutral">NEUTRAL</span></td>
+                  <td><span class="tag-bull">BULLISH</span></td>
+                  <td><span class="score-badge score-high">+4 / 5</span></td>
+                  <td style="color:var(--cyan);font-weight:700;">TACTICAL LONG</td>
+                </tr>
+                <tr>
+                  <td><strong>TATA MOTORS</strong></td>
+                  <td>₹968.40</td>
+                  <td><span class="tag-bull">BULLISH</span></td>
+                  <td><span class="tag-bull">BULLISH</span></td>
+                  <td><span class="tag-bull">BULLISH</span></td>
+                  <td><span class="tag-bull">BULLISH</span></td>
+                  <td><span class="tag-bull">BULLISH</span></td>
+                  <td><span class="score-badge score-high">+5 / 5</span></td>
+                  <td style="color:#4ade80;font-weight:700;">BLASTER ENGINE</td>
+                </tr>
+                <tr>
+                  <td><strong>RELIANCE</strong></td>
+                  <td>₹2,985.00</td>
+                  <td><span class="tag-neutral">NEUTRAL</span></td>
+                  <td><span class="tag-bear">BEARISH</span></td>
+                  <td><span class="tag-bear">BEARISH</span></td>
+                  <td><span class="tag-bear">BEARISH</span></td>
+                  <td><span class="tag-neutral">NEUTRAL</span></td>
+                  <td><span class="score-badge score-low">-3 / 5</span></td>
+                  <td style="color:#f87171;font-weight:700;">WEAK CHOP</td>
+                </tr>
+                <tr>
+                  <td><strong>MCX CRUDE OIL</strong></td>
+                  <td>₹6,150.00</td>
+                  <td><span class="tag-bear">BEARISH</span></td>
+                  <td><span class="tag-bear">BEARISH</span></td>
+                  <td><span class="tag-bear">BEARISH</span></td>
+                  <td><span class="tag-bear">BEARISH</span></td>
+                  <td><span class="tag-bear">BEARISH</span></td>
+                  <td><span class="score-badge score-low">-5 / 5</span></td>
+                  <td style="color:#f87171;font-weight:700;">EXPANSION SELL</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Indian Case Study -->
+    <section id="case-study" class="section">
+      <div class="wrap">
+        <div class="eyebrow">HISTORICAL BLUEPRINT</div>
+        <h2>Bank Nifty +450 Point Intraday Expansion</h2>
+        <p class="section-intro">
+          Learn how the Trend All indicator guided a high-probability trade on BANK NIFTY without getting faked out during choppy morning action.
+        </p>
+
+        <div class="case-card">
+          <div>
+            <span class="pillar-num">NSE DERIVATIVE BLUEPRINT</span>
+            <h3 style="font-size:1.7rem;margin:8px 0 14px;">BANK NIFTY Spot: ₹51,850 &rarr; ₹52,300</h3>
+            <p style="color:#cbd5e1;line-height:1.7;">
+              At 10:45 AM, retail screeners were showing mixed signals due to an intraday dip. However, the <strong>Alpha Edge Trend All</strong> matrix reported:
+            </p>
+            <ul style="color:#cbd5e1;padding-left:20px;line-height:1.7;">
+              <li><strong>Weekly & Daily:</strong> Solid Green (+2 institutional bias)</li>
+              <li><strong>1-Hour:</strong> Reclaimed median trendline with rising volume</li>
+              <li><strong>15-Min:</strong> Retested the dynamic blue support band</li>
+              <li><strong>5-Min:</strong> Triggered buy at ₹51,850 with Trend Score hitting <strong>+5 / 5</strong></li>
+            </ul>
+            <p style="color:#cbd5e1;line-height:1.7;">
+              Result: Bank Nifty surged uninterrupted to ₹52,300 (+450 points). Traders holding 52,000 CE experienced explosive premium expansion from ₹190 to ₹410 (+115%).
+            </p>
+          </div>
+          <div class="case-metrics">
+            <div class="metric-item">
+              <div class="metric-label">Confluence Score</div>
+              <div class="metric-val">+5 / 5 Full Bull</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">Execution Level</div>
+              <div class="metric-val gold">₹51,850</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">Target Exit</div>
+              <div class="metric-val">₹52,300</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">Index Expansion</div>
+              <div class="metric-val gold">+450 Points</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: The Complete Indicator Suite -->
+    <section class="section">
+      <div class="wrap">
+        <div class="eyebrow">SUITE NAVIGATION</div>
+        <h2>Explore All 4 Proprietary TradingView Indicators</h2>
+        <p class="section-intro">
+          Our indicator ecosystem is designed to function together seamlessly across different timeframes and trading styles.
+        </p>
+
+        <div class="suite-cards">
+          <a href="ultraviewer-guide.html" class="suite-card">
+            <span>01 · INDICATOR</span>
+            <h4>Ultraviewer V2.1</h4>
+            <small>Blue Band Retest Engine &rarr;</small>
+          </a>
+          <a href="uop-theory.html" class="suite-card">
+            <span>02 · INDICATOR</span>
+            <h4>Alpha Edge UOP Theory V2.1</h4>
+            <small>Option Chain & P-O-U Levels &rarr;</small>
+          </a>
+          <a href="advance-feature-guide.html" class="suite-card">
+            <span>03 · INDICATOR</span>
+            <h4>Advance Feature V2.1</h4>
+            <small>Active Strike Filtration Board &rarr;</small>
+          </a>
+          <a href="trend-all-guide.html" class="suite-card current">
+            <span style="color:var(--gold);">04 · CURRENT GUIDE</span>
+            <h4>Alpha Edge Trend All</h4>
+            <small style="color:var(--gold);">Multi-Timeframe Trend Scanner &rarr;</small>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="foot">
+    <div class="wrap">
+      <div>
+        <strong>AlphaEdge Pro Academy</strong> · Alpha Edge Trend All Indicator Guide.<br>
+        <span style="font-size:12px;color:#64748b;">Educational content only. Trading Indian stock futures & options involves financial risk. © 2026 AlphaEdge Pro Academy.</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;">
+        <a href="index.html" class="back-to-home">
+          <span class="back-icon">&larr;</span>
+          <span class="back-text">Back to Home</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

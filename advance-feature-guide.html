@@ -1,0 +1,847 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d19">
+  <meta name="description" content="Alpha Edge Advance Feature V2.1 TradingView Indicator: Institutional Buyer/Seller Active Strikes Board, High/Low Option Premium Tracking, and Dynamic Trend Confirmation Line (TCL) for Indian Derivatives.">
+  <title>Alpha Edge Advance Feature V2.1 | Institutional Filtration & Strike Matrix</title>
+  <link rel="icon" type="image/png" href="./image/alphaedge-main-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #040911;
+      --panel: #0d1726;
+      --panel2: #111f34;
+      --edge: rgba(255, 255, 255, 0.1);
+      --text: #f3f7ff;
+      --muted: #94a3b8;
+      --cyan: #35d1c4;
+      --blue: #52a9ff;
+      --red: #ff6c77;
+      --gold: #f4c873;
+      --green: #22c55e;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      background-image: 
+        linear-gradient(to bottom, rgba(4, 9, 17, 0.82), rgba(4, 9, 17, 0.96)),
+        url('./image/professional-trading-bg.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: var(--text);
+      font: 16px/1.6 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+    }
+    a { color: inherit; }
+    button { font: inherit; }
+    .wrap { max-width: 1200px; margin: auto; padding: 0 28px; }
+    
+    /* Top Header */
+    .top {
+      border-bottom: 1px solid var(--edge);
+      background: rgba(8, 13, 25, 0.85);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .top .wrap {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+    .brand img {
+      height: 52px;
+      width: auto;
+      object-fit: contain;
+    }
+    .nav {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+    }
+    .nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 650;
+      transition: color 0.2s;
+    }
+    .nav a:hover { color: var(--gold); }
+    .nav a.active { color: var(--gold); }
+    .nav .source {
+      border: 1px solid rgba(244, 200, 115, 0.4);
+      border-radius: 8px;
+      color: var(--gold);
+      padding: 7px 14px;
+      background: rgba(244, 200, 115, 0.08);
+    }
+    .nav .source:hover {
+      background: var(--gold);
+      color: #07111c;
+    }
+    .back-to-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 6px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: all 0.2s;
+      white-space: nowrap;
+      background: rgba(244, 200, 115, 0.08);
+    }
+    .back-to-home:hover {
+      background: var(--gold);
+      color: #07111c;
+      box-shadow: 0 0 16px rgba(244, 200, 115, 0.35);
+      transform: translateY(-1px);
+    }
+    
+    /* Indicator Suite Subnav */
+    .indicator-subnav {
+      background: #08121f;
+      border-bottom: 1px solid var(--edge);
+      padding: 10px 0;
+    }
+    .indicator-subnav .wrap {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      align-items: center;
+    }
+    .indicator-subnav span {
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 800;
+      margin-right: 8px;
+      white-space: nowrap;
+    }
+    .indicator-subnav a {
+      font-size: 0.84rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--muted);
+      border: 1px solid transparent;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .indicator-subnav a:hover {
+      color: white;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .indicator-subnav a.current {
+      color: var(--cyan);
+      background: rgba(53, 209, 196, 0.1);
+      border-color: rgba(53, 209, 196, 0.3);
+    }
+    
+    /* Hero */
+    .hero {
+      padding: 72px 0 60px;
+      display: grid;
+      grid-template-columns: 1fr 1.08fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .eyebrow {
+      color: var(--cyan);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .eyebrow:before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 10px var(--cyan);
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 4.4vw, 4.2rem);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      margin: 0 0 20px;
+      font-weight: 800;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--cyan), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .lead {
+      font-size: 1.12rem;
+      color: #cbd5e1;
+      max-width: 520px;
+      line-height: 1.68;
+      margin: 0 0 28px;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 10px 22px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 750;
+      font-size: 0.92rem;
+      transition: all 0.2s;
+    }
+    .primary {
+      background: linear-gradient(135deg, #10b981, #35d1c4);
+      color: #03141b;
+      box-shadow: 0 8px 24px rgba(53, 209, 196, 0.25);
+    }
+    .primary:hover {
+      box-shadow: 0 12px 30px rgba(53, 209, 196, 0.4);
+      transform: translateY(-1px);
+    }
+    .secondary {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #e2e8f0;
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    
+    /* Chart Box */
+    .chart-box {
+      border: 1px solid rgba(53, 209, 196, 0.3);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #09121d;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+    }
+    .chart-box img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .chart-caption {
+      padding: 14px 18px;
+      background: #08101a;
+      border-top: 1px solid var(--edge);
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    
+    /* Sections */
+    .section {
+      padding: 76px 0;
+      border-top: 1px solid var(--edge);
+    }
+    .section h2 {
+      font-size: clamp(2rem, 3.2vw, 3rem);
+      letter-spacing: -0.03em;
+      line-height: 1.18;
+      margin: 0 0 14px;
+    }
+    .section-intro {
+      color: var(--muted);
+      max-width: 720px;
+      margin: 0 0 36px;
+      font-size: 1.05rem;
+    }
+    
+    /* Pillars Grid */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .pillar-card {
+      padding: 30px;
+      border: 1px solid var(--edge);
+      background: linear-gradient(145deg, #0d1726, #09111b);
+      border-radius: 14px;
+      position: relative;
+      transition: all 0.3s;
+    }
+    .pillar-card:hover {
+      border-color: rgba(53, 209, 196, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    }
+    .pillar-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      font-weight: 800;
+      color: var(--cyan);
+      margin-bottom: 12px;
+    }
+    .pillar-card h3 {
+      font-size: 1.35rem;
+      margin: 0 0 12px;
+      letter-spacing: -0.02em;
+    }
+    .pillar-card p {
+      color: #94a3b8;
+      margin: 0;
+      line-height: 1.6;
+    }
+    .metric-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(53, 209, 196, 0.1);
+      color: var(--cyan);
+      border: 1px solid rgba(53, 209, 196, 0.25);
+    }
+    
+    /* Board Table */
+    .table-card {
+      border: 1px solid var(--edge);
+      border-radius: 14px;
+      background: #09121d;
+      overflow: hidden;
+      margin-top: 28px;
+    }
+    .table-head {
+      padding: 16px 22px;
+      background: #0d192a;
+      border-bottom: 1px solid var(--edge);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .table-head h4 { margin: 0; font-size: 1.05rem; }
+    .table-head span { font-size: 0.78rem; font-family: 'JetBrains Mono', monospace; color: var(--gold); }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; text-align: left; }
+    th {
+      background: #08101a;
+      padding: 12px 18px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      border-bottom: 1px solid var(--edge);
+    }
+    td {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+    }
+    tr:hover td { background: rgba(255, 255, 255, 0.02); }
+    .status-active {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: rgba(34, 197, 94, 0.15);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+    .status-radar {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: rgba(244, 200, 115, 0.15);
+      color: var(--gold);
+      border: 1px solid rgba(244, 200, 115, 0.3);
+    }
+    
+    /* Sequence Steps */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      counter-reset: stepCount;
+    }
+    .step-box {
+      counter-increment: stepCount;
+      padding: 26px;
+      border: 1px solid var(--edge);
+      border-radius: 12px;
+      background: var(--panel);
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .step-box:before {
+      content: 'STAGE 0' counter(stepCount);
+      color: var(--gold);
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+    }
+    .step-box h3 { margin: 10px 0 8px; font-size: 1.18rem; }
+    .step-box p { color: var(--muted); margin: 0; font-size: 0.92rem; }
+    
+    /* Indian Case Study */
+    .case-card {
+      border: 1px solid rgba(244, 200, 115, 0.3);
+      border-radius: 16px;
+      background: linear-gradient(145deg, #0f1929, #070e17);
+      padding: 36px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      align-items: center;
+      margin-top: 36px;
+    }
+    .case-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .metric-item {
+      padding: 14px 18px;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .metric-label { font-size: 0.74rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .metric-val { font-size: 1.25rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; color: var(--cyan); margin-top: 4px; }
+    .metric-val.gold { color: var(--gold); }
+    
+    /* Suite Switcher */
+    .suite-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .suite-card {
+      padding: 22px;
+      border: 1px solid var(--edge);
+      border-radius: 12px;
+      background: #09121d;
+      text-decoration: none;
+      transition: all 0.25s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 160px;
+    }
+    .suite-card:hover {
+      border-color: var(--cyan);
+      transform: translateY(-2px);
+      background: #0e1b2b;
+    }
+    .suite-card.current {
+      border-color: var(--gold);
+      background: rgba(244, 200, 115, 0.06);
+    }
+    .suite-card span { font-size: 0.74rem; font-family: 'JetBrains Mono', monospace; color: var(--muted); }
+    .suite-card h4 { margin: 8px 0; font-size: 1.05rem; color: white; }
+    .suite-card small { color: var(--cyan); font-weight: 700; }
+    
+    /* Footer */
+    .foot {
+      border-top: 1px solid var(--edge);
+      padding: 34px 0 46px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    .foot .wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding: 48px 0; }
+      .pillars-grid, .steps-grid, .suite-cards, .case-card { grid-template-columns: 1fr; }
+      .nav a:not(.source) { display: none; }
+    }
+    @media (max-width: 600px) {
+      .back-to-home .back-text { display: none; }
+      .wrap { padding: 0 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header Navigation -->
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="index.html">
+        <img src="./image/alphaedge-main-logo.png" alt="Alpha Edge Pro Academy">
+      </a>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <nav class="nav" aria-label="Main navigation">
+          <a href="#filtration-board">Filtration Board</a>
+          <a href="#how-it-works">Architecture</a>
+          <a href="#case-study">Indian Case Study</a>
+          <a class="source" href="https://in.tradingview.com/script/oLCU2BoA-AlphaEdgePro-UOP-Theory-V3/" target="_blank" rel="noopener noreferrer">TradingView Script ↗</a>
+        </nav>
+        <a href="index.html" class="back-to-home">
+          <span class="back-icon">&larr;</span>
+          <span class="back-text">Back to Home</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Indicator Suite Subnav Bar -->
+  <nav class="indicator-subnav">
+    <div class="wrap">
+      <span>Proprietary Suite:</span>
+      <a href="ultraviewer-guide.html">1. Ultraviewer V2.1</a>
+      <a href="uop-theory.html">2. Alpha Edge UOP Theory V2.1</a>
+      <a href="advance-feature-guide.html" class="current">3. Alpha Edge Advance Feature V2.1</a>
+      <a href="trend-all-guide.html">4. Alpha Edge Trend All</a>
+    </div>
+  </nav>
+
+  <!-- Main Hero Section -->
+  <main>
+    <div class="wrap">
+      <div class="hero">
+        <div>
+          <div class="eyebrow">INDICATOR GUIDE · V2.1 ADVANCE FEATURE</div>
+          <h1>Alpha Edge <span>Advance Feature</span></h1>
+          <p class="lead">
+            An institutional TradingView dashboard built for Indian futures and options traders: continuously scanning CE & PE High/Low premium extremes, shortlisting qualifying contracts on the Buyer/Seller Filtration Board, and validating execution against the dynamic Trend Confirmation Line (TCL).
+          </p>
+          <div class="actions">
+            <a class="btn primary" href="#filtration-board">Explore Filtration Board</a>
+            <a class="btn secondary" href="https://in.tradingview.com/script/oLCU2BoA-AlphaEdgePro-UOP-Theory-V3/" target="_blank" rel="noopener noreferrer">View TradingView Script ↗</a>
+          </div>
+        </div>
+        <div class="chart-box">
+          <img src="theory-assets/advance-feature-indicator.png" alt="Alpha Edge Advance Feature V2.1 TradingView Indicator on NIFTY 50" width="1024" height="600">
+          <div class="chart-caption">
+            <span><strong>NIFTY 50 Option Matrix & Filtration</strong> · Real-Time Chart Interface</span>
+            <span>NSE Derivative Analytics</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 1: The 4 Structural Pillars -->
+    <section id="how-it-works" class="section">
+      <div class="wrap">
+        <div class="eyebrow">SYSTEM ARCHITECTURE</div>
+        <h2>From Price Watching to Mathematical Strike Filtration</h2>
+        <p class="section-intro">
+          Retail traders get overwhelmed comparing 40+ strikes across call and put columns. The Alpha Edge Advance Feature V2.1 algorithm condenses market depth into four automated components running directly inside your TradingView layout.
+        </p>
+
+        <div class="pillars-grid">
+          <!-- Pillar 1 -->
+          <div class="pillar-card">
+            <div class="pillar-num">PILLAR 01 · AUTOMATION</div>
+            <h3>Buyer / Seller Active Strikes Board</h3>
+            <p>
+              Instantly aggregates all shortlisted CE and PE contracts across your active index or stock. It checks whether the session low or high tested the institutional absorption zone and displays only actionable candidates.
+            </p>
+            <div class="metric-badge">Fields: Signal · Type · Strike · LTP · Open · High · Low</div>
+          </div>
+
+          <!-- Pillar 2 -->
+          <div class="pillar-card">
+            <div class="pillar-num">PILLAR 02 · MATRIX</div>
+            <h3>CE & PE Session Extreme Tracker</h3>
+            <p>
+              Tracks the session Low and High for both call and put sides simultaneously. Compares Call Low against the O–P band (Optimal to Participation) and Put High against the U–O band, highlighting anomalies before spot breaks out.
+            </p>
+            <div class="metric-badge">Sync: Live NSE Spot + 12 Option Strikes</div>
+          </div>
+
+          <!-- Pillar 3 -->
+          <div class="pillar-card">
+            <div class="pillar-num">PILLAR 03 · EXECUTION</div>
+            <h3>Trend Confirmation Line (TCL)</h3>
+            <p>
+              A non-lagging, premium-weighted dynamic line plotted per option strike. If a call premium trades above TCL, the buyer setup is validated; if premium falls below TCL, the trade is automatically invalidated.
+            </p>
+            <div class="metric-badge">Logic: Premium &gt; TCL = Active Trend Flow</div>
+          </div>
+
+          <!-- Pillar 4 -->
+          <div class="pillar-card">
+            <div class="pillar-num">PILLAR 04 · ANCHORING</div>
+            <h3>Dynamic ATM Reference Anchor</h3>
+            <p>
+              Continuously identifies the exact At-The-Money strike relative to live spot movement (e.g., NIFTY at ₹24,814.50 automatically marks 24,800 as ATM), preventing traders from mistakenly trading illiquid far-OTM strikes.
+            </p>
+            <div class="metric-badge">Step Size: 50 pts (Nifty) / 100 pts (Bank Nifty)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Interactive Filtration Board Table -->
+    <section id="filtration-board" class="section" style="background: rgba(13, 23, 38, 0.4);">
+      <div class="wrap">
+        <div class="eyebrow">DASHBOARD INSPECTION</div>
+        <h2>The Main Filtration Board Output</h2>
+        <p class="section-intro">
+          This is how the Advance Feature V2.1 terminal displays active strikes during live market hours on the National Stock Exchange of India.
+        </p>
+
+        <div class="table-card">
+          <div class="table-head">
+            <h4>ALPHAEDGEPRO | BUYER / SELLER ACTIVE STRIKES</h4>
+            <span>INDEX: NIFTY 50 SPOT ₹24,814.50</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>SIGNAL</th>
+                  <th>TYPE</th>
+                  <th>STRIKE</th>
+                  <th>LTP (₹)</th>
+                  <th>OPEN (₹)</th>
+                  <th>HIGH (₹)</th>
+                  <th>LOW (₹)</th>
+                  <th>TCL (₹)</th>
+                  <th>STATUS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="color:#4ade80;font-weight:700;">BUY</td>
+                  <td>CE</td>
+                  <td>24800</td>
+                  <td style="color:var(--cyan);font-weight:700;">215.40</td>
+                  <td>142.00</td>
+                  <td>228.00</td>
+                  <td>138.50</td>
+                  <td>194.20</td>
+                  <td><span class="status-active">ACTIVE</span></td>
+                </tr>
+                <tr>
+                  <td style="color:#4ade80;font-weight:700;">BUY</td>
+                  <td>CE</td>
+                  <td>24850</td>
+                  <td style="color:var(--cyan);font-weight:700;">178.60</td>
+                  <td>110.00</td>
+                  <td>185.00</td>
+                  <td>106.20</td>
+                  <td>158.40</td>
+                  <td><span class="status-active">ACTIVE</span></td>
+                </tr>
+                <tr>
+                  <td style="color:var(--gold);font-weight:700;">WATCH</td>
+                  <td>PE</td>
+                  <td>24800</td>
+                  <td style="color:#94a3b8;">112.30</td>
+                  <td>180.00</td>
+                  <td>194.50</td>
+                  <td>108.00</td>
+                  <td>135.00</td>
+                  <td><span class="status-radar">RADAR</span></td>
+                </tr>
+                <tr>
+                  <td style="color:#ff6c77;font-weight:700;">SELL</td>
+                  <td>PE</td>
+                  <td>24750</td>
+                  <td style="color:#ff6c77;">88.50</td>
+                  <td>150.00</td>
+                  <td>158.00</td>
+                  <td>84.20</td>
+                  <td>118.80</td>
+                  <td><span class="status-radar">DECAY</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: 5-Step Execution Sequence -->
+    <section class="section">
+      <div class="wrap">
+        <div class="eyebrow">EXECUTION PROTOCOL</div>
+        <h2>Five-Step Rule for Trade Execution</h2>
+        <p class="section-intro">
+          Never execute based on intuition. The Advance Feature enforces a strict sequential gate before taking any position.
+        </p>
+
+        <div class="steps-grid">
+          <div class="step-box">
+            <div>
+              <h3>Check Spot Index Trend</h3>
+              <p>Identify whether NIFTY 50 / BANK NIFTY is sustaining above the day's median VWAP or rejecting key institutional levels.</p>
+            </div>
+          </div>
+          <div class="step-box">
+            <div>
+              <h3>Read U.O.P. Envelope</h3>
+              <p>Confirm where option premiums sit relative to Participation (P), Optimal (O), and Universal (U) structural thresholds.</p>
+            </div>
+          </div>
+          <div class="step-box">
+            <div>
+              <h3>Check Low vs O–P Band</h3>
+              <p>Verify that the contract's session low held inside the institutional accumulation band (between Optimal and Participation).</p>
+            </div>
+          </div>
+          <div class="step-box">
+            <div>
+              <h3>Inspect Filtration Board</h3>
+              <p>The candidate contract must display green <strong>ACTIVE</strong> status on the board with Signal matching your index bias.</p>
+            </div>
+          </div>
+          <div class="step-box">
+            <div>
+              <h3>Confirm Above TCL</h3>
+              <p>Enter only when option premium sustains above its dynamic TCL. Invalidation is fixed below TCL with predefined ₹ risk.</p>
+            </div>
+          </div>
+          <div class="step-box" style="background: linear-gradient(145deg, #13243a, #0b1523); border-color: var(--cyan);">
+            <div>
+              <h3 style="color:var(--cyan);">Scale into Targets</h3>
+              <p>Lock profits at Side Up 1 (SU1) and trail stop-loss to breakeven, allowing runners to reach Main Target 1 (MT1).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Indian Market Case Study -->
+    <section id="case-study" class="section" style="background: rgba(8, 14, 24, 0.6);">
+      <div class="wrap">
+        <div class="eyebrow">HISTORICAL BLUEPRINT</div>
+        <h2>Live Blueprint: NIFTY 24800 PE Strike Traversal</h2>
+        <p class="section-intro">
+          Review an institutional execution on the National Stock Exchange of India using the Advance Feature V2.1 dashboard.
+        </p>
+
+        <div class="case-card">
+          <div>
+            <span class="pillar-num">NSE EXPIRY ANALYSIS</span>
+            <h3 style="font-size:1.7rem;margin:8px 0 14px;">NIFTY 24800 Put Option (Weekly)</h3>
+            <p style="color:#cbd5e1;line-height:1.7;">
+              At 10:15 AM, NIFTY spot index showed weakness below morning resistance. The <strong>Alpha Edge Advance Feature V2.1</strong> flagged <strong>24800 PE</strong> as ACTIVE on the filtration board.
+            </p>
+            <p style="color:#cbd5e1;line-height:1.7;">
+              The session low of ₹180.85 touched the Optimal band (₹179), absorbing institutional selling. As premium crossed above TCL (₹269.52), long positioning was initiated. Within 30 minutes, premium accelerated to ₹309.70 (+₹40.18 gain per lot).
+            </p>
+          </div>
+          <div class="case-metrics">
+            <div class="metric-item">
+              <div class="metric-label">Institutional Low</div>
+              <div class="metric-val">₹180.85</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">TCL Entry Trigger</div>
+              <div class="metric-val gold">₹269.52</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">Session High Target</div>
+              <div class="metric-val">₹309.70</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">Premium Velocity</div>
+              <div class="metric-val gold">+14.9% Fast Gain</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: The Complete Indicator Suite -->
+    <section class="section">
+      <div class="wrap">
+        <div class="eyebrow">SUITE NAVIGATION</div>
+        <h2>Explore All 4 Proprietary TradingView Indicators</h2>
+        <p class="section-intro">
+          Our indicator ecosystem is designed to function together seamlessly across different timeframes and trading styles.
+        </p>
+
+        <div class="suite-cards">
+          <a href="ultraviewer-guide.html" class="suite-card">
+            <span>01 · INDICATOR</span>
+            <h4>Ultraviewer V2.1</h4>
+            <small>Blue Band Retest Engine &rarr;</small>
+          </a>
+          <a href="uop-theory.html" class="suite-card">
+            <span>02 · INDICATOR</span>
+            <h4>Alpha Edge UOP Theory V2.1</h4>
+            <small>Option Chain & P-O-U Levels &rarr;</small>
+          </a>
+          <a href="advance-feature-guide.html" class="suite-card current">
+            <span style="color:var(--gold);">03 · CURRENT GUIDE</span>
+            <h4>Advance Feature V2.1</h4>
+            <small style="color:var(--gold);">Active Strike Filtration Board &rarr;</small>
+          </a>
+          <a href="trend-all-guide.html" class="suite-card">
+            <span>04 · INDICATOR</span>
+            <h4>Alpha Edge Trend All</h4>
+            <small>Multi-Timeframe Trend Scanner &rarr;</small>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="foot">
+    <div class="wrap">
+      <div>
+        <strong>AlphaEdge Pro Academy</strong> · Advance Feature V2.1 Indicator Guide.<br>
+        <span style="font-size:12px;color:#64748b;">Educational content only. Trading Indian stock futures & options involves financial risk. © 2026 AlphaEdge Pro Academy.</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;">
+        <a href="index.html" class="back-to-home">
+          <span class="back-icon">&larr;</span>
+          <span class="back-text">Back to Home</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
