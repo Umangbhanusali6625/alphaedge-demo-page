@@ -316,8 +316,22 @@ html {
     </nav>
 
     <!-- Action Button & Mobile Menu Toggle -->
-    <div class="flex items-center gap-4 shrink-0">
-      <a href="contact.html" class="hidden sm:inline-flex items-center justify-center px-7 py-3 bg-gradient-to-r from-[#d39316] to-[#f3c578] text-black font-extrabold text-[12px] tracking-[0.2em] uppercase hover:brightness-110 transition-all rounded-sm shadow-[0_4px_15px_rgba(211,147,22,0.3)]">
+    <div class="flex items-center gap-3 xl:gap-4 shrink-0">
+      <!-- Highlighted APA & Momentum Dashboard Button -->
+      <a href="https://tradevisor-apa-dashboard.abc2317.chatgpt.site/" target="_blank" rel="noopener noreferrer" class="relative group hidden sm:inline-flex items-center justify-center gap-2 px-4 md:px-5 py-2.5 md:py-3 rounded-sm font-extrabold text-[11px] md:text-[12px] tracking-wider uppercase text-white transition-all duration-300 overflow-hidden shadow-[0_0_20px_rgba(53,209,196,0.35)] hover:shadow-[0_0_30px_rgba(53,209,196,0.65)] hover:-translate-y-0.5 border border-[#35d1c4]/70 bg-gradient-to-r from-[#07242c] via-[#0b3844] to-[#082d2a]">
+        <!-- Shimmer Highlight Effect -->
+        <span class="absolute inset-0 bg-gradient-to-r from-transparent via-[#35d1c4]/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></span>
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#35d1c4] opacity-80"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-[#35d1c4] shadow-[0_0_8px_#35d1c4]"></span>
+        </span>
+        <span class="relative bg-gradient-to-r from-white via-[#d4f9f5] to-[#f3c578] bg-clip-text text-transparent font-extrabold flex items-center gap-1.5 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+          APA &amp; Momentum Dashboard
+          <span class="material-symbols-outlined text-[15px] text-[#35d1c4] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">open_in_new</span>
+        </span>
+      </a>
+
+      <a href="contact.html" class="hidden sm:inline-flex items-center justify-center px-6 md:px-7 py-3 bg-gradient-to-r from-[#d39316] to-[#f3c578] text-black font-extrabold text-[12px] tracking-[0.2em] uppercase hover:brightness-110 transition-all rounded-sm shadow-[0_4px_15px_rgba(211,147,22,0.3)]">
         ADMISSION
       </a>
       
@@ -348,7 +362,17 @@ html {
       <a href="study-guides.html" class="py-2 block hover:text-[#f3c578]">Educational Material</a>
       <a href="#contact" class="py-2 block hover:text-[#f3c578]">Contact us</a>
       
-      <a href="contact.html" class="block text-center mt-4 px-6 py-3 bg-gradient-to-r from-[#d39316] to-[#f3c578] text-black font-bold text-xs tracking-widest uppercase rounded-sm">ADMISSION</a>
+      <!-- Mobile Highlighted APA & Momentum Dashboard Button -->
+      <a href="https://tradevisor-apa-dashboard.abc2317.chatgpt.site/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 text-center mt-3 px-5 py-3 rounded-sm font-extrabold text-xs tracking-wider uppercase text-white border border-[#35d1c4]/70 bg-gradient-to-r from-[#07242c] via-[#0b3844] to-[#082d2a] shadow-[0_0_15px_rgba(53,209,196,0.35)]">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#35d1c4] opacity-80"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-[#35d1c4]"></span>
+        </span>
+        <span class="bg-gradient-to-r from-white via-[#d4f9f5] to-[#f3c578] bg-clip-text text-transparent font-extrabold">APA &amp; Momentum Dashboard</span>
+        <span class="material-symbols-outlined text-[15px] text-[#35d1c4]">open_in_new</span>
+      </a>
+
+      <a href="contact.html" class="block text-center mt-2 px-6 py-3 bg-gradient-to-r from-[#d39316] to-[#f3c578] text-black font-bold text-xs tracking-widest uppercase rounded-sm">ADMISSION</a>
     </div>
   </div>
 </header>
