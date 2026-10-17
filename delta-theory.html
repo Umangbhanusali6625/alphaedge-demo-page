@@ -1,183 +1,850 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#071727"><meta name="description" content="Learn Delta Theory by AlphaEdge Pro Academy: Systematic Stock Relative Strength, Nifty 500 Outperformance Matrix, NSE delivery volume analysis, and dual-momentum equity swing trading."><title>Delta Theory · Systematic Stock Relative Strength | AlphaEdge Pro Academy</title><link rel="icon" type="image/png" href="./image/alphaedge-main-logo.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet"><style>
-:root{--navy:#071727;--teal:#35d1c4;--gold:#f3c578;--ink:#193345;--muted:#94a3b8;--line:rgba(255,255,255,0.1);--panel:#0f172a;--panel-alt:#1e293b}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;font:16px/1.7 'DM Sans',sans-serif;background-color:#040911;background-image:linear-gradient(to bottom,rgba(4,9,17,0.78),rgba(4,9,17,0.96)),url('./image/professional-trading-bg.png');background-size:cover;background-position:center;background-attachment:fixed;color:#e2e8f0}
-a{color:inherit}.wrap{width:min(1180px,calc(100% - 40px));margin:auto}
-.stripe{height:4px;background:linear-gradient(90deg,var(--teal),var(--gold))}
-.header{background:rgba(7,23,39,0.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--line)}
-.head{display:flex;align-items:center;justify-content:space-between;height:74px;gap:20px}
-.brand{display:flex;gap:12px;align-items:center;text-decoration:none}
-.nav{display:flex;gap:24px;font-size:13px;font-weight:700;color:#c9dbe1}
-.nav a{text-decoration:none;transition:color .2s}.nav a:hover{color:var(--gold)}
-.menu{display:none;color:white;background:none;border:1px solid #7c9aa5;border-radius:7px;padding:5px 10px;font:inherit}
-.back-to-home{display:inline-flex;align-items:center;gap:6px;color:var(--gold);border:1px solid var(--gold);padding:6px 14px;border-radius:6px;text-decoration:none;font-size:0.85rem;font-weight:700;transition:all 0.2s;white-space:nowrap;background:rgba(243,197,120,0.08)}
-.back-to-home:hover{background:var(--gold)!important;color:#07111c!important;box-shadow:0 0 15px rgba(243,197,120,0.3);transform:translateY(-1px)}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#071727" />
+    <meta
+      name="description"
+      content="Learn Delta Theory by AlphaEdge Pro Academy: Systematic Stock Relative Strength, Nifty 500 Outperformance Matrix, NSE delivery volume analysis, and dual-momentum equity swing trading."
+    />
+    <title>
+      Delta Theory · Systematic Stock Relative Strength | AlphaEdge Pro Academy
+    </title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="./image/Glossy Blue Analytics Head Logo.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --navy: #071727;
+        --teal: #35d1c4;
+        --gold: #f3c578;
+        --ink: #193345;
+        --muted: #94a3b8;
+        --line: rgba(255, 255, 255, 0.1);
+        --panel: #0f172a;
+        --panel-alt: #1e293b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        font:
+          16px/1.7 "DM Sans",
+          sans-serif;
+        background-color: #040911;
+        background-image:
+          linear-gradient(
+            to bottom,
+            rgba(4, 9, 17, 0.78),
+            rgba(4, 9, 17, 0.96)
+          ),
+          url("./image/professional-trading-bg.png");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: #e2e8f0;
+      }
+      a {
+        color: inherit;
+      }
+      .wrap {
+        width: min(1180px, calc(100% - 40px));
+        margin: auto;
+      }
+      .stripe {
+        height: 4px;
+        background: linear-gradient(90deg, var(--teal), var(--gold));
+      }
+      .header {
+        background: rgba(7, 23, 39, 0.95);
+        backdrop-filter: blur(12px);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        border-bottom: 1px solid var(--line);
+      }
+      .head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 74px;
+        gap: 20px;
+      }
+      .brand {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        text-decoration: none;
+      }
+      .nav {
+        display: flex;
+        gap: 24px;
+        font-size: 13px;
+        font-weight: 700;
+        color: #c9dbe1;
+      }
+      .nav a {
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .nav a:hover {
+        color: var(--gold);
+      }
+      .menu {
+        display: none;
+        color: white;
+        background: none;
+        border: 1px solid #7c9aa5;
+        border-radius: 7px;
+        padding: 5px 10px;
+        font: inherit;
+      }
+      .back-to-home {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--gold);
+        border: 1px solid var(--gold);
+        padding: 6px 14px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 700;
+        transition: all 0.2s;
+        white-space: nowrap;
+        background: rgba(243, 197, 120, 0.08);
+      }
+      .back-to-home:hover {
+        background: var(--gold) !important;
+        color: #07111c !important;
+        box-shadow: 0 0 15px rgba(243, 197, 120, 0.3);
+        transform: translateY(-1px);
+      }
 
-.hero{padding:80px 0 70px;background:radial-gradient(circle at 80% 25%,rgba(53,209,196,0.08) 0,transparent 45%),linear-gradient(160deg,#071727 0%,#091d30 100%);border-bottom:1px solid var(--line)}
-.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:800;display:inline-block;margin-bottom:12px}
-.hero h1{font-size:clamp(36px,5.2vw,64px);line-height:1.1;letter-spacing:-.04em;margin:0 0 18px;color:#f8fafc;font-weight:800}
-.hero h1 em{font-style:normal;color:var(--gold)}
-.hero p{font-size:18px;line-height:1.65;max-width:680px;color:#cbd5e1;margin:0 0 28px}
-.badge-tag{background:rgba(243,197,120,0.12);color:var(--gold);border:1px solid rgba(243,197,120,0.3);padding:4px 12px;border-radius:50px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+      .hero {
+        padding: 80px 0 70px;
+        background:
+          radial-gradient(
+            circle at 80% 25%,
+            rgba(53, 209, 196, 0.08) 0,
+            transparent 45%
+          ),
+          linear-gradient(160deg, #071727 0%, #091d30 100%);
+        border-bottom: 1px solid var(--line);
+      }
+      .eyebrow {
+        font-size: 12px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--gold);
+        font-weight: 800;
+        display: inline-block;
+        margin-bottom: 12px;
+      }
+      .hero h1 {
+        font-size: clamp(36px, 5.2vw, 64px);
+        line-height: 1.1;
+        letter-spacing: -0.04em;
+        margin: 0 0 18px;
+        color: #f8fafc;
+        font-weight: 800;
+      }
+      .hero h1 em {
+        font-style: normal;
+        color: var(--gold);
+      }
+      .hero p {
+        font-size: 18px;
+        line-height: 1.65;
+        max-width: 680px;
+        color: #cbd5e1;
+        margin: 0 0 28px;
+      }
+      .badge-tag {
+        background: rgba(243, 197, 120, 0.12);
+        color: var(--gold);
+        border: 1px solid rgba(243, 197, 120, 0.3);
+        padding: 4px 12px;
+        border-radius: 50px;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
 
-.section{padding:75px 0}.section.alt{background:rgba(15,23,42,0.65);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-h2{font-size:clamp(28px,3.4vw,42px);line-height:1.2;letter-spacing:-.03em;color:#f8fafc;margin:8px 0 16px}
-.intro{font-size:17px;max-width:820px;color:var(--muted);margin:0 0 32px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.card{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:28px;box-shadow:0 12px 30px rgba(0,0,0,0.25)}
-.card h3{font-size:20px;line-height:1.3;margin:10px 0;color:#f8fafc}
-.card p{color:var(--muted);margin:0;font-size:15px}
-.card small{font-size:11px;letter-spacing:.12em;color:var(--gold);font-weight:800;text-transform:uppercase}
+      .section {
+        padding: 75px 0;
+      }
+      .section.alt {
+        background: rgba(15, 23, 42, 0.65);
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+      h2 {
+        font-size: clamp(28px, 3.4vw, 42px);
+        line-height: 1.2;
+        letter-spacing: -0.03em;
+        color: #f8fafc;
+        margin: 8px 0 16px;
+      }
+      .intro {
+        font-size: 17px;
+        max-width: 820px;
+        color: var(--muted);
+        margin: 0 0 32px;
+      }
+      .grid2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+      .grid3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .grid4 {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--panel);
+        padding: 28px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+      }
+      .card h3 {
+        font-size: 20px;
+        line-height: 1.3;
+        margin: 10px 0;
+        color: #f8fafc;
+      }
+      .card p {
+        color: var(--muted);
+        margin: 0;
+        font-size: 15px;
+      }
+      .card small {
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        color: var(--gold);
+        font-weight: 800;
+        text-transform: uppercase;
+      }
 
-.visual-shell{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin:35px 0;box-shadow:0 20px 50px rgba(0,0,0,0.4)}
-.visual-header{padding:24px 30px;background:#0d1825;border-bottom:1px solid var(--line)}
-.visual-header h3{margin:0;font-size:22px;color:#f8fafc}
-.visual-header p{margin:6px 0 0;color:var(--muted);font-size:14px}
-.visual-shell img{display:block;width:100%;height:auto;background:#07111c}
-.visual-caption{padding:14px 24px;background:#0d1825;font-size:13px;color:#cbd5e1;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+      .visual-shell {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        overflow: hidden;
+        margin: 35px 0;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      }
+      .visual-header {
+        padding: 24px 30px;
+        background: #0d1825;
+        border-bottom: 1px solid var(--line);
+      }
+      .visual-header h3 {
+        margin: 0;
+        font-size: 22px;
+        color: #f8fafc;
+      }
+      .visual-header p {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .visual-shell img {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #07111c;
+      }
+      .visual-caption {
+        padding: 14px 24px;
+        background: #0d1825;
+        font-size: 13px;
+        color: #cbd5e1;
+        border-top: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
 
-.rule-box{background:linear-gradient(135deg,rgba(15,23,42,0.9),rgba(20,38,56,0.9));border:1px solid rgba(243,197,120,0.25);border-radius:16px;padding:26px;margin:28px 0}
-.rule-box h4{margin:0 0 12px;color:var(--gold);font-size:18px}
-.rule-list{margin:0;padding-left:22px;color:#cbd5e1}
-.rule-list li{margin-bottom:10px}
-.formula-pill{font-family:'JetBrains Mono',monospace;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.15);padding:8px 14px;border-radius:8px;color:#35d1c4;font-size:14px;display:inline-block;margin:6px 0}
+      .rule-box {
+        background: linear-gradient(
+          135deg,
+          rgba(15, 23, 42, 0.9),
+          rgba(20, 38, 56, 0.9)
+        );
+        border: 1px solid rgba(243, 197, 120, 0.25);
+        border-radius: 16px;
+        padding: 26px;
+        margin: 28px 0;
+      }
+      .rule-box h4 {
+        margin: 0 0 12px;
+        color: var(--gold);
+        font-size: 18px;
+      }
+      .rule-list {
+        margin: 0;
+        padding-left: 22px;
+        color: #cbd5e1;
+      }
+      .rule-list li {
+        margin-bottom: 10px;
+      }
+      .formula-pill {
+        font-family: "JetBrains Mono", monospace;
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        padding: 8px 14px;
+        border-radius: 8px;
+        color: #35d1c4;
+        font-size: 14px;
+        display: inline-block;
+        margin: 6px 0;
+      }
 
-.metric-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:28px 0}
-.metric-box{background:#0d1b2a;border:1px solid var(--line);border-radius:12px;padding:18px}
-.metric-box small{color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
-.metric-box strong{display:block;font-size:22px;color:var(--gold);font-family:'JetBrains Mono',monospace;margin-top:6px}
+      .metric-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin: 28px 0;
+      }
+      .metric-box {
+        background: #0d1b2a;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 18px;
+      }
+      .metric-box small {
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .metric-box strong {
+        display: block;
+        font-size: 22px;
+        color: var(--gold);
+        font-family: "JetBrains Mono", monospace;
+        margin-top: 6px;
+      }
 
-.worked-example{background:#0a1523;border:1px solid rgba(53,209,196,0.3);border-radius:18px;padding:32px;margin:35px 0}
-.worked-example h3{color:var(--teal);margin-top:0;font-size:24px}
-.step-sequence{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}
-.step-item{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}
-.step-item b{color:var(--gold);font-size:12px;letter-spacing:.1em;display:block;margin-bottom:8px}
-.step-item h5{margin:0 0 8px;font-size:16px;color:#f8fafc}
-.step-item p{margin:0;color:var(--muted);font-size:13.5px}
+      .worked-example {
+        background: #0a1523;
+        border: 1px solid rgba(53, 209, 196, 0.3);
+        border-radius: 18px;
+        padding: 32px;
+        margin: 35px 0;
+      }
+      .worked-example h3 {
+        color: var(--teal);
+        margin-top: 0;
+        font-size: 24px;
+      }
+      .step-sequence {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        margin-top: 24px;
+      }
+      .step-item {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 20px;
+      }
+      .step-item b {
+        color: var(--gold);
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        display: block;
+        margin-bottom: 8px;
+      }
+      .step-item h5 {
+        margin: 0 0 8px;
+        font-size: 16px;
+        color: #f8fafc;
+      }
+      .step-item p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13.5px;
+      }
 
-.footer{background:#050c14;color:#94a3b8;padding:35px 0;font-size:13px;border-top:1px solid var(--line)}
-.footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+      .footer {
+        background: #050c14;
+        color: #94a3b8;
+        padding: 35px 0;
+        font-size: 13px;
+        border-top: 1px solid var(--line);
+      }
+      .footer .wrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
 
-@media(max-width:850px){.grid2,.grid3,.grid4,.step-sequence,.metric-strip{grid-template-columns:1fr}.hero{padding:55px 0}}
-@media(max-width:650px){.nav{display:none}.menu{display:block}.wrap{width:calc(100% - 30px)}}
-@media(max-width:600px){.back-to-home .back-text{display:none!important}.back-to-home{padding:6px 10px!important}}
-</style></head><body><div class="stripe"></div>
-<header class="header"><div class="wrap head"><a class="brand" href="index.html"><img src="./image/alphaedge-main-logo.png" alt="AlphaEdge Pro Academy" style="height:62px;width:auto;object-fit:contain"></a>
-<div style="display:flex;align-items:center;gap:16px"><nav class="nav" id="nav"><a href="#relative-strength">Relative Strength</a><a href="#quadrant-matrix">Outperformance Matrix</a><a href="#delivery-volume">Delivery Volume</a><a href="#trent-case">TRENT Blueprint</a></nav>
-<a href="index.html" class="back-to-home"><span class="back-icon">&larr;</span> <span class="back-text">Back to Home</span></a><button class="menu" type="button" aria-label="Open menu">☰</button></div></div></header>
+      @media (max-width: 850px) {
+        .grid2,
+        .grid3,
+        .grid4,
+        .step-sequence,
+        .metric-strip {
+          grid-template-columns: 1fr;
+        }
+        .hero {
+          padding: 55px 0;
+        }
+      }
+      @media (max-width: 650px) {
+        .nav {
+          display: none;
+        }
+        .menu {
+          display: block;
+        }
+        .wrap {
+          width: calc(100% - 30px);
+        }
+      }
+      @media (max-width: 600px) {
+        .back-to-home .back-text {
+          display: none !important;
+        }
+        .back-to-home {
+          padding: 6px 10px !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stripe"></div>
+    <header class="header">
+      <div class="wrap head">
+        <a class="brand" href="index.html"
+          ><img
+            src="./image/Glossy Blue Analytics Head Logo.png"
+            alt="AlphaEdge Pro Academy"
+            style="height: 62px; width: auto; object-fit: contain"
+        /></a>
+        <div style="display: flex; align-items: center; gap: 16px">
+          <nav class="nav" id="nav">
+            <a href="#relative-strength">Relative Strength</a
+            ><a href="#quadrant-matrix">Outperformance Matrix</a
+            ><a href="#delivery-volume">Delivery Volume</a
+            ><a href="#trent-case">TRENT Blueprint</a>
+          </nav>
+          <a href="index.html" class="back-to-home"
+            ><span class="back-icon">&larr;</span>
+            <span class="back-text">Back to Home</span></a
+          ><button class="menu" type="button" aria-label="Open menu">☰</button>
+        </div>
+      </div>
+    </header>
 
-<section class="hero"><div class="wrap"><div class="badge-tag">Theory Framework 05 · Pure Equity Stock Analysis</div><div class="eyebrow" style="margin-top:14px">Systematic Stock Momentum Architecture</div>
-<h1>Delta <em>Theory</em><br>Relative Strength &amp; Multi-Bagger Stock Selection</h1>
-<p>Most retail traders buy beaten-down stocks hoping for a rebound, trapped in dead capital. Delta Theory applies systematic Relative Strength (RS) to the NIFTY 500 universe, identifying high-momentum market leaders before retail screeners catch on and riding institutional delivery trends.</p>
-<div style="display:flex;gap:14px;flex-wrap:wrap"><a href="#trent-case" class="back-to-home" style="background:var(--gold);color:#07111c;padding:10px 22px;font-size:14px">Explore TRENT vs NIFTY Blueprint &darr;</a>
-<span class="badge-tag" style="align-self:center">Validated on NSE Cash Delivery &amp; NIFTY 500 Equities</span></div>
-</div></section>
+    <section class="hero">
+      <div class="wrap">
+        <div class="badge-tag">
+          Theory Framework 05 · Pure Equity Stock Analysis
+        </div>
+        <div class="eyebrow" style="margin-top: 14px">
+          Systematic Stock Momentum Architecture
+        </div>
+        <h1>
+          Delta <em>Theory</em><br />Relative Strength &amp; Multi-Bagger Stock
+          Selection
+        </h1>
+        <p>
+          Most retail traders buy beaten-down stocks hoping for a rebound,
+          trapped in dead capital. Delta Theory applies systematic Relative
+          Strength (RS) to the NIFTY 500 universe, identifying high-momentum
+          market leaders before retail screeners catch on and riding
+          institutional delivery trends.
+        </p>
+        <div style="display: flex; gap: 14px; flex-wrap: wrap">
+          <a
+            href="#trent-case"
+            class="back-to-home"
+            style="
+              background: var(--gold);
+              color: #07111c;
+              padding: 10px 22px;
+              font-size: 14px;
+            "
+            >Explore TRENT vs NIFTY Blueprint &darr;</a
+          >
+          <span class="badge-tag" style="align-self: center"
+            >Validated on NSE Cash Delivery &amp; NIFTY 500 Equities</span
+          >
+        </div>
+      </div>
+    </section>
 
-<main>
-<section class="section" id="relative-strength"><div class="wrap"><div class="eyebrow">Pillar 01 · The Momentum Anomaly</div>
-<h2>The Science of Relative Strength in Indian Stocks</h2>
-<p class="intro">In academic finance and institutional quant desks, Relative Strength (not to be confused with the RSI oscillator) is the single most persistent market anomaly. Stocks that are outperforming the benchmark index over the trailing 3 to 12 months continue to outperform with 72%+ statistical probability.</p>
+    <main>
+      <section class="section" id="relative-strength">
+        <div class="wrap">
+          <div class="eyebrow">Pillar 01 · The Momentum Anomaly</div>
+          <h2>The Science of Relative Strength in Indian Stocks</h2>
+          <p class="intro">
+            In academic finance and institutional quant desks, Relative Strength
+            (not to be confused with the RSI oscillator) is the single most
+            persistent market anomaly. Stocks that are outperforming the
+            benchmark index over the trailing 3 to 12 months continue to
+            outperform with 72%+ statistical probability.
+          </p>
 
-<div class="metric-strip">
-<div class="metric-box"><small>Base Pivot</small><strong>₹4,100.00</strong><span style="font-size:12px;color:var(--muted)">Consolidation Base</span></div>
-<div class="metric-box"><small>Delta Entry Trigger</small><strong>₹4,400.00</strong><span style="font-size:12px;color:var(--muted)">RS Line All-Time High</span></div>
-<div class="metric-box"><small>Peak Runner</small><strong>₹7,250.00</strong><span style="font-size:12px;color:var(--muted)">+64.7% Alpha Gain</span></div>
-<div class="metric-box"><small>Nifty 50 Move</small><strong>+7.2% vs +64.7%</strong><span style="font-size:12px;color:var(--muted)">9.0&times; Index Outperformance</span></div>
-</div>
+          <div class="metric-strip">
+            <div class="metric-box">
+              <small>Base Pivot</small><strong>₹4,100.00</strong
+              ><span style="font-size: 12px; color: var(--muted)"
+                >Consolidation Base</span
+              >
+            </div>
+            <div class="metric-box">
+              <small>Delta Entry Trigger</small><strong>₹4,400.00</strong
+              ><span style="font-size: 12px; color: var(--muted)"
+                >RS Line All-Time High</span
+              >
+            </div>
+            <div class="metric-box">
+              <small>Peak Runner</small><strong>₹7,250.00</strong
+              ><span style="font-size: 12px; color: var(--muted)"
+                >+64.7% Alpha Gain</span
+              >
+            </div>
+            <div class="metric-box">
+              <small>Nifty 50 Move</small><strong>+7.2% vs +64.7%</strong
+              ><span style="font-size: 12px; color: var(--muted)"
+                >9.0&times; Index Outperformance</span
+              >
+            </div>
+          </div>
 
-<div class="grid3">
-<div class="card"><small>Concept 01</small><h3>Price Ratio Line</h3><p>We calculate the daily relative ratio: <span class="formula-pill">Ratio = Stock Close / NIFTY 50 Close</span>. When this ratio line is sloping upwards, the stock is actively attracting institutional money faster than the benchmark index, regardless of whether the index is up or down.</p></div>
-<div class="card"><small>Concept 02</small><h3>The "Best House" Rule</h3><p>When NIFTY 50 drops 300 points, weak stocks crash 5% to 8%. However, true Delta leaders fall only 0.5% or actually close green! This resilience reveals hidden institutional accumulation. When NIFTY rebounds, these leaders explode to new all-time highs.</p></div>
-<div class="card"><small>Concept 03</small><h3>Dual-Momentum Filter</h3><p>To prevent buying relative strength in a falling bear market, Delta Theory enforces the Dual Momentum Rule: The stock must have positive Relative Strength (beating NIFTY) AND positive Absolute Momentum (trading above its 50 and 200 EMA).</p></div>
-</div>
+          <div class="grid3">
+            <div class="card">
+              <small>Concept 01</small>
+              <h3>Price Ratio Line</h3>
+              <p>
+                We calculate the daily relative ratio:
+                <span class="formula-pill"
+                  >Ratio = Stock Close / NIFTY 50 Close</span
+                >. When this ratio line is sloping upwards, the stock is
+                actively attracting institutional money faster than the
+                benchmark index, regardless of whether the index is up or down.
+              </p>
+            </div>
+            <div class="card">
+              <small>Concept 02</small>
+              <h3>The "Best House" Rule</h3>
+              <p>
+                When NIFTY 50 drops 300 points, weak stocks crash 5% to 8%.
+                However, true Delta leaders fall only 0.5% or actually close
+                green! This resilience reveals hidden institutional
+                accumulation. When NIFTY rebounds, these leaders explode to new
+                all-time highs.
+              </p>
+            </div>
+            <div class="card">
+              <small>Concept 03</small>
+              <h3>Dual-Momentum Filter</h3>
+              <p>
+                To prevent buying relative strength in a falling bear market,
+                Delta Theory enforces the Dual Momentum Rule: The stock must
+                have positive Relative Strength (beating NIFTY) AND positive
+                Absolute Momentum (trading above its 50 and 200 EMA).
+              </p>
+            </div>
+          </div>
 
-<div class="visual-shell">
-<div class="visual-header"><h3>TRENT LTD vs NIFTY 50 Benchmark: Relative Strength Alpha Engine</h3>
-<p>Real-time comparative analysis demonstrating TRENT (NSE: TRENT) surging aggressively from ₹4,100 to ₹7,250 on massive institutional delivery volume while the NIFTY 50 benchmark moves at a modest pace.</p></div>
-<img src="theory-assets/delta-trent-nifty.png" alt="TRENT vs NIFTY 50 Relative Strength Chart on NSE India">
-<div class="visual-caption"><span><strong>Stock:</strong> TRENT LTD (NSE: TRENT)</span><span><strong>Benchmark:</strong> NIFTY 50 Index (NSE India)</span><span><strong>Alpha Gain:</strong> ₹4,100 &rarr; ₹7,250 (+64.7%)</span></div>
-</div>
-</div></section>
+          <div class="visual-shell">
+            <div class="visual-header">
+              <h3>
+                TRENT LTD vs NIFTY 50 Benchmark: Relative Strength Alpha Engine
+              </h3>
+              <p>
+                Real-time comparative analysis demonstrating TRENT (NSE: TRENT)
+                surging aggressively from ₹4,100 to ₹7,250 on massive
+                institutional delivery volume while the NIFTY 50 benchmark moves
+                at a modest pace.
+              </p>
+            </div>
+            <img
+              src="theory-assets/delta-trent-nifty.png"
+              alt="TRENT vs NIFTY 50 Relative Strength Chart on NSE India"
+            />
+            <div class="visual-caption">
+              <span><strong>Stock:</strong> TRENT LTD (NSE: TRENT)</span
+              ><span
+                ><strong>Benchmark:</strong> NIFTY 50 Index (NSE India)</span
+              ><span
+                ><strong>Alpha Gain:</strong> ₹4,100 &rarr; ₹7,250
+                (+64.7%)</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
 
-<section class="section alt" id="quadrant-matrix"><div class="wrap"><div class="eyebrow">Pillar 02 · Stock Profiling</div>
-<h2>The 4-Quadrant Relative Outperformance Matrix</h2>
-<p class="intro">Every weekend, our systematic screening algorithm plots all 500 stocks in the NIFTY 500 universe across four dynamic rotational quadrants.</p>
+      <section class="section alt" id="quadrant-matrix">
+        <div class="wrap">
+          <div class="eyebrow">Pillar 02 · Stock Profiling</div>
+          <h2>The 4-Quadrant Relative Outperformance Matrix</h2>
+          <p class="intro">
+            Every weekend, our systematic screening algorithm plots all 500
+            stocks in the NIFTY 500 universe across four dynamic rotational
+            quadrants.
+          </p>
 
-<div class="grid4">
-<div class="card" style="border-top:4px solid #10b981"><small style="color:#10b981">Quadrant 01 · Leading</small>
-<h3>Alpha Leaders</h3>
-<p>High RS Ratio &amp; High RS Momentum. Stocks here are in strong structural uptrends and outperforming Nifty 50 consistently. This is where 80% of our portfolio capital is allocated (e.g. Trent, BEL, Dixon).</p>
-</div>
+          <div class="grid4">
+            <div class="card" style="border-top: 4px solid #10b981">
+              <small style="color: #10b981">Quadrant 01 · Leading</small>
+              <h3>Alpha Leaders</h3>
+              <p>
+                High RS Ratio &amp; High RS Momentum. Stocks here are in strong
+                structural uptrends and outperforming Nifty 50 consistently.
+                This is where 80% of our portfolio capital is allocated (e.g.
+                Trent, BEL, Dixon).
+              </p>
+            </div>
 
-<div class="card" style="border-top:4px solid #f59e0b"><small style="color:#f59e0b">Quadrant 02 · Weakening</small>
-<h3>Maturing Leaders</h3>
-<p>High RS Ratio but Declining Momentum. The stock is still beating the index, but its rate-of-change is slowing down. Action: Tighten trailing stops to 20 EMA, trim 30% of position size.</p>
-</div>
+            <div class="card" style="border-top: 4px solid #f59e0b">
+              <small style="color: #f59e0b">Quadrant 02 · Weakening</small>
+              <h3>Maturing Leaders</h3>
+              <p>
+                High RS Ratio but Declining Momentum. The stock is still beating
+                the index, but its rate-of-change is slowing down. Action:
+                Tighten trailing stops to 20 EMA, trim 30% of position size.
+              </p>
+            </div>
 
-<div class="card" style="border-top:4px solid #ef4444"><small style="color:#ef4444">Quadrant 03 · Lagging</small>
-<h3>The Value Traps</h3>
-<p>Low RS Ratio &amp; Low Momentum. Stocks here are underperforming the market (e.g. beaten-down consumer or chemical stocks). Absolute zero capital allocation. Never average down here.</p>
-</div>
+            <div class="card" style="border-top: 4px solid #ef4444">
+              <small style="color: #ef4444">Quadrant 03 · Lagging</small>
+              <h3>The Value Traps</h3>
+              <p>
+                Low RS Ratio &amp; Low Momentum. Stocks here are underperforming
+                the market (e.g. beaten-down consumer or chemical stocks).
+                Absolute zero capital allocation. Never average down here.
+              </p>
+            </div>
 
-<div class="card" style="border-top:4px solid #3b82f6"><small style="color:#3b82f6">Quadrant 04 · Improving</small>
-<h3>Early Stage Turnarounds</h3>
-<p>Low RS Ratio but Surging Momentum. Stocks rotating out of lagging into improving. We place these on our primary watchlist, preparing to enter the moment they cross into the Leading quadrant.</p>
-</div>
-</div>
+            <div class="card" style="border-top: 4px solid #3b82f6">
+              <small style="color: #3b82f6">Quadrant 04 · Improving</small>
+              <h3>Early Stage Turnarounds</h3>
+              <p>
+                Low RS Ratio but Surging Momentum. Stocks rotating out of
+                lagging into improving. We place these on our primary watchlist,
+                preparing to enter the moment they cross into the Leading
+                quadrant.
+              </p>
+            </div>
+          </div>
 
-<div class="rule-box">
-<h4>The Delta Quantitative Selection Rules</h4>
-<ul class="rule-list">
-<li><strong>Rank Universe:</strong> Filter only top 10% of NIFTY 500 stocks with highest 6-month Mansfield Relative Strength.</li>
-<li><strong>Stage 2 Confirmation:</strong> Stock must be in a confirmed Stage 2 markup with 20 EMA &gt; 50 EMA &gt; 200 EMA.</li>
-<li><strong>High 52-Week Closeness:</strong> The stock must be trading within 15% of its 52-week high. We never buy stocks trading near 52-week lows.</li>
-</ul>
-</div>
-</div></section>
+          <div class="rule-box">
+            <h4>The Delta Quantitative Selection Rules</h4>
+            <ul class="rule-list">
+              <li>
+                <strong>Rank Universe:</strong> Filter only top 10% of NIFTY 500
+                stocks with highest 6-month Mansfield Relative Strength.
+              </li>
+              <li>
+                <strong>Stage 2 Confirmation:</strong> Stock must be in a
+                confirmed Stage 2 markup with 20 EMA &gt; 50 EMA &gt; 200 EMA.
+              </li>
+              <li>
+                <strong>High 52-Week Closeness:</strong> The stock must be
+                trading within 15% of its 52-week high. We never buy stocks
+                trading near 52-week lows.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-<section class="section" id="delivery-volume"><div class="wrap"><div class="eyebrow">Pillar 03 · Institutional Proof</div>
-<h2>Volume-Weighted Delivery Analysis on NSE</h2>
-<p class="intro">Intraday volume in Indian stocks can be inflated by day traders and algorithmic market makers. The definitive signature of institutional accumulation (FIIs, Domestic Mutual Funds) is the <strong>Delivery Volume Percentage</strong> on the National Stock Exchange.</p>
+      <section class="section" id="delivery-volume">
+        <div class="wrap">
+          <div class="eyebrow">Pillar 03 · Institutional Proof</div>
+          <h2>Volume-Weighted Delivery Analysis on NSE</h2>
+          <p class="intro">
+            Intraday volume in Indian stocks can be inflated by day traders and
+            algorithmic market makers. The definitive signature of institutional
+            accumulation (FIIs, Domestic Mutual Funds) is the
+            <strong>Delivery Volume Percentage</strong> on the National Stock
+            Exchange.
+          </p>
 
-<div class="grid2">
-<div class="card"><small>Delivery Accumulation</small><h3>The &gt;60% Delivery Surge Signature</h3>
-<p>When a stock breaks out to a new multi-month high, we pull the official NSE security-wise delivery report. If the delivery percentage is above 60% alongside 2&times; average volume, it proves institutions are taking delivery of real shares into demat accounts rather than intraday square-offs.</p>
-</div>
+          <div class="grid2">
+            <div class="card">
+              <small>Delivery Accumulation</small>
+              <h3>The &gt;60% Delivery Surge Signature</h3>
+              <p>
+                When a stock breaks out to a new multi-month high, we pull the
+                official NSE security-wise delivery report. If the delivery
+                percentage is above 60% alongside 2&times; average volume, it
+                proves institutions are taking delivery of real shares into
+                demat accounts rather than intraday square-offs.
+              </p>
+            </div>
 
-<div class="card"><small>Institutional Blocks</small><h3>VWAP Slope &amp; Institutional Anchors</h3>
-<p>We anchor Volume-Weighted Average Price (VWAP) from quarterly earnings days and major budget announcements. When price tests the quarterly anchored VWAP and holds firmly on rising delivery, it provides a high-probability low-risk swing entry point.</p>
-</div>
-</div>
-</div></section>
+            <div class="card">
+              <small>Institutional Blocks</small>
+              <h3>VWAP Slope &amp; Institutional Anchors</h3>
+              <p>
+                We anchor Volume-Weighted Average Price (VWAP) from quarterly
+                earnings days and major budget announcements. When price tests
+                the quarterly anchored VWAP and holds firmly on rising delivery,
+                it provides a high-probability low-risk swing entry point.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<section class="section alt" id="trent-case"><div class="wrap"><div class="eyebrow">Pillar 04 · Live Market Blueprint</div>
-<h2>TRENT LTD: Real Multi-Bagger Blueprint</h2>
-<p class="intro">Step-by-step institutional case study showing how Delta Theory captured the historic move in TRENT LTD on NSE India.</p>
+      <section class="section alt" id="trent-case">
+        <div class="wrap">
+          <div class="eyebrow">Pillar 04 · Live Market Blueprint</div>
+          <h2>TRENT LTD: Real Multi-Bagger Blueprint</h2>
+          <p class="intro">
+            Step-by-step institutional case study showing how Delta Theory
+            captured the historic move in TRENT LTD on NSE India.
+          </p>
 
-<div class="worked-example">
-<h3>Live Swing Execution: TRENT LTD (NSE: TRENT)</h3>
-<div class="step-sequence">
-<div class="step-item"><b>STEP 01 · SCREENING</b><h5>Delta Relative Strength Screen</h5><p>While NIFTY 50 consolidated in a narrow range, TRENT registered an all-time high on its Relative Strength ratio line. It ranked in the top 1% of the entire NIFTY 500 universe.</p></div>
-<div class="step-item"><b>STEP 02 · STRUCTURAL ENTRY</b><h5>Base Breakout at ₹4,400</h5><p>TRENT broke out of a 6-week consolidation box closing at <strong>₹4,400.00</strong> on 68% NSE delivery volume. Initial stop-loss placed at <strong>₹4,180.00</strong> (5% risk). Initial buy executed.</p></div>
-<div class="step-item"><b>STEP 03 · THE ALPHA RUN</b><h5>Riding the 20-Day EMA</h5><p>TRENT walked up its 20 EMA relentlessly for months. As the stock crossed <strong>₹5,500.00</strong> (+25%), we trailed the stop-loss to ₹5,100, locking in guaranteed risk-free profits.</p></div>
-</div>
+          <div class="worked-example">
+            <h3>Live Swing Execution: TRENT LTD (NSE: TRENT)</h3>
+            <div class="step-sequence">
+              <div class="step-item">
+                <b>STEP 01 · SCREENING</b>
+                <h5>Delta Relative Strength Screen</h5>
+                <p>
+                  While NIFTY 50 consolidated in a narrow range, TRENT
+                  registered an all-time high on its Relative Strength ratio
+                  line. It ranked in the top 1% of the entire NIFTY 500
+                  universe.
+                </p>
+              </div>
+              <div class="step-item">
+                <b>STEP 02 · STRUCTURAL ENTRY</b>
+                <h5>Base Breakout at ₹4,400</h5>
+                <p>
+                  TRENT broke out of a 6-week consolidation box closing at
+                  <strong>₹4,400.00</strong> on 68% NSE delivery volume. Initial
+                  stop-loss placed at <strong>₹4,180.00</strong> (5% risk).
+                  Initial buy executed.
+                </p>
+              </div>
+              <div class="step-item">
+                <b>STEP 03 · THE ALPHA RUN</b>
+                <h5>Riding the 20-Day EMA</h5>
+                <p>
+                  TRENT walked up its 20 EMA relentlessly for months. As the
+                  stock crossed <strong>₹5,500.00</strong> (+25%), we trailed
+                  the stop-loss to ₹5,100, locking in guaranteed risk-free
+                  profits.
+                </p>
+              </div>
+            </div>
 
-<div class="step-sequence" style="margin-top:18px">
-<div class="step-item"><b>STEP 04 · SECTOR CONFIRMATION</b><h5>Nifty Retail Leadership</h5><p>Consumer and retail discretionary stocks showed high group momentum. TRENT acted as the locomotive leader, consistently outperforming peers like D-Mart and Shoppers Stop.</p></div>
-<div class="step-item"><b>STEP 05 · CLIMAX TARGET</b><h5>Peak Reached at ₹7,250</h5><p>TRENT reached <strong>₹7,250.00</strong>, delivering a staggering <strong>+64.7%</strong> capital return while the NIFTY 50 index gained only 7%. Delta Theory captured 9&times; the market alpha!</p></div>
-<div class="step-item"><b>STEP 06 · SYSTEMATIC EXIT</b><h5>Exit on Trend Breakdown</h5><p>When the stock finally closed below its 50 EMA with RS momentum dropping into Quadrant 2 (Weakening), our systematic exit trigger locked in the multi-lakh gain.</p></div>
-</div>
-</div>
+            <div class="step-sequence" style="margin-top: 18px">
+              <div class="step-item">
+                <b>STEP 04 · SECTOR CONFIRMATION</b>
+                <h5>Nifty Retail Leadership</h5>
+                <p>
+                  Consumer and retail discretionary stocks showed high group
+                  momentum. TRENT acted as the locomotive leader, consistently
+                  outperforming peers like D-Mart and Shoppers Stop.
+                </p>
+              </div>
+              <div class="step-item">
+                <b>STEP 05 · CLIMAX TARGET</b>
+                <h5>Peak Reached at ₹7,250</h5>
+                <p>
+                  TRENT reached <strong>₹7,250.00</strong>, delivering a
+                  staggering <strong>+64.7%</strong> capital return while the
+                  NIFTY 50 index gained only 7%. Delta Theory captured 9&times;
+                  the market alpha!
+                </p>
+              </div>
+              <div class="step-item">
+                <b>STEP 06 · SYSTEMATIC EXIT</b>
+                <h5>Exit on Trend Breakdown</h5>
+                <p>
+                  When the stock finally closed below its 50 EMA with RS
+                  momentum dropping into Quadrant 2 (Weakening), our systematic
+                  exit trigger locked in the multi-lakh gain.
+                </p>
+              </div>
+            </div>
+          </div>
 
-<div class="rule-box" style="text-align:center;background:#0b1b2d;border-color:var(--teal)">
-<h4 style="color:#f8fafc">The Core Mantra of Delta Theory</h4>
-<p style="color:#cbd5e1;max-width:750px;margin:10px auto 20px">Buy high to sell higher. Leave the bottom-fishing to retail traders and ride the verified institutional momentum leaders of the Indian economy.</p>
-<a href="index.html" class="back-to-home" style="display:inline-flex;padding:12px 28px;font-size:14px;background:var(--gold);color:#07111c!important">Return to Academy Dashboard &rarr;</a>
-</div>
-</div></section>
-</main>
+          <div
+            class="rule-box"
+            style="
+              text-align: center;
+              background: #0b1b2d;
+              border-color: var(--teal);
+            "
+          >
+            <h4 style="color: #f8fafc">The Core Mantra of Delta Theory</h4>
+            <p style="color: #cbd5e1; max-width: 750px; margin: 10px auto 20px">
+              Buy high to sell higher. Leave the bottom-fishing to retail
+              traders and ride the verified institutional momentum leaders of
+              the Indian economy.
+            </p>
+            <a
+              href="index.html"
+              class="back-to-home"
+              style="
+                display: inline-flex;
+                padding: 12px 28px;
+                font-size: 14px;
+                background: var(--gold);
+                color: #07111c !important;
+              "
+              >Return to Academy Dashboard &rarr;</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
 
-<footer class="footer"><div class="wrap"><div><strong>AlphaEdge Pro Academy</strong> &bull; Delta Theory &bull; Systematic Stock Relative Strength.<br><span style="font-size:12px;color:#64748b">Educational content only. Stock market investments are subject to market risks. © 2026 AlphaEdge Pro Academy.</span></div>
-<a href="index.html" class="back-to-home"><span class="back-icon">&larr;</span> <span class="back-text">Back to Home</span></a></div></footer></body></html>
+    <footer class="footer">
+      <div class="wrap">
+        <div>
+          <strong>AlphaEdge Pro Academy</strong> &bull; Delta Theory &bull;
+          Systematic Stock Relative Strength.<br /><span
+            style="font-size: 12px; color: #64748b"
+            >Educational content only. Stock market investments are subject to
+            market risks. © 2026 AlphaEdge Pro Academy.</span
+          >
+        </div>
+        <a href="index.html" class="back-to-home"
+          ><span class="back-icon">&larr;</span>
+          <span class="back-text">Back to Home</span></a
+        >
+      </div>
+    </footer>
+  </body>
+</html>
