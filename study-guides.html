@@ -3,6 +3,22 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!-- Theme Pre-hydration Script to eliminate flash -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('alphaedge_theme') || 'dark';
+          document.documentElement.dataset.theme = saved;
+          if (saved === 'dark') {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch(e) {}
+      })();
+    </script>
+    <!-- Link custom theme & animation styles -->
+    <link rel="stylesheet" href="./css/react-bits-styles.css?v=3.3" />
     <meta name="theme-color" content="#071827" />
     <meta
       name="description"
@@ -22,15 +38,19 @@
     />
     <style>
       :root {
-        --navy: #000000;
-        --navy2: #0b2538;
-        --teal: #38d6bd;
+        --navy: #080c14;
+        --navy-dark: #040911;
+        --teal: #35d1c4;
+        --teal-glow: rgba(53, 209, 196, 0.35);
         --gold: #f3c578;
-        --ink: #152f40;
-        --muted: #536b77;
-        --line: #d9e4e7;
-        --soft: #f3f7f8;
+        --gold-dark: #d97706;
+        --ink: #f1f5f9;
+        --muted: #94a3b8;
+        --line: rgba(255, 255, 255, 0.12);
+        --card-bg: #0d1e31;
+        --card-border: rgba(255, 255, 255, 0.12);
       }
+
       * {
         box-sizing: border-box;
       }
@@ -39,11 +59,16 @@
       }
       body {
         margin: 0;
-        font:
-          16px/1.7 "DM Sans",
-          sans-serif;
-        color: var(--ink);
-        background: #0f172a;
+        font: 16px/1.7 "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: #e2e8f0;
+        background-color: #080c14;
+        background-image:
+          linear-gradient(to bottom, rgba(4, 9, 17, 0.8), rgba(4, 9, 17, 0.96)),
+          url("./image/professional-trading-bg.png");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        min-height: 100vh;
       }
       a {
         color: inherit;
@@ -54,14 +79,22 @@
       }
       .stripe {
         height: 4px;
-        background: linear-gradient(90deg, var(--teal), #498bad, var(--gold));
+        background: linear-gradient(90deg, #35d1c4, #38bdf8, #f3c578);
       }
+
+      /* ========================================================= */
+      /* TOP NAVIGATION & HEADER                                    */
+      /* ========================================================= */
       .header {
-        background: var(--navy);
-        color: #fff;
+        background: rgba(8, 12, 20, 0.94);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        position: relative;
+        z-index: 50;
       }
       .head {
-        height: 72px;
+        height: 74px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -70,107 +103,183 @@
       .brand {
         text-decoration: none;
         display: flex;
-        gap: 11px;
+        gap: 12px;
         align-items: center;
         font-weight: 800;
         line-height: 1.05;
         letter-spacing: -0.04em;
         font-size: 19px;
+        color: #ffffff;
       }
-      .brand-mark {
-        width: 37px;
-        height: 37px;
-        display: grid;
-        place-items: center;
-        border: 2px solid var(--gold);
-        border-radius: 9px;
-        color: var(--gold);
-      }
-      .brand small {
+      .brand img {
+        height: 60px;
+        width: auto;
+        object-fit: contain;
         display: block;
-        font-size: 10px;
-        color: #b3d0d7;
-        letter-spacing: 0.18em;
-        margin-top: 4px;
+        transition: transform 0.2s;
+      }
+      .brand:hover img {
+        transform: scale(1.03);
       }
       .nav {
         display: flex;
-        gap: 25px;
+        gap: 24px;
         font-weight: 700;
-        font-size: 13px;
-        color: #c5dbe1;
+        font-size: 13.5px;
+        color: #cbd5e1;
       }
       .nav a {
         text-decoration: none;
+        color: #cbd5e1;
+        transition: color 0.2s;
       }
       .nav a:hover {
-        color: var(--gold);
+        color: var(--teal);
       }
       .menu {
         display: none;
-        background: none;
-        color: white;
-        border: 1px solid #819aa5;
-        border-radius: 7px;
-        padding: 4px 10px;
+        background: rgba(255, 255, 255, 0.06);
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        padding: 6px 12px;
         font: inherit;
+        font-size: 18px;
+        cursor: pointer;
+        line-height: 1;
       }
+      .back-to-home {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--gold);
+        border: 1px solid var(--gold);
+        padding: 7px 14px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 700;
+        transition: all 0.2s;
+        white-space: nowrap;
+        background: rgba(243, 197, 120, 0.08);
+      }
+      .back-to-home:hover {
+        background: var(--gold) !important;
+        color: #07111c !important;
+        box-shadow: 0 0 15px rgba(243, 197, 120, 0.35);
+        transform: translateY(-1px);
+      }
+
+      /* ========================================================= */
+      /* COURSE DAYS SUB-NAV                                       */
+      /* ========================================================= */
+      .course-days {
+        background: #0b1a2d;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        color: #cbd5e1;
+      }
+      .course-days .wrap {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding: 9px 0;
+        scrollbar-width: none;
+      }
+      .course-days .wrap::-webkit-scrollbar {
+        display: none;
+      }
+      .course-days a {
+        text-decoration: none;
+        white-space: nowrap;
+        padding: 7px 14px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 700;
+        color: #cbd5e1;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: all 0.2s;
+      }
+      .course-days a:hover {
+        background: #142a42;
+        color: #ffffff;
+        border-color: rgba(56, 189, 248, 0.35);
+      }
+      .course-days a.current {
+        background: #0284c7 !important;
+        color: #ffffff !important;
+        border: 1px solid #38bdf8 !important;
+        font-weight: 800 !important;
+        box-shadow: 0 0 14px rgba(2, 132, 199, 0.35) !important;
+      }
+
+      /* ========================================================= */
+      /* HERO SECTION                                              */
+      /* ========================================================= */
       .hero {
         background:
-          radial-gradient(circle at 72% 45%, #195169 0, transparent 37%),
+          radial-gradient(circle at 72% 45%, #195169 0, transparent 40%),
           linear-gradient(115deg, #071827, #0c3046);
-        color: #fff;
+        color: #ffffff;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       }
       .hero-grid {
-        min-height: 470px;
+        min-height: 420px;
         display: grid;
-        grid-template-columns: 1.02fr 0.98fr;
+        grid-template-columns: 1.05fr 0.95fr;
         gap: 35px;
         align-items: center;
-        padding: 59px 0;
+        padding: 55px 0;
       }
       .eyebrow {
         font-size: 12px;
         letter-spacing: 0.17em;
         text-transform: uppercase;
         font-weight: 800;
-        color: #cbd5e1;
-      }
-      .hero .eyebrow {
         color: var(--gold);
+        margin-bottom: 6px;
       }
       h1 {
-        font-size: clamp(43px, 5.5vw, 72px);
-        line-height: 1.04;
-        letter-spacing: -0.06em;
-        margin: 16px 0 21px;
+        font-size: clamp(38px, 4.8vw, 62px);
+        line-height: 1.08;
+        letter-spacing: -0.05em;
+        margin: 14px 0 18px;
+        color: #ffffff;
+        font-weight: 800;
       }
       h1 em {
         color: var(--teal);
         font-style: normal;
       }
       .hero p {
-        font-size: 18px;
+        font-size: 17px;
         line-height: 1.6;
         color: #c9e1e6;
-        max-width: 590px;
+        max-width: 560px;
+        margin: 0;
       }
-      .hero .pill {
-        display: inline-block;
-        border: 1px solid #75b6b8;
-        border-radius: 999px;
-        padding: 7px 14px;
-        font-size: 12px;
-        font-weight: 800;
-        color: #c9eee8;
-        margin-top: 13px;
+      .module-summary {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 22px;
+      }
+      .module-summary span {
+        border: 1px solid rgba(56, 189, 248, 0.35);
+        padding: 6px 13px;
+        border-radius: 99px;
+        color: #e0f2fe;
+        font-size: 13px;
+        font-weight: 700;
+        background: rgba(56, 189, 248, 0.1);
       }
       .hero-art {
         background: #0a2135;
-        border: 1px solid #ffffff33;
+        border: 1px solid rgba(255, 255, 255, 0.15);
         border-radius: 18px;
-        padding: 21px;
-        box-shadow: 0 25px 65px #0005;
+        padding: 20px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
       }
       .hero-art svg {
         display: block;
@@ -179,217 +288,348 @@
       }
       .art-caption {
         text-align: right;
-        color: #90b5bd;
+        color: #94a3b8;
         font-size: 12px;
-        margin: 9px 3px 0;
+        margin: 10px 4px 0;
+        font-weight: 600;
       }
-      .quicknav {
-        background: #0f172a;
-        border-bottom: 1px solid var(--line);
-      }
-      .quicknav .wrap {
-        display: flex;
-        gap: 20px;
-        overflow-x: auto;
-        white-space: nowrap;
-      }
-      .quicknav a {
-        font-size: 13px;
-        font-weight: 800;
-        color: #cbd5e1;
-        text-decoration: none;
-        padding: 14px 0;
-        border-bottom: 3px solid transparent;
-      }
-      .quicknav a:hover {
-        color: #cbd5e1;
-        border-color: #cbd5e1;
-      }
+
+      /* ========================================================= */
+      /* MAIN SECTION & GUIDES GRID                                */
+      /* ========================================================= */
       .section {
-        padding: 73px 0;
+        padding: 65px 0 75px;
       }
       .section.soft {
-        background: #1e293b;
-        border-top: 1px solid #334155;
+        background: transparent;
       }
       .section h2 {
-        font-size: clamp(30px, 3.5vw, 44px);
-        line-height: 1.19;
-        letter-spacing: -0.045em;
-        margin: 11px 0 14px;
+        font-size: clamp(28px, 3.2vw, 42px);
+        line-height: 1.2;
+        letter-spacing: -0.04em;
+        margin: 10px 0 12px;
+        color: #ffffff;
+        font-weight: 800;
       }
       .intro {
-        font-size: 18px;
-        color: var(--muted);
-        max-width: 800px;
-        margin: 0 0 30px;
+        font-size: 17px;
+        color: #94a3b8;
+        max-width: 760px;
+        margin: 0 0 32px;
+        line-height: 1.6;
       }
-      .anatomy {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 25px;
-      }
-      .anatomy-card {
-        background: #0f172a;
-        border: 1px solid var(--line);
-        border-radius: 15px;
-        padding: 25px;
-        display: grid;
-        grid-template-columns: 0.8fr 1fr;
-        align-items: center;
-        gap: 15px;
-      }
-      .anatomy-card svg {
-        height: 240px;
-        width: 100%;
-      }
-      .anatomy-card h3 {
-        font-size: 23px;
-        margin: 0 0 8px;
-      }
-      .anatomy-card p {
-        margin: 0;
-        color: var(--muted);
-      }
-      .anatomy-card ul {
-        margin: 12px 0 0;
-        padding-left: 20px;
-        color: #cbd5e1;
-        font-size: 14px;
-      }
-      .anatomy-card li {
-        margin: 5px 0;
-      }
-      .definition {
-        background: #1e293b;
-        border-left: 4px solid #18aa9b;
-        border-radius: 0 10px 10px 0;
-        padding: 17px 22px;
-        margin-top: 25px;
-      }
-      .pattern-grid {
+      .guides-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 19px;
+        gap: 20px;
       }
-      .pattern-card {
-        background: #0f172a;
-        border: 1px solid var(--line);
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 10px 30px #0d354009;
-        scroll-margin-top: 20px;
+      .guide-card {
+        background: #0d1e31;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 16px;
+        padding: 26px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
       }
-      .pattern-visual {
-        padding: 13px;
-        background: #0b2136;
+      .guide-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(56, 189, 248, 0.4);
+        box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
       }
-      .pattern-visual svg {
-        width: 100%;
-        height: 177px;
-        display: block;
-      }
-      .pattern-content {
-        padding: 21px 25px 25px;
-      }
-      .pattern-context {
-        font-size: 12px;
-        color: #cbd5e1;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+      .guide-card .eyebrow {
+        color: #38bdf8;
         font-weight: 800;
-        margin: 0 !important;
-      }
-      .pattern-content h3 {
-        font-size: 22px;
-        margin: 6px 0 10px;
-        line-height: 1.25;
-      }
-      .pattern-content p {
-        margin: 10px 0;
-        color: var(--muted);
-      }
-      .pattern-content .how {
-        border-top: 1px solid var(--line);
-        padding-top: 12px;
-        margin-bottom: 0;
-      }
-      .pattern-content .how strong {
-        color: #cbd5e1;
-      }
-      .subhead {
-        font-size: 21px;
-        margin: 36px 0 17px;
-      }
-      .checklist {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 15px;
-      }
-      .check {
-        background: #0f172a;
-        border: 1px solid var(--line);
-        border-top: 4px solid #1ab7a8;
-        border-radius: 11px;
-        padding: 19px;
-      }
-      .check b {
-        display: block;
-        color: #cbd5e1;
-        margin-bottom: 7px;
-      }
-      .check p {
-        color: var(--muted);
+        font-size: 11.5px;
+        letter-spacing: 0.14em;
         margin: 0;
-        font-size: 14px;
       }
+      .guide-card h2 {
+        font-size: 24px;
+        line-height: 1.25;
+        margin: 10px 0 8px;
+        color: #ffffff;
+        font-weight: 700;
+      }
+      .guide-card p {
+        color: #cbd5e1;
+        margin: 0 0 22px;
+        font-size: 15px;
+        line-height: 1.55;
+      }
+      .guide-card a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #0e7490, #0891b2);
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 8px;
+        padding: 11px 18px;
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+        border: 1px solid rgba(34, 211, 238, 0.3);
+        align-self: flex-start;
+        transition: all 0.2s;
+        box-shadow: 0 4px 14px rgba(8, 145, 178, 0.25);
+      }
+      .guide-card a:hover {
+        background: linear-gradient(135deg, #0891b2, #06b6d4);
+        box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
+        transform: translateY(-1px);
+      }
+      .guide-card a:focus-visible {
+        outline: 3px solid var(--gold);
+        outline-offset: 3px;
+      }
+
+      /* ========================================================= */
+      /* ABOUT GUIDES CALLOUT BOX                                  */
+      /* ========================================================= */
       .sources {
         background: #0b2638;
-        color: #c5dae1;
-        border-radius: 15px;
-        padding: 24px 27px;
-        margin-top: 35px;
+        border: 1px solid rgba(56, 189, 248, 0.22);
+        border-left: 5px solid var(--teal);
+        border-radius: 14px;
+        padding: 24px 28px;
+        margin-top: 36px;
       }
       .sources h3 {
-        color: white;
-        margin: 0 0 9px;
-        font-size: 18px;
+        color: #ffffff;
+        margin: 0 0 8px;
+        font-size: 19px;
+        font-weight: 700;
       }
       .sources p {
-        margin: 7px 0;
-        font-size: 14px;
+        margin: 0;
+        font-size: 14.5px;
+        color: #cbd5e1;
+        line-height: 1.6;
       }
-      .sources a {
-        color: #f4d38d;
+      .sources strong {
+        color: var(--gold);
       }
+
+      /* ========================================================= */
+      /* FOOTER                                                    */
+      /* ========================================================= */
       .footer {
-        background: var(--navy);
-        color: #a9c2cb;
-        padding: 34px 0;
+        background: #040911;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        color: #94a3b8;
+        padding: 35px 0;
         font-size: 13px;
       }
       .footer .wrap {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         gap: 15px;
       }
       .footer strong {
-        color: #fff;
+        color: #ffffff;
+        font-size: 14px;
       }
+
+      /* ========================================================= */
+      /* LIGHT MODE OVERRIDES (html[data-theme="light"])            */
+      /* ========================================================= */
+      html[data-theme="light"] body {
+        background-color: #f4f7ff !important;
+        background-image:
+          radial-gradient(at 15% 15%, rgba(16, 185, 129, 0.08) 0px, transparent 50%),
+          radial-gradient(at 85% 25%, rgba(6, 182, 212, 0.06) 0px, transparent 45%),
+          linear-gradient(to bottom, #ffffff, #f4f7ff) !important;
+        color: #0a1536 !important;
+      }
+
+      /* Light Mode Header & Nav */
+      html[data-theme="light"] .header {
+        background: #ffffff !important;
+        border-bottom: 1px solid rgba(30, 58, 138, 0.12) !important;
+        box-shadow: 0 4px 20px rgba(30, 58, 138, 0.06) !important;
+      }
+      html[data-theme="light"] .brand {
+        color: #0a1536 !important;
+      }
+      html[data-theme="light"] .nav {
+        color: #1e293b !important;
+      }
+      html[data-theme="light"] .nav a {
+        color: #1e293b !important;
+        font-weight: 700 !important;
+      }
+      html[data-theme="light"] .nav a:hover {
+        color: #0284c7 !important;
+      }
+      html[data-theme="light"] .menu {
+        background: #f1f5f9 !important;
+        border: 1px solid rgba(30, 58, 138, 0.18) !important;
+        color: #0a1536 !important;
+      }
+      html[data-theme="light"] .back-to-home {
+        color: #1e40af !important;
+        border-color: #2563eb !important;
+        background: rgba(37, 99, 235, 0.08) !important;
+      }
+      html[data-theme="light"] .back-to-home:hover {
+        background: #2563eb !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25) !important;
+      }
+
+      /* Light Mode Course Days Sub-Nav */
+      html[data-theme="light"] .course-days {
+        background: #ffffff !important;
+        border-top: 1px solid rgba(30, 58, 138, 0.12) !important;
+        border-bottom: 1px solid rgba(30, 58, 138, 0.12) !important;
+        box-shadow: 0 2px 10px rgba(30, 58, 138, 0.05) !important;
+      }
+      html[data-theme="light"] .course-days a,
+      html[data-theme="light"] nav.course-days a {
+        color: #1e293b !important;
+        background: #f1f5f9 !important;
+        border: 1px solid rgba(30, 58, 138, 0.12) !important;
+        font-weight: 700 !important;
+      }
+      html[data-theme="light"] .course-days a:hover,
+      html[data-theme="light"] nav.course-days a:hover {
+        background: #e0f2fe !important;
+        color: #0369a1 !important;
+        border-color: #38bdf8 !important;
+      }
+      html[data-theme="light"] .course-days a.current,
+      html[data-theme="light"] nav.course-days a.current {
+        background: #0284c7 !important;
+        color: #ffffff !important;
+        border: 1px solid #0284c7 !important;
+        box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3) !important;
+        font-weight: 800 !important;
+      }
+
+      /* Light Mode Hero Banner */
+      html[data-theme="light"] .hero {
+        background: linear-gradient(180deg, #e4ecff 0%, #f4f7ff 100%) !important;
+        border-bottom: 1px solid rgba(30, 58, 138, 0.12) !important;
+      }
+      html[data-theme="light"] .hero h1 {
+        color: #0a1536 !important;
+      }
+      html[data-theme="light"] .hero h1 em {
+        color: #0284c7 !important;
+      }
+      html[data-theme="light"] .hero p {
+        color: #334155 !important;
+      }
+      html[data-theme="light"] .hero .eyebrow {
+        color: #b45309 !important;
+        font-weight: 800 !important;
+      }
+      html[data-theme="light"] .module-summary span {
+        background: #e0f2fe !important;
+        border: 1px solid #7dd3fc !important;
+        color: #0369a1 !important;
+        font-weight: 700 !important;
+      }
+      html[data-theme="light"] .hero-art {
+        background: #ffffff !important;
+        border: 1.5px solid rgba(30, 58, 138, 0.14) !important;
+        box-shadow: 0 10px 30px rgba(30, 58, 138, 0.08) !important;
+      }
+      html[data-theme="light"] .art-caption {
+        color: #475569 !important;
+        font-weight: 600 !important;
+      }
+
+      /* Light Mode Main Content */
+      html[data-theme="light"] .section.soft {
+        background: #f4f7ff !important;
+      }
+      html[data-theme="light"] .section h2 {
+        color: #0a1536 !important;
+      }
+      html[data-theme="light"] .section .eyebrow {
+        color: #b45309 !important;
+      }
+      html[data-theme="light"] .intro {
+        color: #475569 !important;
+      }
+
+      /* Light Mode Guide Cards */
+      html[data-theme="light"] .guide-card {
+        background: #ffffff !important;
+        border: 1.5px solid rgba(30, 58, 138, 0.14) !important;
+        box-shadow: 0 4px 20px rgba(30, 58, 138, 0.08) !important;
+      }
+      html[data-theme="light"] .guide-card:hover {
+        border-color: #0284c7 !important;
+        box-shadow: 0 8px 30px rgba(30, 58, 138, 0.14) !important;
+      }
+      html[data-theme="light"] .guide-card .eyebrow {
+        color: #0369a1 !important;
+      }
+      html[data-theme="light"] .guide-card h2 {
+        color: #0a1536 !important;
+      }
+      html[data-theme="light"] .guide-card p {
+        color: #334155 !important;
+      }
+      html[data-theme="light"] .guide-card a {
+        background: #0284c7 !important;
+        color: #ffffff !important;
+        border-color: #0284c7 !important;
+        box-shadow: 0 4px 14px rgba(2, 132, 199, 0.25) !important;
+      }
+      html[data-theme="light"] .guide-card a:hover {
+        background: #0369a1 !important;
+        box-shadow: 0 6px 20px rgba(2, 132, 199, 0.35) !important;
+      }
+
+      /* Light Mode Sources Callout */
+      html[data-theme="light"] .sources {
+        background: #eff6ff !important;
+        border: 1.5px solid rgba(37, 99, 235, 0.2) !important;
+        border-left: 5px solid #2563eb !important;
+      }
+      html[data-theme="light"] .sources h3 {
+        color: #1e3a8a !important;
+      }
+      html[data-theme="light"] .sources p {
+        color: #334155 !important;
+      }
+      html[data-theme="light"] .sources strong {
+        color: #1e40af !important;
+      }
+
+      /* Light Mode Footer */
+      html[data-theme="light"] .footer {
+        background: #ffffff !important;
+        border-top: 1px solid rgba(30, 58, 138, 0.12) !important;
+        color: #64748b !important;
+      }
+      html[data-theme="light"] .footer strong {
+        color: #0a1536 !important;
+      }
+
+      /* ========================================================= */
+      /* RESPONSIVE MEDIA QUERIES                                  */
+      /* ========================================================= */
       @media (max-width: 900px) {
         .hero-grid {
           grid-template-columns: 1fr;
-          gap: 15px;
-          padding: 48px 0;
+          gap: 20px;
+          padding: 42px 0;
         }
         .hero-art {
-          max-width: 680px;
+          max-width: 600px;
         }
-        .anatomy {
+      }
+      @media (max-width: 720px) {
+        .guides-grid {
           grid-template-columns: 1fr;
-        }
-        .checklist {
-          grid-template-columns: repeat(2, 1fr);
         }
       }
       @media (max-width: 650px) {
@@ -399,510 +639,70 @@
         .head {
           height: 68px;
         }
-        .brand {
-          font-size: 16px;
-        }
-        .brand-mark {
-          width: 34px;
-          height: 34px;
-        }
         .menu {
           display: block;
         }
         .nav {
           display: none;
           position: absolute;
-          z-index: 10;
+          z-index: 50;
           top: 72px;
           left: 0;
           right: 0;
-          background: #0c2838;
-          padding: 18px;
+          background: #081422;
+          padding: 18px 20px;
           flex-direction: column;
           align-items: flex-start;
-          gap: 13px;
+          gap: 10px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+        .nav a {
+          width: 100%;
+          padding: 10px 14px;
+          border-radius: 8px;
+          font-size: 15px;
+          color: #e2e8f0;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          box-sizing: border-box;
+        }
+        .nav a:hover {
+          background: rgba(53, 209, 196, 0.12);
+          color: #35d1c4;
+          border-color: rgba(53, 209, 196, 0.3);
+        }
+        html[data-theme="light"] .nav {
+          background: #ffffff !important;
+          border-bottom: 1px solid rgba(30, 58, 138, 0.15) !important;
+          box-shadow: 0 14px 35px rgba(30, 58, 138, 0.12) !important;
+        }
+        html[data-theme="light"] .nav a,
+        html[data-theme="light"] nav.nav a {
+          width: 100% !important;
+          color: #0a1536 !important;
+          background: #f8fafc !important;
+          border: 1px solid rgba(30, 58, 138, 0.1) !important;
+        }
+        html[data-theme="light"] .nav a:hover,
+        html[data-theme="light"] nav.nav a:hover {
+          background: #e0f2fe !important;
+          color: #0284c7 !important;
+          border-color: #7dd3fc !important;
         }
         .nav.open {
           display: flex;
         }
-        .header {
-          position: relative;
-        }
-        .hero-grid {
-          padding: 44px 0;
-        }
-        h1 {
-          font-size: 47px;
-        }
-        .hero p {
-          font-size: 16px;
-        }
-        .hero-art {
-          padding: 11px;
-        }
-        .section {
-          padding: 54px 0;
-        }
-        .anatomy-card {
-          grid-template-columns: 1fr;
-        }
-        .anatomy-card svg {
-          height: 215px;
-        }
-        .pattern-grid,
-        .checklist {
-          grid-template-columns: 1fr;
-        }
-        .pattern-visual svg {
-          height: 180px;
-        }
-        .pattern-content {
-          padding: 18px 20px 22px;
-        }
-        .footer .wrap {
-          display: block;
-        }
-        .footer span {
-          display: block;
-          margin-top: 8px;
-        }
-      }
-
-      .pdf-reference {
-        background: #1e293b;
-        border-bottom: 1px solid #cfe2e5;
-      }
-      .pdf-reference-inner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 22px;
-        padding: 22px 0;
-      }
-      .pdf-reference h2 {
-        font-size: 20px;
-        line-height: 1.3;
-        margin: 0 0 3px;
-      }
-      .pdf-reference p {
-        color: #cbd5e1;
-        font-size: 14px;
-        margin: 0;
-      }
-      .pdf-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 9px;
-        flex: none;
-      }
-      .pdf-actions a {
-        font-size: 13px;
-        font-weight: 800;
-        text-decoration: none;
-        border-radius: 8px;
-        padding: 10px 15px;
-        background: #0c3c4a;
-        color: white;
-        min-height: 43px;
-        display: inline-flex;
-        align-items: center;
-      }
-      .pdf-actions a:last-child {
-        background: transparent;
-        border: 1px solid #206d78;
-        color: #cbd5e1;
-      }
-      .pdf-actions a:hover {
-        filter: brightness(1.12);
-      }
-      @media (max-width: 750px) {
-        .pdf-reference-inner {
-          display: block;
-        }
-        .pdf-actions {
-          margin-top: 15px;
-        }
-      }
-
-      .lesson-hero .hero-grid {
-        min-height: 350px;
-        grid-template-columns: 1.15fr 0.85fr;
-        padding: 46px 0;
-      }
-      .lesson-hero h1 {
-        font-size: clamp(42px, 5.2vw, 65px);
-      }
-      .lesson-hero .hero-art {
-        padding: 0;
-        overflow: hidden;
-      }
-      .lesson-hero .hero-art svg {
-        height: 270px;
-      }
-      .lesson-hero .hero-art .art-caption {
-        padding: 0 16px 12px;
-      }
-      .lesson-intro {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-      }
-      .trend {
-        border: 1px solid var(--line);
-        padding: 23px;
-        border-radius: 14px;
-        background: #0f172a;
-      }
-      .trend b {
-        font-size: 19px;
-      }
-      .trend p {
-        color: var(--muted);
-        margin: 7px 0 0;
-      }
-      .trend svg {
-        width: 100%;
-        height: 80px;
-        margin-top: 14px;
-        background: #1e293b;
-        border-radius: 8px;
-      }
-      .chart-list {
-        display: grid;
-        gap: 21px;
-      }
-      .chart-card {
-        display: grid;
-        grid-template-columns: 45% 55%;
-        background: #0f172a;
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        overflow: hidden;
-        scroll-margin-top: 22px;
-        box-shadow: 0 14px 35px #0d354009;
-      }
-      .chart-art {
-        background: #0b2136;
-        padding: 20px;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        min-width: 0;
-      }
-      .chart-art svg {
-        width: 100%;
-        height: auto;
-      }
-      .chart-art span {
-        color: #9db8c3;
-        text-align: right;
-        font-size: 12px;
-        padding: 4px 5px 0;
-      }
-      .chart-copy {
-        padding: 26px 30px;
-      }
-      .chart-copy h3 {
-        font-size: 27px;
-        line-height: 1.2;
-        letter-spacing: -0.035em;
-        margin: 8px 0 11px;
-      }
-      .chart-copy p {
-        color: var(--muted);
-        margin: 0;
-      }
-      .reading {
-        border-top: 1px solid var(--line);
-        margin-top: 19px;
-        padding-top: 14px;
-      }
-      .reading strong {
-        color: #cbd5e1;
-      }
-      .reading p {
-        margin-top: 4px;
-      }
-      .lesson-next {
-        background: #0b2638;
-        color: white;
-        border-radius: 16px;
-        padding: 25px 30px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 25px;
-        margin-top: 28px;
-      }
-      .lesson-next p {
-        margin: 3px 0 0;
-        color: #bdd4dc;
-      }
-      .lesson-next a {
-        background: var(--gold);
-        padding: 11px 18px;
-        text-decoration: none;
-        font-weight: 800;
-        color: #cbd5e1;
-        border-radius: 8px;
-        white-space: nowrap;
-      }
-      .pdf-actions a:focus-visible,
-      .nav a:focus-visible,
-      .quicknav a:focus-visible,
-      .lesson-next a:focus-visible {
-        outline: 3px solid var(--gold);
-        outline-offset: 3px;
-      }
-      @media (max-width: 900px) {
-        .lesson-hero .hero-grid {
-          grid-template-columns: 1fr;
-        }
-        .lesson-intro {
-          grid-template-columns: 1fr;
-        }
-        .chart-card {
-          grid-template-columns: 1fr;
-        }
-        .chart-art svg {
-          max-height: 280px;
-        }
-      }
-      @media (max-width: 650px) {
-        .lesson-hero .hero-art svg {
-          height: auto;
-        }
-        .chart-copy {
-          padding: 21px;
-        }
-        .chart-art {
-          padding: 11px;
-        }
-        .lesson-next {
-          display: block;
-        }
-        .lesson-next a {
-          display: inline-block;
-          margin-top: 15px;
-        }
-        .quicknav .wrap {
-          gap: 19px;
-        }
-      }
-      .course-days {
-        background: #12364a;
-        border-top: 1px solid #ffffff1c;
-        color: #d3e7e9;
-      }
-      .course-days .wrap {
-        display: flex;
-        gap: 6px;
-        overflow-x: auto;
-        padding: 8px 0;
-      }
-      .course-days a {
-        text-decoration: none;
-        white-space: nowrap;
-        padding: 7px 12px;
-        border-radius: 7px;
-        font-size: 13px;
-        font-weight: 800;
-      }
-      .course-days a:hover,
-      .course-days a.current {
-        background: #1e293b;
-        color: #cbd5e1;
-      }
-      .chart-card[id] {
-        scroll-margin-top: 30px;
-      }
-      .lesson-hero .hero-grid {
-        min-height: 360px;
-      }
-      .lesson-hero .hero-art {
-        padding: 18px;
-      }
-      .lesson-hero .hero-art svg {
-        height: auto;
-      }
-      .hero-art .art-caption {
-        padding: 0;
-      }
-      .module-summary {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 20px;
-      }
-      .module-summary span {
-        border: 1px solid #79aeaf;
-        padding: 5px 11px;
-        border-radius: 99px;
-        color: #d8f0ed;
-        font-size: 13px;
-      }
-      .quicknav .wrap {
-        gap: 23px;
-      }
-      .chart-copy .reading strong {
-        display: block;
-      }
-      .sources {
-        margin-top: 28px;
-      }
-      .guides-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 18px;
-      }
-      .guide-card {
-        background: #0f172a;
-        border: 1px solid var(--line);
-        border-radius: 15px;
-        padding: 24px;
-        box-shadow: 0 8px 28px #0c35400b;
-      }
-      .guide-card .eyebrow {
-        margin: 0;
-      }
-      .guide-card h2 {
-        font-size: 25px;
-        line-height: 1.2;
-        margin: 10px 0;
-      }
-      .guide-card p {
-        color: var(--muted);
-        margin: 0 0 20px;
-      }
-      .guide-card a {
-        display: inline-block;
-        background: #0c3c4a;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 8px;
-        padding: 10px 15px;
-        font-size: 14px;
-        font-weight: 800;
-      }
-      .guide-card a:hover {
-        background: #075e67;
-      }
-      .guide-card a:focus-visible {
-        outline: 3px solid var(--gold);
-        outline-offset: 3px;
-      }
-      @media (max-width: 650px) {
-        .guides-grid {
-          grid-template-columns: 1fr;
-        }
-      }
-    </style>
-    <style>
-      body {
-        background-color: #cbd5e1 !important;
-        background-image:
-          linear-gradient(
-            to bottom,
-            rgba(4, 9, 17, 0.75),
-            rgba(4, 9, 17, 0.95)
-          ),
-          url("./image/professional-trading-bg.png") !important;
-        background-size: cover !important;
-        background-position: center !important;
-        background-attachment: fixed !important;
-        color: #e2e8f0 !important;
-      }
-
-      :root {
-        --ink: #f1f5f9 !important;
-        --muted: #94a3b8 !important;
-        --paper: rgba(15, 23, 42, 0.5) !important;
-        --line: rgba(255, 255, 255, 0.1) !important;
-      }
-
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        color: #f8fafc !important;
-      }
-      /* Fix dark text on dark backgrounds */
-      .zone-note div,
-      .method,
-      .example-callout,
-      .learning-figure figcaption,
-      .chart-reading p,
-      .morning p,
-      .caution p,
-      .entry p,
-      .term p,
-      .intro-card p,
-      .activation-card p,
-      .pattern-content p,
-      .anatomy-card p,
-      .check p,
-      .sources p,
-      .pdf-reference p,
-      .chart-copy p {
-        color: #cbd5e1 !important;
-      }
-      .zone-note b,
-      .method strong,
-      .example-callout strong,
-      .learning-figure figcaption b,
-      .chart-reading b,
-      .morning strong,
-      .term h3,
-      .intro-card strong,
-      .activation-card h3,
-      .caution h3,
-      .check b,
-      .anatomy-card h3,
-      .pattern-content h3,
-      .pattern-content .how strong,
-      .pattern-context {
-        color: #f1f5f9 !important;
-      }
-      .entry .rule {
-        color: #94a3b8 !important;
-      }
-      .course-days a.current,
-      .course-days a:hover {
-        color: #f8fafc !important;
-      }
-      .lesson-next a,
-      .btn {
-        color: #0f172a !important;
-      }
-      .back-to-home {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        color: var(--gold, #f3c578);
-        border: 1px solid var(--gold, #f3c578);
-        padding: 6px 14px;
-        border-radius: 6px;
-        text-decoration: none;
-        font-size: 0.85rem;
-        font-weight: 700;
-        transition: all 0.2s;
-        white-space: nowrap;
-        background: rgba(243, 197, 120, 0.08);
-      }
-      .back-to-home:hover {
-        background: var(--gold, #f3c578) !important;
-        color: #07111c !important;
-        box-shadow: 0 0 15px rgba(243, 197, 120, 0.3);
-        transform: translateY(-1px);
-      }
-      @media (max-width: 600px) {
         .back-to-home .back-text {
           display: none !important;
         }
         .back-to-home {
           padding: 6px 10px !important;
+        }
+        .footer .wrap {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
         }
       }
     </style>
@@ -919,14 +719,20 @@
         /></a>
         <div style="display: flex; align-items: center; gap: 16px">
           <nav class="nav" id="nav">
-            <a href="day-1.html">Day 1 lesson</a
-            ><a href="day-5.html">Day 5 lesson</a
-            ><a href="options-day-10.html">Options lesson</a>
+            <a href="index.html">Home</a>
+            <a href="day-1.html">Lessons</a>
+            <a href="apa-theory.html">APA Theory</a>
+            <a href="uop-theory.html">UOP Theory</a>
+            <a href="delta-theory.html">Delta Theory</a>
+            <a href="contact.html">Admission</a>
           </nav>
           <a href="index.html" class="back-to-home"
             ><span class="back-icon">&larr;</span>
             <span class="back-text">Back to Home</span></a
-          ><button
+          ><!-- Theme Toggle Button (Icon Only, Placed At Very Last) -->
+          <button class="tb ae-theme-toggle" id="theme" aria-label="Toggle theme" title="Toggle Light / Dark Theme">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon theme-icon-sun" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          </button><button
             class="menu"
             type="button"
             aria-label="Open menu"
@@ -1098,5 +904,6 @@
         }
       });
     </script>
+    <script src="./js/react-bits.js"></script>
   </body>
 </html>

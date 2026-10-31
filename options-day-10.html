@@ -3,6 +3,22 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!-- Theme Pre-hydration Script to eliminate flash -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('alphaedge_theme') || 'dark';
+          document.documentElement.dataset.theme = saved;
+          if (saved === 'dark') {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch(e) {}
+      })();
+    </script>
+    <!-- Link custom theme & animation styles -->
+    <link rel="stylesheet" href="./css/react-bits-styles.css?v=3.3" />
     <meta name="theme-color" content="#071827" />
     <meta
       name="description"
@@ -1048,7 +1064,10 @@
           <a href="index.html" class="back-to-home"
             ><span class="back-icon">&larr;</span>
             <span class="back-text">Back to Home</span></a
-          ><button
+          ><!-- Theme Toggle Button (Icon Only, Placed At Very Last) -->
+          <button class="tb ae-theme-toggle" id="theme" aria-label="Toggle theme" title="Toggle Light / Dark Theme">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon theme-icon-sun" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          </button><button
             class="menu"
             type="button"
             aria-label="Open menu"
@@ -1500,5 +1519,6 @@
         }
       });
     </script>
+    <script src="./js/react-bits.js"></script>
   </body>
 </html>

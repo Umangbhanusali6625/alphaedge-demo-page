@@ -287,7 +287,7 @@
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Sora:wght@500;600;700;800&amp;display=swap"
       rel="stylesheet"
     />
     <link
@@ -295,48 +295,97 @@
       rel="stylesheet"
     />
 
+    <!-- Theme Pre-hydration Script to eliminate flash -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('alphaedge_theme') || 'dark';
+          document.documentElement.dataset.theme = saved;
+          if (saved === 'dark') {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch(e) {}
+      })();
+    </script>
+
     <!-- Link our custom styles -->
+    <link rel="stylesheet" href="./css/react-bits-styles.css?v=3.6" />
 
     <style>
       body {
-        background-color: #050d1a !important;
+        background-color: var(--bg) !important;
+        color: var(--text) !important;
+        font-family: 'DM Sans', system-ui, -apple-system, sans-serif !important;
+        line-height: 1.6;
+        overflow-x: hidden;
+        transition: background-color 0.25s ease, color 0.25s ease;
+      }
+
+      /* Redesign Demo Hero Background with dynamic theme gradient */
+      .hero,
+      #hero-section {
+        background: var(--herobg) !important;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Redesign Demo Subtle 54px Grid Lines */
+      .gridbg {
+        position: absolute;
+        inset: 0;
         background-image:
-          radial-gradient(
-            ellipse 90% 60% at 50% 0%,
-            rgba(56, 189, 248, 0.15),
-            transparent 75%
-          ),
-          radial-gradient(
-            circle at 80% 25%,
-            rgba(0, 242, 254, 0.1),
-            transparent 50%
-          ),
-          radial-gradient(
-            circle at 20% 75%,
-            rgba(245, 158, 11, 0.08),
-            transparent 55%
-          ),
-          linear-gradient(
-            to bottom,
-            rgba(5, 13, 26, 0.38) 0%,
-            rgba(5, 13, 26, 0.62) 50%,
-            rgba(5, 13, 26, 0.82) 100%
-          ),
-          url("./image/alphaedge-modern-bg.svg") !important;
-        background-size:
-          100% 100%,
-          100% 100%,
-          100% 100%,
-          100% 100%,
-          cover !important;
-        background-position:
-          center top,
-          right 25%,
-          left 75%,
-          center,
-          center !important;
-        background-repeat: no-repeat !important;
-        background-attachment: fixed !important;
+          linear-gradient(var(--line) 1px, transparent 1px),
+          linear-gradient(90deg, var(--line) 1px, transparent 1px) !important;
+        background-size: 54px 54px !important;
+        mask-image: radial-gradient(ellipse at 50% 20%, #000 20%, transparent 70%) !important;
+        -webkit-mask-image: radial-gradient(ellipse at 50% 20%, #000 20%, transparent 70%) !important;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      /* Redesign Demo Ambient Glow Spheres */
+      .glow {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 0;
+      }
+      .glow b {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        opacity: var(--go, 0.5);
+        transition: opacity 0.3s ease;
+      }
+      .glow b:nth-child(1) {
+        width: 520px;
+        height: 520px;
+        background: var(--blue, #3b82f6);
+        left: -10%;
+        top: -25%;
+        animation: f1 15s ease-in-out infinite alternate;
+      }
+      .glow b:nth-child(2) {
+        width: 440px;
+        height: 440px;
+        background: var(--vio, #8b5cf6);
+        right: -8%;
+        top: 5%;
+        opacity: calc(var(--go, 0.5) * 0.7);
+        animation: f2 18s ease-in-out infinite alternate;
+      }
+      @keyframes f1 {
+        to {
+          transform: translate(120px, 90px);
+        }
+      }
+      @keyframes f2 {
+        to {
+          transform: translate(-120px, 60px);
+        }
       }
 
       /* Innovative & High-Visibility Pillar Symbol Styling */
@@ -376,11 +425,19 @@
 
       /* Glassmorphic Header Seamlessly Integrated with Background */
       #main-nav-pill {
-        background: rgba(5, 13, 26, 0.78) !important;
-        backdrop-filter: blur(16px) !important;
-        -webkit-backdrop-filter: blur(16px) !important;
+        background: rgba(5, 13, 26, 0.94) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
         border-bottom: 1px solid rgba(56, 189, 248, 0.15) !important;
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.45) !important;
+        transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+      html[data-theme="light"] #main-nav-pill {
+        background: rgba(244, 247, 255, 0.96) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        border-bottom: 1px solid rgba(30, 58, 138, 0.14) !important;
+        box-shadow: 0 4px 20px rgba(30, 58, 138, 0.08) !important;
       }
     </style>
   </head>
@@ -395,41 +452,41 @@
       class="fixed top-0 left-0 right-0 z-[100] w-full bg-[#050d1a]/80 backdrop-blur-md border-b border-[#38bdf8]/15 transition-all duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.45)]"
     >
       <div
-        class="max-w-[1500px] mx-auto px-4 md:px-6 lg:px-8 h-20 flex items-center justify-between"
+        class="max-w-[1540px] w-full mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4"
       >
         <!-- Logo -->
         <a href="index.html" class="flex items-center shrink-0">
           <img
             src="./image/Glossy Blue Analytics Head Logo.png"
             alt="Alpha Edge Pro Academy"
-            class="h-16 md:h-20 w-auto object-contain"
+            class="h-16 md:h-20 w-auto object-contain ae-header-logo-img"
           />
         </a>
 
         <!-- Desktop Navigation Links -->
         <nav
-          class="hidden lg:flex items-center gap-5 xl:gap-7 text-white/90 font-sans text-[13px] xl:text-[14px] font-semibold tracking-wide h-full"
+          class="hidden lg:flex items-center flex-nowrap shrink-0 gap-4 xl:gap-6 text-white/90 font-sans text-[13px] xl:text-[14px] font-semibold tracking-wide h-full whitespace-nowrap"
         >
           <a
             href="index.html"
-            class="hover:text-[#f3c578] transition-colors h-full flex items-center"
+            class="hover:text-[#f3c578] transition-colors h-full flex items-center whitespace-nowrap shrink-0"
             >Home</a
           >
           <a
             href="#leadership-founders"
-            class="hover:text-[#f3c578] transition-colors h-full flex items-center"
+            class="hover:text-[#f3c578] transition-colors h-full flex items-center whitespace-nowrap shrink-0"
             >About us</a
           >
           <a
             href="#proprietary-frameworks"
-            class="hover:text-[#f3c578] transition-colors h-full flex items-center"
+            class="hover:text-[#f3c578] transition-colors h-full flex items-center whitespace-nowrap shrink-0"
             >Courses</a
           >
 
           <!-- Indicators Dropdown -->
-          <div class="relative group h-full flex items-center">
+          <div class="relative group h-full flex items-center shrink-0">
             <button
-              class="flex items-center gap-1 hover:text-[#f3c578] transition-colors h-full outline-none"
+              class="flex items-center gap-1 hover:text-[#f3c578] transition-colors h-full outline-none whitespace-nowrap shrink-0"
             >
               Indicators
               <span class="material-symbols-outlined text-[16px]"
@@ -441,22 +498,22 @@
             >
               <a
                 href="ultraviewer-guide.html"
-                class="px-4 py-2.5 hover:bg-white/5 hover:text-[#f3c578] text-sm transition-colors"
+                class="px-4 py-2.5 hover:bg-white/5 hover:text-[#f3c578] text-sm transition-colors whitespace-nowrap"
                 >1. Ultraviewer V2.1</a
               >
               <a
                 href="uop-theory.html"
-                class="px-4 py-2.5 hover:bg-white/5 hover:text-[#f3c578] text-sm transition-colors"
+                class="px-4 py-2.5 hover:bg-white/5 hover:text-[#f3c578] text-sm transition-colors whitespace-nowrap"
                 >2. Alpha Edge UOP Theory V2.1</a
               >
               <a
                 href="advance-feature-guide.html"
-                class="px-4 py-2.5 hover:bg-white/5 hover:text-[#f3c578] text-sm transition-colors"
+                class="px-4 py-2.5 hover:bg-white/5 hover:text-[#f3c578] text-sm transition-colors whitespace-nowrap"
                 >3. Alpha Edge Advance Feature V2.1</a
               >
               <a
                 href="trend-all-guide.html"
-                class="px-4 py-2.5 hover:bg-white/5 hover:text-[#f3c578] text-sm transition-colors"
+                class="px-4 py-2.5 hover:bg-white/5 hover:text-[#f3c578] text-sm transition-colors whitespace-nowrap"
                 >4. Alpha Edge Trend All</a
               >
             </div>
@@ -464,43 +521,33 @@
 
           <a
             href="study-guides.html"
-            class="hover:text-[#f3c578] transition-colors h-full flex items-center"
+            class="hover:text-[#f3c578] transition-colors h-full flex items-center whitespace-nowrap shrink-0"
             >Educational Material</a
           >
           <a
             href="#contact"
-            class="hover:text-[#f3c578] transition-colors h-full flex items-center"
+            class="hover:text-[#f3c578] transition-colors h-full flex items-center whitespace-nowrap shrink-0"
             >Contact us</a
           >
         </nav>
 
         <!-- Action Button & Mobile Menu Toggle -->
         <div class="flex items-center gap-3 xl:gap-4 shrink-0">
-          <!-- Highlighted APA & Momentum Dashboard Button -->
+          <!-- Highlighted APA + Momentum Dashboard Button -->
           <a
             href="https://tradevisor-apa-dashboard.abc2317.chatgpt.site/"
             target="_blank"
             rel="noopener noreferrer"
-            class="relative group hidden sm:inline-flex items-center justify-center gap-2 px-4 md:px-5 py-2.5 md:py-3 rounded-sm font-extrabold text-[11px] md:text-[12px] tracking-wider uppercase text-white transition-all duration-300 overflow-hidden shadow-[0_0_20px_rgba(53,209,196,0.35)] hover:shadow-[0_0_30px_rgba(53,209,196,0.65)] hover:-translate-y-0.5 border border-[#35d1c4]/70 bg-gradient-to-r from-[#07242c] via-[#0b3844] to-[#082d2a]"
+            class="relative group hidden sm:inline-flex items-center justify-center gap-2 px-5 py-3 rounded-sm font-extrabold text-[12px] tracking-[0.16em] uppercase text-white transition-all duration-300 overflow-hidden ae-btn-dashboard"
           >
             <!-- Shimmer Highlight Effect -->
             <span
-              class="absolute inset-0 bg-gradient-to-r from-transparent via-[#35d1c4]/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"
+              class="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"
             ></span>
-            <span class="relative flex h-2 w-2">
+            <span class="relative font-extrabold flex items-center gap-1.5 text-white">
+              APA + MOMENTUM DASHBOARD
               <span
-                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#35d1c4] opacity-80"
-              ></span>
-              <span
-                class="relative inline-flex rounded-full h-2 w-2 bg-[#35d1c4] shadow-[0_0_8px_#35d1c4]"
-              ></span>
-            </span>
-            <span
-              class="relative bg-gradient-to-r from-white via-[#d4f9f5] to-[#f3c578] bg-clip-text text-transparent font-extrabold flex items-center gap-1.5 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
-            >
-              APA &amp; Momentum Dashboard
-              <span
-                class="material-symbols-outlined text-[15px] text-[#35d1c4] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                class="material-symbols-outlined text-[15px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
                 >open_in_new</span
               >
             </span>
@@ -508,10 +555,20 @@
 
           <a
             href="contact.html"
-            class="hidden sm:inline-flex items-center justify-center px-6 md:px-7 py-3 bg-gradient-to-r from-[#d39316] to-[#f3c578] text-black font-extrabold text-[12px] tracking-[0.2em] uppercase hover:brightness-110 transition-all rounded-sm shadow-[0_4px_15px_rgba(211,147,22,0.3)]"
+            class="hidden sm:inline-flex items-center justify-center px-6 md:px-7 py-3 bg-gradient-to-r from-[#d39316] to-[#f3c578] text-black font-extrabold text-[12px] tracking-[0.2em] uppercase hover:brightness-110 transition-all rounded-sm shadow-[0_4px_15px_rgba(211,147,22,0.3)] ae-btn-header-admission"
           >
             ADMISSION
           </a>
+
+          <!-- DUAL-THEME TOGGLE BUTTON (Icon Only, Placed At Very Last) -->
+          <button
+            class="tb ae-theme-toggle"
+            id="theme"
+            aria-label="Toggle theme"
+            title="Toggle Light / Dark Theme"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon theme-icon-sun" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          </button>
 
           <!-- Mobile Hamburger Button -->
           <button
@@ -574,104 +631,100 @@
             >Contact us</a
           >
 
-          <!-- Mobile Highlighted APA & Momentum Dashboard Button -->
+          <!-- Mobile Highlighted APA + Momentum Dashboard Button -->
           <a
             href="https://tradevisor-apa-dashboard.abc2317.chatgpt.site/"
             target="_blank"
             rel="noopener noreferrer"
-            class="flex items-center justify-center gap-2 text-center mt-3 px-5 py-3 rounded-sm font-extrabold text-xs tracking-wider uppercase text-white border border-[#35d1c4]/70 bg-gradient-to-r from-[#07242c] via-[#0b3844] to-[#082d2a] shadow-[0_0_15px_rgba(53,209,196,0.35)]"
+            class="flex items-center justify-center gap-2 text-center mt-3 px-5 py-3 rounded-sm font-extrabold text-xs tracking-[0.16em] uppercase text-white ae-btn-dashboard"
           >
-            <span class="relative flex h-2 w-2">
-              <span
-                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#35d1c4] opacity-80"
-              ></span>
-              <span
-                class="relative inline-flex rounded-full h-2 w-2 bg-[#35d1c4]"
-              ></span>
-            </span>
-            <span
-              class="bg-gradient-to-r from-white via-[#d4f9f5] to-[#f3c578] bg-clip-text text-transparent font-extrabold"
-              >APA &amp; Momentum Dashboard</span
-            >
-            <span class="material-symbols-outlined text-[15px] text-[#35d1c4]"
-              >open_in_new</span
-            >
+            <span class="font-extrabold text-white">APA + MOMENTUM DASHBOARD</span>
+            <span class="material-symbols-outlined text-[15px]">open_in_new</span>
           </a>
 
           <a
             href="contact.html"
-            class="block text-center mt-2 px-6 py-3 bg-gradient-to-r from-[#d39316] to-[#f3c578] text-black font-bold text-xs tracking-widest uppercase rounded-sm"
+            class="block text-center mt-2 px-6 py-3 bg-gradient-to-r from-[#d39316] to-[#f3c578] text-black font-bold text-xs tracking-widest uppercase rounded-sm ae-btn-header-admission"
             >ADMISSION</a
           >
+
+          <!-- MOBILE THEME TOGGLE BUTTON (Placed At Very Last) -->
+          <button
+            class="tb ae-theme-toggle w-full justify-center mt-2.5 py-3 font-bold text-xs tracking-wider uppercase rounded-sm"
+            id="theme-mobile"
+            aria-label="Toggle theme"
+            title="Toggle Light / Dark Theme"
+          >
+            ☀️ Switch Theme
+          </button>
         </div>
       </div>
     </header>
     <main
-      class="w-full max-w-[100vw] overflow-x-hidden pt-[140px] md:pt-[120px] bg-transparent min-h-screen"
+      class="w-full max-w-[100vw] overflow-x-hidden pt-[80px] bg-transparent min-h-screen"
     >
       <div class="flex flex-col w-full">
+        <!-- REDESIGN DEMO: FINANCIAL TICKER TAPE -->
+        <div class="tick"><div class="tk" id="tk"></div></div>
+
         <!-- SECTION 1: HERO & QUANTITATIVE DISCIPLINE MANIFESTO -->
         <section
-          class="relative w-full overflow-hidden bg-transparent pb-24 pt-8 bg-grid-pattern"
+          class="relative w-full overflow-hidden bg-transparent pb-16 pt-2 sm:pt-4"
         >
           <div
             class="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-          ></div>
+          >
+            <!-- Redesign Demo Glowing Orbs Background & 54px Grid -->
+            <div class="glow"><b></b><b></b><b></b></div>
+            <div class="gridbg"></div>
+            <!-- Constellation Particles -->
+            <canvas id="rb-particle-canvas" style="position:absolute; inset:0; z-index:2; pointer-events:none;"></canvas>
+          </div>
           <div
             class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 animate-fade-in-up"
           >
-            <!-- Institutional Proof Pill & Status -->
-            <div class="flex flex-wrap items-center gap-3 mb-6">
+            <!-- Institutional Proof Pill & Status: Single Tight Row -->
+            <div class="flex flex-wrap items-center gap-2 sm:gap-2.5 mb-3 sm:mb-4">
               <div
-                class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 text-primary font-label-mono text-label-mono"
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary font-sans text-xs font-semibold tracking-wide rb-ping-pill whitespace-nowrap shrink-0"
               >
-                <span
-                  class="inline-block w-2 h-2 rounded-full bg-primary animate-pulse"
-                ></span>
-                <span
-                  >NISM SERIES VIII CERTIFIED FACULTY &amp; RESEARCH DESK</span
-                >
+                <span class="rb-ping-dot"></span>
+                <span>NISM Series VIII Certified Faculty</span>
               </div>
               <div
-                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-badge text-label-badge uppercase tracking-wider"
+                class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant font-sans text-xs font-semibold tracking-wide whitespace-nowrap shrink-0"
               >
                 <span
-                  class="material-symbols-outlined text-[15px] text-tertiary-container"
+                  class="material-symbols-outlined text-[14px] text-tertiary-container"
                   >military_tech</span
                 >
-                <span>21+ Years Quantitative History</span>
+                <span>21+ Years Quant History</span>
               </div>
               <div
-                class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant font-label-badge text-label-badge uppercase tracking-wider"
+                class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-sans text-xs font-semibold tracking-wide whitespace-nowrap shrink-0"
               >
                 <span
-                  class="material-symbols-outlined text-[15px] text-secondary"
+                  class="material-symbols-outlined text-[14px] text-secondary"
                   >database</span
                 >
                 <span>6 In-House Mathematical Models</span>
               </div>
             </div>
             <!-- Hero Grid Layout -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
               <!-- Left: Strategic Narrative -->
-              <div class="lg:col-span-7 flex flex-col gap-6">
+              <div class="lg:col-span-7 flex flex-col gap-4 sm:gap-5">
                 <h1
-                  class="font-display-hero text-4xl md:text-5xl lg:text-[64px] leading-tight text-on-surface tracking-tight"
+                  class="font-display-hero text-3xl sm:text-4xl lg:text-[44px] xl:text-[50px] leading-[1.3] text-on-surface tracking-tight"
                 >
-                  Building Market Knowledge <br />
-                  <span
-                    class="text-primary no-underline"
-                    style="
-                      text-decoration: none !important;
-                      border-bottom: none !important;
-                      box-shadow: none !important;
-                    "
-                    >Beyond Conventional</span
-                  >
-                  Learning.
+                  <span class="block">Building Market Knowledge</span>
+                  <span class="block my-1">
+                    <span class="rb-shiny-text font-extrabold no-underline">Beyond Conventional</span>
+                  </span>
+                  <span class="block">Learning.</span>
                 </h1>
                 <div
-                  class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed flex flex-col gap-4 text-left"
+                  class="font-body-md text-on-surface-variant max-w-xl leading-relaxed flex flex-col gap-2.5 text-left text-[14.5px] sm:text-[15px]"
                 >
                   <p>
                     <strong>Alpha Edge Pro Academy</strong> is a professional
@@ -680,38 +733,33 @@
                       >disciplined, knowledgeable, and market-ready
                       traders</strong
                     >
-                    through structured education, practical market experience,
-                    advanced analytical frameworks, risk management, trading
-                    psychology, and technology-driven learning.
+                    through structured education, advanced analytical frameworks, risk management, and quantitative learning.
                   </p>
                   <p>
                     With
                     <strong
                       >21+ years of market-data and trading experience</strong
-                    >, Alpha Edge Pro Academy has developed a specialized
-                    approach to understanding market behaviour by combining
-                    extensive historical data, practical market observation,
-                    structured theories, and real-time market applications.
+                    >, we combine extensive historical data, real-time tape observation, and proprietary mathematical theories to decode institutional order flow.
                   </p>
                 </div>
                 <div
-                  class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2"
+                  class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1"
                 >
                   <a
-                    class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-primary text-on-primary font-headline-sm text-headline-sm shadow-md shadow-primary/20 hover:bg-primary/90 transition-all duration-200 glow-effect"
+                    class="rb-magnet-btn inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-primary text-on-primary font-headline-sm text-sm shadow-md shadow-primary/20 hover:bg-primary/90 transition-all duration-200 glow-effect"
                     href="#proprietary-frameworks"
                   >
                     <span>Explore Proprietary Courses</span>
-                    <span class="material-symbols-outlined text-[18px]"
+                    <span class="material-symbols-outlined text-[16px]"
                       >arrow_downward</span
                     >
                   </a>
                   <a
-                    class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-surface-container-high text-on-surface font-headline-sm text-headline-sm hover:bg-surface-container-highest transition-all duration-200"
+                    class="rb-magnet-btn inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-surface-container-high text-on-surface font-headline-sm text-sm hover:bg-surface-container-highest transition-all duration-200"
                     href="#leadership-founders"
                   >
                     <span
-                      class="material-symbols-outlined text-[18px] text-primary"
+                      class="material-symbols-outlined text-[16px] text-primary"
                       >groups</span
                     >
                     <span>Meet Founders &amp; Leadership</span>
@@ -719,122 +767,157 @@
                 </div>
                 <!-- Micro Highlights Bar -->
                 <div
-                  class="grid grid-cols-2 gap-4 pt-6 border-t-0 glassmorphism-dark p-5 rounded-2xl shadow-sm hover:shadow-md transition-shadow"
+                  class="grid grid-cols-2 gap-4 pt-4 border-t-0 glassmorphism-dark p-4 rounded-xl shadow-sm transition-all rb-spotlight-card rb-tilt-card"
+                  data-tilt-max="5"
                 >
+                  <div class="rb-tilt-sheen"></div>
                   <div class="flex flex-col">
                     <span
-                      class="font-label-mono text-label-mono text-outline uppercase"
+                      class="font-label-mono text-xs text-outline uppercase"
                       >Pedagogy Style</span
                     >
                     <span
-                      class="font-headline-sm text-headline-sm text-on-surface mt-0.5"
+                      class="font-headline-sm text-sm text-on-surface mt-0.5"
                       >Zero Tips / Calls</span
                     >
                     <span
-                      class="font-body-sm text-body-sm text-on-surface-variant"
+                      class="font-body-sm text-xs text-on-surface-variant"
                       >Pure system mechanics</span
                     >
                   </div>
                   <div class="flex flex-col">
                     <span
-                      class="font-label-mono text-label-mono text-outline uppercase"
+                      class="font-label-mono text-xs text-outline uppercase"
                       >Continuity</span
                     >
                     <span
-                      class="font-headline-sm text-headline-sm text-on-surface mt-0.5"
+                      class="font-headline-sm text-sm text-on-surface mt-0.5"
                       >Lifetime Lab</span
                     >
                     <span
-                      class="font-body-sm text-body-sm text-on-surface-variant"
+                      class="font-body-sm text-xs text-on-surface-variant"
                       >Daily market briefings</span
                     >
                   </div>
                 </div>
               </div>
-              <!-- Right: Institutional Thesis & Active Strategy Engine Card -->
-              <div class="lg:col-span-5 flex flex-col gap-6 relative">
+              <!-- Right: Live Candlestick Chart Panel (Balanced Height with Left Column) -->
+              <div class="lg:col-span-5 relative">
+                <!-- REDESIGN DEMO: LIVE CANDLESTICK CHART PANEL WITH BOX RANGE & U.O.P. MARKERS -->
+                <div class="panel rb-spotlight-card rb-tilt-card" id="panel">
+                  <div class="rb-tilt-sheen"></div>
+                  <div class="ph">
+                    <span class="flex items-center gap-2">
+                      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                      <b>NIFTY 50</b> · 5m · Box range + U.O.P. markers
+                    </span>
+                    <span class="demo font-label-mono">ILLUSTRATIVE LIVE</span>
+                  </div>
+                  <canvas id="cv" aria-label="Animated candlestick chart"></canvas>
+                  <div class="legend">
+                    <span><i style="background:#2563eb;opacity:.6"></i>Box zone</span>
+                    <span><i style="background:#00f2fe"></i>U.O.P. level</span>
+                    <span><i style="background:#22c55e"></i>Bullish</span>
+                    <span><i style="background:#ef4444"></i>Bearish</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Institutional Thesis & Mentorship Philosophy Strip (Balanced 2-Column Row) -->
+            <div class="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+              <!-- Left: The Foundational Thesis (lg:col-span-7) -->
+              <div
+                class="lg:col-span-7 relative bg-inverse-surface text-inverse-on-surface rounded-3xl p-6 sm:p-7 shadow-2xl overflow-hidden card-hover rb-tilt-card rb-spotlight-card flex flex-col justify-between"
+                data-tilt-max="6"
+              >
+                <div class="rb-tilt-sheen"></div>
+                <!-- Ambient Grid lines in card -->
                 <div
-                  class="relative bg-inverse-surface text-inverse-on-surface rounded-3xl p-8 shadow-2xl overflow-hidden card-hover delay-200"
-                >
-                  <!-- Ambient Grid lines in card -->
-                  <div
-                    class="absolute -right-16 -top-16 w-56 h-56 rounded-full bg-primary/20 blur-3xl pointer-events-none animate-float"
-                  ></div>
-                  <div
-                    class="absolute -left-16 -bottom-16 w-48 h-48 rounded-full bg-secondary/20 blur-3xl pointer-events-none animate-float delay-300"
-                  ></div>
-                  <div class="relative z-10 flex flex-col gap-6">
-                    <div class="flex items-center justify-between">
-                      <div
-                        class="flex items-center gap-2 font-label-mono text-label-mono text-primary-container"
-                      >
-                        <span class="material-symbols-outlined text-[18px]"
-                          >verified</span
-                        >
-                        <span>THE FOUNDATIONAL THESIS</span>
-                      </div>
-                      <span
-                        class="px-2.5 py-0.5 rounded-full glassmorphism-dark/10 font-label-mono text-label-badge text-inverse-on-surface/80"
-                        >RESEARCH LAB V2.1</span
-                      >
-                    </div>
-                    <blockquote
-                      class="font-headline-md text-[22px] text-inverse-on-surface leading-snug"
-                    >
-                      "Trading is not about shortcuts or speculation. It is
-                      about knowledge, process, discipline, risk management, and
-                      continuous learning."
-                    </blockquote>
+                  class="absolute -right-16 -top-16 w-56 h-56 rounded-full bg-primary/20 blur-3xl pointer-events-none animate-float"
+                ></div>
+                <div
+                  class="absolute -left-16 -bottom-16 w-48 h-48 rounded-full bg-secondary/20 blur-3xl pointer-events-none animate-float delay-300"
+                ></div>
+                <div class="relative z-10 flex flex-col gap-5">
+                  <div class="flex items-center justify-between gap-3">
                     <div
-                      class="pt-4 flex items-center justify-between border-t-0 bg-inverse-on-surface/5 p-4 rounded-xl"
+                      class="flex items-center gap-2 font-sans text-xs sm:text-sm font-bold text-primary-container uppercase tracking-wider whitespace-nowrap"
                     >
-                      <div>
-                        <p
-                          class="font-headline-sm text-headline-sm text-inverse-on-surface"
-                        >
-                          Alpha Edge Pro Research Desk
-                        </p>
-                        <p
-                          class="font-label-mono text-label-mono text-inverse-on-surface/70"
-                        >
-                          Historical Price &amp; Volume Analytics Division
-                        </p>
-                      </div>
-                      <div
-                        class="w-10 h-10 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center font-bold shadow-md"
+                      <span class="material-symbols-outlined text-[18px]"
+                        >verified</span
                       >
-                        <span class="material-symbols-outlined text-[20px]"
-                          >candlestick_chart</span
-                        >
-                      </div>
+                      <span>The Foundational Thesis</span>
                     </div>
-                    <!-- Mathematical Market Model Preview -->
-                    <div class="space-y-2 pt-2">
-                      <div
-                        class="flex justify-between font-label-mono text-label-mono text-inverse-on-surface/80"
+                    <span
+                      class="px-2.5 py-0.5 rounded-full glassmorphism-dark/10 font-sans text-xs font-semibold text-inverse-on-surface/80 whitespace-nowrap"
+                      >Research Lab V2.1</span
+                    >
+                  </div>
+                  <blockquote
+                    class="font-headline-md text-[19px] sm:text-[21px] text-inverse-on-surface leading-snug"
+                  >
+                    "Trading is not about shortcuts or speculation. It is
+                    about knowledge, process, discipline, risk management, and
+                    continuous learning."
+                  </blockquote>
+                  <div
+                    class="pt-3 flex items-center justify-between border-t-0 bg-inverse-on-surface/5 p-3.5 rounded-xl gap-3"
+                  >
+                    <div class="min-w-0">
+                      <p
+                        class="font-headline-sm text-sm sm:text-base font-bold text-inverse-on-surface whitespace-nowrap"
                       >
-                        <span>Unit of Price (U.O.P.) Convergence</span>
-                        <span class="text-primary-container"
-                          >94.2% Structural Reliability</span
-                        >
-                      </div>
-                      <div
-                        class="w-full h-2 rounded-full bg-inverse-on-surface/10 overflow-hidden"
+                        Alpha Edge Pro Research Desk
+                      </p>
+                      <p
+                        class="font-sans text-xs text-inverse-on-surface/70 mt-0.5 whitespace-nowrap"
                       >
-                        <div
-                          class="h-full bg-primary-fixed-dim rounded-full"
-                          style="width: 94.2%"
-                        ></div>
-                      </div>
+                        Historical Price &amp; Volume Analytics Division
+                      </p>
+                    </div>
+                    <div
+                      class="w-10 h-10 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center font-bold shadow-md shrink-0"
+                    >
+                      <span class="material-symbols-outlined text-[20px]"
+                        >candlestick_chart</span
+                      >
+                    </div>
+                  </div>
+                  <!-- Mathematical Market Model Preview -->
+                  <div class="space-y-2 pt-1">
+                    <div
+                      class="flex items-center justify-between text-xs sm:text-[13px] text-inverse-on-surface/80 font-sans gap-2"
+                    >
+                      <span class="whitespace-nowrap font-medium"
+                        >U.O.P. Structural Convergence</span
+                      >
+                      <span
+                        class="text-primary-container font-bold whitespace-nowrap"
+                        >94.2% Reliability</span
+                      >
+                    </div>
+                    <div
+                      class="w-full h-2 rounded-full bg-inverse-on-surface/10 overflow-hidden"
+                    >
+                      <div
+                        class="h-full bg-primary-fixed-dim rounded-full"
+                        style="width: 94.2%"
+                      ></div>
                     </div>
                   </div>
                 </div>
-                <!-- Secondary Quick Proof Card -->
-                <div
-                  class="glassmorphism-dark p-6 rounded-2xl shadow-sm flex items-center gap-4 hover:-translate-y-1 transition-transform"
-                >
+              </div>
+
+              <!-- Right: Trading Mentorship Philosophy (lg:col-span-5) -->
+              <div
+                class="lg:col-span-5 glassmorphism-dark p-6 sm:p-7 rounded-3xl shadow-sm flex flex-col justify-between gap-6 rb-spotlight-card rb-tilt-card"
+                data-tilt-max="5"
+              >
+                <div class="rb-tilt-sheen"></div>
+                <div class="flex items-start gap-4">
                   <div
-                    class="w-12 h-12 rounded-xl bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center shrink-0"
+                    class="w-12 h-12 rounded-xl bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center shrink-0 shadow-md"
                   >
                     <span class="material-symbols-outlined text-[26px]"
                       >psychology</span
@@ -842,15 +925,40 @@
                   </div>
                   <div class="flex flex-col">
                     <span
-                      class="font-label-mono text-label-mono text-outline uppercase tracking-wider"
+                      class="font-sans text-xs font-bold text-outline uppercase tracking-wider"
                       >Trading Mentorship Philosophy</span
                     >
                     <p
-                      class="font-headline-sm text-[16px] text-on-surface leading-tight mt-1"
+                      class="font-headline-sm text-[18px] sm:text-[20px] text-on-surface font-bold leading-snug mt-1"
                     >
                       Learn the Market. Understand the Framework. Build the
                       Discipline.
                     </p>
+                  </div>
+                </div>
+                <div
+                  class="space-y-3 border-t border-outline/10 pt-4 text-xs sm:text-[13px] text-on-surface-variant leading-relaxed"
+                >
+                  <div class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                    <span
+                      >Zero tips, zero buy/sell signals — 100% mechanical
+                      rules</span
+                    >
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                    <span
+                      >Quantitative order flow &amp; risk-of-ruin mathematical
+                      models</span
+                    >
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                    <span
+                      >Daily live chart briefings &amp; ongoing lifetime
+                      guidance</span
+                    >
                   </div>
                 </div>
               </div>
@@ -876,6 +984,7 @@
                 </div>
                 <span
                   class="font-display-hero text-4xl md:text-5xl lg:text-[64px] leading-tight text-on-surface leading-none"
+                  data-count="21" data-suffix="+"
                   >21+</span
                 >
                 <span
@@ -904,6 +1013,7 @@
                 </div>
                 <span
                   class="font-display-hero text-4xl md:text-5xl lg:text-[64px] leading-tight text-on-surface leading-none"
+                  data-count="2000" data-suffix="+"
                   >2,000+</span
                 >
                 <span
@@ -932,7 +1042,8 @@
                 </div>
                 <span
                   class="font-display-hero text-4xl md:text-5xl lg:text-[64px] leading-tight text-on-surface leading-none"
-                  >6</span
+                  data-count="7" data-suffix=""
+                  >7</span
                 >
                 <span
                   class="font-headline-sm text-headline-sm text-on-surface mt-2"
@@ -971,6 +1082,31 @@
                   >Equity derivatives &amp; risk compliance verified</span
                 >
               </div>
+            </div>
+          </div>
+
+          <!-- React Bits Infinite Marquee Ticker -->
+          <div class="rb-marquee-container mt-12">
+            <div class="rb-marquee-track">
+              <span class="rb-marquee-item">◆ <b>Road Map Theory V2.1</b> Multi-Asset Macro Confluence</span>
+              <span class="rb-marquee-item">◆ <b>Ultraviewer V2.1</b> Blue Band Retest Engine</span>
+              <span class="rb-marquee-item">◆ <b>Alpha Edge UOP Theory</b> Morning Breakfast Trigger</span>
+              <span class="rb-marquee-item">◆ <b>Box Theory Matrix</b> Liquidity Pockets</span>
+              <span class="rb-marquee-item">◆ <b>Alpha Edge Advance Feature</b> Real-Time Strike Matrix</span>
+              <span class="rb-marquee-item">◆ <b>Momentum Plus APA</b> Institutional Acceleration</span>
+              <span class="rb-marquee-item">◆ <b>Alpha Edge Trend All</b> 5-Timeframe Confluence</span>
+              <span class="rb-marquee-item">◆ <b>Blaster Theory</b> Volatility Compression</span>
+              <span class="rb-marquee-item">◆ <b>Delta Theory</b> Non-Lagging Swings</span>
+              <!-- Repeated for seamless loop -->
+              <span class="rb-marquee-item">◆ <b>Road Map Theory V2.1</b> Multi-Asset Macro Confluence</span>
+              <span class="rb-marquee-item">◆ <b>Ultraviewer V2.1</b> Blue Band Retest Engine</span>
+              <span class="rb-marquee-item">◆ <b>Alpha Edge UOP Theory</b> Morning Breakfast Trigger</span>
+              <span class="rb-marquee-item">◆ <b>Box Theory Matrix</b> Liquidity Pockets</span>
+              <span class="rb-marquee-item">◆ <b>Alpha Edge Advance Feature</b> Real-Time Strike Matrix</span>
+              <span class="rb-marquee-item">◆ <b>Momentum Plus APA</b> Institutional Acceleration</span>
+              <span class="rb-marquee-item">◆ <b>Alpha Edge Trend All</b> 5-Timeframe Confluence</span>
+              <span class="rb-marquee-item">◆ <b>Blaster Theory</b> Volatility Compression</span>
+              <span class="rb-marquee-item">◆ <b>Delta Theory</b> Non-Lagging Swings</span>
             </div>
           </div>
         </section>
@@ -1089,8 +1225,10 @@
 
               <!-- The Alpha Edge Institutional Pedagogy Box -->
               <div
-                class="glassmorphism-dark p-8 rounded-3xl flex flex-col gap-6 relative overflow-hidden border border-outline/10 shadow-sm hover:-translate-y-1 transition-all"
+                class="glassmorphism-dark p-8 rounded-3xl flex flex-col gap-6 relative overflow-hidden border border-primary/30 shadow-sm transition-all rb-spotlight-card rb-tilt-card"
+                data-tilt-max="6"
               >
+                <div class="rb-tilt-sheen"></div>
                 <div
                   class="absolute -right-10 -bottom-10 w-40 h-40 bg-primary/5 rounded-full blur-2xl pointer-events-none"
                 ></div>
@@ -1165,8 +1303,10 @@
 
             <!-- Core Academic Statement Banner -->
             <div
-              class="bg-surface-container-highest p-8 lg:p-12 rounded-3xl flex flex-col md:flex-row items-center gap-8 shadow-inner border border-outline/10"
+              class="bg-surface-container-highest p-8 lg:p-12 rounded-3xl flex flex-col md:flex-row items-center gap-8 shadow-inner border border-outline/10 rb-spotlight-card rb-spotlight-gold rb-tilt-card"
+              data-tilt-max="5"
             >
+              <div class="rb-tilt-sheen"></div>
               <div
                 class="w-16 h-16 rounded-2xl bg-primary text-on-primary flex items-center justify-center shrink-0 shadow-lg shadow-primary/30"
               >
@@ -1196,8 +1336,10 @@
             <!-- Mission & Vision Cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div
-                class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/5 flex flex-col gap-4 card-hover"
+                class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/5 flex flex-col gap-4 card-hover rb-spotlight-card rb-tilt-card"
+                data-tilt-max="6"
               >
+                <div class="rb-tilt-sheen"></div>
                 <div
                   class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center shadow-sm"
                 >
@@ -1235,8 +1377,10 @@
                 </div>
               </div>
               <div
-                class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/5 flex flex-col gap-4 card-hover"
+                class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/5 flex flex-col gap-4 card-hover rb-spotlight-card rb-tilt-card"
+                data-tilt-max="6"
               >
+                <div class="rb-tilt-sheen"></div>
                 <div
                   class="w-12 h-12 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center shadow-sm"
                 >
@@ -1324,9 +1468,11 @@
         </section>
 
         <!-- SECTION 3: THE 6 PROPRIETARY TRADING FRAMEWORKS & COURSES -->
-        <section class="w-full bg-transparent py-24">
+        <section class="w-full bg-transparent py-24 relative overflow-hidden">
+          <div class="glow"><b></b><b></b></div>
+          <div class="gridbg"></div>
           <div
-            class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col gap-16 animate-fade-in-up scroll-mt-24"
+            class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col gap-16 animate-fade-in-up scroll-mt-24 relative z-10"
             id="proprietary-frameworks"
           >
             <!-- Section Title & Narrative -->
@@ -1356,8 +1502,10 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <!-- 1. U.O.P. Theory Card -->
               <div
-                class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 group card-hover relative cursor-pointer"
+                class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 group card-hover relative cursor-pointer rb-spotlight-card rb-tilt-card"
+                data-tilt-max="7"
               >
+                <div class="rb-tilt-sheen"></div>
                 <div
                   class="flex items-center justify-between border-b border-outline/10 pb-4"
                 >
@@ -1391,6 +1539,11 @@
                   options markets. Transforms unstructured tape movement into
                   systematic mathematical decision units.
                 </p>
+                <!-- Redesign Demo SVG Mathematical Trendline -->
+                <svg viewBox="0 0 100 56" preserveAspectRatio="none" style="width:100%; height:52px; margin:4px 0;">
+                  <path d="M0 50 L20 40 L40 46 L60 22 L80 30 L100 8" fill="none" stroke="url(#g-uop)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" class="ln"/>
+                  <defs><linearGradient id="g-uop"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#22d3ee"/></linearGradient></defs>
+                </svg>
                 <div
                   class="space-y-2.5 pt-2 bg-transparent/50 border border-outline/5 p-4 rounded-2xl"
                 >
@@ -1430,8 +1583,10 @@
 
               <!-- 2. Box Theory Matrix Card -->
               <div
-                class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 group card-hover relative cursor-pointer"
+                class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 group card-hover relative cursor-pointer rb-spotlight-card rb-tilt-card"
+                data-tilt-max="7"
               >
+                <div class="rb-tilt-sheen"></div>
                 <div
                   class="flex items-center justify-between border-b border-outline/10 pb-4"
                 >
@@ -1465,6 +1620,11 @@
                   zones, and dynamic option strike liquidity pockets before
                   directional expansions occur.
                 </p>
+                <!-- Redesign Demo SVG Mathematical Trendline -->
+                <svg viewBox="0 0 100 56" preserveAspectRatio="none" style="width:100%; height:52px; margin:4px 0;">
+                  <path d="M0 40 L20 24 L40 40 L60 24 L80 40 L100 12" fill="none" stroke="url(#g-box)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" class="ln"/>
+                  <defs><linearGradient id="g-box"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#22d3ee"/></linearGradient></defs>
+                </svg>
                 <div
                   class="space-y-2.5 pt-2 bg-transparent/50 border border-outline/5 p-4 rounded-2xl"
                 >
@@ -1504,8 +1664,10 @@
 
               <!-- 3. Momentum Plus APA System -->
               <div
-                class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 group card-hover relative cursor-pointer"
+                class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 group card-hover relative cursor-pointer rb-spotlight-card rb-tilt-card"
+                data-tilt-max="7"
               >
+                <div class="rb-tilt-sheen"></div>
                 <div
                   class="flex items-center justify-between border-b border-outline/10 pb-4"
                 >
@@ -1539,6 +1701,11 @@
                   acceleration across indices, large-cap equities, and high-beta
                   commodity derivatives.
                 </p>
+                <!-- Redesign Demo SVG Mathematical Trendline -->
+                <svg viewBox="0 0 100 56" preserveAspectRatio="none" style="width:100%; height:52px; margin:4px 0;">
+                  <path d="M0 52 Q30 50 50 34 T100 4" fill="none" stroke="url(#g-apa)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" class="ln"/>
+                  <defs><linearGradient id="g-apa"><stop offset="0%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#00f2fe"/></linearGradient></defs>
+                </svg>
                 <div
                   class="space-y-2.5 pt-2 bg-transparent/50 border border-outline/5 p-4 rounded-2xl"
                 >
@@ -1578,8 +1745,10 @@
 
               <!-- 4. Blaster Theory -->
               <div
-                class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 group card-hover relative cursor-pointer"
+                class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 group card-hover relative cursor-pointer rb-spotlight-card rb-tilt-card"
+                data-tilt-max="7"
               >
+                <div class="rb-tilt-sheen"></div>
                 <div
                   class="flex items-center justify-between border-b border-outline/10 pb-4"
                 >
@@ -1613,6 +1782,11 @@
                   and structured breakout triggers after prolonged
                   low-volatility coiling periods.
                 </p>
+                <!-- Redesign Demo SVG Mathematical Trendline -->
+                <svg viewBox="0 0 100 56" preserveAspectRatio="none" style="width:100%; height:52px; margin:4px 0;">
+                  <path d="M0 30 L30 32 L50 30 L60 28 L75 10 L100 2" fill="none" stroke="url(#g-blaster)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" class="ln"/>
+                  <defs><linearGradient id="g-blaster"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#22d3ee"/></linearGradient></defs>
+                </svg>
                 <div
                   class="space-y-2.5 pt-2 bg-transparent/50 border border-outline/5 p-4 rounded-2xl"
                 >
@@ -1652,8 +1826,10 @@
 
               <!-- 5. Delta Theory -->
               <div
-                class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 group card-hover relative cursor-pointer"
+                class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 group card-hover relative cursor-pointer rb-spotlight-card rb-tilt-card"
+                data-tilt-max="7"
               >
+                <div class="rb-tilt-sheen"></div>
                 <div
                   class="flex items-center justify-between border-b border-outline/10 pb-4"
                 >
@@ -1687,6 +1863,11 @@
                   swings, identifying smart-money positioning before retail
                   screener alerts trigger.
                 </p>
+                <!-- Redesign Demo SVG Mathematical Trendline -->
+                <svg viewBox="0 0 100 56" preserveAspectRatio="none" style="width:100%; height:52px; margin:4px 0;">
+                  <path d="M0 46 L25 38 L40 42 L65 20 L85 26 L100 6" fill="none" stroke="url(#g-delta)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" class="ln"/>
+                  <defs><linearGradient id="g-delta"><stop offset="0%" stop-color="#00f2fe"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs>
+                </svg>
                 <div
                   class="space-y-2.5 pt-2 bg-transparent/50 border border-outline/5 p-4 rounded-2xl"
                 >
@@ -1726,8 +1907,10 @@
 
               <!-- 6. FLAGSHIP: Road Map Theory V2.1 -->
               <div
-                class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 group card-hover relative cursor-pointer"
+                class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 group card-hover relative cursor-pointer rb-spotlight-card rb-spotlight-gold rb-tilt-card border-[#f3c578]/40"
+                data-tilt-max="7"
               >
+                <div class="rb-tilt-sheen"></div>
                 <div
                   class="flex items-center justify-between border-b border-outline/10 pb-4"
                 >
@@ -1761,6 +1944,11 @@
                   equities, global commodities, crypto derivatives, and foreign
                   exchange into one unified trade roadmap.
                 </p>
+                <!-- Redesign Demo SVG Mathematical Trendline -->
+                <svg viewBox="0 0 100 56" preserveAspectRatio="none" style="width:100%; height:52px; margin:4px 0;">
+                  <path d="M0 48 Q20 20 40 38 T80 16 L100 6" fill="none" stroke="url(#g-roadmap)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" class="ln"/>
+                  <defs><linearGradient id="g-roadmap"><stop offset="0%" stop-color="#f3c578"/><stop offset="100%" stop-color="#00f2fe"/></linearGradient></defs>
+                </svg>
                 <div
                   class="space-y-2.5 pt-2 bg-transparent/50 border border-outline/5 p-4 rounded-2xl"
                 >
@@ -1799,8 +1987,10 @@
               </div>
               <!-- 7. Extension of UOP Theory -->
               <div
-                class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 group card-hover relative cursor-pointer"
+                class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 group card-hover relative cursor-pointer rb-spotlight-card rb-tilt-card"
+                data-tilt-max="7"
               >
+                <div class="rb-tilt-sheen"></div>
                 <div
                   class="flex items-center justify-between border-b border-outline/10 pb-4"
                 >
@@ -1834,6 +2024,11 @@
                   into advanced positioning, real-time premium shifts, and
                   dynamic risk management techniques.
                 </p>
+                <!-- Redesign Demo SVG Mathematical Trendline -->
+                <svg viewBox="0 0 100 56" preserveAspectRatio="none" style="width:100%; height:52px; margin:4px 0;">
+                  <path d="M0 44 L22 30 L44 36 L66 14 L100 20" fill="none" stroke="url(#g-ext)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" class="ln"/>
+                  <defs><linearGradient id="g-ext"><stop offset="0%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#22d3ee"/></linearGradient></defs>
+                </svg>
                 <div
                   class="space-y-2.5 pt-2 bg-transparent/50 border border-outline/5 p-4 rounded-2xl"
                 >
@@ -1876,20 +2071,22 @@
 
         <!-- SECTION 3.5: STUDY GUIDES LIBRARY -->
         <section
-          class="w-full bg-transparent py-16 scroll-mt-24 border-y border-outline/10"
+          class="w-full bg-transparent py-16 scroll-mt-24 border-y border-outline/10 relative overflow-hidden"
         >
           <div
-            class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-8 animate-fade-in-up"
+            class="max-w-7xl mx-auto px-6 lg:px-12 p-8 md:p-12 rounded-3xl glassmorphism-dark border border-outline/15 flex flex-col md:flex-row items-center justify-between gap-8 animate-fade-in-up rb-spotlight-card rb-tilt-card"
+            data-tilt-max="5"
           >
-            <div class="flex flex-col gap-4 max-w-2xl">
+            <div class="rb-tilt-sheen"></div>
+            <div class="flex flex-col gap-4 max-w-2xl relative z-10">
               <span
-                class="font-label-mono text-label-mono text-secondary uppercase tracking-wider font-semibold bg-secondary/10 px-3 py-1 rounded-full w-max"
+                class="font-label-mono text-label-mono text-secondary uppercase tracking-wider font-semibold bg-secondary/10 px-3 py-1 rounded-full w-max border border-secondary/20"
                 >FREE RESOURCES</span
               >
               <h2
                 class="font-headline-lg text-3xl md:text-4xl lg:text-5xl leading-tight text-on-surface"
               >
-                AlphaEdge Study Guides Library
+                AlphaEdge <span class="rb-shiny-text">Study Guides Library</span>
               </h2>
               <p class="font-body-lg text-body-lg text-on-surface-variant">
                 Access our comprehensive collection of visual study guides
@@ -1897,10 +2094,10 @@
                 Patterns, Breakout Strategies, and Options.
               </p>
             </div>
-            <div class="flex shrink-0">
+            <div class="flex shrink-0 relative z-10">
               <a
                 href="study-guides.html"
-                class="bg-secondary text-on-secondary hover:bg-secondary/90 transition-colors px-8 py-4 rounded-xl font-bold flex items-center gap-3 shadow-lg hover:-translate-y-1 transform duration-300"
+                class="rb-magnet-btn bg-secondary text-on-secondary hover:bg-secondary/90 transition-all px-8 py-4 rounded-xl font-bold flex items-center gap-3 shadow-lg"
               >
                 <span class="material-symbols-outlined text-[24px]"
                   >library_books</span
@@ -1956,14 +2153,17 @@
             </div>
 
             <!-- 4 Indicators Grid -->
+            <!-- 4 Indicators Grid with React Bits Live Product Simulators -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <!-- Indicator 1: Ultraviewer V2.1 -->
               <div
-                class="glassmorphism-dark p-6 rounded-3xl border border-outline/10 flex flex-col justify-between gap-6 group card-hover relative"
+                class="glassmorphism-dark p-6 rounded-3xl border border-outline/10 flex flex-col justify-between gap-5 group card-hover relative rb-spotlight-card rb-tilt-card"
+                data-tilt-max="6"
               >
-                <div class="flex flex-col gap-4">
+                <div class="rb-tilt-sheen"></div>
+                <div class="flex flex-col gap-3">
                   <div
-                    class="flex items-center justify-between border-b border-outline/10 pb-4"
+                    class="flex items-center justify-between border-b border-outline/10 pb-3"
                   >
                     <span
                       class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center font-label-mono font-bold shadow-sm border border-blue-500/20"
@@ -1980,35 +2180,48 @@
                     Ultraviewer V2.1
                   </h3>
                   <p
-                    class="font-body-sm text-[14px] text-on-surface-variant leading-relaxed"
+                    class="font-body-sm text-[13px] text-on-surface-variant leading-relaxed"
                   >
                     Blue Band Retest System. Identifies directional trend from
-                    blue and red line alignment, then waits for the band
-                    pullback before validating entry.
+                    blue/red line alignment, then waits for the band pullback.
                   </p>
+
+                  <!-- LIVE PRODUCT SIMULATOR: ULTRAVIEWER CANDLESTICKS -->
+                  <div class="rb-product-stage" style="border-radius:12px; overflow:hidden;">
+                    <div class="rb-stage-topbar" style="display:flex; justify-content:space-between; align-items:center; padding:6px 10px; font-size:11px; font-family:'JetBrains Mono';">
+                      <span style="color:var(--ae-muted); font-size:10px;">NIFTY 50 LIVE</span>
+                      <span id="uv-live-price" style="color:var(--ae-cyan); font-weight:700;">24,812.40</span>
+                    </div>
+                    <div class="rb-candlestick-wrap" style="height:120px; position:relative;">
+                      <canvas id="uv-chart-canvas"></canvas>
+                      <div class="rb-chart-trigger-pill" id="uv-signal-pill" style="font-size:9px; padding:2px 6px;">
+                        <span class="dot"></span> RETEST ACTIVE
+                      </div>
+                    </div>
+                    <!-- Redesign Demo Dynamic Blue/Red Wave Band Retest Canvas -->
+                    <canvas class="band-canvas" id="band" title="Ultraviewer Oscillating Retest Band"></canvas>
+                    <div class="ae-sim-controls" style="padding:5px 8px; margin:4px 6px 6px; font-size:11px;">
+                      <span style="color:var(--ae-muted); font-size:10px;">Simulate:</span>
+                      <button class="ae-sim-btn" id="uv-btn-retest" style="font-size:10px; padding:2px 8px;">Pullback Entry</button>
+                    </div>
+                  </div>
+
                   <div
-                    class="space-y-2 pt-2 border-t border-outline/5 text-xs text-slate-300"
+                    class="space-y-1.5 pt-1 border-t border-outline/5 text-xs text-slate-300"
                   >
                     <div class="flex items-center gap-2">
                       <span
-                        class="material-symbols-outlined text-blue-400 text-[15px]"
+                        class="material-symbols-outlined text-blue-400 text-[14px]"
                         >check_circle</span
                       >
                       Blue Band Support/Resistance
                     </div>
                     <div class="flex items-center gap-2">
                       <span
-                        class="material-symbols-outlined text-blue-400 text-[15px]"
+                        class="material-symbols-outlined text-blue-400 text-[14px]"
                         >check_circle</span
                       >
                       Buy &amp; Sell Trend Signals
-                    </div>
-                    <div class="flex items-center gap-2">
-                      <span
-                        class="material-symbols-outlined text-blue-400 text-[15px]"
-                        >check_circle</span
-                      >
-                      Phoenix Mills &amp; Nifty 50 Blueprints
                     </div>
                   </div>
                 </div>
@@ -2022,11 +2235,13 @@
 
               <!-- Indicator 2: Alpha Edge UOP Theory V2.1 -->
               <div
-                class="glassmorphism-dark p-6 rounded-3xl border border-outline/10 flex flex-col justify-between gap-6 group card-hover relative"
+                class="glassmorphism-dark p-6 rounded-3xl border border-outline/10 flex flex-col justify-between gap-5 group card-hover relative rb-spotlight-card rb-tilt-card"
+                data-tilt-max="6"
               >
-                <div class="flex flex-col gap-4">
+                <div class="rb-tilt-sheen"></div>
+                <div class="flex flex-col gap-3">
                   <div
-                    class="flex items-center justify-between border-b border-outline/10 pb-4"
+                    class="flex items-center justify-between border-b border-outline/10 pb-3"
                   >
                     <span
                       class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-label-mono font-bold shadow-sm border border-emerald-500/20"
@@ -2043,32 +2258,38 @@
                     Alpha Edge UOP Theory V2.1
                   </h3>
                   <p
-                    class="font-body-sm text-[14px] text-on-surface-variant leading-relaxed"
+                    class="font-body-sm text-[13px] text-on-surface-variant leading-relaxed"
                   >
                     Universal Optimal Participation framework. Decodes option
-                    premium behavior, CE/PE moneyness, and the proprietary
-                    Morning Breakfast trigger.
+                    premium decay and Morning Breakfast trigger.
                   </p>
+
+                  <!-- LIVE PRODUCT SIMULATOR: UOP DECAY BARS & STRIKE SLIDER -->
+                  <div class="rb-product-stage" style="border-radius:12px; overflow:hidden;">
+                    <div class="rb-stage-topbar" style="display:flex; justify-content:space-between; align-items:center; padding:6px 10px; font-size:11px; font-family:'JetBrains Mono';">
+                      <span style="color:var(--ae-gold); font-weight:700; font-size:10px;">MORNING BREAKFAST</span>
+                      <span id="uop-breakfast-timer" style="color:var(--ae-cyan); font-size:10px;">09:28:45 IST</span>
+                    </div>
+                    <div class="rb-uop-decay-grid" id="uop-decay-bars" style="height:95px; padding:10px 8px 4px;"></div>
+                    <div class="ae-sim-controls" style="padding:4px 8px; margin:4px 6px 6px;">
+                      <span id="uop-strike-display" style="color:var(--ae-ink-bright); font-size:10px; font-weight:700;">24800 CE</span>
+                      <input type="range" id="uop-strike-slider" min="24600" max="25000" step="50" value="24800" style="accent-color:var(--ae-teal); width:85px; cursor:pointer;">
+                    </div>
+                  </div>
+
                   <div
-                    class="space-y-2 pt-2 border-t border-outline/5 text-xs text-slate-300"
+                    class="space-y-1.5 pt-1 border-t border-outline/5 text-xs text-slate-300"
                   >
                     <div class="flex items-center gap-2">
                       <span
-                        class="material-symbols-outlined text-emerald-400 text-[15px]"
-                        >check_circle</span
-                      >
-                      Universal, Optimal, Participation Levels
-                    </div>
-                    <div class="flex items-center gap-2">
-                      <span
-                        class="material-symbols-outlined text-emerald-400 text-[15px]"
+                        class="material-symbols-outlined text-emerald-400 text-[14px]"
                         >check_circle</span
                       >
                       Trend Confirmation Line (TCL)
                     </div>
                     <div class="flex items-center gap-2">
                       <span
-                        class="material-symbols-outlined text-emerald-400 text-[15px]"
+                        class="material-symbols-outlined text-emerald-400 text-[14px]"
                         >check_circle</span
                       >
                       12 Complete Bootcamp Lessons
@@ -2085,11 +2306,13 @@
 
               <!-- Indicator 3: Alpha Edge Advance Feature V2.1 -->
               <div
-                class="glassmorphism-dark p-6 rounded-3xl border border-outline/10 flex flex-col justify-between gap-6 group card-hover relative"
+                class="glassmorphism-dark p-6 rounded-3xl border border-outline/10 flex flex-col justify-between gap-5 group card-hover relative rb-spotlight-card rb-tilt-card"
+                data-tilt-max="6"
               >
-                <div class="flex flex-col gap-4">
+                <div class="rb-tilt-sheen"></div>
+                <div class="flex flex-col gap-3">
                   <div
-                    class="flex items-center justify-between border-b border-outline/10 pb-4"
+                    class="flex items-center justify-between border-b border-outline/10 pb-3"
                   >
                     <span
                       class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center font-label-mono font-bold shadow-sm border border-cyan-500/20"
@@ -2103,35 +2326,33 @@
                   <h3
                     class="font-headline-md text-xl font-bold text-on-surface group-hover:text-cyan-300 transition-colors"
                   >
-                    Alpha Edge Advance Feature V2.1
+                    Advance Feature V2.1
                   </h3>
                   <p
-                    class="font-body-sm text-[14px] text-on-surface-variant leading-relaxed"
+                    class="font-body-sm text-[13px] text-on-surface-variant leading-relaxed"
                   >
-                    Automated Strike Filtration Board. Continuously scans CE and
-                    PE session High/Low extremes and displays active
-                    buyer/seller shortlists in real time.
+                    Automated Strike Filtration Board. Continuously scans CE/PE
+                    extremes and displays active buyer/seller shortlists.
                   </p>
+
+                  <!-- LIVE PRODUCT SIMULATOR: LIVE STRIKE MATRIX -->
+                  <div class="rb-product-stage" style="border-radius:12px; overflow:hidden;">
+                    <div id="adv-strike-table" style="font-size:11px; max-height:148px; overflow:hidden;"></div>
+                  </div>
+
                   <div
-                    class="space-y-2 pt-2 border-t border-outline/5 text-xs text-slate-300"
+                    class="space-y-1.5 pt-1 border-t border-outline/5 text-xs text-slate-300"
                   >
                     <div class="flex items-center gap-2">
                       <span
-                        class="material-symbols-outlined text-cyan-400 text-[15px]"
-                        >check_circle</span
-                      >
-                      Buyer/Seller Active Strikes Board
-                    </div>
-                    <div class="flex items-center gap-2">
-                      <span
-                        class="material-symbols-outlined text-cyan-400 text-[15px]"
+                        class="material-symbols-outlined text-cyan-400 text-[14px]"
                         >check_circle</span
                       >
                       Real-Time Extreme Tracker (O–P Band)
                     </div>
                     <div class="flex items-center gap-2">
                       <span
-                        class="material-symbols-outlined text-cyan-400 text-[15px]"
+                        class="material-symbols-outlined text-cyan-400 text-[14px]"
                         >check_circle</span
                       >
                       Dynamic ATM Auto-Reference Anchor
@@ -2148,11 +2369,13 @@
 
               <!-- Indicator 4: Alpha Edge Trend All -->
               <div
-                class="glassmorphism-dark p-6 rounded-3xl border border-outline/10 flex flex-col justify-between gap-6 group card-hover relative"
+                class="glassmorphism-dark p-6 rounded-3xl border border-outline/10 flex flex-col justify-between gap-5 group card-hover relative rb-spotlight-card rb-tilt-card"
+                data-tilt-max="6"
               >
-                <div class="flex flex-col gap-4">
+                <div class="rb-tilt-sheen"></div>
+                <div class="flex flex-col gap-3">
                   <div
-                    class="flex items-center justify-between border-b border-outline/10 pb-4"
+                    class="flex items-center justify-between border-b border-outline/10 pb-3"
                   >
                     <span
                       class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-label-mono font-bold shadow-sm border border-amber-500/20"
@@ -2169,32 +2392,35 @@
                     Alpha Edge Trend All
                   </h3>
                   <p
-                    class="font-body-sm text-[14px] text-on-surface-variant leading-relaxed"
+                    class="font-body-sm text-[13px] text-on-surface-variant leading-relaxed"
                   >
                     Multi-Asset Multi-Timeframe Heatmap. Combines 5m, 15m, 1H,
                     Daily, and Weekly trends across NIFTY, BANK NIFTY, Equities,
                     and MCX Commodities.
                   </p>
+
+                  <!-- LIVE PRODUCT SIMULATOR: 5-TIMEFRAME CONFLUENCE HEATMAP -->
+                  <div class="rb-product-stage" style="border-radius:12px; overflow:hidden;">
+                    <div class="rb-stage-topbar" style="display:flex; justify-content:space-between; align-items:center; padding:6px 10px; font-size:10px; font-family:'JetBrains Mono';">
+                      <span style="color:var(--ae-muted);">CONFLUENCE</span>
+                      <span id="trend-confluence-score" style="color:var(--ae-bullish); font-weight:800;">+4.2 CONFLUENCE</span>
+                    </div>
+                    <div class="rb-trend-heatmap-grid" id="trend-heatmap-board" style="padding:6px 4px; font-size:10px;"></div>
+                  </div>
+
                   <div
-                    class="space-y-2 pt-2 border-t border-outline/5 text-xs text-slate-300"
+                    class="space-y-1.5 pt-1 border-t border-outline/5 text-xs text-slate-300"
                   >
                     <div class="flex items-center gap-2">
                       <span
-                        class="material-symbols-outlined text-amber-400 text-[15px]"
+                        class="material-symbols-outlined text-amber-400 text-[14px]"
                         >check_circle</span
                       >
                       5-Tier Confluence Scoring (-5 to +5)
                     </div>
                     <div class="flex items-center gap-2">
                       <span
-                        class="material-symbols-outlined text-amber-400 text-[15px]"
-                        >check_circle</span
-                      >
-                      NIFTY, BANK NIFTY &amp; MCX Scope
-                    </div>
-                    <div class="flex items-center gap-2">
-                      <span
-                        class="material-symbols-outlined text-amber-400 text-[15px]"
+                        class="material-symbols-outlined text-amber-400 text-[14px]"
                         >check_circle</span
                       >
                       Bank Nifty +450 Point Blueprint
@@ -2852,13 +3078,20 @@
                 emotional decision-making.
               </p>
             </div>
+
+            <!-- Redesign Demo Formula Bar -->
+            <div class="formula animate-fade-in-up">
+              <span>Knowledge</span><em>+</em><span>Methodology</span><em>+</em><span>Discipline</span><em>+</em><span>Psychology</span><em>+</em><span>Risk</span><em>+</em><span>Learning</span><em>=</em><strong class="rb-shiny-text font-black">Consistent Mastery</strong>
+            </div>
           </div>
         </section>
 
         <!-- SECTION 5: LEADERSHIP & FOUNDERS -->
-        <section class="w-full bg-transparent py-24">
+        <section class="w-full bg-transparent py-24 relative overflow-hidden">
+          <div class="glow"><b></b><b></b></div>
+          <div class="gridbg"></div>
           <div
-            class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col gap-16 animate-fade-in-up scroll-mt-24"
+            class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col gap-16 animate-fade-in-up scroll-mt-24 relative z-10"
             id="leadership-founders"
           >
             <div
@@ -2904,8 +3137,10 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <!-- Founder 1 -->
               <div
-                class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 card-hover group"
+                class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 card-hover group rb-spotlight-card rb-tilt-card"
+                data-tilt-max="7"
               >
+                <div class="rb-tilt-sheen"></div>
                 <div
                   class="flex flex-col sm:flex-row items-center sm:items-start gap-6"
                 >
@@ -3019,8 +3254,10 @@
 
               <!-- Founder 2 -->
               <div
-                class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 card-hover group"
+                class="glassmorphism-dark p-8 rounded-3xl shadow-md border border-outline/10 flex flex-col gap-6 card-hover group rb-spotlight-card rb-tilt-card"
+                data-tilt-max="7"
               >
+                <div class="rb-tilt-sheen"></div>
                 <div
                   class="flex flex-col sm:flex-row items-center sm:items-start gap-6"
                 >
@@ -3119,6 +3356,42 @@
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        <!-- CALL TO ACTION BAND (AURORA & SHINYTEXT) -->
+        <section
+          class="w-full text-center py-24 relative overflow-hidden border-t border-outline/10 final"
+          id="admission-cta"
+        >
+          <!-- Redesign Demo Glowing Orbs Background & 54px Grid -->
+          <div class="glow"><b></b><b></b></div>
+          <div class="gridbg"></div>
+          <div class="max-w-4xl mx-auto px-6 relative z-10 flex flex-col items-center gap-6 animate-fade-in-up">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 text-primary font-label-mono text-label-mono rb-decrypt-badge">
+              <span class="dot"></span>
+              ADMISSION &amp; DESK ONBOARDING 2026
+            </div>
+            <h2 class="font-headline-lg text-3xl md:text-5xl lg:text-6xl leading-tight text-on-surface">
+              <span class="rb-shiny-text">Build a Repeatable Process.</span><br />
+              <span class="text-white">Never Trade On Guesses Again.</span>
+            </h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+              Speak directly with our senior admission team, explore our proprietary framework syllabi, and select the system tailored to your market.
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+              <a
+                href="contact.html"
+                class="rb-magnet-btn rb-btn-gold px-8 py-4 rounded-xl text-black font-extrabold text-[13px] tracking-wider uppercase shadow-xl"
+              >
+                Apply For Admission
+              </a>
+              <a
+                href="tel:+919173905201"
+                class="rb-magnet-btn px-8 py-4 rounded-xl bg-surface-container-high text-on-surface font-headline-sm text-headline-sm hover:bg-surface-container-highest transition-all flex items-center gap-2 border border-outline/20"
+              >
+                <span class="material-symbols-outlined text-[18px] text-primary">call</span>
+                <span>Call +91 91739 05201</span>
+              </a>
             </div>
           </div>
         </section>
@@ -3423,5 +3696,7 @@
         });
       });
     </script>
+    <!-- React Bits Modular Interaction Engine -->
+    <script src="./js/react-bits.js?v=3.6"></script>
   </body>
 </html>

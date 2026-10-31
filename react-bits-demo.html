@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- Theme Pre-hydration Script to eliminate flash -->
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('alphaedge_theme') || 'dark';
+        document.documentElement.dataset.theme = saved;
+        if (saved === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch(e) {}
+    })();
+  </script>
+  <title>Alpha Edge Pro Academy · React Bits UI & Product Showcase Demo</title>
+  <meta name="description" content="Ultra-modern React Bits animated UI demo for Alpha Edge Pro Academy. Interactive indicator simulators, spotlight cards, 3D tilt, and proprietary framework engines.">
+  <link rel="icon" type="image/png" href="./image/Glossy Blue Analytics Head Logo.png">
+
+  <!-- Premium Typography: Sora (Headings), DM Sans (Body), JetBrains Mono (Quant Data) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&family=JetBrains+Mono:wght@400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
+  <!-- React Bits Modular Stylesheet -->
+  <link rel="stylesheet" href="./css/react-bits-styles.css?v=3.3">
+
+  <style>
+    /* Demo Page Layout Enhancements */
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background-color: var(--ae-bg);
+      color: var(--ae-ink);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      selection-background-color: var(--ae-teal);
+    }
+    ::selection {
+      background: rgba(53, 209, 196, 0.35);
+      color: #ffffff;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Sora', sans-serif;
+      line-height: 1.15;
+      margin: 0;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 2;
+    }
+    section {
+      padding: 110px 0;
+      position: relative;
+    }
+
+    /* Fixed Glassmorphic Navigation */
+    .ae-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 14px 0;
+      background: rgba(3, 8, 18, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--ae-border);
+      transition: all 0.3s ease;
+    }
+    .ae-nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .ae-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 19px;
+      letter-spacing: -0.02em;
+    }
+    .ae-logo-img {
+      height: 44px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 0 12px var(--ae-teal-glow));
+      transition: transform 0.3s var(--ae-ease-spring);
+    }
+    .ae-logo-wrap:hover .ae-logo-img {
+      transform: scale(1.08) rotate(-2deg);
+    }
+    .ae-nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ae-muted);
+    }
+    .ae-nav-links a {
+      transition: color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .ae-nav-links a:hover {
+      color: var(--ae-cyan);
+    }
+    @media (max-width: 990px) {
+      .ae-nav-links { display: none; }
+    }
+
+    /* Hero Section */
+    .ae-hero {
+      padding: 160px 0 90px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+    .ae-hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: center;
+    }
+    @media (max-width: 960px) {
+      .ae-hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .ae-hero { padding: 130px 0 70px; }
+    }
+
+    .ae-hero-title {
+      font-size: clamp(38px, 5.2vw, 66px);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      margin: 22px 0 18px;
+      line-height: 1.1;
+    }
+    .ae-hero-subtitle {
+      font-size: clamp(16px, 1.8vw, 19px);
+      color: var(--ae-muted);
+      line-height: 1.65;
+      max-width: 580px;
+      margin-bottom: 32px;
+    }
+
+    /* Live Interactive Hero Terminal / Stage */
+    .ae-hero-stage {
+      background: linear-gradient(165deg, rgba(13, 33, 63, 0.75), rgba(4, 12, 28, 0.95));
+      border: 1px solid var(--ae-border-strong);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 30px 80px -25px rgba(0, 0, 0, 0.8), 0 0 45px -10px var(--ae-teal-glow);
+      position: relative;
+      overflow: hidden;
+    }
+    .ae-terminal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+    }
+    .ae-terminal-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .ae-terminal-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    /* Live Stats Row */
+    .ae-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--ae-border);
+      border: 1px solid var(--ae-border);
+      border-radius: 22px;
+      overflow: hidden;
+      margin-top: -20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+    .ae-stat-item {
+      background: var(--ae-bg-panel);
+      padding: 32px 24px;
+      text-align: left;
+      position: relative;
+      transition: background 0.3s ease;
+    }
+    .ae-stat-item:hover {
+      background: var(--ae-bg-panel-elevated);
+    }
+    .ae-stat-number {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(34px, 4.2vw, 50px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 8px;
+      display: block;
+      background: linear-gradient(180deg, #ffffff 30%, var(--ae-cyan) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .ae-stat-label {
+      font-size: 13px;
+      color: var(--ae-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    @media (max-width: 860px) {
+      .ae-stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .ae-stats-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Frameworks Grid */
+    .ae-frameworks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 22px;
+      margin-top: 48px;
+    }
+    .ae-fw-card {
+      padding: 30px 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 240px;
+    }
+    .ae-fw-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ae-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .ae-fw-card h3 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--ae-ink-bright);
+    }
+    .ae-fw-card p {
+      font-size: 14px;
+      color: var(--ae-muted);
+      line-height: 1.55;
+      margin: 0 0 20px;
+    }
+    .ae-fw-arrow {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ae-teal);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+    .ae-fw-card:hover .ae-fw-arrow {
+      color: var(--ae-cyan);
+      transform: translateX(4px);
+    }
+
+    /* Product Showcase 2-Column Grid */
+    .ae-product-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 50px;
+    }
+    @media (max-width: 900px) {
+      .ae-product-grid { grid-template-columns: 1fr; }
+    }
+    .ae-prod-card {
+      padding: 32px 28px;
+    }
+    .ae-prod-card h3 {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 8px 0 10px;
+      color: var(--ae-ink-bright);
+    }
+    .ae-prod-card p {
+      color: var(--ae-muted);
+      font-size: 14px;
+      margin: 0 0 18px;
+    }
+
+    /* Simulator Controls inside product cards */
+    .ae-sim-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 14px;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      margin-top: 14px;
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .ae-sim-btn {
+      background: rgba(53, 209, 196, 0.15);
+      border: 1px solid var(--ae-teal);
+      color: var(--ae-cyan);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 11px;
+      transition: all 0.2s ease;
+    }
+    .ae-sim-btn:hover {
+      background: var(--ae-teal);
+      color: #021021;
+    }
+
+    /* Founders Grid */
+    .ae-founders-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 50px;
+    }
+    @media (max-width: 820px) {
+      .ae-founders-grid { grid-template-columns: 1fr; }
+    }
+    .ae-founder-card {
+      background: linear-gradient(160deg, var(--ae-bg-panel-elevated), var(--ae-bg-panel));
+      border: 1px solid var(--ae-border);
+      border-radius: 24px;
+      padding: 36px 30px;
+      position: relative;
+      overflow: hidden;
+    }
+    .ae-founder-head {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      margin-bottom: 20px;
+    }
+    .ae-founder-photo-wrap {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      padding: 3px;
+      background: conic-gradient(from 0deg, var(--ae-teal), var(--ae-cyan), var(--ae-gold), var(--ae-teal));
+      animation: rb-beam-rotate 10s linear infinite;
+      flex-shrink: 0;
+      box-shadow: 0 0 25px -5px var(--ae-teal-glow);
+    }
+    .ae-founder-photo {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      background: #020b18;
+    }
+    .ae-founder-info h3 {
+      font-size: 26px;
+      margin-bottom: 4px;
+    }
+    .ae-founder-info small {
+      color: var(--ae-cyan);
+      font-weight: 600;
+      font-size: 13px;
+      display: block;
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
+    }
+    .ae-founder-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      padding: 3px 8px;
+      background: rgba(243, 197, 120, 0.12);
+      border: 1px solid var(--ae-border-gold);
+      color: var(--ae-gold);
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Bento Practical Pillars */
+    .ae-pillars-bento {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 48px;
+    }
+    .ae-pillar-box {
+      padding: 24px 20px;
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid var(--ae-border);
+      border-radius: 18px;
+      transition: all 0.3s ease;
+    }
+    .ae-pillar-box:hover {
+      background: rgba(53, 209, 196, 0.08);
+      border-color: var(--ae-teal);
+      transform: translateY(-4px);
+    }
+    .ae-pillar-box .icon {
+      font-size: 28px;
+      color: var(--ae-cyan);
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+    .ae-pillar-box h4 {
+      font-size: 17px;
+      margin-bottom: 8px;
+      color: var(--ae-ink-bright);
+    }
+    .ae-pillar-box p {
+      font-size: 13px;
+      color: var(--ae-muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Modal for 'How to Apply to All Pages' */
+    #ae-apply-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 2000;
+      display: none;
+      place-items: center;
+      padding: 20px;
+    }
+    #ae-apply-modal.active { display: grid; }
+    .ae-modal-card {
+      background: var(--ae-bg-panel-elevated);
+      border: 1px solid var(--ae-border-strong);
+      border-radius: 20px;
+      max-width: 650px;
+      width: 100%;
+      padding: 32px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 40px var(--ae-teal-glow);
+      position: relative;
+    }
+    .ae-modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      color: var(--ae-muted);
+      font-size: 24px;
+      cursor: pointer;
+    }
+    .ae-code-snippet {
+      background: #020813;
+      border: 1px solid var(--ae-border);
+      border-radius: 10px;
+      padding: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #7dd3fc;
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+  </style>
+</head>
+<body class="ae-theme">
+
+  <!-- =========================================================================
+       1. REACT BITS AURORA BACKGROUND & STARFIELD CANVAS
+       ========================================================================= -->
+  <div class="rb-aurora-wrap">
+    <div class="rb-aurora-blob rb-aurora-blob-1"></div>
+    <div class="rb-aurora-blob rb-aurora-blob-2"></div>
+    <div class="rb-aurora-blob rb-aurora-blob-3"></div>
+    <div class="rb-grid-pattern"></div>
+    <!-- Interactive Starfield & Constellation Canvas -->
+    <canvas id="rb-particle-canvas" style="position:absolute; inset:0; z-index:1; pointer-events:none;"></canvas>
+  </div>
+
+  <!-- =========================================================================
+       2. PERSISTED HEADER NAVIGATION
+       ========================================================================= -->
+  <header class="ae-nav">
+    <div class="container">
+      <div class="ae-nav-inner">
+        <a href="index.html" class="ae-logo-wrap">
+          <img src="./image/Glossy Blue Analytics Head Logo.png" alt="Alpha Edge Pro Academy" class="ae-logo-img">
+          <span>Alpha<span style="color:var(--ae-cyan)">Edge</span> <span class="rb-shiny-gold">Pro</span></span>
+        </a>
+
+        <nav>
+          <ul class="ae-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#frameworks">Proprietary Courses</a></li>
+            <li><a href="#indicators">Live Indicators</a></li>
+            <li><a href="#pillars">11 Pillars</a></li>
+            <li><a href="#founders">Founders</a></li>
+            <li><a href="study-guides.html">Study Guides</a></li>
+          </ul>
+        </nav>
+
+        <div style="display:flex; align-items:center; gap:12px;">
+          <!-- APA Momentum Live Portal Link -->
+          <a href="https://tradevisor-apa-dashboard.abc2317.chatgpt.site/" target="_blank" rel="noopener noreferrer" class="ae-btn-dashboard" style="padding:10px 18px; font-size:12px;">
+            APA + MOMENTUM DASHBOARD
+            <span class="material-symbols-outlined" style="font-size:14px; margin-left:4px;">open_in_new</span>
+          </a>
+
+          <!-- Admission CTA with Magnet Pull Effect -->
+          <a href="contact.html" class="rb-magnet-btn rb-btn-gold">
+            ADMISSION
+          </a>
+
+          <!-- Interactive Theme Toggle Button (Icon Only, Placed At Very Last) -->
+          <button class="tb ae-theme-toggle" id="theme" aria-label="Toggle theme" title="Toggle Light / Dark Theme" style="margin-right:0;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon theme-icon-sun" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       3. HERO SECTION (BlurText, ShinyText, 3D Tilt Stage, Live Candlesticks)
+       ========================================================================= -->
+  <section class="ae-hero" id="top">
+    <div class="container">
+      <div class="ae-hero-grid">
+        <div>
+          <!-- Decrypted badge with pulsing status -->
+          <div class="rb-decrypt-badge" data-scramble>
+            <span class="dot"></span>
+            NISM SERIES VIII CERTIFIED FACULTY · LIVE DESK 09:15–15:30 IST
+          </div>
+
+          <!-- React Bits BlurText Animated Headline -->
+          <h1 class="ae-hero-title rb-blur-text" data-text="Master the Market. Trade Pure In-House Systems.">
+            Master the Market. Trade Pure In-House Systems.
+          </h1>
+
+          <p class="ae-hero-subtitle">
+            A premier stock market institution powered by <strong style="color:var(--ae-ink-bright)">21+ years of historical market tape</strong> and seven proprietary frameworks.
+            <span class="rb-shiny-text">Zero tips. Zero calls. Pure systematic execution.</span>
+          </p>
+
+          <div style="display:flex; gap:16px; flex-wrap:wrap;">
+            <a href="#frameworks" class="rb-magnet-btn rb-btn-primary">
+              <span class="material-symbols-outlined" style="font-size:18px;">browse_gallery</span>
+              Explore Frameworks
+            </a>
+            <a href="#indicators" class="rb-magnet-btn">
+              <span class="material-symbols-outlined" style="font-size:18px; color:var(--ae-gold)">play_circle</span>
+              Interactive Product Demo
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero Stage: 3D Tilted Interactive Candlestick Preview -->
+        <div class="ae-hero-stage rb-tilt-card" data-tilt-max="8">
+          <div class="rb-tilt-sheen"></div>
+          <div class="rb-tilt-inner">
+            <div class="ae-terminal-header">
+              <div class="ae-terminal-dots">
+                <span style="background:#ff5d73"></span>
+                <span style="background:#ffc24a"></span>
+                <span style="background:#2be39a"></span>
+              </div>
+              <div style="color:var(--ae-muted);">
+                NIFTY 50 · ULTRAVIEWER V2.1 LIVE TAPE
+              </div>
+              <div style="font-weight:700; font-size:13px;" id="uv-live-price">
+                24,812.40
+              </div>
+            </div>
+
+            <!-- Candlestick Canvas Container -->
+            <div class="rb-candlestick-wrap">
+              <canvas id="uv-chart-canvas"></canvas>
+              <div class="rb-chart-trigger-pill" id="uv-signal-pill">
+                <span class="dot"></span> ULTRAVIEWER BLUE BAND ACTIVE
+              </div>
+            </div>
+
+            <!-- Interactive Stage Controls -->
+            <div class="ae-sim-controls">
+              <span style="color:var(--ae-muted)">Simulate Indicator:</span>
+              <button class="ae-sim-btn" id="uv-btn-retest">Trigger Retest Pullback</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       4. QUANT STATS SECTION (Animated Counting Numbers)
+       ========================================================================= -->
+  <section style="padding:0; position:relative; z-index:5;">
+    <div class="container">
+      <div class="ae-stats-grid">
+        <div class="ae-stat-item">
+          <span class="ae-stat-number" data-count="21" data-suffix="+">0+</span>
+          <span class="ae-stat-label">Years Of Market Tape Data</span>
+        </div>
+        <div class="ae-stat-item">
+          <span class="ae-stat-number" data-count="2000" data-suffix="+">0+</span>
+          <span class="ae-stat-label">Traders Mentored & Graduated</span>
+        </div>
+        <div class="ae-stat-item">
+          <span class="ae-stat-number" data-count="7" data-suffix="">0</span>
+          <span class="ae-stat-label">Proprietary In-House Frameworks</span>
+        </div>
+        <div class="ae-stat-item">
+          <span class="ae-stat-number" data-count="94.2" data-decimals="1" data-suffix="%">0%</span>
+          <span class="ae-stat-label">U.O.P. Structural Reliability</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Infinite Scrolling Marquee -->
+    <div class="rb-marquee-container" style="margin-top:60px;">
+      <div class="rb-marquee-track">
+        <span class="rb-marquee-item">◆ <b>Road Map Theory V2.1</b> Multi-Asset Confluence</span>
+        <span class="rb-marquee-item">◆ <b>Ultraviewer V2.1</b> Blue Band Retest Engine</span>
+        <span class="rb-marquee-item">◆ <b>Alpha Edge UOP Theory</b> Morning Breakfast Trigger</span>
+        <span class="rb-marquee-item">◆ <b>Box Theory Matrix</b> Liquidity Pockets</span>
+        <span class="rb-marquee-item">◆ <b>Alpha Edge Advance Feature</b> Real-Time Strike Matrix</span>
+        <span class="rb-marquee-item">◆ <b>Momentum Plus APA</b> Institutional Acceleration</span>
+        <span class="rb-marquee-item">◆ <b>Alpha Edge Trend All</b> 5-Timeframe Confluence</span>
+        <span class="rb-marquee-item">◆ <b>Blaster Theory</b> Volatility Compression</span>
+        <span class="rb-marquee-item">◆ <b>Delta Theory</b> Non-Lagging Swings</span>
+        <!-- Duplicated track for continuous infinite scroll -->
+        <span class="rb-marquee-item">◆ <b>Road Map Theory V2.1</b> Multi-Asset Confluence</span>
+        <span class="rb-marquee-item">◆ <b>Ultraviewer V2.1</b> Blue Band Retest Engine</span>
+        <span class="rb-marquee-item">◆ <b>Alpha Edge UOP Theory</b> Morning Breakfast Trigger</span>
+        <span class="rb-marquee-item">◆ <b>Box Theory Matrix</b> Liquidity Pockets</span>
+        <span class="rb-marquee-item">◆ <b>Alpha Edge Advance Feature</b> Real-Time Strike Matrix</span>
+        <span class="rb-marquee-item">◆ <b>Momentum Plus APA</b> Institutional Acceleration</span>
+        <span class="rb-marquee-item">◆ <b>Alpha Edge Trend All</b> 5-Timeframe Confluence</span>
+        <span class="rb-marquee-item">◆ <b>Blaster Theory</b> Volatility Compression</span>
+        <span class="rb-marquee-item">◆ <b>Delta Theory</b> Non-Lagging Swings</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       5. PROPRIETARY FRAMEWORKS (Spotlight Cards with Holographic Glow & Tilt)
+       ========================================================================= -->
+  <section id="frameworks">
+    <div class="container">
+      <div class="rb-reveal" style="text-align:center; max-width:750px; margin:0 auto;">
+        <span class="rb-decrypt-badge" style="margin-bottom:12px;">PROPRIETARY CURRICULUM</span>
+        <h2 style="font-size:clamp(30px, 4vw, 48px); margin-bottom:14px;">
+          Seven Proprietary Frameworks. Built on Research.
+        </h2>
+        <p style="color:var(--ae-muted); font-size:16px;">
+          Developed completely in-house from historical databases and live orderbook tape observation. Move your mouse across each card to feel the dynamic spotlight illumination.
+        </p>
+      </div>
+
+      <div class="ae-frameworks-grid">
+        <!-- 1. Road Map Theory V2.1 (Flagship in Gold Spotlight) -->
+        <a href="roadmap-theory.html" class="rb-spotlight-card rb-spotlight-gold ae-fw-card rb-tilt-card rb-reveal">
+          <div>
+            <div class="ae-fw-meta">
+              <span class="material-symbols-outlined" style="font-size:14px; color:var(--ae-gold)">military_tech</span>
+              Flagship Multi-Asset Engine
+            </div>
+            <h3>Road Map Theory V2.1</h3>
+            <p>One unified macro roadmap for Nifty 50, Bank Nifty, MCX, USD/INR, and institutional liquidity correlation.</p>
+          </div>
+          <span class="ae-fw-arrow" style="color:var(--ae-gold)">
+            Access Roadmap Guide <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span>
+          </span>
+        </a>
+
+        <!-- 2. U.O.P. Theory -->
+        <a href="uop-theory.html" class="rb-spotlight-card ae-fw-card rb-tilt-card rb-reveal">
+          <div>
+            <div class="ae-fw-meta">Options & Index Architecture</div>
+            <h3>U.O.P. Theory</h3>
+            <p>Price and premium behaviour in index futures and options. The foundational doctrine of modern premium reading.</p>
+          </div>
+          <span class="ae-fw-arrow">
+            Explore U.O.P. <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span>
+          </span>
+        </a>
+
+        <!-- 3. Box Theory Matrix -->
+        <a href="box-theory.html" class="rb-spotlight-card ae-fw-card rb-tilt-card rb-reveal">
+          <div>
+            <div class="ae-fw-meta">Range Containment</div>
+            <h3>Box Theory Matrix</h3>
+            <p>Identifies range containment zones, institutional trapped liquidity pockets, and clean breakout parameters.</p>
+          </div>
+          <span class="ae-fw-arrow">
+            Explore Box Theory <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span>
+          </span>
+        </a>
+
+        <!-- 4. Momentum Plus APA -->
+        <a href="apa-theory.html" class="rb-spotlight-card ae-fw-card rb-tilt-card rb-reveal">
+          <div>
+            <div class="ae-fw-meta">Institutional Acceleration</div>
+            <h3>Momentum Plus APA</h3>
+            <p>Order acceleration and volume velocity models designed to catch explosive momentum bursts across indices and equities.</p>
+          </div>
+          <span class="ae-fw-arrow">
+            Explore Momentum <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span>
+          </span>
+        </a>
+
+        <!-- 5. Blaster Theory -->
+        <a href="blaster-theory.html" class="rb-spotlight-card ae-fw-card rb-tilt-card rb-reveal">
+          <div>
+            <div class="ae-fw-meta">Stocks & Commodities</div>
+            <h3>Blaster Theory</h3>
+            <p>Precision execution for high-volatility breakouts following deep low-volatility coiling cycles.</p>
+          </div>
+          <span class="ae-fw-arrow">
+            Explore Blaster <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span>
+          </span>
+        </a>
+
+        <!-- 6. Delta Theory -->
+        <a href="delta-theory.html" class="rb-spotlight-card ae-fw-card rb-tilt-card rb-reveal">
+          <div>
+            <div class="ae-fw-meta">Equity Swing Analysis</div>
+            <h3>Delta Theory</h3>
+            <p>Non-lagging structural approach to stock swings and high-beta equities with mathematical edge.</p>
+          </div>
+          <span class="ae-fw-arrow">
+            Explore Delta <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span>
+          </span>
+        </a>
+
+        <!-- 7. Extension of UOP Theory -->
+        <a href="extension-uop-theory.html" class="rb-spotlight-card ae-fw-card rb-tilt-card rb-reveal">
+          <div>
+            <div class="ae-fw-meta">Advanced Options</div>
+            <h3>Extension of UOP Theory</h3>
+            <p>High-tier multi-leg targets, deep strike premium shifts, and dynamic risk management models.</p>
+          </div>
+          <span class="ae-fw-arrow">
+            Explore Extension <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       6. LIVE PRODUCT & INDICATOR ANIMATION DEMOS (Requested specifically by user)
+       ========================================================================= -->
+  <section id="indicators" style="background:linear-gradient(180deg, transparent 0%, rgba(7,21,41,0.5) 50%, transparent 100%);">
+    <div class="container">
+      <div class="rb-reveal" style="text-align:center; max-width:800px; margin:0 auto;">
+        <span class="rb-decrypt-badge" style="margin-bottom:12px;">LIVE PRODUCT ANIMATIONS</span>
+        <h2 style="font-size:clamp(30px, 4vw, 48px); margin-bottom:14px;">
+          TradingView Indicators That Move With The Market
+        </h2>
+        <p style="color:var(--ae-muted); font-size:16px;">
+          Experience how our proprietary indicators function in real time. Each card below contains a live interactive simulator reflecting actual market dynamics.
+        </p>
+      </div>
+
+      <div class="ae-product-grid">
+        <!-- 1. Ultraviewer V2.1 Retest Engine -->
+        <div class="rb-spotlight-card ae-prod-card rb-reveal">
+          <div class="ae-fw-meta">Retest & Trend Engine</div>
+          <h3>Ultraviewer V2.1</h3>
+          <p>Blue Band retest system. Identifies trend alignment with blue and red lines, then pinpoints the exact pullback entry.</p>
+
+          <div class="rb-product-stage" style="padding:14px;">
+            <div style="display:flex; justify-content:space-between; font-size:11px; font-family:'JetBrains Mono'; color:var(--ae-muted); margin-bottom:10px;">
+              <span>LIVE RETEST VISUALIZER</span>
+              <span style="color:var(--ae-cyan)">TREND: BULLISH CONVERGENCE</span>
+            </div>
+            <!-- SVG Retest Arc Visualizer -->
+            <svg viewBox="0 0 450 160" style="width:100%; height:150px; display:block;">
+              <!-- Blue Band Support Zone -->
+              <path d="M0 115 C70 100 120 50 180 75 S270 35 340 45 S410 15 450 25" fill="none" stroke="rgba(47,107,255,0.4)" stroke-width="32" stroke-linecap="round"/>
+              <!-- Retest Path with drawing animation -->
+              <path d="M0 125 C60 90 90 60 150 82 S190 55 220 80 S280 25 340 50 S410 12 450 20" fill="none" stroke="var(--ae-cyan)" stroke-width="3" stroke-linecap="round" stroke-dasharray="800" stroke-dashoffset="0" style="animation: draw 5s ease-in-out infinite;"/>
+              <!-- Retest Pulse Point -->
+              <circle cx="220" cy="80" r="7" fill="var(--ae-bullish)">
+                <animate attributeName="r" values="5;11;5" dur="1.8s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="1;0.4;1" dur="1.8s" repeatCount="indefinite"/>
+              </circle>
+              <text x="235" y="84" fill="var(--ae-bullish)" font-family="JetBrains Mono" font-size="11" font-weight="700">Retest Entry Zone</text>
+            </svg>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px;">
+            <span style="font-size:13px; color:var(--ae-muted)">✓ Dynamic Blue Band Retest Signals</span>
+            <a href="ultraviewer-guide.html" class="ae-fw-arrow">
+              Open Ultraviewer Guide <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 2. Alpha Edge UOP Theory V2.1 (Morning Breakfast & Option Decay) -->
+        <div class="rb-spotlight-card ae-prod-card rb-reveal">
+          <div class="ae-fw-meta">Option Premium Execution</div>
+          <h3>Alpha Edge UOP Theory V2.1</h3>
+          <p>Decodes option premium behavior and the signature Morning Breakfast trigger. Watch premium decay rates live.</p>
+
+          <div class="rb-product-stage">
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:rgba(0,0,0,0.3); font-size:11px; font-family:'JetBrains Mono';">
+              <span style="color:var(--ae-gold); font-weight:700;">MORNING BREAKFAST TRIGGER</span>
+              <span id="uop-breakfast-timer" style="color:var(--ae-cyan)">09:28:45 IST</span>
+            </div>
+
+            <!-- Animated Decay Bars -->
+            <div class="rb-uop-decay-grid" id="uop-decay-bars"></div>
+
+            <!-- Strike Slider Simulation -->
+            <div class="ae-sim-controls" style="margin:10px 12px 12px;">
+              <span style="color:var(--ae-muted);">ATM Strike:</span>
+              <span id="uop-strike-display" style="color:var(--ae-ink-bright); font-weight:700;">24800 CE</span>
+              <input type="range" id="uop-strike-slider" min="24600" max="25000" step="50" value="24800" style="accent-color:var(--ae-teal); width:130px; cursor:pointer;">
+            </div>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px;">
+            <span style="font-size:13px; color:var(--ae-muted)">✓ Trend Confirmation Line (TCL)</span>
+            <a href="uop-theory.html" class="ae-fw-arrow">
+              Open U.O.P. Guide <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 3. Alpha Edge Advance Feature V2.1 (Dynamic Strike Matrix) -->
+        <div class="rb-spotlight-card ae-prod-card rb-reveal">
+          <div class="ae-fw-meta">Live Strike Matrix Board</div>
+          <h3>Alpha Edge Advance Feature V2.1</h3>
+          <p>Scans CE and PE session extremes, calculates dynamic ATM anchors, and streams active buyer and seller strike dominance.</p>
+
+          <div class="rb-product-stage">
+            <div id="adv-strike-table"></div>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px;">
+            <span style="font-size:13px; color:var(--ae-muted)">✓ Real-Time Ticking Liquidity Orderbook</span>
+            <a href="advance-feature-guide.html" class="ae-fw-arrow">
+              Open Advance Guide <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 4. Alpha Edge Trend All (Multi-Timeframe Heatmap) -->
+        <div class="rb-spotlight-card ae-prod-card rb-reveal">
+          <div class="ae-fw-meta">Multi-Timeframe Confluence</div>
+          <h3>Alpha Edge Trend All</h3>
+          <p>One unified matrix for 5m, 15m, 1H, Daily, and Weekly trends across NIFTY, BANK NIFTY, FINNIFTY, MCX CRUDE, and GOLD.</p>
+
+          <div class="rb-product-stage">
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:rgba(0,0,0,0.3); font-size:11px; font-family:'JetBrains Mono';">
+              <span style="color:var(--ae-muted);">CONFLUENCE SCORE</span>
+              <span id="trend-confluence-score" style="color:var(--ae-bullish); font-weight:800;">+4.2 CONFLUENCE</span>
+            </div>
+            <div class="rb-trend-heatmap-grid" id="trend-heatmap-board"></div>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px;">
+            <span style="font-size:13px; color:var(--ae-muted)">✓ Bank Nifty +450 Pt Confluence Blueprint</span>
+            <a href="trend-all-guide.html" class="ae-fw-arrow">
+              Open Trend All Guide <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       7. 11 PRACTICAL PILLARS (High-Tech Bento Grid)
+       ========================================================================= -->
+  <section id="pillars">
+    <div class="container">
+      <div class="rb-reveal" style="text-align:center; max-width:720px; margin:0 auto;">
+        <span class="rb-decrypt-badge" style="margin-bottom:12px;">SYSTEM ARCHITECTURE</span>
+        <h2 style="font-size:clamp(30px, 4vw, 48px); margin-bottom:14px;">
+          Eleven Practical Pillars of Professional Trading
+        </h2>
+        <p style="color:var(--ae-muted); font-size:16px;">
+          Knowledge + Methodology + Discipline + Psychology + Risk Management + Continuous Learning.
+        </p>
+      </div>
+
+      <div class="ae-pillars-bento">
+        <div class="ae-pillar-box rb-reveal">
+          <span class="material-symbols-outlined icon">analytics</span>
+          <h4>Market Structure</h4>
+          <p>Order-book balance, liquidity pools, and institutional price action mechanics.</p>
+        </div>
+        <div class="ae-pillar-box rb-reveal">
+          <span class="material-symbols-outlined icon">account_tree</span>
+          <h4>Advanced Methodologies</h4>
+          <p>Discretionary execution workflows backed by multi-factor mathematical confluence.</p>
+        </div>
+        <div class="ae-pillar-box rb-reveal">
+          <span class="material-symbols-outlined icon">candlestick_chart</span>
+          <h4>Options & Premium</h4>
+          <p>Greeks, IV shift models, volatility skew, and gamma exposure management.</p>
+        </div>
+        <div class="ae-pillar-box rb-reveal">
+          <span class="material-symbols-outlined icon">corporate_fare</span>
+          <h4>Institutional Footprints</h4>
+          <p>Tracking FII/DII block orders, delivery shifts, and institutional positioning.</p>
+        </div>
+        <div class="ae-pillar-box rb-reveal">
+          <span class="material-symbols-outlined icon">psychology</span>
+          <h4>Trading Psychology</h4>
+          <p>Neutralizing emotional FOMO, revenge trading, and building systematic discipline.</p>
+        </div>
+        <div class="ae-pillar-box rb-reveal">
+          <span class="material-symbols-outlined icon">shield</span>
+          <h4>Risk & Sizing</h4>
+          <p>Mathematical stop placement, asymmetric risk-reward, and capital protection.</p>
+        </div>
+        <div class="ae-pillar-box rb-reveal">
+          <span class="material-symbols-outlined icon">memory</span>
+          <h4>AI-Powered Tools</h4>
+          <p>Algorithmic screeners, assisted backtesting, and automated quantitative alerts.</p>
+        </div>
+        <div class="ae-pillar-box rb-reveal">
+          <span class="material-symbols-outlined icon">history_edu</span>
+          <h4>Historical Research</h4>
+          <p>Extensive study of bull, bear, and rangebound regimes from 2003 through 2026.</p>
+        </div>
+        <div class="ae-pillar-box rb-reveal">
+          <span class="material-symbols-outlined icon">desktop_windows</span>
+          <h4>Live Market Desks</h4>
+          <p>Real-time market hours observation (09:15–15:30 IST) with direct mentor guidance.</p>
+        </div>
+        <div class="ae-pillar-box rb-reveal">
+          <span class="material-symbols-outlined icon">terminal</span>
+          <h4>Practical Application</h4>
+          <p>Supervised terminal setup, disciplined trade journaling, and metrics logging.</p>
+        </div>
+        <div class="ae-pillar-box rb-reveal" style="grid-column: 1 / -1;">
+          <span class="material-symbols-outlined icon" style="color:var(--ae-gold)">military_tech</span>
+          <h4 style="color:var(--ae-gold)">Continuous Mentorship</h4>
+          <p>Lifelong alumni desk support that adapts with changing market regimes and volatility cycles.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       8. FOUNDERS & LEADERSHIP (Real Photos with 3D Tilt & Specular Sheen)
+       ========================================================================= -->
+  <section id="founders">
+    <div class="container">
+      <div class="rb-reveal" style="text-align:center; max-width:700px; margin:0 auto;">
+        <span class="rb-decrypt-badge" style="margin-bottom:12px;">LEADERSHIP & MENTORSHIP</span>
+        <h2 style="font-size:clamp(30px, 4vw, 48px); margin-bottom:14px;">
+          Founded on Data Research, Engineering & Systematic Execution
+        </h2>
+      </div>
+
+      <div class="ae-founders-grid">
+        <!-- Amit Patel -->
+        <div class="ae-founder-card rb-tilt-card rb-reveal" data-tilt-max="10">
+          <div class="rb-tilt-sheen"></div>
+          <div class="rb-tilt-inner">
+            <div class="ae-founder-head">
+              <div class="ae-founder-photo-wrap">
+                <img src="./image/founder-amit-patel.jpeg" alt="Amit Patel" class="ae-founder-photo">
+              </div>
+              <div class="ae-founder-info">
+                <h3>Amit Patel</h3>
+                <small>Founder · 21+ Years Experience</small>
+                <span class="ae-founder-badge">
+                  <span class="material-symbols-outlined" style="font-size:13px">verified</span>
+                  NISM Series VIII Certified
+                </span>
+              </div>
+            </div>
+            <p style="color:var(--ae-muted); font-size:14px; line-height:1.65; margin:0;">
+              Data analyst and market research professional. Chief Architect of U.O.P., Box Theory Matrix, Momentum Plus APA, Blaster Theory, Delta Theory, and Road Map Theory. Has mentored over 2,000+ traders across online and offline institutional desks.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pragnesh Savaliya -->
+        <div class="ae-founder-card rb-tilt-card rb-reveal" data-tilt-max="10">
+          <div class="rb-tilt-sheen"></div>
+          <div class="rb-tilt-inner">
+            <div class="ae-founder-head">
+              <div class="ae-founder-photo-wrap">
+                <img src="./image/founder-pragnesh.png" alt="Pragnesh Savaliya" class="ae-founder-photo">
+              </div>
+              <div class="ae-founder-info">
+                <h3>Pragnesh Savaliya</h3>
+                <small>Co-Founder · 8+ Years Experience</small>
+                <span class="ae-founder-badge">
+                  <span class="material-symbols-outlined" style="font-size:13px">verified</span>
+                  NISM Series VIII Certified
+                </span>
+              </div>
+            </div>
+            <p style="color:var(--ae-muted); font-size:14px; line-height:1.65; margin:0;">
+              Mechanical engineer and quantitative systematic trader. Proprietary desk and algorithmic trading specialist, bringing state-of-the-art computational research, automated screeners, and engineering precision into the AlphaEdge curriculum.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       9. CALL TO ACTION BAND
+       ========================================================================= -->
+  <section style="text-align:center; padding:120px 0; position:relative; overflow:hidden;" id="join">
+    <div class="rb-aurora-wrap">
+      <div class="rb-aurora-blob rb-aurora-blob-2" style="top:20%; left:25%; width:50vw; height:50vw;"></div>
+    </div>
+    <div class="container">
+      <div class="rb-reveal" style="max-width:760px; margin:0 auto;">
+        <h2 style="font-size:clamp(32px, 4.5vw, 56px); margin-bottom:18px;">
+          <span class="rb-shiny-text">Build a Repeatable Process.</span><br>
+          <span style="color:var(--ae-ink-bright)">Never Trade On Guesses Again.</span>
+        </h2>
+        <p style="color:var(--ae-muted); font-size:17px; margin-bottom:34px;">
+          Speak directly with our senior admission team, explore our proprietary framework syllabi, and select the system tailored to your market.
+        </p>
+        <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+          <a href="contact.html" class="rb-magnet-btn rb-btn-gold">
+            Apply For Admission
+          </a>
+          <a href="tel:+919173905201" class="rb-magnet-btn">
+            <span class="material-symbols-outlined" style="font-size:18px; color:var(--ae-teal)">call</span>
+            Call +91 91739 05201
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="border-top:1px solid var(--ae-border); padding:36px 0; color:var(--ae-muted); font-size:13px; text-align:center; background:rgba(3,8,18,0.9);">
+    <div class="container">
+      <p style="margin:0 0 8px;">
+        © 2026 Alpha Edge Pro Academy · Learn the Market. Understand the Framework. Build the Discipline.
+      </p>
+      <p style="font-size:12px; color:var(--ae-muted-dark); margin:0;">
+        Stock market trading involves substantial risk. Educational purposes only. NISM Series VIII Certified Mentorship.
+      </p>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       10. FLOATING DEMO CONTROL DOCK & 'APPLY TO ALL PAGES' MODAL TRIGGER
+       ========================================================================= -->
+  <div class="rb-demo-dock">
+    <span class="rb-dock-badge">
+      <span class="material-symbols-outlined" style="font-size:14px">auto_awesome</span>
+      React Bits Demo
+    </span>
+    <span style="color:var(--ae-muted); font-size:12px;" class="hide-mobile">AlphaEdge Brand UI</span>
+    <button class="rb-dock-action" id="open-apply-modal-btn">
+      <span class="material-symbols-outlined" style="font-size:15px">integration_instructions</span>
+      How to Add to All Pages
+    </button>
+    <a href="index.html" class="rb-dock-action" style="border-color:var(--ae-border-gold); color:var(--ae-gold);">
+      <span class="material-symbols-outlined" style="font-size:15px">compare</span>
+      View Current Site
+    </a>
+  </div>
+
+  <!-- Modal: Step-by-Step Instructions to add React Bits to all pages -->
+  <div id="ae-apply-modal">
+    <div class="ae-modal-card">
+      <button class="ae-modal-close" id="close-apply-modal-btn">&times;</button>
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+        <span class="material-symbols-outlined" style="color:var(--ae-teal); font-size:28px;">auto_awesome</span>
+        <h3 style="font-size:22px; color:var(--ae-ink-bright);">How to Apply React Bits to All Web Pages</h3>
+      </div>
+      <p style="color:var(--ae-muted); font-size:14px; line-height:1.6;">
+        All animations, colors, and components are fully modular! To add this 100x upgraded UI/UX to any page (such as <code>roadmap-theory.html</code>, <code>box-theory.html</code>, <code>day-1.html</code>, etc.), simply add these 2 lines:
+      </p>
+      <div class="ae-code-snippet">
+&lt;!-- In the &lt;head&gt; of any page: --&gt;
+&lt;link rel="stylesheet" href="./css/react-bits-styles.css"&gt;
+
+&lt;!-- Just before &lt;/body&gt;: --&gt;
+&lt;script src="./js/react-bits.js"&gt;&lt;/script&gt;
+      </div>
+      <p style="color:var(--ae-muted); font-size:13px; margin:0;">
+        Then simply add classes like <code>class="rb-spotlight-card rb-tilt-card"</code> to any card, or <code>class="rb-shiny-text"</code> to any headline. Everything will automatically animate with zero manual coding!
+      </p>
+    </div>
+  </div>
+
+  <!-- React Bits Modular Interaction Script -->
+  <script src="./js/react-bits.js"></script>
+
+  <script>
+    // Modal toggle script
+    const modal = document.getElementById('ae-apply-modal');
+    document.getElementById('open-apply-modal-btn').addEventListener('click', () => modal.classList.add('active'));
+    document.getElementById('close-apply-modal-btn').addEventListener('click', () => modal.classList.remove('active'));
+    modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+  </script>
+</body>
+</html>

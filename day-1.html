@@ -3,6 +3,22 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!-- Theme Pre-hydration Script to eliminate flash -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('alphaedge_theme') || 'dark';
+          document.documentElement.dataset.theme = saved;
+          if (saved === 'dark') {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch(e) {}
+      })();
+    </script>
+    <!-- Link custom theme & animation styles -->
+    <link rel="stylesheet" href="./css/react-bits-styles.css?v=3.4" />
     <meta name="theme-color" content="#071827" />
     <meta
       name="description"
@@ -755,7 +771,10 @@
           <a href="index.html" class="back-to-home"
             ><span class="back-icon">&larr;</span>
             <span class="back-text">Back to Home</span></a
-          ><button
+          ><!-- Theme Toggle Button (Icon Only, Placed At Very Last) -->
+          <button class="tb ae-theme-toggle" id="theme" aria-label="Toggle theme" title="Toggle Light / Dark Theme">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon theme-icon-sun" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          </button><button
             class="menu"
             type="button"
             aria-label="Open menu"
@@ -844,11 +863,11 @@
             href="AlphaEdge-Day-1-Study-Guide.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            >Open study PDF ?</a
+            >Open study PDF ↗</a
           ><a
             href="AlphaEdge-Day-1-Study-Guide.pdf"
             download="AlphaEdge-Day-1-Study-Guide.pdf"
-            >Download study PDF ?</a
+            >Download study PDF ↓</a
           >
         </div>
       </div>
@@ -862,7 +881,7 @@
             Bullish Flag and Cup &amp; Handle.</span
           >
         </div>
-        <a href="day-2.html">Open Day 2 lesson ?</a>
+        <a href="day-2.html">Open Day 2 lesson →</a>
       </div>
     </div>
     <nav class="quicknav" aria-label="Lesson sections">
@@ -1899,5 +1918,6 @@
         }
       });
     </script>
+    <script src="./js/react-bits.js?v=3.4"></script>
   </body>
 </html>

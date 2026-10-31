@@ -3,6 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Theme Pre-hydration Script to eliminate flash -->
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('alphaedge_theme') || 'dark';
+        document.documentElement.dataset.theme = saved;
+        if (saved === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch(e) {}
+    })();
+  </script>
+  <!-- Link custom theme & animation styles -->
+  <link rel="stylesheet" href="./css/react-bits-styles.css?v=3.3" />
   <meta name="theme-color" content="#080d19">
   <meta name="description" content="Alpha Edge Advance Feature V2.1 TradingView Indicator: Institutional Buyer/Seller Active Strikes Board, High/Low Option Premium Tracking, and Dynamic Trend Confirmation Line (TCL) for Indian Derivatives.">
   <title>Alpha Edge Advance Feature V2.1 | Institutional Filtration & Strike Matrix</title>
@@ -522,6 +538,10 @@
           <a href="#case-study">Indian Case Study</a>
           <a class="source" href="https://in.tradingview.com/script/oLCU2BoA-AlphaEdgePro-UOP-Theory-V3/" target="_blank" rel="noopener noreferrer">TradingView Script ↗</a>
         </nav>
+        <!-- Theme Toggle Button -->
+        <button class="tb ae-theme-toggle" id="theme" aria-label="Toggle theme" title="Toggle Light / Dark Theme">
+          ◐ Theme
+        </button>
         <a href="index.html" class="back-to-home">
           <span class="back-icon">&larr;</span>
           <span class="back-text">Back to Home</span>
@@ -843,5 +863,6 @@
     </div>
   </footer>
 
+  <script src="./js/react-bits.js"></script>
 </body>
 </html>

@@ -3,6 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Theme Pre-hydration Script to eliminate flash -->
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('alphaedge_theme') || 'dark';
+        document.documentElement.dataset.theme = saved;
+        if (saved === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch(e) {}
+    })();
+  </script>
+  <!-- Link custom theme & animation styles -->
+  <link rel="stylesheet" href="./css/react-bits-styles.css?v=3.3" />
   <meta name="theme-color" content="#080d19">
   <meta name="description" content="Alpha Edge Trend All TradingView Indicator: Multi-timeframe trend heatmap scanner across NIFTY 50, BANK NIFTY, Indian Equities, and MCX commodities for institutional trend alignment.">
   <title>Alpha Edge Trend All | Multi-Timeframe Multi-Asset Trend Matrix</title>
@@ -516,6 +532,10 @@
           <a href="#capabilities">Scanner Capabilities</a>
           <a href="#case-study">Bank Nifty Blueprint</a>
         </nav>
+        <!-- Theme Toggle Button -->
+        <button class="tb ae-theme-toggle" id="theme" aria-label="Toggle theme" title="Toggle Light / Dark Theme">
+          ◐ Theme
+        </button>
         <a href="index.html" class="back-to-home">
           <span class="back-icon">&larr;</span>
           <span class="back-text">Back to Home</span>
@@ -815,5 +835,6 @@
     </div>
   </footer>
 
+  <script src="./js/react-bits.js"></script>
 </body>
 </html>

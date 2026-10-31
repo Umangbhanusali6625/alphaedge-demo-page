@@ -1,0 +1,4188 @@
+/**
+ * AlphaEdge Pro Academy - React Bits Animation System
+ * Tailored to AlphaEdge Brand Colors: Deep Obsidian Navy, Alpha Teal (#35d1c4), Electric Cyan (#00f2fe), Luxury Gold (#f3c578)
+ * Modular & reusable for index.html, roadmap-theory.html, box-theory.html, advance-feature-guide.html, etc.
+ */
+
+/* ==========================================================================
+   THEME SYSTEM: LIGHT & DARK THEMES (from Redesign Demo)
+   ========================================================================== */
+:root,
+:root[data-theme="dark"] {
+  /* Redesign Demo Theme Variables - Dark Mode */
+  --bg: #050a1c;
+  --surf: #0b1330;
+  --line: rgba(148, 176, 255, 0.14);
+  --text: #e8eeff;
+  --mute: #8d9bc4;
+  --blue: #3b82f6;
+  --cyan: #22d3ee;
+  --vio: #8b5cf6;
+  --up: #22c55e;
+  --dn: #ef4444;
+  --hl: #ffffff;
+  --gold: #fbbf24;
+  --go: 0.5;
+  --sh: none;
+  --herobg: none;
+  --r: 20px;
+
+  /* Brand Core Palette */
+  --ae-bg: #050a1c;
+  --ae-bg-panel: #0b1330;
+  --ae-bg-panel-elevated: #0f1c42;
+  --ae-bg-glass: rgba(11, 19, 48, 0.75);
+  --ae-bg-glass-elevated: rgba(15, 28, 66, 0.85);
+
+  /* Primary Accent: Alpha Teal & Electric Cyan */
+  --ae-teal: #35d1c4;
+  --ae-cyan: #22d3ee;
+  --ae-teal-glow: rgba(53, 209, 196, 0.4);
+  --ae-cyan-glow: rgba(34, 211, 238, 0.35);
+
+  /* Secondary Accent: Luxury Gold & Amber */
+  --ae-gold: #fbbf24;
+  --ae-gold-bright: #ffc24a;
+  --ae-gold-glow: rgba(251, 191, 36, 0.45);
+  --ae-gold-dark: #b8861e;
+
+  /* Market Trading Signals */
+  --ae-bullish: #22c55e;
+  --ae-bullish-glow: rgba(34, 197, 94, 0.35);
+  --ae-bearish: #ef4444;
+  --ae-bearish-glow: rgba(239, 68, 68, 0.35);
+  --ae-blue-band: #3b82f6;
+  --ae-blue-band-glow: rgba(59, 130, 246, 0.35);
+
+  /* Typography & Surfaces */
+  --ae-ink: #e8eeff;
+  --ae-ink-bright: #ffffff;
+  --ae-muted: #8d9bc4;
+  --ae-muted-dark: #526779;
+  --ae-border: rgba(148, 176, 255, 0.14);
+  --ae-border-strong: rgba(148, 176, 255, 0.3);
+  --ae-border-gold: rgba(251, 191, 36, 0.3);
+
+  /* Easing */
+  --ae-ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ae-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ae-ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:root[data-theme="light"],
+html[data-theme="light"] {
+  /* Redesign Demo Theme Variables - Light Mode */
+  --bg: #f4f7ff;
+  --surf: #ffffff;
+  --line: rgba(30, 58, 138, 0.14);
+  --text: #0a1536;
+  --mute: #4f5d87;
+  --blue: #2563eb;
+  --cyan: #0e7490;
+  --vio: #7c3aed;
+  --up: #16a34a;
+  --dn: #dc2626;
+  --hl: #0a1536;
+  --gold: #b45309;
+  --go: 0.28;
+  --sh: 0 16px 40px -20px rgba(30, 58, 138, 0.35);
+  --herobg: linear-gradient(180deg, #e4ecff, var(--bg) 92%);
+  --r: 20px;
+
+  /* Brand Core Palette in Light Mode */
+  --ae-bg: #f4f7ff;
+  --ae-bg-panel: #ffffff;
+  --ae-bg-panel-elevated: #f0f4ff;
+  --ae-bg-glass: rgba(255, 255, 255, 0.88);
+  --ae-bg-glass-elevated: rgba(240, 244, 255, 0.95);
+
+  /* Primary Accent in Light Mode */
+  --ae-teal: #0e7490;
+  --ae-cyan: #0284c7;
+  --ae-teal-glow: rgba(14, 116, 144, 0.25);
+  --ae-cyan-glow: rgba(2, 132, 199, 0.2);
+
+  /* Secondary Accent in Light Mode */
+  --ae-gold: #b45309;
+  --ae-gold-bright: #d97706;
+  --ae-gold-glow: rgba(180, 83, 9, 0.25);
+  --ae-gold-dark: #92400e;
+
+  /* Market Trading Signals in Light Mode */
+  --ae-bullish: #16a34a;
+  --ae-bullish-glow: rgba(22, 163, 74, 0.25);
+  --ae-bearish: #dc2626;
+  --ae-bearish-glow: rgba(220, 38, 38, 0.25);
+  --ae-blue-band: #2563eb;
+  --ae-blue-band-glow: rgba(37, 99, 235, 0.25);
+
+  /* Typography & Surfaces in Light Mode */
+  --ae-ink: #0a1536;
+  --ae-ink-bright: #050d21;
+  --ae-muted: #4f5d87;
+  --ae-muted-dark: #64748b;
+  --ae-border: rgba(30, 58, 138, 0.14);
+  --ae-border-strong: rgba(37, 99, 235, 0.28);
+  --ae-border-gold: rgba(180, 83, 9, 0.25);
+}
+
+/* Theme Toggle Button (.tb / .ae-theme-toggle) - Icon Only, Modern & Sleek */
+.tb,
+.ae-theme-toggle {
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  min-height: 42px !important;
+  max-width: 42px !important;
+  max-height: 42px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  border: 1px solid var(--line) !important;
+  background: var(--surf) !important;
+  color: var(--text) !important;
+  font-size: 0 !important; /* Hides any fallback text completely */
+  cursor: pointer;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  position: relative;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* Exception for full-width mobile menu drawer button */
+.ae-theme-toggle#theme-mobile {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 44px !important;
+  max-width: 100% !important;
+  max-height: none !important;
+  border-radius: 6px !important;
+  font-size: 13px !important;
+  padding: 10px 16px !important;
+}
+
+.tb:hover,
+.ae-theme-toggle:hover {
+  border-color: var(--blue) !important;
+  color: var(--blue) !important;
+  transform: translateY(-2px) rotate(12deg);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
+}
+
+.tb:active,
+.ae-theme-toggle:active {
+  transform: translateY(0) scale(0.92);
+}
+
+.tb svg,
+.ae-theme-toggle svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+  pointer-events: none;
+  transition: transform 0.3s ease, color 0.2s ease;
+}
+
+/* Light Mode Overrides for Theme Toggle */
+html[data-theme="light"] .tb,
+html[data-theme="light"] .ae-theme-toggle {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid rgba(30, 58, 138, 0.18) !important;
+  box-shadow: 0 2px 8px rgba(30, 58, 138, 0.08) !important;
+}
+
+html[data-theme="light"] .tb:hover,
+html[data-theme="light"] .ae-theme-toggle:hover {
+  background: #f0f7ff !important;
+  color: #0284c7 !important;
+  border-color: #0284c7 !important;
+  box-shadow: 0 4px 16px rgba(2, 132, 199, 0.25) !important;
+}
+
+/* Dark Mode Overrides for Theme Toggle */
+html[data-theme="dark"] .tb,
+html[data-theme="dark"] .ae-theme-toggle {
+  background: #0b1330 !important;
+  color: #f3c578 !important; /* Warm gold glow in dark mode */
+  border: 1px solid rgba(148, 176, 255, 0.2) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35) !important;
+}
+
+html[data-theme="dark"] .tb:hover,
+html[data-theme="dark"] .ae-theme-toggle:hover {
+  background: #111d47 !important;
+  color: #ffde82 !important;
+  border-color: #f3c578 !important;
+  box-shadow: 0 0 16px rgba(243, 197, 120, 0.35) !important;
+}
+
+/* Base resets & typography */
+.ae-theme {
+  background-color: var(--ae-bg);
+  color: var(--ae-ink);
+  font-family: 'DM Sans', 'Manrope', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   1. AURORA BACKGROUND (React Bits Aurora Component)
+   ========================================================================== */
+.rb-aurora-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.rb-aurora-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  will-change: transform, opacity;
+  animation: rb-aurora-drift 22s ease-in-out infinite alternate;
+}
+
+.rb-aurora-blob-1 {
+  width: 55vw;
+  height: 55vw;
+  background: radial-gradient(circle, rgba(47, 107, 255, 0.32) 0%, rgba(53, 209, 196, 0.18) 70%, transparent 100%);
+  top: -15%;
+  left: -10%;
+  animation-duration: 20s;
+}
+
+.rb-aurora-blob-2 {
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(0, 242, 254, 0.25) 0%, rgba(43, 227, 154, 0.12) 70%, transparent 100%);
+  top: 5%;
+  right: -15%;
+  animation-duration: 25s;
+  animation-delay: -5s;
+}
+
+.rb-aurora-blob-3 {
+  width: 45vw;
+  height: 45vw;
+  background: radial-gradient(circle, rgba(243, 197, 120, 0.16) 0%, rgba(211, 147, 22, 0.08) 60%, transparent 100%);
+  bottom: 0%;
+  left: 25%;
+  animation-duration: 28s;
+  animation-delay: -10s;
+}
+
+@keyframes rb-aurora-drift {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate(6vw, 4vh) scale(1.18) rotate(15deg);
+  }
+  100% {
+    transform: translate(-4vw, 8vh) scale(0.92) rotate(-10deg);
+  }
+}
+
+/* Subtle tech grid mesh */
+.rb-grid-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(53, 209, 196, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(53, 209, 196, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 25%, #000 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 25%, #000 30%, transparent 80%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   2. SHINY TEXT & BLUR TEXT (React Bits Text Effects)
+   ========================================================================== */
+.rb-shiny-text {
+  background: linear-gradient(
+    115deg,
+    #ffffff 20%,
+    var(--ae-cyan) 40%,
+    var(--ae-gold) 50%,
+    var(--ae-cyan) 60%,
+    #ffffff 80%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: rb-shine 4s linear infinite;
+  display: inline-block;
+  padding-bottom: 0.22em;
+  margin-bottom: -0.22em;
+  padding-right: 0.06em;
+  vertical-align: baseline;
+}
+
+.rb-shiny-gold {
+  background: linear-gradient(
+    115deg,
+    #ffffff 15%,
+    var(--ae-gold) 45%,
+    #fff7d6 55%,
+    var(--ae-gold-bright) 65%,
+    #ffffff 85%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: rb-shine 3.5s linear infinite;
+  display: inline-block;
+  padding-bottom: 0.22em;
+  margin-bottom: -0.22em;
+  padding-right: 0.06em;
+  vertical-align: baseline;
+}
+
+@keyframes rb-shine {
+  0% {
+    background-position: 150% 0;
+  }
+  100% {
+    background-position: -50% 0;
+  }
+}
+
+/* BlurText animated word tokens */
+.rb-blur-text span {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(14px);
+  transform: translateY(22px) scale(0.95);
+  animation: rb-blur-in 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes rb-blur-in {
+  to {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Decrypted / Cyber ticker tag */
+.rb-decrypt-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--ae-teal);
+  background: rgba(53, 209, 196, 0.1);
+  border: 1px solid rgba(53, 209, 196, 0.3);
+  padding: 4px 10px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 0 15px rgba(53, 209, 196, 0.15);
+}
+
+.rb-decrypt-badge .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ae-bullish);
+  box-shadow: 0 0 8px var(--ae-bullish);
+  animation: rb-pulse 1.8s infinite;
+}
+
+@keyframes rb-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* ==========================================================================
+   3. SPOTLIGHT CARDS (React Bits Interactive Spotlight & Border Glow)
+   ========================================================================== */
+.rb-spotlight-card,
+.pillar-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s var(--ae-ease-smooth), border-color 0.35s ease, box-shadow 0.35s ease;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  --spotlight-color: rgba(0, 242, 254, 0.18);
+  --border-glow-color: rgba(53, 209, 196, 0.6);
+}
+
+/* Dynamic Radial Spotlight on hover */
+.rb-spotlight-card::before,
+.pillar-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    420px circle at var(--mouse-x) var(--mouse-y),
+    var(--spotlight-color),
+    transparent 50%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ae-ease-smooth);
+  z-index: 1;
+}
+
+/* Illuminated border mask following cursor */
+.rb-spotlight-card::after,
+.pillar-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: radial-gradient(
+    300px circle at var(--mouse-x) var(--mouse-y),
+    var(--border-glow-color),
+    transparent 65%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ae-ease-smooth);
+  z-index: 2;
+}
+
+.rb-spotlight-card:hover::before,
+.rb-spotlight-card:hover::after,
+.pillar-card:hover::before,
+.pillar-card:hover::after {
+  opacity: 1;
+}
+
+.rb-spotlight-card:hover,
+.pillar-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 20px 45px -15px rgba(0, 8, 22, 0.7), 0 0 35px -10px var(--ae-teal-glow);
+}
+
+.rb-spotlight-card > * {
+  position: relative;
+  z-index: 3;
+}
+
+/* Flagship Gold Spotlight variant */
+.rb-spotlight-gold {
+  --spotlight-color: rgba(243, 197, 120, 0.2);
+  --border-glow-color: rgba(243, 197, 120, 0.85);
+  background: linear-gradient(150deg, #162438, var(--ae-bg-panel));
+  border-color: var(--ae-border-gold);
+}
+
+.rb-spotlight-gold:hover {
+  box-shadow: 0 20px 45px -15px rgba(0, 8, 22, 0.7), 0 0 35px -8px var(--ae-gold-glow);
+}
+
+/* ==========================================================================
+   4. TILT 3D PARALLAX (React Bits Tilted Card)
+   ========================================================================== */
+.rb-tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.rb-tilt-inner {
+  transform: translateZ(30px);
+}
+
+.rb-tilt-sheen {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    transparent 50%,
+    rgba(0, 242, 254, 0.08) 100%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.rb-tilt-card:hover .rb-tilt-sheen {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   5. BORDER BEAM (React Bits Border Beam Animation)
+   ========================================================================== */
+.rb-border-beam {
+  position: relative;
+  overflow: hidden;
+}
+
+.rb-border-beam::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 280deg,
+    var(--ae-cyan) 320deg,
+    var(--ae-gold) 350deg,
+    transparent 360deg
+  );
+  border-radius: inherit;
+  animation: rb-beam-rotate 4s linear infinite;
+  z-index: 0;
+}
+
+.rb-border-beam-inner {
+  position: relative;
+  border-radius: inherit;
+  background: var(--ae-bg-panel);
+  z-index: 1;
+  height: 100%;
+}
+
+@keyframes rb-beam-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   6. MAGNET BUTTONS (React Bits Magnetic Interaction)
+   ========================================================================== */
+.rb-magnet-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 26px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  border: 1px solid var(--ae-border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--ae-ink);
+  transition: transform 0.25s var(--ae-ease-spring), box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  will-change: transform;
+  text-decoration: none;
+}
+
+.rb-magnet-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: skewX(-25deg);
+  pointer-events: none;
+}
+
+.rb-magnet-btn:hover::after {
+  left: 150%;
+  transition: left 0.75s ease-out;
+}
+
+.rb-magnet-btn:hover {
+  border-color: rgba(56, 189, 248, 0.5);
+  background: rgba(56, 189, 248, 0.1);
+  box-shadow: 0 10px 30px -5px rgba(0, 242, 254, 0.3);
+}
+
+/* Primary Teal Gradient Button */
+.rb-btn-primary {
+  background: linear-gradient(135deg, var(--ae-teal) 0%, #159c90 100%);
+  color: #021021;
+  border: none;
+  box-shadow: 0 4px 20px -2px var(--ae-teal-glow);
+}
+
+.rb-btn-primary:hover {
+  background: linear-gradient(135deg, #4ef2e2 0%, var(--ae-teal) 100%);
+  color: #010b17;
+  box-shadow: 0 8px 32px 0 var(--ae-teal-glow), 0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+  transform: translateY(-2px);
+}
+
+/* Luxury Gold Button */
+.rb-btn-gold {
+  background: linear-gradient(135deg, #f4c873 0%, #d39316 100%);
+  color: #071727;
+  border: none;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 25px -4px var(--ae-gold-glow);
+}
+
+.rb-btn-gold:hover {
+  background: linear-gradient(135deg, #ffe099 0%, #e29f1e 100%);
+  box-shadow: 0 8px 35px 2px var(--ae-gold-glow);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   7. PRODUCT ANIMATED SIMULATORS (Live Product Demos)
+   ========================================================================== */
+.rb-product-stage {
+  border-radius: 16px;
+  background: rgba(2, 9, 23, 0.85);
+  border: 1px solid var(--ae-border);
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Interactive Candlestick Canvas container */
+.rb-candlestick-wrap {
+  width: 100%;
+  height: 220px;
+  position: relative;
+}
+
+.rb-candlestick-wrap canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Trigger pill badge on charts */
+.rb-chart-trigger-pill {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(7, 21, 41, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--ae-teal);
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--ae-cyan);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 15px rgba(0, 242, 254, 0.25);
+}
+
+/* Option Premium Decay Bars */
+.rb-uop-decay-grid {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 140px;
+  padding: 18px 14px 10px;
+  position: relative;
+}
+
+.rb-uop-bar {
+  flex: 1;
+  background: linear-gradient(to top, rgba(47, 107, 255, 0.3), var(--ae-cyan));
+  border-radius: 4px 4px 0 0;
+  transform-origin: bottom;
+  position: relative;
+  transition: height 0.6s var(--ae-ease-smooth);
+}
+
+.rb-uop-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #ffffff;
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 0 8px #ffffff;
+}
+
+/* Strike Matrix Live Orderbook */
+.rb-strike-matrix-table {
+  width: 100%;
+  padding: 8px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+}
+
+.rb-strike-matrix-header {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1fr 0.8fr;
+  padding: 6px 8px;
+  color: var(--ae-muted);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.rb-strike-matrix-row {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1fr 0.8fr;
+  padding: 7px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  align-items: center;
+  transition: background 0.2s ease;
+}
+
+.rb-strike-matrix-row:hover {
+  background: rgba(53, 209, 196, 0.07);
+}
+
+.rb-tick-flash-up {
+  color: var(--ae-bullish);
+  text-shadow: 0 0 10px var(--ae-bullish-glow);
+  animation: rb-flash-green 0.8s ease;
+}
+
+.rb-tick-flash-dn {
+  color: var(--ae-bearish);
+  text-shadow: 0 0 10px var(--ae-bearish-glow);
+  animation: rb-flash-red 0.8s ease;
+}
+
+@keyframes rb-flash-green {
+  0% { background-color: rgba(43, 227, 154, 0.35); }
+  100% { background-color: transparent; }
+}
+
+@keyframes rb-flash-red {
+  0% { background-color: rgba(255, 93, 115, 0.35); }
+  100% { background-color: transparent; }
+}
+
+/* Multi-Timeframe Trend All Heatmap */
+.rb-trend-heatmap-grid {
+  display: grid;
+  grid-template-columns: 85px repeat(5, 1fr);
+  gap: 6px;
+  padding: 14px;
+  font-size: 11px;
+  align-items: center;
+}
+
+.rb-trend-cell {
+  border-radius: 6px;
+  text-align: center;
+  padding: 6px 2px;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  color: #020b18;
+  transition: all 0.5s var(--ae-ease-smooth);
+}
+
+/* ==========================================================================
+   8. INFINITE TICKER MARQUEE (React Bits Marquee)
+   ========================================================================== */
+.rb-marquee-container {
+  overflow: hidden;
+  border-block: 1px solid var(--line) !important;
+  background: color-mix(in srgb, var(--surf) 78%, transparent) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  padding: 14px 0 !important;
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+
+.rb-marquee-track {
+  display: flex;
+  gap: 36px;
+  width: max-content;
+  animation: rb-marquee-scroll 35s linear infinite;
+  white-space: nowrap;
+}
+
+.rb-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes rb-marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.rb-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--mute) !important;
+  transition: color 0.2s ease;
+}
+
+.rb-marquee-item b {
+  color: var(--text) !important;
+  font-family: Sora, sans-serif !important;
+  font-weight: 700 !important;
+}
+
+.rb-marquee-item:hover,
+.rb-marquee-item:hover b {
+  color: var(--blue) !important;
+}
+
+/* ==========================================================================
+   9. SCROLL REVEAL & STATS COUNTER
+   ========================================================================== */
+.rb-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(8px);
+  transition: opacity 0.85s var(--ae-ease-out), transform 0.85s var(--ae-ease-out), filter 0.85s var(--ae-ease-out);
+}
+
+.rb-reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0px);
+}
+
+/* ==========================================================================
+   10. FLOATING DEMO CONTROLLER & TOAST DOCK
+   ========================================================================== */
+.rb-demo-dock {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: rgba(5, 13, 26, 0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--ae-teal);
+  border-radius: 999px;
+  padding: 8px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), 0 0 30px -5px var(--ae-teal-glow);
+  font-size: 13px;
+}
+
+.rb-dock-badge {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--ae-teal), var(--ae-cyan));
+  color: #021021;
+  padding: 4px 10px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.rb-dock-action {
+  color: var(--ae-ink);
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--ae-border);
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+.rb-dock-action:hover {
+  background: var(--ae-teal);
+  color: #021021;
+  border-color: var(--ae-teal);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .rb-aurora-blob { filter: blur(70px); }
+  .rb-demo-dock { bottom: 12px; width: 92%; justify-content: space-between; padding: 6px 12px; font-size: 12px; }
+}
+
+/* ==========================================================================
+   11. HEADER REACT BITS ANIMATIONS
+   ========================================================================== */
+#main-nav-pill {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(3, 8, 18, 0.88) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.18) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Subtle ambient top highlight */
+#main-nav-pill::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 25%,
+    rgba(53, 209, 196, 0.35) 50%,
+    rgba(255, 255, 255, 0.08) 75%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Animated laser border beam across the bottom edge of the header */
+#main-nav-pill::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(53, 209, 196, 0.25) 20%,
+    var(--ae-cyan) 45%,
+    var(--ae-gold) 55%,
+    rgba(53, 209, 196, 0.25) 80%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: rb-header-beam 4s ease-in-out infinite;
+  pointer-events: none;
+  box-shadow: 0 0 16px rgba(0, 242, 254, 0.8);
+  z-index: 10;
+}
+
+@keyframes rb-header-beam {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Logo animation with living float and glow */
+.ae-header-logo-img {
+  transition: transform 0.4s var(--ae-ease-spring), filter 0.4s ease;
+  filter: drop-shadow(0 0 10px rgba(53, 209, 196, 0.45));
+  animation: rb-logo-float 5s ease-in-out infinite;
+}
+
+@keyframes rb-logo-float {
+  0%, 100% {
+    transform: translateY(0px);
+    filter: drop-shadow(0 0 8px rgba(53, 209, 196, 0.35));
+  }
+  50% {
+    transform: translateY(-2px);
+    filter: drop-shadow(0 0 18px rgba(0, 242, 254, 0.7));
+  }
+}
+
+.ae-header-logo-img:hover {
+  transform: scale(1.08) rotate(-2deg) translateY(-2px) !important;
+  filter: drop-shadow(0 0 24px rgba(0, 242, 254, 0.95)) drop-shadow(0 0 40px rgba(53, 209, 196, 0.5)) !important;
+}
+
+/* Desktop Navigation Top-Level Link Capsules Only */
+#main-nav-pill nav > a,
+#main-nav-pill nav > div > button {
+  position: relative;
+  height: 38px !important;
+  align-self: center;
+  padding: 0 14px !important;
+  border-radius: 999px !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  border: 1px solid transparent;
+  transition: all 0.25s var(--ae-ease-smooth);
+}
+
+#main-nav-pill nav > a:hover,
+#main-nav-pill nav > div > button:hover {
+  color: #ffffff !important;
+  background: rgba(53, 209, 196, 0.12) !important;
+  border-color: rgba(53, 209, 196, 0.45) !important;
+  box-shadow: 0 0 20px -3px rgba(53, 209, 196, 0.35), inset 0 0 10px rgba(53, 209, 196, 0.12) !important;
+  transform: translateY(-2px);
+}
+
+/* Dropdown Animation & Layout */
+#main-nav-pill .group > div {
+  transform: translateY(10px) scale(0.96);
+  transition: all 0.25s var(--ae-ease-spring);
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.25), 0 0 20px -5px rgba(59, 130, 246, 0.15) !important;
+  border: 1px solid var(--line) !important;
+  background: var(--surf) !important;
+  border-radius: 14px !important;
+  padding: 6px !important;
+  min-width: 270px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 3px !important;
+}
+
+#main-nav-pill .group:hover > div {
+  transform: translateY(0) scale(1) !important;
+}
+
+#main-nav-pill .group > div a {
+  display: flex !important;
+  width: 100% !important;
+  align-self: stretch !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  text-align: left !important;
+  height: auto !important;
+  padding: 10px 14px !important;
+  border-radius: 8px !important;
+  border: none !important;
+  background: transparent !important;
+  color: var(--text) !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: normal !important;
+  box-shadow: none !important;
+  transform: none !important;
+  transition: all 0.18s ease !important;
+}
+
+#main-nav-pill .group > div a:hover {
+  background: color-mix(in srgb, var(--blue) 12%, var(--surf)) !important;
+  color: var(--blue) !important;
+  transform: translateX(4px) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* APA + Momentum Dashboard Button - Crisp, Institutional, Sleek */
+.ae-btn-dashboard {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 10px 18px !important;
+  min-height: 44px !important;
+  border-radius: 4px !important; /* Matches rounded-sm of ADMISSION */
+  border: 1px solid rgba(56, 189, 248, 0.45) !important;
+  background: linear-gradient(135deg, #072338 0%, #0c3848 50%, #092c3a 100%) !important;
+  color: #ffffff !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  box-shadow: 0 4px 14px rgba(7, 35, 56, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease !important;
+  transform: none !important;
+}
+
+.ae-btn-dashboard:hover {
+  background: linear-gradient(135deg, #09314f 0%, #0f4b60 50%, #0d3c4f 100%) !important;
+  border-color: rgba(56, 189, 248, 0.9) !important;
+  box-shadow: 0 6px 22px rgba(14, 116, 144, 0.45), 0 0 15px rgba(56, 189, 248, 0.3) !important;
+  transform: none !important;
+  color: #ffffff !important;
+}
+
+.ae-btn-dashboard:active {
+  transform: none !important;
+}
+
+.ae-btn-dashboard span {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+.ae-btn-dashboard .material-symbols-outlined {
+  font-size: 15px !important;
+  color: #38bdf8 !important;
+  -webkit-text-fill-color: #38bdf8 !important;
+  margin-left: 4px !important;
+  transition: transform 0.2s ease, color 0.2s ease !important;
+}
+
+.ae-btn-dashboard:hover .material-symbols-outlined {
+  color: #7dd3fc !important;
+  -webkit-text-fill-color: #7dd3fc !important;
+  transform: translate(2px, -2px) !important;
+}
+
+/* Light Mode Overrides for APA + Momentum Dashboard Button */
+html[data-theme="light"] .ae-btn-dashboard {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+  border: 1px solid rgba(2, 132, 199, 0.9) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+html[data-theme="light"] .ae-btn-dashboard:hover {
+  background: linear-gradient(135deg, #0369a1 0%, #075985 100%) !important;
+  border-color: #0284c7 !important;
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.45) !important;
+}
+
+html[data-theme="light"] .ae-btn-dashboard .material-symbols-outlined {
+  color: #e0f2fe !important;
+  -webkit-text-fill-color: #e0f2fe !important;
+}
+
+/* Admission Button in Header */
+.ae-btn-header-admission {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px !important;
+  background: linear-gradient(135deg, #f4c873 0%, #d39316 100%) !important;
+  box-shadow: 0 4px 20px rgba(243, 197, 120, 0.35), 0 0 12px rgba(211, 147, 22, 0.3) !important;
+  transition: transform 0.25s var(--ae-ease-spring), box-shadow 0.35s ease, filter 0.35s ease !important;
+  animation: rb-gold-breathe 4s infinite alternate !important;
+}
+
+@keyframes rb-gold-breathe {
+  0% {
+    box-shadow: 0 4px 20px rgba(243, 197, 120, 0.35), 0 0 12px rgba(211, 147, 22, 0.3);
+  }
+  100% {
+    box-shadow: 0 6px 30px rgba(243, 197, 120, 0.6), 0 0 20px rgba(255, 194, 74, 0.45);
+  }
+}
+
+.ae-btn-header-admission::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    transparent 100%
+  );
+  transform: translateX(-150%) skewX(-20deg);
+  animation: rb-shine-gold-btn 3.8s infinite;
+  pointer-events: none;
+}
+
+@keyframes rb-shine-gold-btn {
+  0%, 25% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  70%, 100% {
+    transform: translateX(180%) skewX(-20deg);
+  }
+}
+
+.ae-btn-header-admission:hover {
+  box-shadow: 0 8px 45px rgba(243, 197, 120, 0.8), 0 0 30px rgba(255, 194, 74, 0.6) !important;
+  filter: brightness(1.1) !important;
+}
+
+/* Mobile Hamburger Button Animation */
+#mobile-menu-btn {
+  border-radius: 8px;
+  transition: all 0.25s var(--ae-ease-smooth);
+}
+
+#mobile-menu-btn:hover {
+  background: rgba(53, 209, 196, 0.12);
+  color: var(--ae-cyan) !important;
+  transform: scale(1.08);
+}
+
+/* ==========================================================================
+   12. REDESIGN DEMO: GLOW ORB BACKGROUND & INSTITUTIONAL GRID
+   ========================================================================== */
+.glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.glow b {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.52;
+  will-change: transform;
+}
+
+.glow b:nth-child(1) {
+  width: 540px;
+  height: 540px;
+  background: #3b82f6;
+  left: -8%;
+  top: -20%;
+  animation: f1 15s ease-in-out infinite alternate;
+}
+
+.glow b:nth-child(2) {
+  width: 460px;
+  height: 460px;
+  background: #8b5cf6;
+  right: -6%;
+  top: 5%;
+  opacity: 0.42;
+  animation: f2 18s ease-in-out infinite alternate;
+}
+
+.glow b:nth-child(3) {
+  width: 420px;
+  height: 420px;
+  background: #22d3ee;
+  left: 30%;
+  bottom: -15%;
+  opacity: 0.35;
+  animation: f1 20s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes f1 {
+  to { transform: translate(120px, 90px); }
+}
+
+@keyframes f2 {
+  to { transform: translate(-120px, 60px); }
+}
+
+/* 54px Institutional Radial-Mask Grid */
+.gridbg {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(148, 176, 255, 0.11) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 176, 255, 0.11) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: radial-gradient(ellipse at 50% 25%, #000 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 25%, #000 20%, transparent 75%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   13. REDESIGN DEMO: FINANCIAL TICKER TAPE
+   ========================================================================== */
+.tick {
+  border-bottom: 1px solid rgba(56, 189, 248, 0.18);
+  border-top: 1px solid rgba(56, 189, 248, 0.12);
+  overflow: hidden;
+  font: 600 13px 'JetBrains Mono', 'DM Sans', monospace;
+  background: rgba(4, 11, 24, 0.95);
+  backdrop-filter: blur(12px);
+  position: relative;
+  z-index: 30;
+  width: 100%;
+}
+
+.tk {
+  display: flex;
+  gap: 36px;
+  width: max-content;
+  padding: 6px 0;
+  animation: mq 30s linear infinite;
+}
+
+.tk span {
+  display: inline-flex;
+  align-items: center;
+  color: var(--ae-ink);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+.tk span b {
+  margin-left: 8px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.tk .u {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.14);
+}
+
+.tk .d {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.14);
+}
+
+@keyframes mq {
+  to { transform: translateX(-50%); }
+}
+
+/* ==========================================================================
+   14. REDESIGN DEMO: HERO CANDLESTICK CHART PANEL WITH BOX RANGE & U.O.P.
+   ========================================================================== */
+.panel {
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  border-radius: 24px;
+  background: rgba(7, 21, 41, 0.88);
+  backdrop-filter: blur(16px);
+  padding: 20px;
+  box-shadow: 0 40px 90px -30px rgba(47, 107, 255, 0.45), 0 0 30px rgba(53, 209, 196, 0.15);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  position: relative;
+  overflow: hidden;
+}
+
+.panel:hover {
+  border-color: rgba(53, 209, 196, 0.5);
+  box-shadow: 0 45px 100px -25px rgba(47, 107, 255, 0.6), 0 0 40px rgba(0, 242, 254, 0.25);
+}
+
+.ph {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--ae-muted);
+  margin-bottom: 12px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ph b {
+  color: var(--ae-ink-bright);
+  font-family: 'Sora', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.demo {
+  font-size: 11px;
+  border: 1px solid var(--ae-cyan);
+  color: var(--ae-cyan);
+  background: rgba(0, 242, 254, 0.1);
+  border-radius: 99px;
+  padding: 3px 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+#cv {
+  width: 100% !important;
+  height: 280px !important;
+  display: block !important;
+  border-radius: 12px !important;
+  background: color-mix(in srgb, var(--surf) 92%, var(--bg)) !important;
+}
+
+.legend {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--ae-muted);
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.legend span {
+  display: flex;
+  align-items: center;
+}
+
+.legend i {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  margin-right: 6px;
+}
+
+/* ==========================================================================
+   15. REDESIGN DEMO: SVG CURVE DRAWING & ULTRAVIEWER BAND
+   ========================================================================== */
+.ln {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ln.drawn {
+  stroke-dashoffset: 0 !important;
+}
+
+.band-canvas {
+  width: 100%;
+  height: 70px;
+  display: block;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.25);
+  margin: 10px 0;
+}
+
+/* ==========================================================================
+   16. REDESIGN DEMO: FORMULA BAR & RADAR PING
+   ========================================================================== */
+.formula {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.formula span {
+  padding: 8px 16px;
+  border-radius: 99px;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  background: rgba(7, 21, 41, 0.7);
+  font-size: 14px;
+  color: var(--ae-ink);
+  font-weight: 600;
+}
+
+.formula em {
+  font-style: normal;
+  color: var(--ae-cyan);
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.formula strong {
+  font: 800 18px 'Sora', sans-serif;
+  color: var(--ae-cyan);
+}
+
+.rb-ping-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: ping 1.8s infinite;
+  display: inline-block;
+}
+
+@keyframes ping {
+  0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.8); }
+  70%, 100% { box-shadow: 0 0 0 10px transparent; }
+}
+
+/* ==========================================================================
+   17. REDESIGN DEMO: DUAL-THEME SYSTEM (FROM REDESIGN DEMO)
+   Matches exact text color, card backgrounds, borders, shadows & typography
+   from "Alpha Edge Pro Academy – Redesign Demo.html" in both Light & Dark modes.
+   ========================================================================== */
+
+/* 1. Global Page Typography & Headings */
+h1, h2, h3, h4,
+.font-headline-lg,
+.font-headline-md,
+.font-headline-sm,
+.text-on-surface,
+.text-white {
+  font-family: Sora, system-ui, sans-serif !important;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text) !important;
+}
+
+/* 2. Global Body Copy, Paragraphs, Descriptions & Subtitles */
+p,
+.font-body-lg,
+.font-body-md,
+.font-body-sm,
+.text-on-surface-variant,
+.text-slate-200,
+.text-slate-300,
+.text-slate-400,
+.text-outline,
+.lead {
+  font-family: 'DM Sans', system-ui, sans-serif !important;
+  color: var(--mute) !important;
+  line-height: 1.6;
+}
+
+/* 3. Bold Emphasis */
+strong, b {
+  color: var(--text) !important;
+  font-weight: 700;
+}
+
+/* 4. Small Labels, Taglines, Category Badges & Smalls */
+.font-label-mono,
+.font-label-badge,
+.tagl,
+.k,
+small,
+.card .k,
+.ibox small,
+.pl small,
+.fc small {
+  color: var(--cyan) !important;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+}
+
+/* 5. Redesign Demo Shiny Text (Dynamic Gradient for Light and Dark themes) */
+.rb-shiny-text,
+.shiny {
+  background: linear-gradient(
+    110deg,
+    var(--blue) 30%,
+    var(--hl) 46%,
+    var(--cyan) 54%,
+    var(--blue) 70%
+  ) !important;
+  background-size: 250% 100% !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  display: inline-block;
+  animation: sh 3.4s linear infinite !important;
+  padding-bottom: 0.22em !important;
+  margin-bottom: -0.22em !important;
+  padding-right: 0.06em !important;
+  vertical-align: baseline;
+}
+@keyframes sh {
+  to {
+    background-position: -250% 0;
+  }
+}
+
+/* 6. Stat Numbers & Metric Displays */
+.stat strong,
+.trust b,
+[data-stat-number],
+.stat-number {
+  font: 800 42px Sora, sans-serif !important;
+  display: block;
+  background: linear-gradient(135deg, var(--blue), var(--cyan)) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* 7. Card Surfaces & Containers (Pure var(--surf) with subtle var(--line) border and var(--sh) shadow) */
+.glassmorphism-dark,
+.rb-spotlight-card,
+.pillar-card,
+.stat,
+.ibox,
+.fc,
+.pl,
+.card > div,
+.bg-surface-container,
+.bg-surface-container-low,
+.bg-surface-container-lowest,
+.bg-surface-container-high,
+.bg-surface-container-highest {
+  background: var(--surf) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--r) !important;
+  box-shadow: var(--sh) !important;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Structural borders matching theme lines */
+.border-outline\/5,
+.border-outline\/10,
+.border-outline\/20,
+.border-\[\#38bdf8\]\/15,
+.border-\[\#38bdf8\]\/20,
+.border-\[\#38bdf8\]\/30,
+.border-white\/10,
+.border-white\/\[0\.08\] {
+  border-color: var(--line) !important;
+}
+
+/* 8. Section 2 Comparison Matrix (Exact Redesign Demo Aesthetic) */
+/* Left Card: Conventional Retail Course */
+.cmp > div:first-child,
+div:has(> div > .bg-error-container),
+.cmp .bad {
+  background: var(--surf) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--r) !important;
+  box-shadow: var(--sh) !important;
+}
+
+/* Right Card: The Alpha Edge Standard (Glowing blue accent border) */
+.cmp .good,
+div:has(.border-primary\/30) {
+  background: var(--surf) !important;
+  border: 1px solid var(--blue) !important;
+  border-radius: var(--r) !important;
+  box-shadow: 0 0 60px -20px var(--blue) !important;
+}
+
+/* Conventional Tagline */
+.bg-error-container,
+.tagl {
+  color: var(--mute) !important;
+  background: color-mix(in srgb, var(--surf) 85%, var(--bg)) !important;
+  border: 1px solid var(--line) !important;
+}
+
+/* Alpha Edge Standard Tagline */
+.bg-primary\/10.text-primary {
+  color: var(--blue) !important;
+  background: color-mix(in srgb, var(--blue) 12%, var(--surf)) !important;
+  border: 1px solid color-mix(in srgb, var(--blue) 30%, transparent) !important;
+}
+
+/* Crosses & Negative Indicators (✕) */
+.text-error,
+.bad li::before {
+  color: var(--dn) !important;
+}
+
+/* Checkmarks & Positive Indicators (✓) */
+.good li::before {
+  color: var(--up) !important;
+}
+
+/* Result Strip inside Comparison */
+.border-error\/10 {
+  background: color-mix(in srgb, var(--surf) 90%, var(--bg)) !important;
+  border: 1px solid var(--line) !important;
+  color: var(--dn) !important;
+}
+
+/* 9. Section 3 Framework Cards */
+.card,
+.rb-spotlight-card {
+  background: var(--surf) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--r) !important;
+  box-shadow: var(--sh) !important;
+}
+
+.card .k,
+.rb-spotlight-card .font-label-badge {
+  color: var(--cyan) !important;
+  background: color-mix(in srgb, var(--cyan) 10%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--cyan) 25%, transparent) !important;
+  border-radius: 99px;
+  font-weight: 700;
+}
+
+/* Category & subtitle labels inside spotlight cards (clean text, no awkward blue boxes) */
+.rb-spotlight-card .font-label-mono {
+  background: transparent !important;
+  color: var(--cyan) !important;
+}
+
+/* Square step number badge (01, 02, etc.) inside cards */
+.rb-spotlight-card .w-10.h-10.font-label-mono,
+.rb-spotlight-card span.w-10.h-10 {
+  background: color-mix(in srgb, var(--blue) 12%, var(--surf)) !important;
+  color: var(--blue) !important;
+  border: 1px solid color-mix(in srgb, var(--blue) 25%, transparent) !important;
+  border-radius: 12px !important;
+}
+
+/* Analytical Focus Sub-Box inside Framework Cards */
+.bg-transparent\/50 {
+  background: color-mix(in srgb, var(--surf) 88%, var(--bg)) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 16px !important;
+}
+
+.bg-transparent\/50 span,
+.bg-transparent\/50 div {
+  color: var(--mute) !important;
+}
+
+.bg-transparent\/50 .material-symbols-outlined {
+  color: var(--up) !important;
+  background: color-mix(in srgb, var(--up) 12%, transparent) !important;
+  border-radius: 99px;
+}
+
+.bg-transparent\/50 > div > span:not(.material-symbols-outlined) {
+  color: var(--text) !important;
+}
+
+.bg-transparent\/50 .text-outline,
+.bg-transparent\/50 > span:first-child {
+  color: var(--cyan) !important;
+  font-weight: 700 !important;
+}
+
+/* Flagship Road Map Theory Card & Academic Objective Banner (Pure surface with gold accent) */
+.flag,
+.rb-spotlight-gold {
+  background: var(--surf) !important;
+  border: 2px solid var(--gold) !important;
+  box-shadow: 0 0 35px -10px rgba(251, 191, 36, 0.4), var(--sh) !important;
+}
+
+.flag > div,
+.rb-spotlight-gold > div {
+  background: transparent !important;
+}
+
+.flag .k,
+.rb-spotlight-gold .font-label-badge {
+  color: var(--gold) !important;
+  background: color-mix(in srgb, var(--gold) 15%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--gold) 30%, transparent) !important;
+}
+
+.rb-spotlight-gold .material-symbols-outlined {
+  color: var(--gold) !important;
+}
+
+/* Foundational Thesis & Inverse Surface Containers (100% readable in both themes) */
+.bg-inverse-surface {
+  background: var(--surf) !important;
+  border: 1px solid var(--line) !important;
+  color: var(--text) !important;
+}
+
+.text-inverse-on-surface,
+.bg-inverse-surface blockquote,
+.bg-inverse-surface p,
+.bg-inverse-surface .text-inverse-on-surface {
+  color: var(--text) !important;
+}
+
+.bg-inverse-surface .text-inverse-on-surface\/80,
+.bg-inverse-surface .text-inverse-on-surface\/70 {
+  color: var(--mute) !important;
+}
+
+.bg-inverse-surface .bg-inverse-on-surface\/5 {
+  background: color-mix(in srgb, var(--surf) 88%, var(--bg)) !important;
+  border: 1px solid var(--line) !important;
+}
+
+.bg-inverse-surface .bg-inverse-on-surface\/10 {
+  background: color-mix(in srgb, var(--line) 80%, transparent) !important;
+}
+
+.bg-inverse-surface .text-primary-container {
+  color: var(--cyan) !important;
+  font-weight: 700 !important;
+}
+
+.bg-inverse-surface .bg-primary-container {
+  background: color-mix(in srgb, var(--blue) 14%, var(--surf)) !important;
+  color: var(--blue) !important;
+  border: 1px solid var(--line) !important;
+}
+
+.bg-inverse-surface .bg-primary-fixed-dim {
+  background: linear-gradient(90deg, var(--blue), var(--cyan)) !important;
+}
+
+/* 10. Section 4 Product Simulators */
+.rb-product-stage {
+  background: var(--surf) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 16px !important;
+  box-shadow: var(--sh) !important;
+}
+
+.rb-stage-topbar,
+.ae-sim-controls {
+  background: color-mix(in srgb, var(--surf) 88%, var(--bg)) !important;
+  border-bottom: 1px solid var(--line) !important;
+  color: var(--text) !important;
+}
+
+.ae-sim-btn {
+  background: var(--surf) !important;
+  border: 1px solid var(--line) !important;
+  color: var(--blue) !important;
+  border-radius: 99px;
+  font-weight: 700 !important;
+}
+
+.ae-sim-btn:hover {
+  background: var(--blue) !important;
+  color: #ffffff !important;
+}
+
+/* Simulator Guide Buttons in Product Section (Excluding Header Nav) */
+section#proprietary-indicators a[href*="guide.html"],
+section#proprietary-indicators a[href*="theory.html"],
+.rb-product-stage ~ a[href*="guide.html"],
+.rb-product-stage ~ a[href*="theory.html"],
+.rb-spotlight-card > a[href*="guide.html"],
+.rb-spotlight-card > a[href*="theory.html"] {
+  background: var(--surf) !important;
+  border: 1.5px solid var(--line) !important;
+  color: var(--blue) !important;
+  font-weight: 700 !important;
+  transition: all 0.2s ease !important;
+}
+
+section#proprietary-indicators a[href*="guide.html"]:hover,
+section#proprietary-indicators a[href*="theory.html"]:hover,
+.rb-product-stage ~ a[href*="guide.html"]:hover,
+.rb-product-stage ~ a[href*="theory.html"]:hover,
+.rb-spotlight-card > a[href*="guide.html"]:hover,
+.rb-spotlight-card > a[href*="theory.html"]:hover {
+  background: var(--blue) !important;
+  color: #ffffff !important;
+  border-color: var(--blue) !important;
+  box-shadow: 0 8px 24px -6px var(--blue) !important;
+}
+
+.band-canvas {
+  background: color-mix(in srgb, var(--surf) 92%, var(--bg)) !important;
+}
+
+/* Strike Matrix table */
+#strike-matrix-tbody tr,
+.ae-matrix-table th {
+  border-color: var(--line) !important;
+  color: var(--text) !important;
+}
+
+.ae-matrix-table th {
+  background: color-mix(in srgb, var(--surf) 82%, var(--bg)) !important;
+}
+
+/* 11. Section 5 Learning Pillars & Formula */
+.pillar-card,
+.pl {
+  background: var(--surf) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 16px !important;
+  box-shadow: var(--sh) !important;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.pillar-card:hover,
+.pl:hover {
+  border-color: var(--blue) !important;
+  transform: translateY(-4px);
+}
+
+.pillar-card small,
+.pl small {
+  color: var(--cyan) !important;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pillar-card h4,
+.pillar-card h3,
+.pl h4 {
+  color: var(--text) !important;
+  font-family: Sora, sans-serif !important;
+  font-weight: 700;
+}
+
+.pillar-card p,
+.pl p {
+  color: var(--mute) !important;
+  font-size: 13.5px;
+}
+
+/* Pillar 11 (Flagship Continuous Mentorship) */
+.pillar-card.col-span-full,
+.pl.wide {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--blue) 18%, var(--surf)),
+    color-mix(in srgb, var(--vio) 18%, var(--surf))
+  ) !important;
+  border: 1px solid var(--line) !important;
+}
+
+/* Formula equation strip */
+.formula span {
+  padding: 8px 14px;
+  border-radius: 99px;
+  border: 1px solid var(--line) !important;
+  background: var(--surf) !important;
+  font-size: 14px;
+  color: var(--text) !important;
+  box-shadow: var(--sh);
+}
+
+.formula em {
+  font-style: normal;
+  color: var(--mute) !important;
+}
+
+.formula strong {
+  font: 800 18px Sora, sans-serif !important;
+  color: var(--cyan) !important;
+}
+
+/* 12. Section 6 Founders & Team */
+.fc {
+  border: 1px solid var(--line) !important;
+  background: var(--surf) !important;
+  border-radius: var(--r) !important;
+  box-shadow: var(--sh) !important;
+  padding: 28px;
+}
+
+.av {
+  background: linear-gradient(135deg, var(--blue), var(--vio)) !important;
+  color: #ffffff !important;
+  border-radius: 22px;
+  font: 800 26px Sora, sans-serif;
+}
+
+.fc h3 {
+  color: var(--text) !important;
+  font-family: Sora, sans-serif !important;
+}
+
+.fc small {
+  color: var(--cyan) !important;
+  font-weight: 700;
+}
+
+.fc p {
+  color: var(--mute) !important;
+}
+
+.fc span {
+  border: 1px solid var(--line) !important;
+  background: var(--surf) !important;
+  color: var(--text) !important;
+  border-radius: 99px;
+}
+
+/* 13. Navigation & Header */
+#main-nav-pill,
+nav {
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  background: color-mix(in srgb, var(--bg) 72%, transparent) !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+
+#main-nav-pill nav > a,
+#main-nav-pill nav > div > button,
+nav ul a {
+  color: var(--mute) !important;
+  font-weight: 500;
+}
+
+#main-nav-pill nav > a:hover,
+#main-nav-pill nav > div > button:hover,
+nav ul a:hover {
+  color: var(--text) !important;
+}
+
+/* Indicators Dropdown Menu & Mobile Menu */
+#main-nav-pill .group .group-hover\:visible,
+#main-nav-pill div[class*="absolute left-0 top-full"] {
+  background: var(--surf) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 14px !important;
+  padding: 6px !important;
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.25) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 3px !important;
+  min-width: 270px !important;
+}
+
+#main-nav-pill .group .group-hover\:visible a,
+#main-nav-pill div[class*="absolute left-0 top-full"] a {
+  display: flex !important;
+  width: 100% !important;
+  align-self: stretch !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  text-align: left !important;
+  height: auto !important;
+  padding: 10px 14px !important;
+  border-radius: 8px !important;
+  border: none !important;
+  background: transparent !important;
+  color: var(--text) !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: normal !important;
+  box-shadow: none !important;
+  transform: none !important;
+  transition: all 0.18s ease !important;
+}
+
+#main-nav-pill .group .group-hover\:visible a:hover,
+#main-nav-pill div[class*="absolute left-0 top-full"] a:hover {
+  background: color-mix(in srgb, var(--blue) 12%, var(--surf)) !important;
+  color: var(--blue) !important;
+  transform: translateX(4px) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+#mobile-menu-items {
+  background: var(--surf) !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+
+#mobile-menu-items a {
+  color: var(--text) !important;
+}
+
+#mobile-menu-items a:hover {
+  color: var(--blue) !important;
+}
+
+/* Redesign Demo Primary Button (Royal Blue -> Violet Gradient) */
+.btn.pri,
+a.bg-primary,
+button.bg-primary,
+a[href*="admission"] {
+  background: linear-gradient(135deg, var(--blue), var(--vio)) !important;
+  color: #ffffff !important;
+  border: 0 !important;
+  border-radius: 99px;
+  box-shadow: 0 12px 40px -10px rgba(99, 102, 241, 0.8) !important;
+}
+
+.btn.pri span,
+a.bg-primary span,
+button.bg-primary span {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Secondary Button */
+.btn.sec,
+a.bg-surface-container-high,
+button.bg-surface-container-high {
+  background: var(--surf) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 99px;
+}
+
+a.bg-surface-container-high:hover,
+button.bg-surface-container-high:hover {
+  background: color-mix(in srgb, var(--surf) 88%, var(--bg)) !important;
+  border-color: var(--blue) !important;
+  color: var(--blue) !important;
+}
+
+/* Theme Toggle Button */
+.tb,
+#theme,
+#theme-mobile {
+  border: 1px solid var(--line) !important;
+  background: var(--surf) !important;
+  color: var(--text) !important;
+  border-radius: 99px;
+}
+
+/* 14. Ticker Tape */
+.tick {
+  border-bottom: 1px solid var(--line) !important;
+  background: var(--surf) !important;
+  color: var(--text) !important;
+}
+
+.tk span {
+  color: var(--text) !important;
+}
+
+.tk span b.u {
+  color: var(--up) !important;
+}
+
+.tk span b.d {
+  color: var(--dn) !important;
+}
+
+/* 15. Candlestick Chart Panel */
+#panel,
+.panel {
+  border: 1px solid var(--line) !important;
+  border-radius: 24px !important;
+  background: color-mix(in srgb, var(--surf) 92%, transparent) !important;
+  box-shadow: 0 40px 90px -30px rgba(59, 130, 246, 0.45) !important;
+}
+
+#panel .ph b {
+  color: var(--text) !important;
+}
+
+#panel .ph span {
+  color: var(--mute) !important;
+}
+
+#panel .demo {
+  border: 1px solid var(--cyan) !important;
+  color: var(--cyan) !important;
+  border-radius: 99px;
+}
+
+/* 16. Footer */
+footer {
+  border-top: 1px solid var(--line) !important;
+  background: var(--bg) !important;
+  color: var(--mute) !important;
+}
+
+footer p,
+footer a {
+  color: var(--mute) !important;
+}
+
+footer a:hover {
+  color: var(--text) !important;
+}
+
+/* ==========================================================================
+   18. COMPREHENSIVE CONTRAST & THEME LEGIBILITY ENGINE
+   Resolves all clashing text colors across Light & Dark themes.
+   ========================================================================== */
+
+/* Pillar 11 flagship wide card selector */
+.pillar-card.sm\:col-span-2,
+.pillar-card.col-span-full,
+.pl.wide {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--blue) 14%, var(--surf)),
+    color-mix(in srgb, var(--vio) 14%, var(--surf))
+  ) !important;
+  border: 1.5px solid var(--line) !important;
+}
+
+/* Fix Pillar Titles and Headings inside all pillar cards */
+.pillar-card h4,
+.pillar-card h3 {
+  color: var(--text) !important;
+}
+
+/* In Light Mode: Prevent hover inversion (white text on white card) */
+html[data-theme="light"] .pillar-card:hover h4,
+html[data-theme="light"] .group:hover .group-hover\:text-white,
+html[data-theme="light"] .group:hover .group-hover\:text-blue-300,
+html[data-theme="light"] .group:hover .group-hover\:text-emerald-300,
+html[data-theme="light"] .group:hover .group-hover\:text-cyan-300,
+html[data-theme="light"] .group:hover .group-hover\:text-amber-300,
+html[data-theme="light"] .group:hover .group-hover\:text-emerald-200,
+html[data-theme="light"] .group-hover\:text-white:hover {
+  color: var(--blue) !important;
+}
+
+/* In Dark Mode: Ensure high-contrast crisp text */
+:root[data-theme="dark"] .group:hover .group-hover\:text-white,
+html:not([data-theme="light"]) .group:hover .group-hover\:text-white {
+  color: #ffffff !important;
+}
+
+/* Light Mode: Upgrade 300-level pastels on white surfaces to rich 700-level contrast */
+html[data-theme="light"] .text-emerald-300,
+html[data-theme="light"] .text-emerald-400 {
+  color: #047857 !important;
+}
+html[data-theme="light"] .text-indigo-300,
+html[data-theme="light"] .text-indigo-400 {
+  color: #4338ca !important;
+}
+html[data-theme="light"] .text-amber-300,
+html[data-theme="light"] .text-amber-400,
+html[data-theme="light"] .text-amber-300\/90 {
+  color: #b45309 !important;
+}
+html[data-theme="light"] .text-sky-300,
+html[data-theme="light"] .text-sky-400 {
+  color: #0369a1 !important;
+}
+html[data-theme="light"] .text-purple-300,
+html[data-theme="light"] .text-purple-400 {
+  color: #6b21a8 !important;
+}
+html[data-theme="light"] .text-rose-300,
+html[data-theme="light"] .text-rose-400 {
+  color: #be123c !important;
+}
+html[data-theme="light"] .text-teal-300,
+html[data-theme="light"] .text-teal-400 {
+  color: #0f766e !important;
+}
+html[data-theme="light"] .text-blue-300,
+html[data-theme="light"] .text-blue-400 {
+  color: #1d4ed8 !important;
+}
+html[data-theme="light"] .text-fuchsia-300,
+html[data-theme="light"] .text-fuchsia-400 {
+  color: #a21caf !important;
+}
+html[data-theme="light"] .text-cyan-300,
+html[data-theme="light"] .text-cyan-400 {
+  color: #0e7490 !important;
+}
+html[data-theme="light"] .text-red-300,
+html[data-theme="light"] .text-red-400 {
+  color: #b91c1c !important;
+}
+
+/* Light Mode Secondary & Tertiary Brand Tokens */
+html[data-theme="light"] .text-secondary,
+html[data-theme="light"] .text-secondary-fixed {
+  color: var(--vio) !important;
+}
+html[data-theme="light"] .bg-secondary\/10 {
+  background: color-mix(in srgb, var(--vio) 12%, var(--surf)) !important;
+}
+html[data-theme="light"] .bg-secondary {
+  background: var(--vio) !important;
+  color: #ffffff !important;
+}
+html[data-theme="light"] .text-tertiary-container {
+  color: var(--gold) !important;
+}
+html[data-theme="light"] .bg-tertiary-fixed {
+  background: color-mix(in srgb, var(--gold) 15%, var(--surf)) !important;
+}
+
+/* Light Mode Footer High Contrast */
+html[data-theme="light"] footer {
+  background: var(--bg) !important;
+  border-top: 1px solid var(--line) !important;
+}
+html[data-theme="light"] footer span.font-label-mono {
+  color: var(--cyan) !important;
+  font-weight: 700;
+}
+html[data-theme="light"] footer a {
+  color: var(--mute) !important;
+}
+html[data-theme="light"] footer a:hover,
+html[data-theme="light"] footer .hover\:text-white:hover {
+  color: var(--blue) !important;
+}
+html[data-theme="light"] footer .text-slate-300,
+html[data-theme="light"] footer .text-slate-400,
+html[data-theme="light"] footer .text-slate-500 {
+  color: var(--mute) !important;
+}
+
+/* ==========================================================================
+   18. GLOBAL MULTI-PAGE THEME ENHANCEMENTS
+   Ensures consistent, flawless Dark and Light mode across all pages:
+   Theory Guides, Feature Guides, Study Guides, Bootcamp Chapters & Contact.
+   Completely resolves text color / background mismatches.
+   ========================================================================== */
+
+/* 1. Global CSS Variable Mapping across all pages in Light Mode */
+html[data-theme="light"] {
+  --bg: #f4f7ff !important;
+  --surf: #ffffff !important;
+  --line: rgba(30, 58, 138, 0.14) !important;
+  --navy: #ffffff !important;
+  --navy2: #f0f4ff !important;
+  --panel: #ffffff !important;
+  --panel-alt: #f0f4ff !important;
+  --panel2: #e9efff !important;
+  --ink: #0a1536 !important;
+  --edge: rgba(30, 58, 138, 0.14) !important;
+  --soft: #f0f4ff !important;
+
+  /* Text & Inks - HIGH CONTRAST */
+  --text: #0a1536 !important;
+  --muted: #475569 !important;
+  --mute: #475569 !important;
+
+  /* Accent colors tuned for LIGHT backgrounds */
+  --blue: #2563eb !important;
+  --teal: #0d9488 !important;
+  --cyan: #0284c7 !important;
+  --mint: #059669 !important;
+  --gold: #b45309 !important; /* Rich bronze-amber: 100% contrast on white */
+  --red: #dc2626 !important;
+  --up: #16a34a !important;
+  --dn: #dc2626 !important;
+  --hl: #0a1536 !important;
+  --sh: 0 16px 40px -20px rgba(30, 58, 138, 0.25) !important;
+  --herobg: linear-gradient(180deg, #e4ecff, #f4f7ff 92%) !important;
+}
+
+/* 2. Global Body & Backgrounds in Light Mode */
+html[data-theme="light"] body {
+  background-color: var(--bg) !important;
+  background-image: none !important;
+  color: var(--text) !important;
+}
+html[data-theme="light"] main {
+  color: var(--text) !important;
+}
+html[data-theme="light"] h1,
+html[data-theme="light"] h2,
+html[data-theme="light"] h3,
+html[data-theme="light"] h4,
+html[data-theme="light"] h5,
+html[data-theme="light"] h6 {
+  color: var(--text) !important;
+}
+
+/* 3. Global Headers, Navbars & Sticky Tops in Light Mode */
+html[data-theme="light"] .header,
+html[data-theme="light"] header,
+html[data-theme="light"] .top,
+html[data-theme="light"] nav.header {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-bottom: 1px solid var(--line) !important;
+  backdrop-filter: blur(16px) !important;
+}
+html[data-theme="light"] .nav,
+html[data-theme="light"] .nav a,
+html[data-theme="light"] nav a {
+  color: var(--mute) !important;
+}
+html[data-theme="light"] .nav a:hover,
+html[data-theme="light"] nav a:hover {
+  color: var(--blue) !important;
+}
+html[data-theme="light"] .nav .source {
+  border: 1.5px solid rgba(37, 99, 235, 0.35) !important;
+  color: var(--blue) !important;
+  background: rgba(37, 99, 235, 0.08) !important;
+  font-weight: 700 !important;
+}
+html[data-theme="light"] .nav .source:hover {
+  background: var(--blue) !important;
+  color: #ffffff !important;
+}
+html[data-theme="light"] .back-to-home {
+  color: var(--blue) !important;
+  border: 1.5px solid rgba(37, 99, 235, 0.35) !important;
+  background: rgba(37, 99, 235, 0.08) !important;
+  font-weight: 700 !important;
+}
+html[data-theme="light"] .back-to-home:hover {
+  background: var(--blue) !important;
+  color: #ffffff !important;
+}
+html[data-theme="light"] .brand-mark {
+  border-color: var(--blue) !important;
+  color: var(--blue) !important;
+}
+html[data-theme="light"] .brand small {
+  color: var(--mute) !important;
+}
+
+/* 4. Indicator Suite / Proprietary Suite Subnav (Fixes Screenshot 1) */
+html[data-theme="light"] .indicator-subnav,
+html[data-theme="light"] nav[style*="#08121f"],
+html[data-theme="light"] nav[style*="rgb(8, 18, 31)"],
+html[data-theme="light"] .subnav {
+  background: #ffffff !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .indicator-subnav span,
+html[data-theme="light"] nav[style*="#08121f"] span,
+html[data-theme="light"] nav[style*="rgb(8, 18, 31)"] span,
+html[data-theme="light"] .subnav span {
+  color: #475569 !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .indicator-subnav a,
+html[data-theme="light"] nav[style*="#08121f"] a,
+html[data-theme="light"] nav[style*="rgb(8, 18, 31)"] a,
+html[data-theme="light"] .subnav a {
+  color: #475569 !important;
+  background: #f1f5f9 !important;
+  border: 1px solid rgba(30, 58, 138, 0.12) !important;
+  font-weight: 700 !important;
+}
+html[data-theme="light"] .indicator-subnav a:hover,
+html[data-theme="light"] nav[style*="#08121f"] a:hover,
+html[data-theme="light"] nav[style*="rgb(8, 18, 31)"] a:hover {
+  color: var(--blue) !important;
+  background: rgba(37, 99, 235, 0.08) !important;
+  border-color: rgba(37, 99, 235, 0.3) !important;
+}
+html[data-theme="light"] .indicator-subnav a.current,
+html[data-theme="light"] nav[style*="#08121f"] a[style*="rgba(82, 169, 255, 0.1)"],
+html[data-theme="light"] nav[style*="rgb(8, 18, 31)"] a[style*="rgba(82, 169, 255, 0.1)"] {
+  color: var(--blue) !important;
+  background: rgba(37, 99, 235, 0.12) !important;
+  border-color: rgba(37, 99, 235, 0.4) !important;
+  font-weight: 800 !important;
+}
+
+/* 5. Global Action Buttons (Fixes Screenshot 1 button contrast) */
+html[data-theme="light"] .btn.primary,
+html[data-theme="light"] .primary {
+  background: linear-gradient(135deg, var(--blue), #6366f1) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35) !important;
+}
+html[data-theme="light"] .btn.primary *,
+html[data-theme="light"] .primary * {
+  color: #ffffff !important;
+}
+html[data-theme="light"] .btn.secondary,
+html[data-theme="light"] .secondary,
+html[data-theme="light"] .btn-secondary,
+html[data-theme="light"] .btn-sec,
+html[data-theme="light"] a.btn.secondary,
+html[data-theme="light"] a.secondary {
+  background: #ffffff !important;
+  color: var(--blue) !important;
+  border: 1.5px solid rgba(37, 99, 235, 0.35) !important;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08) !important;
+  font-weight: 700 !important;
+}
+html[data-theme="light"] .btn.secondary:hover,
+html[data-theme="light"] .secondary:hover,
+html[data-theme="light"] .btn-secondary:hover,
+html[data-theme="light"] .btn-sec:hover,
+html[data-theme="light"] a.btn.secondary:hover,
+html[data-theme="light"] a.secondary:hover {
+  background: rgba(37, 99, 235, 0.08) !important;
+  color: #1d4ed8 !important;
+  border-color: var(--blue) !important;
+}
+html[data-theme="light"] .tb,
+html[data-theme="light"] .ae-theme-toggle {
+  background: var(--surf) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--line) !important;
+}
+
+/* 6. Global Hero Sections in Light Mode */
+html[data-theme="light"] .hero,
+html[data-theme="light"] .lesson-title {
+  background: var(--herobg, linear-gradient(180deg, #e4ecff, #f4f7ff 92%)) !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .hero h1,
+html[data-theme="light"] .lesson-title h1 {
+  color: var(--text) !important;
+}
+html[data-theme="light"] .hero p,
+html[data-theme="light"] .lesson-title p,
+html[data-theme="light"] .lead {
+  color: #334155 !important;
+}
+html[data-theme="light"] .mini {
+  color: var(--mute) !important;
+}
+html[data-theme="light"] .eyebrow,
+html[data-theme="light"] .kicker {
+  color: var(--gold) !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .hero .pill {
+  background: #e0edff !important;
+  color: var(--blue) !important;
+  border: 1px solid rgba(37, 99, 235, 0.3) !important;
+}
+
+/* 7. Global Sections & Alternating Stripes in Light Mode */
+html[data-theme="light"] .section.alt,
+html[data-theme="light"] .section.soft,
+html[data-theme="light"] .journey,
+html[data-theme="light"] .theory,
+html[data-theme="light"] .chapter-five,
+html[data-theme="light"] .chapter-six,
+html[data-theme="light"] .chapter-seven,
+html[data-theme="light"] .chapter-eight,
+html[data-theme="light"] .chapter-nine,
+html[data-theme="light"] .first-solution,
+html[data-theme="light"] .AlphaEdgePro-lesson,
+html[data-theme="light"] .execution-lesson,
+html[data-theme="light"] section#AlphaEdgePro-guide,
+html[data-theme="light"] section#execution-guide,
+html[data-theme="light"] section#chapter-five,
+html[data-theme="light"] section#chapter-six,
+html[data-theme="light"] section#chapter-seven,
+html[data-theme="light"] section#chapter-eight,
+html[data-theme="light"] section#chapter-eight-guide,
+html[data-theme="light"] section#chapter-four,
+html[data-theme="light"] section#chapter-three,
+html[data-theme="light"] section#chapter-two,
+html[data-theme="light"] section#chapter-five-one,
+html[data-theme="light"] section#chapter-six-guide {
+  background: #f4f7ff !important;
+  border-color: var(--line) !important;
+  color: var(--text) !important;
+}
+
+/* 8. Global Cards, Panels, Steps, Checkpoints & Boxes (Fixes Screenshot 2 & all pages) */
+html[data-theme="light"] .card,
+html[data-theme="light"] .card.dark,
+html[data-theme="light"] .anatomy-card,
+html[data-theme="light"] .guide-card,
+html[data-theme="light"] .theory-card,
+html[data-theme="light"] .step,
+html[data-theme="light"] .step-box,
+html[data-theme="light"] .question,
+html[data-theme="light"] .rule-card,
+html[data-theme="light"] .chart-card,
+html[data-theme="light"] .confirm-card,
+html[data-theme="light"] .pillar,
+html[data-theme="light"] .pillar-card,
+html[data-theme="light"] .case-card,
+html[data-theme="light"] .table-card,
+html[data-theme="light"] .suite-card,
+html[data-theme="light"] .level-tile,
+html[data-theme="light"] .selection-grid article,
+html[data-theme="light"] .continuation-card,
+html[data-theme="light"] .zone-cards article,
+html[data-theme="light"] .comparison article,
+html[data-theme="light"] .nine-stats div,
+html[data-theme="light"] .nine-rule-grid article,
+html[data-theme="light"] .nine-decision,
+html[data-theme="light"] .story-visuals article,
+html[data-theme="light"] .expiry-example,
+html[data-theme="light"] .sequence article,
+html[data-theme="light"] .teaching-steps li,
+html[data-theme="light"] .practice-box,
+html[data-theme="light"] .spot-check,
+html[data-theme="light"] .rule-box,
+html[data-theme="light"] .metric-box,
+html[data-theme="light"] .worked-example,
+html[data-theme="light"] .step-item,
+html[data-theme="light"] .hero-art,
+html[data-theme="light"] .hero-visual,
+html[data-theme="light"] .example,
+html[data-theme="light"] .visual-shell,
+html[data-theme="light"] .pattern-card,
+html[data-theme="light"] .check,
+html[data-theme="light"] .levels,
+html[data-theme="light"] .boot-main .chapter-end {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+  color: var(--text) !important;
+  box-shadow: 0 4px 20px rgba(30, 58, 138, 0.08) !important;
+}
+
+/* Ensure text inside cards is crisp and dark */
+html[data-theme="light"] .card h3,
+html[data-theme="light"] .card.dark h3,
+html[data-theme="light"] .anatomy-card h3,
+html[data-theme="light"] .pattern-card h3,
+html[data-theme="light"] .pattern-content h3,
+html[data-theme="light"] .guide-card h3,
+html[data-theme="light"] .theory-card h3,
+html[data-theme="light"] .rule-card h3,
+html[data-theme="light"] .chart-card h3,
+html[data-theme="light"] .pillar-card h3,
+html[data-theme="light"] .case-card h3,
+html[data-theme="light"] .suite-card h4,
+html[data-theme="light"] .step-box h3,
+html[data-theme="light"] .step h3,
+html[data-theme="light"] .question b,
+html[data-theme="light"] .practice-box h2,
+html[data-theme="light"] .levels h3,
+html[data-theme="light"] .level-tile b,
+html[data-theme="light"] .hero-visual .big {
+  color: var(--text) !important;
+}
+
+html[data-theme="light"] .card p,
+html[data-theme="light"] .card.dark p,
+html[data-theme="light"] .anatomy-card p,
+html[data-theme="light"] .anatomy-card ul,
+html[data-theme="light"] .anatomy-card li,
+html[data-theme="light"] .pattern-content p,
+html[data-theme="light"] .guide-card p,
+html[data-theme="light"] .theory-card p,
+html[data-theme="light"] .theory-card li,
+html[data-theme="light"] .rule-card ol,
+html[data-theme="light"] .rule-card li,
+html[data-theme="light"] .chart-card p,
+html[data-theme="light"] .pillar-card p,
+html[data-theme="light"] .case-card p,
+html[data-theme="light"] .step-box p,
+html[data-theme="light"] .step p,
+html[data-theme="light"] .question span,
+html[data-theme="light"] .practice-box p,
+html[data-theme="light"] .check p,
+html[data-theme="light"] .teaching-steps li,
+html[data-theme="light"] .hero-visual .small {
+  color: var(--mute) !important;
+}
+
+/* 9. Rules Grid High-Contrast Styling (Fixes Screenshot 2) */
+html[data-theme="light"] .rule,
+html[data-theme="light"] .rule-grid .rule {
+  background: #ffffff !important;
+  border: 1px solid rgba(37, 99, 235, 0.22) !important;
+  border-top: 3px solid var(--blue) !important;
+  box-shadow: 0 4px 20px rgba(30, 58, 138, 0.08) !important;
+}
+html[data-theme="light"] .rule.sell {
+  background: #ffffff !important;
+  border: 1px solid rgba(220, 38, 38, 0.22) !important;
+  border-top: 3px solid var(--dn) !important;
+  box-shadow: 0 4px 20px rgba(220, 38, 38, 0.08) !important;
+}
+html[data-theme="light"] .rule .num {
+  color: var(--blue) !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .rule.sell .num {
+  color: var(--dn) !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .rule h3,
+html[data-theme="light"] .rule.sell h3 {
+  color: var(--text) !important;
+}
+html[data-theme="light"] .rule p,
+html[data-theme="light"] .rule.sell p {
+  color: var(--mute) !important;
+}
+html[data-theme="light"] .rule .line-legend,
+html[data-theme="light"] .rule .greater {
+  color: var(--mute) !important;
+}
+
+/* 10. Callout Strips & High-Visibility Amber Alerts (Fixes Screenshot 3) */
+html[data-theme="light"] .callout,
+html[data-theme="light"] .timing-note,
+html[data-theme="light"] .day-note,
+html[data-theme="light"] .insight,
+html[data-theme="light"] .process-callout,
+html[data-theme="light"] .definition,
+html[data-theme="light"] .hero-note,
+html[data-theme="light"] .equation {
+  background: #fffbeb !important;
+  border: 1px solid rgba(180, 83, 9, 0.25) !important;
+  border-left: 4px solid var(--gold) !important;
+  color: #78350f !important;
+  border-radius: 0 10px 10px 0 !important;
+  font-weight: 600 !important;
+}
+html[data-theme="light"] .callout strong,
+html[data-theme="light"] .callout b,
+html[data-theme="light"] .timing-note b,
+html[data-theme="light"] .day-note strong,
+html[data-theme="light"] .insight strong,
+html[data-theme="light"] .process-callout strong,
+html[data-theme="light"] .definition strong,
+html[data-theme="light"] .definition b {
+  color: #92400e !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .callout a,
+html[data-theme="light"] .timing-note a,
+html[data-theme="light"] .day-note a,
+html[data-theme="light"] .insight a,
+html[data-theme="light"] .process-callout a,
+html[data-theme="light"] .definition a {
+  color: var(--blue) !important;
+  font-weight: 700 !important;
+}
+
+/* 11. Educational Notes & Sources Boxes (Fixes Screenshot 4) */
+html[data-theme="light"] .note,
+html[data-theme="light"] .member-note,
+html[data-theme="light"] .sources {
+  background: #f0f5ff !important;
+  border: 1px solid rgba(30, 58, 138, 0.18) !important;
+  color: #334155 !important;
+  border-radius: 13px !important;
+}
+html[data-theme="light"] .note strong,
+html[data-theme="light"] .note b,
+html[data-theme="light"] .member-note strong,
+html[data-theme="light"] .sources h3 {
+  color: var(--text) !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .note a,
+html[data-theme="light"] .member-note a,
+html[data-theme="light"] .sources a {
+  color: var(--blue) !important;
+  font-weight: 700 !important;
+}
+
+/* 12. Chart Canvas Containers Protection (Preserves trading chart contrast) */
+html[data-theme="light"] .chart,
+html[data-theme="light"] .chart-box,
+html[data-theme="light"] .real-example figure,
+html[data-theme="light"] .wide-example figure,
+html[data-theme="light"] .pattern-visual {
+  background: #0b1423 !important;
+  border-color: #344963 !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15) !important;
+}
+html[data-theme="light"] .chart-head,
+html[data-theme="light"] .chart-caption {
+  background: #0f1c2e !important;
+  border-color: #213148 !important;
+}
+html[data-theme="light"] .chart-head span,
+html[data-theme="light"] .chart-caption span {
+  color: #93c5fd !important;
+}
+html[data-theme="light"] .chart-head small,
+html[data-theme="light"] .chart-caption small {
+  color: #94a3b8 !important;
+}
+html[data-theme="light"] .chart-foot {
+  background: #0b1423 !important;
+  border-color: #213148 !important;
+  color: #cbd5e1 !important;
+}
+html[data-theme="light"] .chart-foot span {
+  color: #cbd5e1 !important;
+}
+
+/* Keep white text inside colorful .zone containers */
+html[data-theme="light"] .zone,
+html[data-theme="light"] .zone small,
+html[data-theme="light"] .zone b,
+html[data-theme="light"] .zone span {
+  color: #ffffff !important;
+}
+
+/* 13. Bootcamp Chapters Sidebar, Navigation & Menus */
+html[data-theme="light"] .boot-sidebar {
+  background: #eef3ff !important;
+  border-right: 1px solid var(--line) !important;
+  color: var(--text) !important;
+}
+html[data-theme="light"] .boot-sidebar h2 {
+  color: var(--text) !important;
+}
+html[data-theme="light"] .boot-sidebar a {
+  color: #334155 !important;
+}
+html[data-theme="light"] .boot-sidebar a b {
+  color: var(--gold) !important;
+}
+html[data-theme="light"] .boot-sidebar a:hover {
+  background: #dbe6fc !important;
+  color: #1d4ed8 !important;
+}
+html[data-theme="light"] .boot-sidebar a[aria-current] {
+  background: #d0e0fc !important;
+  border-color: var(--blue) !important;
+  color: #1d4ed8 !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .chapter-number {
+  color: var(--gold) !important;
+  border-right-color: var(--gold) !important;
+}
+html[data-theme="light"] .lesson-nav a,
+html[data-theme="light"] .mobile-chapters summary {
+  background: var(--blue) !important;
+  color: #ffffff !important;
+}
+html[data-theme="light"] .lesson-nav a small {
+  color: #dbeafe !important;
+}
+html[data-theme="light"] .chapter-list {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+  box-shadow: 0 20px 45px rgba(30, 58, 138, 0.15) !important;
+}
+html[data-theme="light"] .chapter-list a {
+  color: var(--text) !important;
+}
+html[data-theme="light"] .chapter-list a:hover {
+  background: #eef3ff !important;
+}
+html[data-theme="light"] .chapter-list .index {
+  color: var(--gold) !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .chapter-list .label small {
+  color: #64748b !important;
+}
+
+/* 14. Quicknav, Daily Study Guides Reference & Next Lesson Banners */
+html[data-theme="light"] .pdf-reference {
+  background: #f0f7ff !important;
+  border-top: 1px solid rgba(37, 99, 235, 0.2) !important;
+  border-bottom: 1px solid rgba(37, 99, 235, 0.2) !important;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.08) !important;
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .pdf-reference h2,
+html[data-theme="light"] .pdf-reference h2#pdf-reference-title,
+html[data-theme="light"] .pdf-reference h2#pdf-title,
+html[data-theme="light"] .pdf-reference strong {
+  color: #0a1536 !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .pdf-reference p {
+  color: #334155 !important;
+  font-weight: 500 !important;
+}
+html[data-theme="light"] .pdf-actions a,
+html[data-theme="light"] .pdf-actions a:first-child {
+  background: #0284c7 !important;
+  color: #ffffff !important;
+  border: 1px solid #0284c7 !important;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.25) !important;
+  font-weight: 700 !important;
+}
+html[data-theme="light"] .pdf-actions a:hover,
+html[data-theme="light"] .pdf-actions a:first-child:hover {
+  background: #0369a1 !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.35) !important;
+  transform: translateY(-1px);
+}
+html[data-theme="light"] .pdf-actions a:last-child {
+  background: #ffffff !important;
+  color: #0284c7 !important;
+  border: 1.5px solid #0284c7 !important;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.12) !important;
+}
+html[data-theme="light"] .pdf-actions a:last-child:hover {
+  background: #e0f2fe !important;
+  color: #0369a1 !important;
+  transform: translateY(-1px);
+}
+
+/* Light Mode Continue to Next Lesson Banner (.day2-link, .lesson-next) */
+html[data-theme="light"] .day2-link,
+html[data-theme="light"] .lesson-next {
+  background: #eef5ff !important;
+  border-top: 1px solid rgba(30, 58, 138, 0.15) !important;
+  border-bottom: 1px solid rgba(30, 58, 138, 0.15) !important;
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .day2-link strong,
+html[data-theme="light"] .lesson-next strong {
+  color: #0a1536 !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .day2-link span,
+html[data-theme="light"] .lesson-next p {
+  color: #334155 !important;
+  font-weight: 500 !important;
+}
+html[data-theme="light"] .day2-link a,
+html[data-theme="light"] .lesson-next a {
+  background: #0284c7 !important;
+  color: #ffffff !important;
+  border: 1px solid #0284c7 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.25) !important;
+}
+html[data-theme="light"] .day2-link a:hover,
+html[data-theme="light"] .lesson-next a:hover {
+  background: #0369a1 !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.35) !important;
+  transform: translateY(-1px);
+}
+
+/* Dark Mode Study Guides Reference & Next Lesson Banners */
+html[data-theme="dark"] .pdf-reference {
+  background: #0b1330 !important;
+  border-top: 1px solid rgba(148, 176, 255, 0.14) !important;
+  border-bottom: 1px solid rgba(148, 176, 255, 0.14) !important;
+  color: #f8fafc !important;
+}
+html[data-theme="dark"] .pdf-reference h2,
+html[data-theme="dark"] .pdf-reference h2#pdf-reference-title,
+html[data-theme="dark"] .pdf-reference h2#pdf-title,
+html[data-theme="dark"] .pdf-reference strong {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .pdf-reference p {
+  color: #94a3b8 !important;
+}
+html[data-theme="dark"] .pdf-actions a,
+html[data-theme="dark"] .pdf-actions a:first-child {
+  background: #2563eb !important;
+  color: #ffffff !important;
+  border: 1px solid #3b82f6 !important;
+  font-weight: 700 !important;
+}
+html[data-theme="dark"] .pdf-actions a:last-child {
+  background: transparent !important;
+  color: #93c5fd !important;
+  border: 1px solid rgba(147, 197, 253, 0.4) !important;
+}
+html[data-theme="dark"] .day2-link,
+html[data-theme="dark"] .lesson-next {
+  background: #0d183d !important;
+  border-top: 1px solid rgba(148, 176, 255, 0.14) !important;
+  border-bottom: 1px solid rgba(148, 176, 255, 0.14) !important;
+  color: #f8fafc !important;
+}
+html[data-theme="dark"] .day2-link strong,
+html[data-theme="dark"] .lesson-next strong {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .day2-link span,
+html[data-theme="dark"] .lesson-next p {
+  color: #94a3b8 !important;
+}
+html[data-theme="dark"] .day2-link a,
+html[data-theme="dark"] .lesson-next a {
+  background: #2563eb !important;
+  color: #ffffff !important;
+  border: 1px solid #3b82f6 !important;
+  font-weight: 700 !important;
+}
+
+/* Course Days Sub-Nav Bar across all lesson pages */
+html[data-theme="light"] .course-days {
+  background: #ffffff !important;
+  border-top: 1px solid rgba(30, 58, 138, 0.12) !important;
+  border-bottom: 1px solid rgba(30, 58, 138, 0.12) !important;
+  box-shadow: 0 2px 10px rgba(30, 58, 138, 0.05) !important;
+}
+html[data-theme="light"] .course-days a,
+html[data-theme="light"] nav.course-days a {
+  color: #1e293b !important;
+  background: #f1f5f9 !important;
+  border: 1px solid rgba(30, 58, 138, 0.12) !important;
+  font-weight: 700 !important;
+}
+html[data-theme="light"] .course-days a:hover,
+html[data-theme="light"] nav.course-days a:hover {
+  background: #e0f2fe !important;
+  color: #0369a1 !important;
+  border-color: #38bdf8 !important;
+}
+html[data-theme="light"] .course-days a.current,
+html[data-theme="light"] nav.course-days a.current {
+  background: #0284c7 !important;
+  color: #ffffff !important;
+  border: 1px solid #0284c7 !important;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3) !important;
+  font-weight: 800 !important;
+}
+
+html[data-theme="light"] .quicknav {
+  background: #ffffff !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .quicknav a {
+  color: #334155 !important;
+  font-weight: 700 !important;
+}
+html[data-theme="light"] .quicknav a:hover {
+  color: var(--blue) !important;
+  border-color: var(--blue) !important;
+}
+html[data-theme="light"] .pattern-context {
+  color: var(--cyan) !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .pattern-content .how {
+  border-top: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .pattern-content .how strong {
+  color: var(--text) !important;
+}
+html[data-theme="light"] .check {
+  border-top: 4px solid var(--mint) !important;
+}
+html[data-theme="light"] .check b {
+  color: var(--text) !important;
+}
+
+/* 15. Badges, Indicators, Metric Tiles & Tables */
+html[data-theme="light"] .badge-tag {
+  background: rgba(180, 83, 9, 0.1) !important;
+  color: var(--gold) !important;
+  border: 1px solid rgba(180, 83, 9, 0.25) !important;
+}
+html[data-theme="light"] .formula-pill {
+  background: #eef4ff !important;
+  color: var(--cyan) !important;
+  border: 1px solid rgba(2, 132, 199, 0.25) !important;
+}
+html[data-theme="light"] .metric-badge,
+html[data-theme="light"] .pillar-num {
+  color: var(--cyan) !important;
+}
+html[data-theme="light"] .rule-box {
+  background: #fffdf5 !important;
+  border: 1px solid rgba(180, 83, 9, 0.25) !important;
+  border-left: 4px solid var(--gold) !important;
+}
+html[data-theme="light"] .rule-box h4 {
+  color: var(--gold) !important;
+}
+html[data-theme="light"] .rule-list {
+  color: #334155 !important;
+}
+html[data-theme="light"] .visual-header {
+  background: #f0f5ff !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .visual-header h3 {
+  color: var(--text) !important;
+}
+html[data-theme="light"] .visual-header p,
+html[data-theme="light"] .visual-caption {
+  color: var(--mute) !important;
+}
+html[data-theme="light"] .case-metrics article,
+html[data-theme="light"] .metric-item {
+  background: #f8faff !important;
+  border: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .case-metrics b,
+html[data-theme="light"] .metric-val {
+  color: var(--cyan) !important;
+}
+html[data-theme="light"] .metric-val.gold {
+  color: var(--gold) !important;
+}
+html[data-theme="light"] .case-metrics small,
+html[data-theme="light"] .metric-label {
+  color: #64748b !important;
+}
+html[data-theme="light"] .suite-card {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .suite-card h4 {
+  color: var(--text) !important;
+}
+html[data-theme="light"] .suite-card span {
+  color: #64748b !important;
+}
+html[data-theme="light"] .suite-card small {
+  color: var(--cyan) !important;
+}
+html[data-theme="light"] .suite-card.current {
+  border-color: var(--gold) !important;
+  background: #fffdf7 !important;
+}
+html[data-theme="light"] .tag-bull,
+html[data-theme="light"] .score-high,
+html[data-theme="light"] .status-active {
+  background: rgba(34, 197, 94, 0.15) !important;
+  color: #15803d !important;
+  border: 1px solid rgba(34, 197, 94, 0.35) !important;
+}
+html[data-theme="light"] .tag-bear,
+html[data-theme="light"] .score-low {
+  background: rgba(239, 68, 68, 0.15) !important;
+  color: #b91c1c !important;
+  border: 1px solid rgba(239, 68, 68, 0.35) !important;
+}
+html[data-theme="light"] .tag-neutral {
+  background: #f1f5f9 !important;
+  color: #475569 !important;
+  border: 1px solid #cbd5e1 !important;
+}
+html[data-theme="light"] .status-radar {
+  background: rgba(245, 158, 11, 0.15) !important;
+  color: var(--gold) !important;
+  border: 1px solid rgba(245, 158, 11, 0.35) !important;
+}
+html[data-theme="light"] .level-tile.p {
+  border-top: 3px solid #059669 !important;
+}
+html[data-theme="light"] .level-tile.p small {
+  color: #059669 !important;
+}
+html[data-theme="light"] .level-tile.o {
+  border-top: 3px solid var(--gold) !important;
+}
+html[data-theme="light"] .level-tile.o small {
+  color: var(--gold) !important;
+}
+html[data-theme="light"] .level-tile.u {
+  border-top: 3px solid var(--dn) !important;
+}
+html[data-theme="light"] .level-tile.u small {
+  color: var(--dn) !important;
+}
+html[data-theme="light"] .pause {
+  color: var(--gold) !important;
+}
+html[data-theme="light"] .hero-visual .index {
+  color: var(--blue) !important;
+}
+html[data-theme="light"] .hero-visual .highlight {
+  color: var(--gold) !important;
+}
+
+/* Global Tables in Light Mode */
+html[data-theme="light"] table,
+html[data-theme="light"] .weekly-table,
+html[data-theme="light"] .moneyness-table,
+html[data-theme="light"] .nine-map {
+  background: var(--surf) !important;
+  border-color: var(--line) !important;
+}
+html[data-theme="light"] th,
+html[data-theme="light"] .table-head {
+  background: #e2eafc !important;
+  color: #1e3a8a !important;
+  border-color: var(--line) !important;
+}
+html[data-theme="light"] .table-head h4 {
+  color: var(--text) !important;
+}
+html[data-theme="light"] .table-head span {
+  color: var(--gold) !important;
+}
+html[data-theme="light"] td {
+  border-color: var(--line) !important;
+  color: var(--text) !important;
+}
+html[data-theme="light"] tr:hover td {
+  background: rgba(37, 99, 235, 0.04) !important;
+}
+
+/* 16. Universal Typography Overrides in Light Mode */
+html[data-theme="light"] h1,
+html[data-theme="light"] h2,
+html[data-theme="light"] h3,
+html[data-theme="light"] h4,
+html[data-theme="light"] h5,
+html[data-theme="light"] h6 {
+  color: var(--text) !important;
+}
+html[data-theme="light"] p,
+html[data-theme="light"] li,
+html[data-theme="light"] .intro,
+html[data-theme="light"] .sub,
+html[data-theme="light"] .caption,
+html[data-theme="light"] figcaption,
+html[data-theme="light"] .art-caption,
+html[data-theme="light"] .section-intro,
+html[data-theme="light"] .flow p,
+html[data-theme="light"] .lead,
+html[data-theme="light"] .mini,
+html[data-theme="light"] .lesson-goal {
+  color: var(--mute) !important;
+}
+html[data-theme="light"] strong,
+html[data-theme="light"] b {
+  color: var(--text) !important;
+  font-weight: 700 !important;
+}
+html[data-theme="light"] em {
+  color: var(--cyan) !important;
+}
+html[data-theme="light"] .step:before {
+  color: var(--blue) !important;
+}
+html[data-theme="light"] .example small {
+  color: #64748b !important;
+}
+
+/* 17. Footers in Light Mode */
+html[data-theme="light"] .foot,
+html[data-theme="light"] footer,
+html[data-theme="light"] .footer {
+  background: #ffffff !important;
+  border-top: 1px solid var(--line) !important;
+  color: #64748b !important;
+}
+html[data-theme="light"] .foot a,
+html[data-theme="light"] footer a,
+html[data-theme="light"] .footer a {
+  color: var(--blue) !important;
+}
+html[data-theme="light"] .foot span,
+html[data-theme="light"] footer p,
+html[data-theme="light"] .footer p {
+  color: #64748b !important;
+}
+
+/* 18. Contact Page Form & Panels in Light Mode */
+html[data-theme="light"] .glass-panel,
+html[data-theme="light"] .bg-obsidian-900,
+html[data-theme="light"] .bg-obsidian-850,
+html[data-theme="light"] .bg-obsidian-800,
+html[data-theme="light"] .bg-obsidian-950\/60,
+html[data-theme="light"] .bg-obsidian-900\/50,
+html[data-theme="light"] .bg-obsidian-900\/40,
+html[data-theme="light"] .bg-obsidian-900\/80 {
+  background: var(--surf) !important;
+  border-color: var(--line) !important;
+  color: var(--text) !important;
+}
+html[data-theme="light"] input,
+html[data-theme="light"] select,
+html[data-theme="light"] textarea {
+  background: #f8faff !important;
+  border-color: var(--line) !important;
+  color: var(--text) !important;
+}
+html[data-theme="light"] input:focus,
+html[data-theme="light"] select:focus,
+html[data-theme="light"] textarea:focus {
+  background: #ffffff !important;
+  border-color: var(--blue) !important;
+}
+
+/* ==========================================================================
+   19. MULTI-PAGE FIXES: CHAPTER SECTIONS, FLOW PILLS, CONFIRM CARDS & EMBEDDED GUIDES
+   Completely resolves black-on-black and washed-out text across all bootcamp chapters.
+   ========================================================================== */
+
+/* Fix Screenshot 1: Chapter 4 Confirm Cards & Strips */
+html[data-theme="light"] .confirm-card {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+  box-shadow: 0 4px 20px rgba(30, 58, 138, 0.08) !important;
+}
+html[data-theme="light"] .confirm-card .card-head {
+  border-bottom: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .confirm-card h3 {
+  color: #0a1536 !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .confirm-card .card-head p {
+  color: #475569 !important;
+}
+html[data-theme="light"] .confirm-card .row {
+  border-bottom: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .confirm-card .row span {
+  color: #0a1536 !important;
+  font-weight: 700 !important;
+}
+html[data-theme="light"] .confirm-card .row span b {
+  color: #0a1536 !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .confirm-card .row strong.above,
+html[data-theme="light"] .above,
+html[data-theme="light"] strong.above {
+  color: #15803d !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .confirm-card .row strong.below,
+html[data-theme="light"] .below,
+html[data-theme="light"] strong.below {
+  color: #b91c1c !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .confirm-card .card-foot {
+  color: #475569 !important;
+  font-weight: 500 !important;
+}
+html[data-theme="light"] .confirm-card .card-foot em {
+  color: #1d4ed8 !important;
+  font-style: italic !important;
+  font-weight: 700 !important;
+}
+html[data-theme="light"] .spot-check {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+  border-left: 4px solid var(--blue) !important;
+  color: #0a1536 !important;
+  box-shadow: 0 4px 20px rgba(30, 58, 138, 0.06) !important;
+}
+html[data-theme="light"] .spot-check h3 {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .spot-check p {
+  color: #475569 !important;
+}
+html[data-theme="light"] .spot-check b {
+  color: var(--gold) !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .spot-scale .edge {
+  color: #0a1536 !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .spot-scale .edge small {
+  color: #64748b !important;
+}
+
+/* Fix Screenshot 2: Chapter 5 AlphaEdgePro Practical Guide */
+html[data-theme="light"] .AlphaEdgePro-lesson,
+html[data-theme="light"] section#AlphaEdgePro-guide,
+html[data-theme="light"] section.AlphaEdgePro-lesson {
+  background: #f4f7ff !important;
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .tv-intro {
+  color: #475569 !important;
+}
+html[data-theme="light"] .tv-link {
+  background: linear-gradient(135deg, var(--gold), #d97706) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35) !important;
+}
+html[data-theme="light"] .tv-figure {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .tv-figure figcaption {
+  color: #64748b !important;
+}
+html[data-theme="light"] .tv-board {
+  border-top: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .tv-board-head b {
+  color: var(--gold) !important;
+  border: 1.5px solid var(--gold) !important;
+  background: rgba(180, 83, 9, 0.08) !important;
+}
+html[data-theme="light"] .tv-board h2 {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .tv-board-head p {
+  color: #64748b !important;
+}
+html[data-theme="light"] .tv-board p {
+  color: #475569 !important;
+}
+html[data-theme="light"] .tv-table {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .tv-table th {
+  background: #e2eafc !important;
+  color: #1e3a8a !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .tv-table td {
+  color: #0a1536 !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .tv-table td strong {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .tv-examples article {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+  border-top: 3px solid var(--blue) !important;
+  color: #0a1536 !important;
+  box-shadow: 0 4px 16px rgba(30, 58, 138, 0.06) !important;
+}
+html[data-theme="light"] .tv-examples h3 {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .tv-examples p {
+  color: #475569 !important;
+}
+html[data-theme="light"] .tv-result {
+  background: #eff6ff !important;
+  border-left: 4px solid var(--blue) !important;
+  color: #1e3a8a !important;
+  border-radius: 0 10px 10px 0 !important;
+}
+html[data-theme="light"] .tv-result strong {
+  color: #0a1536 !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .tv-result p {
+  color: #334155 !important;
+}
+
+/* Fix Screenshot 3: Chapter 8 tg-flow Step Pills & Roadmap */
+html[data-theme="light"] .tg-flow span {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(37, 99, 235, 0.3) !important;
+  color: #1e3a8a !important;
+  font-weight: 800 !important;
+  box-shadow: 0 2px 8px rgba(30, 58, 138, 0.08) !important;
+}
+html[data-theme="light"] .tg-flow i {
+  color: var(--gold) !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .chapter-six,
+html[data-theme="light"] section#chapter-six,
+html[data-theme="light"] .chapter-five,
+html[data-theme="light"] section#chapter-five,
+html[data-theme="light"] .chapter-seven,
+html[data-theme="light"] section#chapter-seven,
+html[data-theme="light"] .chapter-eight,
+html[data-theme="light"] section#chapter-eight,
+html[data-theme="light"] .chapter-nine,
+html[data-theme="light"] section#chapter-eight-guide,
+html[data-theme="light"] .execution-lesson,
+html[data-theme="light"] section#execution-guide,
+html[data-theme="light"] .first-solution,
+html[data-theme="light"] .journey,
+html[data-theme="light"] .theory,
+html[data-theme="light"] .boot-main section {
+  background: #f4f7ff !important;
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .rejection-gallery article {
+  border-top: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .rejection-gallery h3 {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .rejection-gallery p {
+  color: #475569 !important;
+}
+html[data-theme="light"] .morning-stages article {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+  border-top: 3px solid var(--blue) !important;
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .morning-stages h3 {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .morning-stages p {
+  color: #475569 !important;
+}
+
+/* Fix Screenshot 4: Chapter 11 Trade Execution Guide */
+html[data-theme="light"] .execution-lesson,
+html[data-theme="light"] section#execution-guide,
+html[data-theme="light"] section.execution-lesson {
+  background: #f4f7ff !important;
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .execution-intro {
+  color: #475569 !important;
+}
+html[data-theme="light"] .execution-card {
+  border-top: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .execution-head b {
+  color: var(--gold) !important;
+  border: 1.5px solid var(--gold) !important;
+  background: rgba(180, 83, 9, 0.08) !important;
+}
+html[data-theme="light"] .execution-head h2 {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .execution-head p {
+  color: #64748b !important;
+}
+html[data-theme="light"] .execution-figure {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .execution-figure figcaption {
+  color: #64748b !important;
+}
+html[data-theme="light"] .execution-table {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .execution-table th {
+  background: #e2eafc !important;
+  color: #1e3a8a !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .execution-table td {
+  color: #0a1536 !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .execution-table td strong {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .execution-formula {
+  background: #fffdf5 !important;
+  border: 1.5px solid rgba(180, 83, 9, 0.25) !important;
+  border-left: 4px solid var(--gold) !important;
+  color: #78350f !important;
+  border-radius: 0 10px 10px 0 !important;
+  box-shadow: 0 4px 16px rgba(180, 83, 9, 0.08) !important;
+  padding: 22px !important;
+}
+html[data-theme="light"] .execution-formula strong {
+  color: #92400e !important;
+  font-weight: 800 !important;
+  font-size: 1.15rem !important;
+}
+html[data-theme="light"] .execution-formula p {
+  color: #78350f !important;
+  font-weight: 500 !important;
+}
+html[data-theme="light"] .execution-formula b {
+  color: #0a1536 !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .execution-notes article {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+  color: #0a1536 !important;
+  box-shadow: 0 4px 16px rgba(30, 58, 138, 0.06) !important;
+}
+html[data-theme="light"] .execution-notes h3 {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .execution-notes p {
+  color: #475569 !important;
+}
+html[data-theme="light"] .execution-list li {
+  color: #334155 !important;
+}
+html[data-theme="light"] .execution-list strong {
+  color: #0a1536 !important;
+}
+
+/* Chapter 9 Nine Image Grid, Decisions & Stats in Light Mode (Fixes Screenshot 1) */
+html[data-theme="light"] .nine-image-grid figure,
+html[data-theme="light"] .nine-decision,
+html[data-theme="light"] .nine-stats div,
+html[data-theme="light"] .nine-rule-grid article {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+  color: #0a1536 !important;
+  box-shadow: 0 4px 20px rgba(30, 58, 138, 0.08) !important;
+}
+html[data-theme="light"] .nine-image-grid figcaption,
+html[data-theme="light"] .nine-image-grid figure figcaption,
+html[data-theme="light"] .nine-decision figcaption,
+html[data-theme="light"] .zone-figure figcaption {
+  color: #475569 !important;
+  font-weight: 600 !important;
+}
+html[data-theme="light"] .nine-decision h3 {
+  color: #0a1536 !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .nine-stats small {
+  color: #64748b !important;
+}
+html[data-theme="light"] .nine-stats b {
+  color: var(--gold) !important;
+}
+html[data-theme="light"] .nine-rule-grid h3 {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .nine-rule-grid p {
+  color: #475569 !important;
+}
+html[data-theme="light"] .nine-map {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .nine-map th {
+  background: #e2eafc !important;
+  color: #1e3a8a !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .nine-map td {
+  color: #0a1536 !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+
+/* Fix Screenshot 5: Chapter 12 Embedded I.O.P Guide */
+html[data-theme="light"] .iop-content {
+  background: #f4f7ff !important;
+  color: #0a1536 !important;
+  --bg: #f4f7ff !important;
+  --panel: #ffffff !important;
+  --ink: #0a1536 !important;
+  --muted: #475569 !important;
+}
+html[data-theme="light"] .iop-content section,
+html[data-theme="light"] .iop-content .hero,
+html[data-theme="light"] .iop-content .section {
+  background: #f4f7ff !important;
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .iop-content header {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .iop-content .brand {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .iop-content nav a {
+  color: #475569 !important;
+}
+html[data-theme="light"] .iop-content nav a:hover {
+  color: var(--blue) !important;
+}
+html[data-theme="light"] .iop-content .eyebrow {
+  color: var(--gold) !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .iop-content h1,
+html[data-theme="light"] .iop-content h2,
+html[data-theme="light"] .iop-content h3,
+html[data-theme="light"] .iop-content h4 {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .iop-content h1 em {
+  color: var(--blue) !important;
+}
+html[data-theme="light"] .iop-content p,
+html[data-theme="light"] .iop-content .lead,
+html[data-theme="light"] .iop-content .intro,
+html[data-theme="light"] .iop-content .caption,
+html[data-theme="light"] .iop-content li {
+  color: #475569 !important;
+}
+html[data-theme="light"] .iop-content strong,
+html[data-theme="light"] .iop-content b {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .iop-content .ribbon {
+  background: #eef3ff !important;
+  border-top: 1px solid var(--line) !important;
+  border-bottom: 1px solid var(--line) !important;
+  color: var(--gold) !important;
+}
+html[data-theme="light"] .iop-content .ribbon span {
+  color: var(--blue) !important;
+}
+html[data-theme="light"] .iop-content .shade {
+  background: #e9f0fe !important;
+  border-block: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .iop-content .card {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+  color: #0a1536 !important;
+  box-shadow: 0 4px 20px rgba(30, 58, 138, 0.08) !important;
+}
+html[data-theme="light"] .iop-content .card h3 {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .iop-content .card p {
+  color: #475569 !important;
+}
+html[data-theme="light"] .iop-content .tag {
+  background: rgba(37, 99, 235, 0.1) !important;
+  color: var(--blue) !important;
+  border: 1px solid rgba(37, 99, 235, 0.25) !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .iop-content .button {
+  background: linear-gradient(135deg, var(--gold), #d97706) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35) !important;
+}
+html[data-theme="light"] .iop-content .button:hover {
+  background: linear-gradient(135deg, #d97706, #b45309) !important;
+  color: #ffffff !important;
+}
+html[data-theme="light"] .iop-content .contact {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .iop-content .logo figcaption {
+  color: var(--gold) !important;
+}
+html[data-theme="light"] .iop-content .chartcard,
+html[data-theme="light"] .chartcard {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+  box-shadow: 0 4px 20px rgba(30, 58, 138, 0.08) !important;
+}
+html[data-theme="light"] .iop-content .chartheading span,
+html[data-theme="light"] .chartcard .chartheading span {
+  color: var(--blue) !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .iop-content .chartheading b,
+html[data-theme="light"] .chartcard .chartheading b {
+  color: var(--gold) !important;
+  font-weight: 800 !important;
+}
+/* SVG text and paths inside chartcard (Fixes Screenshot 3) */
+html[data-theme="light"] .chartcard svg text,
+html[data-theme="light"] .iop-content .chartcard svg text,
+html[data-theme="light"] .chartcard svg g[fill] text,
+html[data-theme="light"] svg g[fill="#e6edf5"] text,
+html[data-theme="light"] svg text[fill="#e6edf5"] {
+  fill: #0a1536 !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .chartcard svg g[stroke="#263445"] path,
+html[data-theme="light"] .iop-content .chartcard svg g[stroke="#263445"] path {
+  stroke: #94a3b8 !important;
+  stroke-width: 1.5 !important;
+  fill: none !important;
+}
+html[data-theme="light"] .chartcard svg path[stroke="#6fe7b9"],
+html[data-theme="light"] .iop-content .chartcard svg path[stroke="#6fe7b9"] {
+  stroke: #059669 !important;
+  stroke-width: 5 !important;
+}
+html[data-theme="light"] .chartcard svg path[stroke="#f18c8c"],
+html[data-theme="light"] .iop-content .chartcard svg path[stroke="#f18c8c"] {
+  stroke: #dc2626 !important;
+  stroke-width: 1.5 !important;
+}
+html[data-theme="light"] .chartcard svg rect[fill="#f2c96b"],
+html[data-theme="light"] .iop-content .chartcard svg rect[fill="#f2c96b"] {
+  fill: #f59e0b !important;
+  opacity: 0.28 !important;
+}
+html[data-theme="light"] .chartcard p.caption {
+  color: #64748b !important;
+  font-weight: 500 !important;
+}
+html[data-theme="light"] .iop-content .note {
+  background: #fffdf5 !important;
+  border: 1px solid rgba(180, 83, 9, 0.25) !important;
+  border-left: 4px solid var(--gold) !important;
+  color: #78350f !important;
+}
+html[data-theme="light"] .iop-content .process {
+  border-block-color: var(--line) !important;
+}
+html[data-theme="light"] .iop-content .process b {
+  color: var(--blue) !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .iop-content .process span {
+  color: #475569 !important;
+}
+html[data-theme="light"] .iop-content details {
+  border-bottom-color: var(--line) !important;
+}
+html[data-theme="light"] .iop-content summary {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .iop-content .quote {
+  color: var(--gold) !important;
+}
+html[data-theme="light"] .iop-content .tablewrap {
+  border-color: var(--line) !important;
+  background: #ffffff !important;
+}
+html[data-theme="light"] .iop-content table {
+  background: #ffffff !important;
+}
+html[data-theme="light"] .iop-content th {
+  background: #e2eafc !important;
+  color: #1e3a8a !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .iop-content td {
+  color: #0a1536 !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .iop-content td:last-child {
+  color: #475569 !important;
+}
+html[data-theme="light"] .iop-content .maphead {
+  color: #475569 !important;
+  font-weight: 700 !important;
+}
+html[data-theme="light"] .iop-content .oi b {
+  color: #0a1536 !important;
+}
+
+/* Comprehensive Chapter End Takeaway & Practice Box Fixes */
+html[data-theme="light"] .chapter-end,
+html[data-theme="light"] .boot-main .chapter-end {
+  background: #eff6ff !important;
+  border-left: 4px solid var(--blue) !important;
+  color: #1e3a8a !important;
+  padding: 20px 24px !important;
+  border-radius: 0 12px 12px 0 !important;
+}
+html[data-theme="light"] .chapter-end b,
+html[data-theme="light"] .boot-main .chapter-end b {
+  color: #0a1536 !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .chapter-end strong,
+html[data-theme="light"] .boot-main .chapter-end strong {
+  color: #1d4ed8 !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .practice-box {
+  background: #fffdf5 !important;
+  border: 1.5px solid rgba(180, 83, 9, 0.3) !important;
+  border-top: 4px solid var(--gold) !important;
+  color: #0a1536 !important;
+  box-shadow: 0 4px 20px rgba(180, 83, 9, 0.08) !important;
+}
+html[data-theme="light"] .practice-box h2 {
+  color: #78350f !important;
+}
+html[data-theme="light"] .practice-box p {
+  color: #334155 !important;
+}
+
+/* General Multi-Page Figure, Caption, Callout & Example Fixes in Light Mode */
+html[data-theme="light"] figcaption,
+html[data-theme="light"] .caption,
+html[data-theme="light"] .art-caption {
+  color: #64748b !important;
+  font-weight: 600 !important;
+}
+html[data-theme="light"] .expiry-example {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+  color: #0a1536 !important;
+  box-shadow: 0 4px 20px rgba(30, 58, 138, 0.08) !important;
+}
+html[data-theme="light"] .expiry-example h3 {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .expiry-example p {
+  color: #475569 !important;
+}
+html[data-theme="light"] .story-visuals article {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+  color: #0a1536 !important;
+  box-shadow: 0 4px 16px rgba(30, 58, 138, 0.06) !important;
+}
+html[data-theme="light"] .story-visuals h3 {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .story-visuals p {
+  color: #475569 !important;
+}
+html[data-theme="light"] .member-note {
+  background: #f0f5ff !important;
+  border: 1px solid rgba(30, 58, 138, 0.18) !important;
+  color: #334155 !important;
+  box-shadow: 0 4px 16px rgba(30, 58, 138, 0.06) !important;
+}
+html[data-theme="light"] .member-note h3 {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .member-note p,
+html[data-theme="light"] .member-note ul {
+  color: #334155 !important;
+}
+html[data-theme="light"] .process-callout {
+  background: #fffdf5 !important;
+  border: 1px solid rgba(180, 83, 9, 0.25) !important;
+  border-left: 4px solid var(--gold) !important;
+  color: #78350f !important;
+}
+html[data-theme="light"] .process-callout strong {
+  color: #92400e !important;
+}
+html[data-theme="light"] .process-callout p {
+  color: #78350f !important;
+}
+
+/* ==========================================================================
+   20. APA Theory & Indicator Theory Pages (Light & Dark System)
+   ========================================================================== */
+
+/* Dark Theme Specifics */
+html[data-theme="dark"] .apa-page,
+html[data-theme="dark"] body.apa-theme {
+  background-color: #071727 !important;
+  color: #e2e8f0 !important;
+}
+
+/* Light Theme Overrides for APA Theory & Theory Pages */
+html[data-theme="light"] .dual-levels .levels,
+html[data-theme="light"] .levels {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+  box-shadow: 0 4px 20px rgba(30, 58, 138, 0.08) !important;
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .levels h3 {
+  color: #0a1536 !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .level b {
+  color: #0a1536 !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .level small {
+  color: #64748b !important;
+  font-weight: 700 !important;
+}
+html[data-theme="light"] .levels p {
+  color: #475569 !important;
+}
+
+html[data-theme="light"] .momentum-levels {
+  background: #f0f7ff !important;
+  border: 1.5px solid rgba(37, 99, 235, 0.25) !important;
+  color: #0a1536 !important;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.08) !important;
+}
+html[data-theme="light"] .momentum-levels h3 {
+  color: #1e3a8a !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .momentum-levels .level b {
+  color: #0a1536 !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .momentum-levels .level small {
+  color: #1e40af !important;
+  font-weight: 700 !important;
+}
+html[data-theme="light"] .momentum-levels p {
+  color: #1e3a8a !important;
+}
+
+html[data-theme="light"] .scenario-card,
+html[data-theme="light"] .setup-card,
+html[data-theme="light"] .range-path,
+html[data-theme="light"] .cycle-card {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+  box-shadow: 0 4px 20px rgba(30, 58, 138, 0.08) !important;
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .scenario-body h3,
+html[data-theme="light"] .setup-content h3,
+html[data-theme="light"] .range-path h3,
+html[data-theme="light"] .cycle-card h3 {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .scenario-body p,
+html[data-theme="light"] .setup-content p,
+html[data-theme="light"] .range-path p,
+html[data-theme="light"] .cycle-card p {
+  color: #475569 !important;
+}
+html[data-theme="light"] .scenario-body small,
+html[data-theme="light"] .setup-content small,
+html[data-theme="light"] .range-path.recovery small,
+html[data-theme="light"] .cycle-card small {
+  color: #1e3a8a !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .scenario-card.rejection .scenario-body small,
+html[data-theme="light"] .setup-card.sell .setup-content small,
+html[data-theme="light"] .range-path small,
+html[data-theme="light"] .cycle-card:nth-child(2) small {
+  color: #dc2626 !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .setup-content li {
+  color: #334155 !important;
+}
+html[data-theme="light"] .setup-content li strong,
+html[data-theme="light"] .scenario-body strong {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .setup-content li::marker {
+  color: #2563eb !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .setup-card.sell li::marker {
+  color: #dc2626 !important;
+  font-weight: 800 !important;
+}
+
+html[data-theme="light"] .scenario-rule,
+html[data-theme="light"] .setup-summary,
+html[data-theme="light"] .range-limits,
+html[data-theme="light"] .cycle-note {
+  background: #fffdf5 !important;
+  border: 1.5px solid rgba(180, 83, 9, 0.25) !important;
+  border-left: 4px solid var(--gold) !important;
+  color: #78350f !important;
+  box-shadow: 0 4px 16px rgba(180, 83, 9, 0.06) !important;
+}
+html[data-theme="light"] .scenario-rule strong,
+html[data-theme="light"] .setup-summary strong,
+html[data-theme="light"] .range-limits strong,
+html[data-theme="light"] .cycle-note strong {
+  color: #92400e !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .scenario-rule p,
+html[data-theme="light"] .setup-summary p {
+  color: #78350f !important;
+}
+
+html[data-theme="light"] .visual-section {
+  background: #eef4ff !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .visual-header {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+  color: #0a1536 !important;
+  box-shadow: 0 4px 20px rgba(30, 58, 138, 0.08) !important;
+}
+html[data-theme="light"] .visual-header h2 {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .visual-header p {
+  color: #475569 !important;
+}
+html[data-theme="light"] .visual-header .eyebrow {
+  color: #b45309 !important;
+}
+html[data-theme="light"] .visual-stack {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+  border-top: 0 !important;
+  box-shadow: 0 10px 30px rgba(30, 58, 138, 0.08) !important;
+}
+html[data-theme="light"] .visual-card {
+  background: #f8fafc !important;
+  border: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .visual-card figcaption {
+  color: #475569 !important;
+}
+html[data-theme="light"] .visual-card figcaption strong {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .visual-card figcaption span {
+  color: #64748b !important;
+}
+
+html[data-theme="light"] .range-figure,
+html[data-theme="light"] .cycle-figure {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+  box-shadow: 0 4px 20px rgba(30, 58, 138, 0.08) !important;
+}
+html[data-theme="light"] .range-figure figcaption,
+html[data-theme="light"] .cycle-figure figcaption {
+  color: #64748b !important;
+  font-weight: 600 !important;
+}
+
+html[data-theme="light"] .example {
+  background: #ffffff !important;
+  border: 1px solid var(--line) !important;
+  box-shadow: 0 6px 24px rgba(30, 58, 138, 0.08) !important;
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .example h2 {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .example p {
+  color: #475569 !important;
+}
+html[data-theme="light"] .example li {
+  color: #334155 !important;
+}
+html[data-theme="light"] .example li b {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .example .figure {
+  background: #f8fafc !important;
+  border: 1px solid var(--line) !important;
+}
+html[data-theme="light"] .example .figure h3 {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .example .figure figcaption {
+  color: #64748b !important;
+}
+html[data-theme="light"] .example .figure svg text {
+  fill: #0a1536 !important;
+  font-weight: 800 !important;
+}
+html[data-theme="light"] .example .figure svg g[stroke] path {
+  stroke: #cbd5e1 !important;
+}
+
+html[data-theme="light"] .zone,
+html[data-theme="light"] .zone *,
+html[data-theme="light"] .zone b,
+html[data-theme="light"] .zone small,
+html[data-theme="light"] .zone span {
+  color: #ffffff !important;
+}
+html[data-theme="light"] .zone small {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+html[data-theme="light"] .zone b {
+  color: #ffffff !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35) !important;
+}
+html[data-theme="light"] .zone span {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+html[data-theme="light"] .closing {
+  background: #eff6ff !important;
+  border: 1.5px solid rgba(37, 99, 235, 0.3) !important;
+  border-left: 5px solid #2563eb !important;
+  color: #1e3a8a !important;
+}
+html[data-theme="light"] .closing small {
+  color: #475569 !important;
+}
+
+html[data-theme="light"] .header {
+  background: #ffffff !important;
+  border-bottom: 1px solid var(--line) !important;
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .header .brand {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .header .nav a {
+  color: #475569 !important;
+}
+html[data-theme="light"] .header .nav a:hover {
+  color: #2563eb !important;
+}
+html[data-theme="light"] .footer {
+  background: #ffffff !important;
+  border-top: 1px solid var(--line) !important;
+  color: #475569 !important;
+}
+html[data-theme="light"] .footer strong {
+  color: #0a1536 !important;
+}
+html[data-theme="light"] .footer a {
+  color: #2563eb !important;
+}
+
+html[data-theme="light"] .back-to-home {
+  color: #1e40af !important;
+  border-color: #2563eb !important;
+  background: rgba(37, 99, 235, 0.08) !important;
+}
+html[data-theme="light"] .back-to-home:hover {
+  background: #2563eb !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25) !important;
+}
+
+html[data-theme="light"] .example .figure svg path[stroke="#56d1c6"],
+html[data-theme="light"] .example .figure svg path[stroke="#58bec3"] {
+  stroke: #0284c7 !important;
+}
+html[data-theme="light"] .example .figure svg path[stroke="#f1bf68"] {
+  stroke: #d97706 !important;
+}
+html[data-theme="light"] .example .figure svg path[stroke="#39d7c8"] {
+  stroke: #0f766e !important;
+}
+
+
+

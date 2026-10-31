@@ -1,8 +1,24 @@
 <!DOCTYPE html>
-<html class="dark scroll-smooth" lang="en">
+<html class="scroll-smooth" lang="en">
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <!-- Theme Pre-hydration Script to eliminate flash -->
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('alphaedge_theme') || 'dark';
+        document.documentElement.dataset.theme = saved;
+        if (saved === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch(e) {}
+    })();
+  </script>
+  <!-- Link custom theme & animation styles -->
+  <link rel="stylesheet" href="./css/react-bits-styles.css?v=3.4" />
   <meta name="description" content="Apply for admission to AlphaEdge Pro Academy. Learn institutional participation systems, high-probability order-flow trading, and advanced market theories.">
   <meta name="keywords" content="AlphaEdge Admissions, Institutional Trading, UOP Theory, Delta Theory, Blaster Theory, Stock Market Course, Trading Academy">
   <meta name="robots" content="index, follow">
@@ -51,87 +67,588 @@
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <!-- Custom Styles: Atmospheric Glows & Candlestick Pattern Overlays -->
-  <style data-purpose="custom-background-effects">
-    body {
+  <style data-purpose="custom-theme-system">
+    /* ========================================================= */
+    /* THEME SYSTEM FOR CONTACT.HTML                             */
+    /* ========================================================= */
+    
+    /* Common Back to Home button */
+    .back-to-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #34d399;
+      border: 1px solid rgba(52, 211, 153, 0.4);
+      padding: 7px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+      background: rgba(16, 185, 129, 0.08);
+    }
+    .back-to-home:hover {
+      background: #10b981 !important;
+      color: #080c14 !important;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.35);
+      transform: translateY(-1px);
+    }
+
+    /* Common Navigation Link */
+    .nav-link {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding: 6px 4px;
+      position: relative;
+    }
+    .nav-link:hover {
+      color: #34d399;
+    }
+
+    /* ========================================================= */
+    /* DARK MODE STYLES (Default & html[data-theme="dark"])       */
+    /* ========================================================= */
+    html[data-theme="dark"] body,
+    body:not([data-theme="light"]) {
       background-color: #080c14;
       background-image: 
         radial-gradient(at 15% 15%, rgba(16, 185, 129, 0.12) 0px, transparent 50%),
         radial-gradient(at 85% 25%, rgba(6, 182, 212, 0.08) 0px, transparent 45%),
         radial-gradient(at 50% 80%, rgba(16, 185, 129, 0.07) 0px, transparent 60%);
       background-attachment: fixed;
+      color: #e2e8f0;
     }
-    
-    /* Candlestick Grid Backdrop Pattern */
-    .market-grid-pattern {
+
+    html[data-theme="dark"] .market-grid-pattern,
+    body:not([data-theme="light"]).market-grid-pattern {
       background-color: #040911;
       background-image: 
-        linear-gradient(to bottom, rgba(4, 9, 17, 0.75), rgba(4, 9, 17, 0.95)),
+        linear-gradient(to bottom, rgba(4, 9, 17, 0.8), rgba(4, 9, 17, 0.96)),
         url('./image/professional-trading-bg.png');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
     }
 
-    /* Glass card custom treatment */
-    .glass-panel {
-      background: linear-gradient(135deg, rgba(18, 25, 39, 0.78) 0%, rgba(13, 19, 31, 0.88) 100%);
+    /* Dark Mode Header */
+    html[data-theme="dark"] header,
+    body:not([data-theme="light"]) header {
+      background: rgba(8, 12, 20, 0.94) !important;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.09) !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+    }
+    html[data-theme="dark"] .header-brand-text,
+    body:not([data-theme="light"]) .header-brand-text {
+      color: #ffffff !important;
+    }
+    html[data-theme="dark"] .header-brand-accent,
+    body:not([data-theme="light"]) .header-brand-accent {
+      color: #34d399 !important;
+    }
+    html[data-theme="dark"] .header-subbrand-text,
+    body:not([data-theme="light"]) .header-subbrand-text {
+      color: #94a3b8 !important;
+    }
+    html[data-theme="dark"] .header-nav a,
+    body:not([data-theme="light"]) .header-nav a {
+      color: #cbd5e1 !important;
+    }
+    html[data-theme="dark"] .header-nav a:hover,
+    body:not([data-theme="light"]) .header-nav a:hover {
+      color: #34d399 !important;
+    }
+    html[data-theme="dark"] #mobile-menu-btn,
+    body:not([data-theme="light"]) #mobile-menu-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+    }
+    html[data-theme="dark"] .mobile-menu-drawer,
+    body:not([data-theme="light"]) .mobile-menu-drawer {
+      background: rgba(8, 12, 20, 0.98) !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.09) !important;
+    }
+    html[data-theme="dark"] .mobile-menu-drawer a,
+    body:not([data-theme="light"]) .mobile-menu-drawer a {
+      color: #cbd5e1 !important;
+    }
+    html[data-theme="dark"] .mobile-menu-drawer a:hover,
+    body:not([data-theme="light"]) .mobile-menu-drawer a:hover {
+      background: rgba(16, 185, 129, 0.12) !important;
+      color: #34d399 !important;
     }
 
-    /* Custom Checkbox Toggle Glow Effect */
+    /* Dark Mode Glass Panel Card */
+    html[data-theme="dark"] .glass-panel,
+    body:not([data-theme="light"]) .glass-panel {
+      background: linear-gradient(135deg, rgba(18, 25, 39, 0.9) 0%, rgba(13, 19, 31, 0.96) 100%) !important;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.09) !important;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    /* Dark Mode Form Inputs & Selects - Guarantees High Contrast Typed Text */
+    input, textarea, select {
+      background-color: rgba(13, 19, 31, 0.95) !important;
+      border: 1px solid rgba(255, 255, 255, 0.14) !important;
+      color: #ffffff !important;
+      font-weight: 500;
+    }
+    input::placeholder, textarea::placeholder {
+      color: #64748b !important;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: #34d399 !important;
+      box-shadow: 0 0 0 2px rgba(52, 211, 153, 0.25) !important;
+      outline: none !important;
+    }
+    select option {
+      background-color: #0d131f !important;
+      color: #ffffff !important;
+    }
+    select option:disabled {
+      color: #64748b !important;
+    }
+
+    /* Dark Mode Course Cards */
+    .course-card {
+      background-color: rgba(13, 19, 31, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.2s ease;
+    }
+    .course-card:hover {
+      background-color: rgba(18, 25, 39, 0.95);
+      border-color: rgba(52, 211, 153, 0.4);
+    }
+    .course-title {
+      color: #ffffff;
+    }
+    .course-desc {
+      color: #94a3b8;
+    }
+    .indicator-badge {
+      background-color: #080c14;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
     .course-checkbox:checked + div {
-      border-color: #10b981;
-      background: linear-gradient(145deg, rgba(16, 185, 129, 0.12) 0%, rgba(15, 23, 42, 0.6) 100%);
-      box-shadow: 0 0 15px -3px rgba(16, 185, 129, 0.25);
+      border-color: #10b981 !important;
+      background: linear-gradient(145deg, rgba(16, 185, 129, 0.18) 0%, rgba(15, 23, 42, 0.9) 100%) !important;
+      box-shadow: 0 0 15px -3px rgba(16, 185, 129, 0.3) !important;
+    }
+    .course-checkbox:checked + div .course-title {
+      color: #34d399 !important;
     }
     .course-checkbox:checked + div .indicator-badge {
-      background-color: #10b981;
-      border-color: #34d399;
+      background-color: #10b981 !important;
+      border-color: #34d399 !important;
     }
     .course-checkbox:checked + div .indicator-icon {
       opacity: 1;
       transform: scale(1);
     }
-  </style>
 
-<style>
-  body {
-    background-color: #040911 !important;
-    background-image: 
-      linear-gradient(to bottom, rgba(4, 9, 17, 0.75), rgba(4, 9, 17, 0.95)),
-      url('./image/professional-trading-bg.png') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-attachment: fixed !important;
-  }
-</style>
+    /* Dark Mode Course Badges */
+    .badge-foundation {
+      background-color: rgba(255, 255, 255, 0.08);
+      color: #cbd5e1;
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    .badge-flagship {
+      background-color: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+    .badge-equities {
+      background-color: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+    .badge-multi {
+      background-color: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border-color: rgba(245, 158, 11, 0.3);
+    }
+    .badge-macro {
+      background-color: rgba(6, 182, 212, 0.15);
+      color: #22d3ee;
+      border-color: rgba(6, 182, 212, 0.3);
+    }
+
+    /* WebKit Autofill in Dark Mode */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus {
+      -webkit-text-fill-color: #ffffff !important;
+      -webkit-box-shadow: 0 0 0px 1000px #0d131f inset !important;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+
+    /* ========================================================= */
+    /* LIGHT MODE STYLES (html[data-theme="light"])               */
+    /* ========================================================= */
+    html[data-theme="light"] body {
+      background-color: #f4f7ff !important;
+      background-image: 
+        radial-gradient(at 15% 15%, rgba(16, 185, 129, 0.08) 0px, transparent 50%),
+        radial-gradient(at 85% 25%, rgba(6, 182, 212, 0.06) 0px, transparent 45%),
+        linear-gradient(to bottom, #ffffff, #f4f7ff) !important;
+      color: #0a1536 !important;
+    }
+    html[data-theme="light"] .market-grid-pattern {
+      background-color: #f4f7ff !important;
+      background-image: none !important;
+    }
+
+    /* Light Mode Navigation & Header */
+    html[data-theme="light"] header {
+      background: #ffffff !important;
+      border-bottom: 1px solid rgba(30, 58, 138, 0.12) !important;
+      box-shadow: 0 4px 20px rgba(30, 58, 138, 0.06) !important;
+    }
+    html[data-theme="light"] .header-brand-text {
+      color: #0a1536 !important;
+    }
+    html[data-theme="light"] .header-brand-accent {
+      color: #059669 !important;
+    }
+    html[data-theme="light"] .header-subbrand-text {
+      color: #64748b !important;
+    }
+    html[data-theme="light"] .header-nav a {
+      color: #1e293b !important;
+      font-weight: 700 !important;
+    }
+    html[data-theme="light"] .header-nav a:hover {
+      color: #059669 !important;
+    }
+    html[data-theme="light"] .back-to-home {
+      color: #065f46 !important;
+      border-color: #059669 !important;
+      background: rgba(16, 185, 129, 0.1) !important;
+    }
+    html[data-theme="light"] .back-to-home:hover {
+      background: #059669 !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 14px rgba(5, 150, 105, 0.25) !important;
+    }
+    html[data-theme="light"] #mobile-menu-btn {
+      background: #f1f5f9 !important;
+      border-color: rgba(30, 58, 138, 0.16) !important;
+      color: #0a1536 !important;
+    }
+    html[data-theme="light"] .mobile-menu-drawer {
+      background: #ffffff !important;
+      border-top: 1px solid rgba(30, 58, 138, 0.12) !important;
+      box-shadow: 0 10px 25px rgba(30, 58, 138, 0.08) !important;
+    }
+    html[data-theme="light"] .mobile-menu-drawer a {
+      color: #1e293b !important;
+      font-weight: 700 !important;
+    }
+    html[data-theme="light"] .mobile-menu-drawer a:hover {
+      background: #ecfdf5 !important;
+      color: #065f46 !important;
+    }
+
+    /* Light Mode Main Glass Panel Card */
+    html[data-theme="light"] .glass-panel {
+      background: #ffffff !important;
+      border: 1px solid rgba(30, 58, 138, 0.14) !important;
+      box-shadow: 0 12px 40px rgba(30, 58, 138, 0.08) !important;
+    }
+
+    /* Light Mode Headings, Subtitles & Section Titles */
+    html[data-theme="light"] .page-title,
+    html[data-theme="light"] h1 {
+      color: #0a1536 !important;
+    }
+    html[data-theme="light"] .page-subtitle,
+    html[data-theme="light"] p {
+      color: #475569 !important;
+    }
+    html[data-theme="light"] .section-title,
+    html[data-theme="light"] h2 {
+      color: #0a1536 !important;
+    }
+    html[data-theme="light"] .section-hint {
+      color: #64748b !important;
+    }
+    html[data-theme="light"] label,
+    html[data-theme="light"] .form-label {
+      color: #0a1536 !important;
+      font-weight: 700 !important;
+    }
+    html[data-theme="light"] .text-slate-300,
+    html[data-theme="light"] .text-slate-400 {
+      color: #475569 !important;
+    }
+    html[data-theme="light"] .text-slate-500 {
+      color: #64748b !important;
+    }
+    html[data-theme="light"] .border-slate-800,
+    html[data-theme="light"] .border-slate-700 {
+      border-color: rgba(30, 58, 138, 0.12) !important;
+    }
+
+    /* Light Mode Status Pill */
+    html[data-theme="light"] .status-pill {
+      background-color: #ecfdf5 !important;
+      border-color: #a7f3d0 !important;
+      color: #065f46 !important;
+      font-weight: 700 !important;
+    }
+
+    /* Light Mode Section Numbers (01, 02, 03) */
+    html[data-theme="light"] .section-num {
+      background-color: #ecfdf5 !important;
+      border-color: #a7f3d0 !important;
+      color: #065f46 !important;
+    }
+
+    /* Light Mode Form Inputs & Selects - Crisp Navy Text on Clean Background */
+    html[data-theme="light"] input,
+    html[data-theme="light"] textarea,
+    html[data-theme="light"] select {
+      background-color: #ffffff !important;
+      border: 1.5px solid rgba(30, 58, 138, 0.22) !important;
+      color: #0a1536 !important;
+      font-weight: 600 !important;
+    }
+    html[data-theme="light"] input::placeholder,
+    html[data-theme="light"] textarea::placeholder {
+      color: #94a3b8 !important;
+      font-weight: 400;
+    }
+    html[data-theme="light"] input:focus,
+    html[data-theme="light"] textarea:focus,
+    html[data-theme="light"] select:focus {
+      background-color: #ffffff !important;
+      border-color: #059669 !important;
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2) !important;
+      color: #0a1536 !important;
+    }
+    html[data-theme="light"] select option {
+      background-color: #ffffff !important;
+      color: #0a1536 !important;
+    }
+    html[data-theme="light"] select option:disabled {
+      color: #94a3b8 !important;
+    }
+
+    /* WebKit Autofill in Light Mode */
+    html[data-theme="light"] input:-webkit-autofill,
+    html[data-theme="light"] input:-webkit-autofill:hover,
+    html[data-theme="light"] input:-webkit-autofill:focus,
+    html[data-theme="light"] textarea:-webkit-autofill,
+    html[data-theme="light"] textarea:-webkit-autofill:hover,
+    html[data-theme="light"] textarea:-webkit-autofill:focus {
+      -webkit-text-fill-color: #0a1536 !important;
+      -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+
+    /* Light Mode Course Cards */
+    html[data-theme="light"] .course-card {
+      background-color: #f8fafc !important;
+      border: 1.5px solid rgba(30, 58, 138, 0.16) !important;
+      box-shadow: 0 2px 8px rgba(30, 58, 138, 0.04) !important;
+    }
+    html[data-theme="light"] .course-card:hover {
+      background-color: #f0fdf4 !important;
+      border-color: #059669 !important;
+    }
+    html[data-theme="light"] .course-title {
+      color: #0a1536 !important;
+      font-weight: 700 !important;
+    }
+    html[data-theme="light"] .course-desc {
+      color: #475569 !important;
+    }
+    html[data-theme="light"] .course-checkbox:checked + div {
+      background: #ecfdf5 !important;
+      border-color: #059669 !important;
+      box-shadow: 0 4px 16px rgba(5, 150, 105, 0.15) !important;
+    }
+    html[data-theme="light"] .course-checkbox:checked + div .course-title {
+      color: #064e3b !important;
+    }
+    html[data-theme="light"] .course-checkbox:checked + div .course-desc {
+      color: #047857 !important;
+    }
+    html[data-theme="light"] .indicator-badge {
+      background-color: #ffffff !important;
+      border-color: #94a3b8 !important;
+    }
+    html[data-theme="light"] .course-checkbox:checked + div .indicator-badge {
+      background-color: #059669 !important;
+      border-color: #047857 !important;
+    }
+
+    /* Light Mode Course Badges */
+    html[data-theme="light"] .badge-foundation {
+      background-color: #e2e8f0 !important;
+      color: #1e293b !important;
+      border-color: #cbd5e1 !important;
+    }
+    html[data-theme="light"] .badge-flagship {
+      background-color: #d1fae5 !important;
+      color: #065f46 !important;
+      border-color: #a7f3d0 !important;
+    }
+    html[data-theme="light"] .badge-equities {
+      background-color: #dbeafe !important;
+      color: #1e40af !important;
+      border-color: #bfdbfe !important;
+    }
+    html[data-theme="light"] .badge-multi {
+      background-color: #fef3c7 !important;
+      color: #92400e !important;
+      border-color: #fde68a !important;
+    }
+    html[data-theme="light"] .badge-macro {
+      background-color: #cffafe !important;
+      color: #155e75 !important;
+      border-color: #a5f3fc !important;
+    }
+
+    /* Light Mode Submit CTA Button */
+    html[data-theme="light"] button[type="submit"] {
+      color: #042f24 !important;
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.35) !important;
+    }
+
+    /* Light Mode Success Box */
+    html[data-theme="light"] #successMessage h2 {
+      color: #0a1536 !important;
+    }
+    html[data-theme="light"] #successMessage p {
+      color: #475569 !important;
+    }
+    html[data-theme="light"] #successMessage a {
+      background-color: #059669 !important;
+      color: #ffffff !important;
+      border-color: #047857 !important;
+    }
+
+    /* Light Mode Footer */
+    html[data-theme="light"] footer {
+      background: #ffffff !important;
+      border-top: 1px solid rgba(30, 58, 138, 0.12) !important;
+    }
+    html[data-theme="light"] footer p {
+      color: #64748b !important;
+    }
+    html[data-theme="light"] footer h3 {
+      color: #0a1536 !important;
+    }
+    html[data-theme="light"] footer a {
+      color: #059669 !important;
+    }
+    html[data-theme="light"] footer a:hover {
+      color: #047857 !important;
+    }
+
+    /* Light Mode Input Icon fills */
+    html[data-theme="light"] .input-icon-muted {
+      color: #64748b !important;
+    }
+    html[data-theme="light"] .input-icon-emerald {
+      color: #059669 !important;
+    }
+  </style>
 </head>
 <body class="min-h-screen text-slate-200 font-sans antialiased selection:bg-emerald-500 selection:text-black market-grid-pattern flex flex-col justify-between overflow-x-hidden">
   
   <!-- BEGIN: TopNavigation -->
-  <header class="sticky top-0 z-50 w-full border-b border-slate-800/80 bg-black">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <!-- Back Link & Brand Mark -->
-      <div class="flex items-center space-x-6">
-        <a class="group inline-flex items-center gap-2 text-xs font-mono tracking-wider uppercase text-slate-400 hover:text-emerald-400 transition-colors py-1.5 px-3 rounded-lg hover:bg-slate-800/60 border border-transparent hover:border-slate-700/50" href="index.html">
-          <svg class="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <header class="sticky top-0 z-50 w-full border-b transition-colors duration-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo & Home Link -->
+      <a href="index.html" class="flex items-center gap-3 shrink-0 group">
+        <img alt="AlphaEdge Logo" class="h-14 md:h-16 w-auto object-contain drop-shadow-xl transition-transform group-hover:scale-105" src="./image/Glossy Blue Analytics Head Logo.png">
+        <div class="flex flex-col">
+          <span class="text-base sm:text-lg font-bold tracking-tight header-brand-text flex items-center gap-1.5">
+            Alpha<span class="header-brand-accent">Edge</span>
+            <span class="text-[9px] font-mono uppercase bg-emerald-500/10 text-emerald-400 px-1.5 py-0.5 rounded border border-emerald-500/20 font-semibold tracking-wider">PRO</span>
+          </span>
+          <span class="text-[10px] tracking-widest uppercase font-mono header-subbrand-text opacity-75">Academy</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden lg:flex items-center gap-6 xl:gap-8 header-nav text-sm font-semibold">
+        <a href="index.html" class="nav-link transition-colors">Home</a>
+        <a href="study-guides.html" class="nav-link transition-colors">Educational Material</a>
+        <a href="apa-theory.html" class="nav-link transition-colors">APA Theory</a>
+        <a href="uop-theory.html" class="nav-link transition-colors">UOP Theory</a>
+        <a href="delta-theory.html" class="nav-link transition-colors">Delta Theory</a>
+      </nav>
+
+      <!-- Right Action Group -->
+      <div class="flex items-center gap-3 sm:gap-4 shrink-0">
+        <!-- Back to Home Button -->
+        <a href="index.html" class="back-to-home">
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
           </svg>
-          <span class="">Back to Home</span>
+          <span class="hidden sm:inline">Back to Home</span>
         </a>
-        <div class="h-4 w-px bg-slate-800 hidden sm:block"></div>
-        <!-- Logo -->
-        <div class="flex items-center gap-2.5">
-          <img alt="AlphaEdge Logo" class="h-16 w-auto object-contain drop-shadow-xl" src="./image/Glossy Blue Analytics Head Logo.png">
-          <div class="flex flex-col">
-            <span class="text-base font-bold tracking-tight text-white flex items-center gap-1.5">
-              Alpha<span class="text-emerald-400">Edge</span>
-              <span class="text-[9px] font-mono uppercase bg-emerald-500/10 text-emerald-300 px-1.5 py-0.5 rounded border border-emerald-500/20 font-semibold tracking-wider">PRO</span>
-            </span>
-          </div>
-        </div>
+
+        <!-- Theme Toggle Button (Icon Only, Placed At Very Last) -->
+        <button class="tb ae-theme-toggle" id="theme" aria-label="Toggle theme" title="Toggle Light / Dark Theme">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon theme-icon-sun" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        </button>
+
+        <!-- Mobile Menu Hamburger Button -->
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg border transition-colors flex items-center justify-center" aria-label="Toggle Navigation Menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path class="hamburger-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            <path class="hamburger-close hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Collapsible Mobile Menu Drawer -->
+    <div id="mobile-menu" class="hidden lg:hidden border-t px-4 py-5 space-y-3 mobile-menu-drawer transition-all duration-300">
+      <div class="flex flex-col space-y-2">
+        <a href="index.html" class="px-3 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center justify-between">
+          <span>Home</span>
+          <span class="text-xs font-mono opacity-50">&rarr;</span>
+        </a>
+        <a href="study-guides.html" class="px-3 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center justify-between">
+          <span>Educational Material</span>
+          <span class="text-xs font-mono opacity-50">&rarr;</span>
+        </a>
+        <a href="apa-theory.html" class="px-3 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center justify-between">
+          <span>APA Theory</span>
+          <span class="text-xs font-mono opacity-50">&rarr;</span>
+        </a>
+        <a href="uop-theory.html" class="px-3 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center justify-between">
+          <span>UOP Theory</span>
+          <span class="text-xs font-mono opacity-50">&rarr;</span>
+        </a>
+        <a href="delta-theory.html" class="px-3 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center justify-between">
+          <span>Delta Theory</span>
+          <span class="text-xs font-mono opacity-50">&rarr;</span>
+        </a>
+        <a href="ultraviewer-guide.html" class="px-3 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center justify-between">
+          <span>Ultraviewer Guide</span>
+          <span class="text-xs font-mono opacity-50">&rarr;</span>
+        </a>
       </div>
     </div>
   </header>
@@ -145,14 +662,14 @@
       <!-- Form Heading & Enrollment Status -->
       <div class="text-center mb-8 sm:mb-10 flex flex-col items-center">
         <img alt="AlphaEdge Logo" class="w-24 h-24 md:w-32 md:h-32 mb-6 object-contain drop-shadow-xl" src="./image/Glossy Blue Analytics Head Logo.png">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-950/40 text-emerald-300 text-xs font-mono font-medium mb-3 shadow-inner">
+        <div class="status-pill inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-950/40 text-emerald-300 text-xs font-mono font-medium mb-3 shadow-inner">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
           UOP Theory Course
         </div>
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+        <h1 class="page-title text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
           Join <span class="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">AlphaEdge Academy</span>
         </h1>
-        <p class="mt-3 text-sm sm:text-base text-slate-400 max-w-xl mx-auto leading-relaxed">
+        <p class="page-subtitle mt-3 text-sm sm:text-base text-slate-400 max-w-xl mx-auto leading-relaxed">
           Step beyond retail speculation. Fill out the application below to secure your seat for institutional participation systems and high-probability order-flow trading.
         </p>
       </div>
@@ -293,8 +810,8 @@
           <section class="space-y-5" data-purpose="personal-information">
             <div class="flex items-center justify-between border-b border-slate-800 pb-3">
               <div class="flex items-center gap-2.5">
-                <span class="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-xs font-mono font-bold text-emerald-400">01</span>
-                <h2 class="text-lg font-bold text-white tracking-wide">Personal Information</h2>
+                <span class="section-num w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-xs font-mono font-bold text-emerald-400">01</span>
+                <h2 class="section-title text-lg font-bold text-white tracking-wide">Personal Information</h2>
               </div>
               <span class="text-xs font-mono text-slate-500">* Required Fields</span>
             </div>
@@ -302,7 +819,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <!-- Full Name -->
               <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="fullName">
+                <label class="form-label block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="fullName">
                   Full Name <span class="text-emerald-400">*</span>
                 </label>
                 <div class="relative">
@@ -311,13 +828,13 @@
                       <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
                     </svg>
                   </div>
-                  <input class="w-full pl-10 pr-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition" id="fullName" name="entry.2005620554" placeholder="John Doe" required="" type="text">
+                  <input class="w-full pl-10 pr-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition" id="fullName" name="entry.2005620554" placeholder="John Doe" required="" type="text">
                 </div>
               </div>
               
               <!-- Email Address -->
               <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="email">
+                <label class="form-label block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="email">
                   Email Address <span class="text-emerald-400">*</span>
                 </label>
                 <div class="relative">
@@ -326,13 +843,13 @@
                       <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
                     </svg>
                   </div>
-                  <input class="w-full pl-10 pr-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition" id="email" name="entry.1045781291" placeholder="john@example.com" required="" type="email">
+                  <input class="w-full pl-10 pr-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition" id="email" name="entry.1045781291" placeholder="john@example.com" required="" type="email">
                 </div>
               </div>
               
               <!-- WhatsApp Number -->
               <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="whatsapp">
+                <label class="form-label block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="whatsapp">
                   WhatsApp Number <span class="text-emerald-400">*</span>
                 </label>
                 <div class="relative">
@@ -341,71 +858,71 @@
                       <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"></path>
                     </svg>
                   </div>
-                  <input class="w-full pl-10 pr-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition font-mono" id="whatsapp" name="entry.1166974658" placeholder="+91 9876543210" required="" type="tel">
+                  <input class="w-full pl-10 pr-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition font-mono" id="whatsapp" name="entry.1166974658" placeholder="+91 9876543210" required="" type="tel">
                 </div>
               </div>
               
               <!-- TradingView ID -->
               <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="tradingviewId">
+                <label class="form-label block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="tradingviewId">
                   TradingView ID <span class="text-emerald-400">*</span>
                 </label>
                 <div class="relative">
                   <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500 font-mono text-xs">
                     @
                   </div>
-                  <input class="w-full pl-9 pr-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition font-mono" id="tradingviewId" name="entry.1394777946" placeholder="Username" required="" type="text">
+                  <input class="w-full pl-9 pr-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition font-mono" id="tradingviewId" name="entry.1394777946" placeholder="Username" required="" type="text">
                 </div>
               </div>
               
               <!-- City -->
               <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="city">
+                <label class="form-label block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="city">
                   City
                 </label>
-                <input class="w-full px-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition" id="city" name="entry.614982496" placeholder="E.g. Mumbai" type="text">
+                <input class="w-full px-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition" id="city" name="entry.614982496" placeholder="E.g. Mumbai" type="text">
               </div>
               
               <!-- State -->
               <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="state">
+                <label class="form-label block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="state">
                   State
                 </label>
-                <input class="w-full px-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition" id="state" name="entry.914979355" placeholder="E.g. Maharashtra" type="text">
+                <input class="w-full px-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition" id="state" name="entry.914979355" placeholder="E.g. Maharashtra" type="text">
               </div>
             </div>
             
             <!-- Full Address -->
             <div>
-              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="address">
+              <label class="form-label block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="address">
                 Address <span class="text-emerald-400">*</span>
               </label>
-              <textarea class="w-full px-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition resize-none" id="address" name="entry.1065046570" placeholder="Full residential or office address" required="" rows="2"></textarea>
+              <textarea class="w-full px-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition resize-none" id="address" name="entry.1065046570" placeholder="Full residential or office address" required="" rows="2"></textarea>
             </div>
           </section>
 
           <!-- SECTION 2: Trading Profile -->
           <section class="space-y-5 pt-2" data-purpose="trading-profile">
             <div class="flex items-center gap-2.5 border-b border-slate-800 pb-3">
-              <span class="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-xs font-mono font-bold text-emerald-400">02</span>
-              <h2 class="text-lg font-bold text-white tracking-wide">Trading Profile</h2>
+              <span class="section-num w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-xs font-mono font-bold text-emerald-400">02</span>
+              <h2 class="section-title text-lg font-bold text-white tracking-wide">Trading Profile</h2>
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <!-- Occupation Dropdown -->
               <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="occupation">
+                <label class="form-label block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="occupation">
                   Occupation <span class="text-emerald-400">*</span>
                 </label>
                 <div class="relative">
-                  <select class="w-full px-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm text-white focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition appearance-none cursor-pointer" id="occupation" name="entry.902051597" required="">
+                  <select class="w-full px-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition appearance-none cursor-pointer" id="occupation" name="entry.902051597" required="">
                     <option class="text-slate-500" disabled="" selected="" value="">Select occupation</option>
-                    <option class="bg-obsidian-900 text-white" value="Student">Student / Academic</option>
-                    <option class="bg-obsidian-900 text-white" value="Employee">Working Professional / Corporate</option>
-                    <option class="bg-obsidian-900 text-white" value="Business Owner">Business Owner / Entrepreneur</option>
-                    <option class="bg-obsidian-900 text-white" value="Housewife">Housewife</option>
-                    <option class="bg-obsidian-900 text-white" value="Full Time Trader">Full-Time Independent Trader</option>
-                    <option class="bg-obsidian-900 text-white" value="Others">Others</option>
+                    <option value="Student">Student / Academic</option>
+                    <option value="Employee">Working Professional / Corporate</option>
+                    <option value="Business Owner">Business Owner / Entrepreneur</option>
+                    <option value="Housewife">Housewife</option>
+                    <option value="Full Time Trader">Full-Time Independent Trader</option>
+                    <option value="Others">Others</option>
                   </select>
                   <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -417,17 +934,17 @@
               
               <!-- Experience Level Dropdown -->
               <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="experience">
+                <label class="form-label block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="experience">
                   Experience <span class="text-emerald-400">*</span>
                 </label>
                 <div class="relative">
-                  <select class="w-full px-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm text-white focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition appearance-none cursor-pointer" id="experience" name="entry.1209887136" required="">
+                  <select class="w-full px-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition appearance-none cursor-pointer" id="experience" name="entry.1209887136" required="">
                     <option class="text-slate-500" disabled="" selected="" value="">Select level</option>
-                    <option class="bg-obsidian-900 text-white" value="Begineer">Beginner</option>
-                    <option class="bg-obsidian-900 text-white" value="0-6 Months">0-6 Months</option>
-                    <option class="bg-obsidian-900 text-white" value="6-12 MOnths">6-12 Months</option>
-                    <option class="bg-obsidian-900 text-white" value="1-3 Years">1-3 Years</option>
-                    <option class="bg-obsidian-900 text-white" value="More Than 3 Years">More Than 3 Years</option>
+                    <option value="Begineer">Beginner</option>
+                    <option value="0-6 Months">0-6 Months</option>
+                    <option value="6-12 MOnths">6-12 Months</option>
+                    <option value="1-3 Years">1-3 Years</option>
+                    <option value="More Than 3 Years">More Than 3 Years</option>
                   </select>
                   <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -443,15 +960,15 @@
           <section class="space-y-5 pt-2" data-purpose="course-interests">
             <div class="flex items-center justify-between border-b border-slate-800 pb-3">
               <div class="flex items-center gap-2.5">
-                <span class="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-xs font-mono font-bold text-emerald-400">03</span>
-                <h2 class="text-lg font-bold text-white tracking-wide">Interests &amp; Preferences</h2>
+                <span class="section-num w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-xs font-mono font-bold text-emerald-400">03</span>
+                <h2 class="section-title text-lg font-bold text-white tracking-wide">Interests &amp; Preferences</h2>
               </div>
-              <span class="text-xs text-slate-400">Select one or more modules</span>
+              <span class="section-hint text-xs text-slate-400">Select one or more modules</span>
             </div>
             
             <!-- Course Modules Selector Grid -->
             <div>
-              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-3">
+              <label class="form-label block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-3">
                 Academy Courses <span class="text-emerald-400">*</span>
               </label>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
@@ -459,15 +976,15 @@
                 <!-- Card 1: Introductory Course -->
                 <label class="relative block cursor-pointer group">
                   <input class="peer sr-only course-checkbox" name="entry.839337160" type="checkbox" value="Introductory Course (Basic)">
-                  <div class="p-4 rounded-xl border border-slate-700/70 bg-obsidian-900/60 hover:bg-obsidian-850 hover:border-slate-600 transition-all flex items-start justify-between h-full">
+                  <div class="course-card p-4 rounded-xl border transition-all flex items-start justify-between h-full">
                     <div class="pr-3">
                       <div class="flex items-center gap-2 mb-1">
-                        <span class="text-sm font-semibold text-white group-hover:text-emerald-300 transition-colors">Introductory Course</span>
-                        <span class="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Foundation</span>
+                        <span class="course-title text-sm font-semibold transition-colors">Introductory Course</span>
+                        <span class="badge-pill badge-foundation text-[10px] uppercase font-mono px-1.5 py-0.5 rounded border">Foundation</span>
                       </div>
-                      <p class="text-xs text-slate-400 leading-snug">Essential market mechanics, risk architecture &amp; setup fundamentals.</p>
+                      <p class="course-desc text-xs leading-snug">Essential market mechanics, risk architecture &amp; setup fundamentals.</p>
                     </div>
-                    <div class="indicator-badge w-5 h-5 rounded-md border border-slate-600 flex items-center justify-center shrink-0 mt-0.5 bg-obsidian-950 transition-colors">
+                    <div class="indicator-badge w-5 h-5 rounded-md border flex items-center justify-center shrink-0 mt-0.5 transition-colors">
                       <svg class="indicator-icon w-3 h-3 text-white opacity-0 transition-opacity transform scale-75" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
                       </svg>
@@ -478,15 +995,15 @@
                 <!-- Card 2: U.O.P Theory -->
                 <label class="relative block cursor-pointer group">
                   <input class="peer sr-only course-checkbox" name="entry.839337160" type="checkbox" value="U.O.P Theory(Index Weekly Option -Institutional Participation Trading System)">
-                  <div class="p-4 rounded-xl border border-slate-700/70 bg-obsidian-900/60 hover:bg-obsidian-850 hover:border-slate-600 transition-all flex items-start justify-between h-full">
+                  <div class="course-card p-4 rounded-xl border transition-all flex items-start justify-between h-full">
                     <div class="pr-3">
                       <div class="flex items-center gap-2 mb-1">
-                        <span class="text-sm font-semibold text-white group-hover:text-emerald-300 transition-colors">U.O.P Theory</span>
-                        <span class="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 font-medium">Flagship</span>
+                        <span class="course-title text-sm font-semibold transition-colors">U.O.P Theory</span>
+                        <span class="badge-pill badge-flagship text-[10px] uppercase font-mono px-1.5 py-0.5 rounded border font-medium">Flagship</span>
                       </div>
-                      <p class="text-xs text-slate-400 leading-snug">Index Weekly Option - Institutional Participation Trading System.</p>
+                      <p class="course-desc text-xs leading-snug">Index Weekly Option - Institutional Participation Trading System.</p>
                     </div>
-                    <div class="indicator-badge w-5 h-5 rounded-md border border-slate-600 flex items-center justify-center shrink-0 mt-0.5 bg-obsidian-950 transition-colors">
+                    <div class="indicator-badge w-5 h-5 rounded-md border flex items-center justify-center shrink-0 mt-0.5 transition-colors">
                       <svg class="indicator-icon w-3 h-3 text-white opacity-0 transition-opacity transform scale-75" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
                       </svg>
@@ -497,15 +1014,15 @@
                 <!-- Card 3: Delta Theory -->
                 <label class="relative block cursor-pointer group">
                   <input class="peer sr-only course-checkbox" name="entry.839337160" type="checkbox" value="Delta Theory (Stock Based)">
-                  <div class="p-4 rounded-xl border border-slate-700/70 bg-obsidian-900/60 hover:bg-obsidian-850 hover:border-slate-600 transition-all flex items-start justify-between h-full">
+                  <div class="course-card p-4 rounded-xl border transition-all flex items-start justify-between h-full">
                     <div class="pr-3">
                       <div class="flex items-center gap-2 mb-1">
-                        <span class="text-sm font-semibold text-white group-hover:text-emerald-300 transition-colors">Delta Theory</span>
-                        <span class="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Equities</span>
+                        <span class="course-title text-sm font-semibold transition-colors">Delta Theory</span>
+                        <span class="badge-pill badge-equities text-[10px] uppercase font-mono px-1.5 py-0.5 rounded border">Equities</span>
                       </div>
-                      <p class="text-xs text-slate-400 leading-snug">High delivery volume &amp; order book imbalances (Stock Based).</p>
+                      <p class="course-desc text-xs leading-snug">High delivery volume &amp; order book imbalances (Stock Based).</p>
                     </div>
-                    <div class="indicator-badge w-5 h-5 rounded-md border border-slate-600 flex items-center justify-center shrink-0 mt-0.5 bg-obsidian-950 transition-colors">
+                    <div class="indicator-badge w-5 h-5 rounded-md border flex items-center justify-center shrink-0 mt-0.5 transition-colors">
                       <svg class="indicator-icon w-3 h-3 text-white opacity-0 transition-opacity transform scale-75" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
                       </svg>
@@ -516,15 +1033,15 @@
                 <!-- Card 4: Blaster Theory -->
                 <label class="relative block cursor-pointer group">
                   <input class="peer sr-only course-checkbox" name="entry.839337160" type="checkbox" value="Blaster Theory (Index+Stocks+Mcx)">
-                  <div class="p-4 rounded-xl border border-slate-700/70 bg-obsidian-900/60 hover:bg-obsidian-850 hover:border-slate-600 transition-all flex items-start justify-between h-full">
+                  <div class="course-card p-4 rounded-xl border transition-all flex items-start justify-between h-full">
                     <div class="pr-3">
                       <div class="flex items-center gap-2 mb-1">
-                        <span class="text-sm font-semibold text-white group-hover:text-emerald-300 transition-colors">Blaster Theory</span>
-                        <span class="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Multi-Asset</span>
+                        <span class="course-title text-sm font-semibold transition-colors">Blaster Theory</span>
+                        <span class="badge-pill badge-multi text-[10px] uppercase font-mono px-1.5 py-0.5 rounded border">Multi-Asset</span>
                       </div>
-                      <p class="text-xs text-slate-400 leading-snug">Momentum ignition setups across Index, Stocks and MCX commodities.</p>
+                      <p class="course-desc text-xs leading-snug">Momentum ignition setups across Index, Stocks and MCX commodities.</p>
                     </div>
-                    <div class="indicator-badge w-5 h-5 rounded-md border border-slate-600 flex items-center justify-center shrink-0 mt-0.5 bg-obsidian-950 transition-colors">
+                    <div class="indicator-badge w-5 h-5 rounded-md border flex items-center justify-center shrink-0 mt-0.5 transition-colors">
                       <svg class="indicator-icon w-3 h-3 text-white opacity-0 transition-opacity transform scale-75" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
                       </svg>
@@ -535,15 +1052,15 @@
                 <!-- Card 5: APA + Momentum Theory (Full Width) -->
                 <label class="relative block cursor-pointer group md:col-span-2">
                   <input class="peer sr-only course-checkbox" name="entry.839337160" type="checkbox" value="APA +Momentum Theory (Market Broad Picture Theory)">
-                  <div class="p-4 rounded-xl border border-slate-700/70 bg-obsidian-900/60 hover:bg-obsidian-850 hover:border-slate-600 transition-all flex items-start justify-between">
+                  <div class="course-card p-4 rounded-xl border transition-all flex items-start justify-between">
                     <div class="pr-3">
                       <div class="flex items-center gap-2 mb-1">
-                        <span class="text-sm font-semibold text-white group-hover:text-emerald-300 transition-colors">APA + Momentum Theory</span>
-                        <span class="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-500/30">Macro Cycle</span>
+                        <span class="course-title text-sm font-semibold transition-colors">APA + Momentum Theory</span>
+                        <span class="badge-pill badge-macro text-[10px] uppercase font-mono px-1.5 py-0.5 rounded border">Macro Cycle</span>
                       </div>
-                      <p class="text-xs text-slate-400 leading-snug">Market Broad Picture Theory — HTF liquidity pools &amp; structural trend continuation.</p>
+                      <p class="course-desc text-xs leading-snug">Market Broad Picture Theory — HTF liquidity pools &amp; structural trend continuation.</p>
                     </div>
-                    <div class="indicator-badge w-5 h-5 rounded-md border border-slate-600 flex items-center justify-center shrink-0 mt-0.5 bg-obsidian-950 transition-colors">
+                    <div class="indicator-badge w-5 h-5 rounded-md border flex items-center justify-center shrink-0 mt-0.5 transition-colors">
                       <svg class="indicator-icon w-3 h-3 text-white opacity-0 transition-opacity transform scale-75" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
                       </svg>
@@ -557,21 +1074,21 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-1">
               <!-- Indicator List -->
               <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="indicatorList">
+                <label class="form-label block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="indicatorList">
                   Indicator Access
                 </label>
                 <div class="relative">
-                  <select class="w-full px-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm text-white focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition appearance-none cursor-pointer" id="indicatorList" name="entry.1541197092">
-                    <option class="bg-obsidian-900 text-white" value="" selected="">None / Skip Indicator Access</option>
-                    <option class="bg-obsidian-900 text-white" value="Index + UOP Dashboard v2.1 (Only For Nifty Index)">Index + UOP Dashboard v2.1</option>
-                    <option class="bg-obsidian-900 text-white" value="Prodesk Data V2.1 (U.O.P BASED -Only For Nifty Weekly Options)">Prodesk Data V2.1</option>
-                    <option class="bg-obsidian-900 text-white" value="AlphaEdge MarketViewer V2.1">AlphaEdge MarketViewer V2.1</option>
-                    <option class="bg-obsidian-900 text-white" value="AlphaEdge APA +Momentum V2.1">AlphaEdge APA +Momentum V2.1</option>
-                    <option class="bg-obsidian-900 text-white" value="AlphaEdge Protector V2.1">AlphaEdge Protector V2.1</option>
-                    <option class="bg-obsidian-900 text-white" value="AlphaEdge Market Mover V1.1">AlphaEdge Market Mover V1.1</option>
-                    <option class="bg-obsidian-900 text-white" value="Alpha Edge NSA (All In One Time Frame) v2.1">Alpha Edge NSA (All In One Time Frame) v2.1</option>
-                    <option class="bg-obsidian-900 text-white" value="Alpha Edge Market Predictor V2.1">Alpha Edge Market Predictor V2.1</option>
-                    <option class="bg-obsidian-900 text-white" value="Alpha Forex Expertise v2.1">Alpha Forex Expertise v2.1</option>
+                  <select class="w-full px-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition appearance-none cursor-pointer" id="indicatorList" name="entry.1541197092">
+                    <option value="" selected="">None / Skip Indicator Access</option>
+                    <option value="Index + UOP Dashboard v2.1 (Only For Nifty Index)">Index + UOP Dashboard v2.1</option>
+                    <option value="Prodesk Data V2.1 (U.O.P BASED -Only For Nifty Weekly Options)">Prodesk Data V2.1</option>
+                    <option value="AlphaEdge MarketViewer V2.1">AlphaEdge MarketViewer V2.1</option>
+                    <option value="AlphaEdge APA +Momentum V2.1">AlphaEdge APA +Momentum V2.1</option>
+                    <option value="AlphaEdge Protector V2.1">AlphaEdge Protector V2.1</option>
+                    <option value="AlphaEdge Market Mover V1.1">AlphaEdge Market Mover V1.1</option>
+                    <option value="Alpha Edge NSA (All In One Time Frame) v2.1">Alpha Edge NSA (All In One Time Frame) v2.1</option>
+                    <option value="Alpha Edge Market Predictor V2.1">Alpha Edge Market Predictor V2.1</option>
+                    <option value="Alpha Forex Expertise v2.1">Alpha Forex Expertise v2.1</option>
                   </select>
                   <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -583,14 +1100,14 @@
               
               <!-- Preferred Batch -->
               <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="preferredBatch">
+                <label class="form-label block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="preferredBatch">
                   Preferred Batch <span class="text-emerald-400">*</span>
                 </label>
                 <div class="relative">
-                  <select class="w-full px-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm text-white focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition appearance-none cursor-pointer" id="preferredBatch" name="entry.146731371" required="">
+                  <select class="w-full px-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition appearance-none cursor-pointer" id="preferredBatch" name="entry.146731371" required="">
                     <option class="text-slate-500" disabled="" value="" selected="">Select batch</option>
-                    <option class="bg-obsidian-900 text-white" value="Offline Classroom (Weekend)">Offline Classroom (Weekend)</option>
-                    <option class="bg-obsidian-900 text-white" value="Online Live">Online Live</option>
+                    <option value="Offline Classroom (Weekend)">Offline Classroom (Weekend)</option>
+                    <option value="Online Live">Online Live</option>
                   </select>
                   <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -603,17 +1120,17 @@
 
             <!-- Specific Questions / Requirements -->
             <div>
-              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="query">
+              <label class="form-label block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5" for="query">
                 Specific Inquiries or Trading Goals
               </label>
-              <textarea class="w-full px-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition resize-none" id="query" name="entry.85310541" placeholder="Tell us about your current trading challenges, capital deployment size, or expectations..." rows="3"></textarea>
+              <textarea class="w-full px-4 py-2.5 bg-obsidian-900/90 border border-slate-700/80 rounded-xl text-sm placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition resize-none" id="query" name="entry.85310541" placeholder="Tell us about your current trading challenges, capital deployment size, or expectations..." rows="3"></textarea>
             </div>
           </section>
 
           <!-- Submit CTA Button Container -->
           <div class="pt-4 space-y-3">
-            <button class="w-full py-4 px-6 rounded-xl font-bold tracking-wide text-obsidian-950 bg-gradient-to-r from-brand-accent via-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 shadow-glow-emerald hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 group text-base" type="submit">
-              <span class="">SUBMIT DETAILS &amp; SECURE ADMISSION</span>
+            <button class="w-full py-4 px-6 rounded-xl font-bold tracking-wide text-obsidian-950 bg-gradient-to-r from-brand-accent via-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 shadow-glow-emerald hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 group text-base cursor-pointer" type="submit">
+              <span>SUBMIT DETAILS &amp; SECURE ADMISSION</span>
               <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path d="M13 7l5 5m0 0l-5 5m5-5H6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
               </svg>
@@ -654,6 +1171,40 @@
       </div>
     </div>
   </footer>
+
+  <!-- Mobile Menu Drawer Toggle Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var menuBtn = document.getElementById("mobile-menu-btn");
+      var mobileMenu = document.getElementById("mobile-menu");
+      if (menuBtn && mobileMenu) {
+        var openIcon = menuBtn.querySelector(".hamburger-open");
+        var closeIcon = menuBtn.querySelector(".hamburger-close");
+        menuBtn.addEventListener("click", function () {
+          var isHidden = mobileMenu.classList.toggle("hidden");
+          if (openIcon && closeIcon) {
+            if (isHidden) {
+              openIcon.classList.remove("hidden");
+              closeIcon.classList.add("hidden");
+            } else {
+              openIcon.classList.add("hidden");
+              closeIcon.classList.remove("hidden");
+            }
+          }
+        });
+        mobileMenu.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", function () {
+            mobileMenu.classList.add("hidden");
+            if (openIcon && closeIcon) {
+              openIcon.classList.remove("hidden");
+              closeIcon.classList.add("hidden");
+            }
+          });
+        });
+      }
+    });
+  </script>
+  <script src="./js/react-bits.js?v=3.4"></script>
 </body>
 </html>
 
