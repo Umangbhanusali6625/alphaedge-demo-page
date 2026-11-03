@@ -127,8 +127,8 @@ html[data-theme="light"] {
 }
 
 /* Theme Toggle Button (.tb / .ae-theme-toggle) - Icon Only, Modern & Sleek */
-.tb,
-.ae-theme-toggle {
+.tb:not(#theme-mobile):not(.tb-mobile),
+.ae-theme-toggle:not(#theme-mobile):not(.tb-mobile) {
   width: 42px !important;
   height: 42px !important;
   min-width: 42px !important;
@@ -153,29 +153,53 @@ html[data-theme="light"] {
   line-height: 1;
 }
 
-/* Exception for full-width mobile menu drawer button */
+/* Full-width mobile menu drawer button */
+#theme-mobile,
+.tb-mobile,
 .ae-theme-toggle#theme-mobile {
   width: 100% !important;
-  height: auto !important;
-  min-height: 44px !important;
+  min-width: 100% !important;
   max-width: 100% !important;
-  max-height: none !important;
-  border-radius: 6px !important;
+  height: 46px !important;
+  min-height: 46px !important;
+  max-height: 46px !important;
+  border-radius: 8px !important;
   font-size: 13px !important;
-  padding: 10px 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  padding: 0 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  cursor: pointer !important;
+  border: 1px solid var(--line) !important;
+  background: var(--surf) !important;
+  color: var(--text) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
+  transition: all 0.2s ease !important;
+  text-transform: uppercase !important;
+  user-select: none;
 }
 
-.tb:hover,
-.ae-theme-toggle:hover {
+.tb:not(#theme-mobile):not(.tb-mobile):hover,
+.ae-theme-toggle:not(#theme-mobile):not(.tb-mobile):hover {
   border-color: var(--blue) !important;
   color: var(--blue) !important;
   transform: translateY(-2px) rotate(12deg);
   box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
 }
 
+#theme-mobile:hover,
+.tb-mobile:hover {
+  transform: translateY(-1px) !important;
+  border-color: var(--blue) !important;
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.25) !important;
+}
+
 .tb:active,
 .ae-theme-toggle:active {
-  transform: translateY(0) scale(0.92);
+  transform: translateY(0) scale(0.96);
 }
 
 .tb svg,
@@ -1095,9 +1119,9 @@ html[data-theme="dark"] .ae-theme-toggle:hover {
 .ae-btn-dashboard {
   position: relative;
   overflow: hidden;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 10px 18px !important;
   min-height: 44px !important;
   border-radius: 4px !important; /* Matches rounded-sm of ADMISSION */
@@ -4183,6 +4207,853 @@ html[data-theme="light"] .example .figure svg path[stroke="#f1bf68"] {
 html[data-theme="light"] .example .figure svg path[stroke="#39d7c8"] {
   stroke: #0f766e !important;
 }
+
+/* ==========================================================================
+   21. Day 1 to Day 10 Lessons & Study Guides (Complete Dark & Light Theme System)
+   ========================================================================== */
+
+/* Theme Variables for Lesson Pages */
+html[data-theme="dark"] {
+  --ink: #f1f5f9 !important;
+  --muted: #94a3b8 !important;
+  --line: rgba(148, 176, 255, 0.14) !important;
+  --soft: #0c1b2e !important;
+  --paper: rgba(15, 23, 42, 0.5) !important;
+}
+
+html[data-theme="light"] {
+  --ink: #0a1536 !important;
+  --muted: #475569 !important;
+  --line: rgba(30, 58, 138, 0.14) !important;
+  --soft: #f1f5f9 !important;
+  --paper: #ffffff !important;
+}
+
+/* ---------- DARK THEME (html[data-theme="dark"]) ---------- */
+html[data-theme="dark"] body {
+  background-color: #07111e !important;
+  background-image: linear-gradient(to bottom, rgba(4, 9, 17, 0.75), rgba(4, 9, 17, 0.95)), url("../image/professional-trading-bg.png") !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+  color: #e2e8f0 !important;
+}
+
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6 {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .section {
+  color: #e2e8f0 !important;
+}
+
+html[data-theme="dark"] .section.soft {
+  background: #091728 !important;
+  border-top: 1px solid rgba(148, 176, 255, 0.12) !important;
+}
+
+html[data-theme="dark"] .intro,
+html[data-theme="dark"] .subhead,
+html[data-theme="dark"] .reading p,
+html[data-theme="dark"] .chart-copy p,
+html[data-theme="dark"] .chart-reading p,
+html[data-theme="dark"] .zone-note div,
+html[data-theme="dark"] .method,
+html[data-theme="dark"] .example-callout,
+html[data-theme="dark"] .learning-figure figcaption,
+html[data-theme="dark"] .morning p,
+html[data-theme="dark"] .caution p,
+html[data-theme="dark"] .entry p,
+html[data-theme="dark"] .term p,
+html[data-theme="dark"] .intro-card p,
+html[data-theme="dark"] .activation-card p,
+html[data-theme="dark"] .pattern-content p,
+html[data-theme="dark"] .anatomy-card p,
+html[data-theme="dark"] .check p,
+html[data-theme="dark"] .sources p,
+html[data-theme="dark"] .pdf-reference p,
+html[data-theme="dark"] .strategy-body p,
+html[data-theme="dark"] .strategy-body ul,
+html[data-theme="dark"] .strategy-body li,
+html[data-theme="dark"] .anatomy-card ul,
+html[data-theme="dark"] .anatomy-card li,
+html[data-theme="dark"] .option-box ul,
+html[data-theme="dark"] .option-box li,
+html[data-theme="dark"] .option-note,
+html[data-theme="dark"] .example p {
+  color: #cbd5e1 !important;
+}
+
+html[data-theme="dark"] .eyebrow {
+  color: #f3c578 !important;
+}
+
+html[data-theme="dark"] .anatomy-card,
+html[data-theme="dark"] .pattern-card,
+html[data-theme="dark"] .chart-card,
+html[data-theme="dark"] .check,
+html[data-theme="dark"] .strategy {
+  background: #0c1c2e !important;
+  border: 1px solid rgba(148, 176, 255, 0.14) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35) !important;
+}
+
+html[data-theme="dark"] .pattern-visual,
+html[data-theme="dark"] .chart-art,
+html[data-theme="dark"] .strategy-visual {
+  background: #071524 !important;
+  border-bottom: 1px solid rgba(148, 176, 255, 0.1) !important;
+}
+
+html[data-theme="dark"] .definition {
+  background: #0c2438 !important;
+  border-left: 4px solid #38d6bd !important;
+  color: #e2e8f0 !important;
+}
+
+html[data-theme="dark"] .definition strong {
+  color: #38d6bd !important;
+}
+
+html[data-theme="dark"] .pattern-context {
+  color: #38bdf8 !important;
+}
+
+html[data-theme="dark"] .pattern-content .how {
+  border-top: 1px solid rgba(148, 176, 255, 0.12) !important;
+}
+
+html[data-theme="dark"] .pattern-content .how strong,
+html[data-theme="dark"] .reading strong,
+html[data-theme="dark"] .check b,
+html[data-theme="dark"] .anatomy-card h3,
+html[data-theme="dark"] .pattern-content h3,
+html[data-theme="dark"] .strategy-body h3,
+html[data-theme="dark"] .chart-copy h3 {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .quicknav {
+  background: #060e19 !important;
+  border-bottom: 1px solid rgba(148, 176, 255, 0.12) !important;
+}
+
+html[data-theme="dark"] .quicknav a {
+  color: #94a3b8 !important;
+}
+
+html[data-theme="dark"] .quicknav a:hover,
+html[data-theme="dark"] .quicknav a.active {
+  color: #f3c578 !important;
+  border-color: #f3c578 !important;
+}
+
+html[data-theme="dark"] .course-days {
+  background: #091a2a !important;
+  border-top: 1px solid rgba(148, 176, 255, 0.1) !important;
+  border-bottom: 1px solid rgba(148, 176, 255, 0.1) !important;
+  color: #94a3b8 !important;
+}
+
+html[data-theme="dark"] .course-days a {
+  color: #94a3b8 !important;
+}
+
+html[data-theme="dark"] .course-days a:hover,
+html[data-theme="dark"] .course-days a.current {
+  background: #17324c !important;
+  color: #f3c578 !important;
+  box-shadow: 0 0 12px rgba(243, 197, 120, 0.2) !important;
+}
+
+html[data-theme="dark"] .pdf-reference {
+  background: #0b1f32 !important;
+  border-bottom: 1px solid rgba(148, 176, 255, 0.14) !important;
+}
+
+html[data-theme="dark"] .pdf-reference h2 {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .pdf-actions a:first-child {
+  background: #0e4c5e !important;
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .pdf-actions a:last-child {
+  background: transparent !important;
+  border: 1px solid #206d78 !important;
+  color: #cbd5e1 !important;
+}
+
+html[data-theme="dark"] .day2-link,
+html[data-theme="dark"] .lesson-next {
+  background: #0a2638 !important;
+  border-top: 1px solid rgba(148, 176, 255, 0.14) !important;
+  border-bottom: 1px solid rgba(148, 176, 255, 0.14) !important;
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .day2-link strong,
+html[data-theme="dark"] .lesson-next strong,
+html[data-theme="dark"] .lesson-next h3 {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .day2-link a,
+html[data-theme="dark"] .lesson-next a {
+  background: #f3c578 !important;
+  color: #07111c !important;
+  font-weight: 800 !important;
+}
+
+html[data-theme="dark"] .sources {
+  background: #0a1f33 !important;
+  border: 1px solid rgba(148, 176, 255, 0.14) !important;
+  color: #cbd5e1 !important;
+}
+
+html[data-theme="dark"] .sources h3 {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .sources a {
+  color: #f3c578 !important;
+}
+
+html[data-theme="dark"] .option-table th {
+  background: #0c2738 !important;
+  color: #f3c578 !important;
+}
+
+html[data-theme="dark"] .option-table td {
+  color: #cbd5e1 !important;
+  border-bottom: 1px solid rgba(148, 176, 255, 0.12) !important;
+}
+
+html[data-theme="dark"] .call {
+  color: #34d399 !important;
+}
+
+html[data-theme="dark"] .put {
+  color: #f87171 !important;
+}
+
+html[data-theme="dark"] .section .formula,
+html[data-theme="dark"] .anatomy-card .formula,
+html[data-theme="dark"] .option-box .formula,
+html[data-theme="dark"] .formula-box {
+  background: #0a2336 !important;
+  color: #f3c578 !important;
+  border-left: 3px solid #f3c578 !important;
+}
+
+html[data-theme="dark"] .risk-badge {
+  background: rgba(239, 68, 68, 0.15) !important;
+  color: #fca5a5 !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+}
+
+/* ---------- LIGHT THEME (html[data-theme="light"]) ---------- */
+html[data-theme="light"] body {
+  background: #f4f7fc !important;
+  background-image: none !important;
+  color: #1e293b !important;
+}
+
+html[data-theme="light"] h1,
+html[data-theme="light"] h2,
+html[data-theme="light"] h3,
+html[data-theme="light"] h4,
+html[data-theme="light"] h5,
+html[data-theme="light"] h6 {
+  color: #0a1536 !important;
+}
+
+html[data-theme="light"] .hero {
+  background: linear-gradient(135deg, #f0f7ff 0%, #e0e7ff 100%) !important;
+  color: #0a1536 !important;
+}
+
+html[data-theme="light"] .hero .eyebrow {
+  color: #1d4ed8 !important;
+}
+
+html[data-theme="light"] .hero h1 {
+  color: #0a1536 !important;
+}
+
+html[data-theme="light"] .hero h1 em {
+  color: #2563eb !important;
+}
+
+html[data-theme="light"] .hero p {
+  color: #334155 !important;
+}
+
+html[data-theme="light"] .hero .pill {
+  background: #ffffff !important;
+  border: 1px solid #93c5fd !important;
+  color: #1e40af !important;
+}
+
+html[data-theme="light"] .hero-art {
+  background: #ffffff !important;
+  border: 1px solid rgba(30, 58, 138, 0.15) !important;
+  box-shadow: 0 10px 30px rgba(30, 58, 138, 0.08) !important;
+}
+
+html[data-theme="light"] .hero-art rect[fill="#0b2136"] {
+  fill: #f1f5f9 !important;
+}
+
+html[data-theme="light"] .art-caption {
+  color: #64748b !important;
+}
+
+html[data-theme="light"] .section {
+  color: #1e293b !important;
+}
+
+html[data-theme="light"] .section.soft {
+  background: #edf2f9 !important;
+  border-top: 1px solid rgba(30, 58, 138, 0.1) !important;
+}
+
+html[data-theme="light"] .eyebrow {
+  color: #2563eb !important;
+}
+
+html[data-theme="light"] .intro,
+html[data-theme="light"] .subhead,
+html[data-theme="light"] .reading p,
+html[data-theme="light"] .chart-copy p,
+html[data-theme="light"] .chart-reading p,
+html[data-theme="light"] .zone-note div,
+html[data-theme="light"] .method,
+html[data-theme="light"] .example-callout,
+html[data-theme="light"] .learning-figure figcaption,
+html[data-theme="light"] .morning p,
+html[data-theme="light"] .caution p,
+html[data-theme="light"] .entry p,
+html[data-theme="light"] .term p,
+html[data-theme="light"] .intro-card p,
+html[data-theme="light"] .activation-card p,
+html[data-theme="light"] .pattern-content p,
+html[data-theme="light"] .anatomy-card p,
+html[data-theme="light"] .check p,
+html[data-theme="light"] .sources p,
+html[data-theme="light"] .pdf-reference p,
+html[data-theme="light"] .strategy-body p,
+html[data-theme="light"] .strategy-body ul,
+html[data-theme="light"] .strategy-body li,
+html[data-theme="light"] .anatomy-card ul,
+html[data-theme="light"] .anatomy-card li,
+html[data-theme="light"] .option-box ul,
+html[data-theme="light"] .option-box li,
+html[data-theme="light"] .option-note,
+html[data-theme="light"] .example p {
+  color: #334155 !important;
+}
+
+html[data-theme="light"] .anatomy-card,
+html[data-theme="light"] .pattern-card,
+html[data-theme="light"] .chart-card,
+html[data-theme="light"] .check,
+html[data-theme="light"] .strategy {
+  background: #ffffff !important;
+  border: 1px solid rgba(30, 58, 138, 0.14) !important;
+  box-shadow: 0 4px 20px rgba(30, 58, 138, 0.06) !important;
+}
+
+html[data-theme="light"] .pattern-visual,
+html[data-theme="light"] .chart-art,
+html[data-theme="light"] .strategy-visual {
+  background: #f8fafc !important;
+  border-bottom: 1px solid rgba(30, 58, 138, 0.1) !important;
+}
+
+html[data-theme="light"] .pattern-visual rect[fill="#0b2136"],
+html[data-theme="light"] .chart-art rect[fill="#0b2136"],
+html[data-theme="light"] .strategy-visual rect[fill="#0b2136"],
+html[data-theme="light"] .anatomy-card rect[fill="#0b2136"] {
+  fill: #f1f5f9 !important;
+}
+
+html[data-theme="light"] .definition {
+  background: #eff6ff !important;
+  border-left: 4px solid #2563eb !important;
+  color: #1e3a8a !important;
+}
+
+html[data-theme="light"] .definition strong {
+  color: #1d4ed8 !important;
+}
+
+html[data-theme="light"] .pattern-context {
+  color: #2563eb !important;
+}
+
+html[data-theme="light"] .pattern-content .how {
+  border-top: 1px solid rgba(30, 58, 138, 0.1) !important;
+}
+
+html[data-theme="light"] .pattern-content .how strong,
+html[data-theme="light"] .reading strong,
+html[data-theme="light"] .check b,
+html[data-theme="light"] .anatomy-card h3,
+html[data-theme="light"] .pattern-content h3,
+html[data-theme="light"] .strategy-body h3,
+html[data-theme="light"] .chart-copy h3 {
+  color: #0a1536 !important;
+}
+
+html[data-theme="light"] .quicknav {
+  background: #ffffff !important;
+  border-bottom: 1px solid rgba(30, 58, 138, 0.12) !important;
+}
+
+html[data-theme="light"] .quicknav a {
+  color: #475569 !important;
+}
+
+html[data-theme="light"] .quicknav a:hover,
+html[data-theme="light"] .quicknav a.active {
+  color: #2563eb !important;
+  border-color: #2563eb !important;
+}
+
+html[data-theme="light"] .course-days {
+  background: #edf2f9 !important;
+  border-top: 1px solid rgba(30, 58, 138, 0.1) !important;
+  border-bottom: 1px solid rgba(30, 58, 138, 0.1) !important;
+  color: #475569 !important;
+}
+
+html[data-theme="light"] .course-days a {
+  color: #475569 !important;
+}
+
+html[data-theme="light"] .course-days a:hover,
+html[data-theme="light"] .course-days a.current {
+  background: #ffffff !important;
+  color: #1e40af !important;
+  box-shadow: 0 2px 8px rgba(30, 58, 138, 0.12) !important;
+}
+
+html[data-theme="light"] .pdf-reference {
+  background: #ffffff !important;
+  border-bottom: 1px solid rgba(30, 58, 138, 0.12) !important;
+}
+
+html[data-theme="light"] .pdf-reference h2 {
+  color: #0a1536 !important;
+}
+
+html[data-theme="light"] .pdf-actions a:first-child {
+  background: #2563eb !important;
+  color: #ffffff !important;
+}
+
+html[data-theme="light"] .pdf-actions a:last-child {
+  background: transparent !important;
+  border: 1px solid #2563eb !important;
+  color: #1e40af !important;
+}
+
+html[data-theme="light"] .day2-link,
+html[data-theme="light"] .lesson-next {
+  background: #eff6ff !important;
+  border-top: 1.5px solid rgba(37, 99, 235, 0.25) !important;
+  border-bottom: 1.5px solid rgba(37, 99, 235, 0.25) !important;
+  color: #0a1536 !important;
+}
+
+html[data-theme="light"] .day2-link strong,
+html[data-theme="light"] .lesson-next strong,
+html[data-theme="light"] .lesson-next h3 {
+  color: #0a1536 !important;
+}
+
+html[data-theme="light"] .day2-link span,
+html[data-theme="light"] .lesson-next p {
+  color: #334155 !important;
+}
+
+html[data-theme="light"] .day2-link a,
+html[data-theme="light"] .lesson-next a {
+  background: #2563eb !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25) !important;
+}
+
+html[data-theme="light"] .sources {
+  background: #f8fafc !important;
+  border: 1px solid rgba(30, 58, 138, 0.14) !important;
+  color: #475569 !important;
+}
+
+html[data-theme="light"] .sources h3 {
+  color: #0a1536 !important;
+}
+
+html[data-theme="light"] .sources a {
+  color: #2563eb !important;
+}
+
+html[data-theme="light"] .option-table {
+  border: 1px solid rgba(30, 58, 138, 0.12) !important;
+}
+
+html[data-theme="light"] .option-table th {
+  background: #f1f5f9 !important;
+  color: #0a1536 !important;
+  font-weight: 800 !important;
+}
+
+html[data-theme="light"] .option-table td {
+  color: #334155 !important;
+  border-bottom: 1px solid rgba(30, 58, 138, 0.1) !important;
+}
+
+html[data-theme="light"] .call {
+  color: #059669 !important;
+  font-weight: 800 !important;
+}
+
+html[data-theme="light"] .put {
+  color: #dc2626 !important;
+  font-weight: 800 !important;
+}
+
+html[data-theme="light"] .section .formula,
+html[data-theme="light"] .anatomy-card .formula,
+html[data-theme="light"] .option-box .formula,
+html[data-theme="light"] .formula-box {
+  background: #f0fdf4 !important;
+  color: #166534 !important;
+  border-left: 3px solid #16a34a !important;
+}
+
+html[data-theme="light"] .risk-badge {
+  background: #fef2f2 !important;
+  color: #dc2626 !important;
+  border: 1px solid #fecaca !important;
+}
+
+html[data-theme="light"] .small-emphasis {
+  color: #dc2626 !important;
+}
+
+html[data-theme="light"] .example {
+  background: #eff6ff !important;
+  border: 1px solid rgba(37, 99, 235, 0.18) !important;
+  color: #1e3a8a !important;
+}
+
+/* ==========================================================================
+   22. MOBILE VIEWPORT & RESPONSIVE POLISH SYSTEM
+   Guarantees zero horizontal overflow, flawless light/dark drawer & buttons,
+   and fluid touch-friendly layouts on all screens (320px - 768px).
+   ========================================================================== */
+
+/* Universal Mobile Overflow Shield */
+html,
+body {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  -webkit-text-size-adjust: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+svg,
+canvas,
+video {
+  max-width: 100%;
+}
+
+/* Header & Mobile Navigation */
+#main-nav-pill {
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* Header Action Buttons: hide from top bar on screens < 1024px so the 3-line hamburger menu is NEVER squeezed or pushed off */
+@media (max-width: 1023px) {
+  header a.ae-btn-dashboard:not(#mobile-menu-items a),
+  header .ae-btn-dashboard:not(#mobile-menu-items a),
+  header a.ae-btn-header-admission:not(#mobile-menu-items a),
+  header .ae-btn-header-admission:not(#mobile-menu-items a) {
+    display: none !important;
+  }
+  #mobile-menu-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    min-height: 42px !important;
+    padding: 0 !important;
+    flex-shrink: 0 !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    z-index: 101 !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  #mobile-menu-btn {
+    display: none !important;
+  }
+}
+
+#mobile-menu-btn svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  display: block;
+  pointer-events: none;
+}
+
+#mobile-menu-btn span#menu-icon {
+  color: inherit !important;
+  display: block;
+}
+
+html[data-theme="light"] #mobile-menu-btn {
+  color: #0a1536 !important;
+  background: rgba(30, 58, 138, 0.08) !important;
+  border: 1px solid rgba(30, 58, 138, 0.18) !important;
+}
+
+html[data-theme="light"] #mobile-menu-btn:hover {
+  background: rgba(30, 58, 138, 0.14) !important;
+  color: #b45309 !important;
+}
+
+html[data-theme="dark"] #mobile-menu-btn,
+body:not([data-theme="light"]) #mobile-menu-btn {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+}
+
+html[data-theme="dark"] #mobile-menu-btn:hover,
+body:not([data-theme="light"]) #mobile-menu-btn:hover {
+  background: rgba(243, 197, 120, 0.15) !important;
+  color: #f3c578 !important;
+}
+
+/* Mobile Dropdown Drawer Theme Adaptation */
+#mobile-menu-items {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+html[data-theme="light"] #mobile-menu-items {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-top: 1px solid rgba(30, 58, 138, 0.14) !important;
+  color: #0a1536 !important;
+  box-shadow: 0 20px 45px rgba(30, 58, 138, 0.16) !important;
+}
+
+html[data-theme="light"] #mobile-menu-items > div {
+  color: #1e293b !important;
+}
+
+html[data-theme="light"] #mobile-menu-items a {
+  color: #1e293b !important;
+}
+
+html[data-theme="light"] #mobile-menu-items a:hover {
+  color: #b45309 !important;
+  background-color: rgba(243, 197, 120, 0.18) !important;
+}
+
+html[data-theme="light"] #mobile-menu-items .font-bold.text-white,
+html[data-theme="light"] #mobile-menu-items .text-white {
+  color: #0a1536 !important;
+}
+
+html[data-theme="light"] #mobile-menu-items .border-white\/10 {
+  border-color: rgba(30, 58, 138, 0.15) !important;
+}
+
+/* Formula Bar Responsive Styling */
+.formula {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-top: 28px !important;
+  border-left: none !important;
+  background: transparent !important;
+  max-width: 100% !important;
+}
+
+.formula span {
+  padding: 8px 16px !important;
+  border-radius: 99px !important;
+  border: 1px solid var(--line) !important;
+  background: var(--surf) !important;
+  font-size: 13.5px !important;
+  color: var(--text) !important;
+  box-shadow: var(--sh) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  font-weight: 600 !important;
+}
+
+.formula em {
+  font-style: normal !important;
+  color: var(--cyan) !important;
+  font-weight: 800 !important;
+  font-size: 16px !important;
+}
+
+.formula strong {
+  font: 800 16px 'Sora', sans-serif !important;
+  color: var(--cyan) !important;
+}
+
+/* Mobile Screens Adjustments (max-width: 768px and 640px) */
+@media (max-width: 768px) {
+  /* Ticker tape */
+  .tick {
+    font-size: 11.5px !important;
+  }
+  .tk {
+    gap: 24px !important;
+    padding: 5px 0 !important;
+  }
+
+  /* Marquee Track */
+  .rb-marquee-item {
+    font-size: 11.5px !important;
+    padding: 0 12px !important;
+  }
+
+  /* Live Candlestick Panel */
+  .panel, #panel {
+    padding: 16px 14px !important;
+    border-radius: 20px !important;
+  }
+  #cv {
+    height: 240px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Top Logo sizing */
+  .ae-header-logo-img {
+    height: 48px !important;
+    width: auto !important;
+  }
+
+  /* Hero Candlestick Panel */
+  .panel, #panel {
+    padding: 14px 12px !important;
+    border-radius: 16px !important;
+  }
+  #cv {
+    height: 210px !important;
+  }
+  .ph {
+    font-size: 11px !important;
+    gap: 6px !important;
+  }
+  .ph b {
+    font-size: 12px !important;
+  }
+  .demo {
+    font-size: 9px !important;
+    padding: 2px 8px !important;
+  }
+  .legend {
+    gap: 6px 10px !important;
+    font-size: 10.5px !important;
+    margin-top: 8px !important;
+  }
+
+  /* Formula Bar on Mobile */
+  .formula {
+    gap: 5px !important;
+    margin-top: 18px !important;
+  }
+  .formula span {
+    padding: 5px 10px !important;
+    font-size: 11px !important;
+  }
+  .formula em {
+    font-size: 12px !important;
+  }
+  .formula strong {
+    font-size: 13px !important;
+    width: 100% !important;
+    text-align: center !important;
+    margin-top: 4px !important;
+  }
+
+  /* Strike Matrix Simulator */
+  .rb-strike-matrix-header,
+  .rb-strike-matrix-row {
+    grid-template-columns: 1.1fr 1fr 1fr 0.85fr !important;
+    padding: 5px 6px !important;
+    font-size: 10px !important;
+    gap: 2px !important;
+  }
+
+  /* Heatmap Simulator */
+  .rb-trend-heatmap-grid {
+    grid-template-columns: 66px repeat(5, minmax(30px, 1fr)) !important;
+    gap: 3px !important;
+    padding: 8px 4px !important;
+    font-size: 9px !important;
+    overflow-x: auto !important;
+  }
+  .rb-trend-cell {
+    padding: 4px 1px !important;
+    font-size: 8.5px !important;
+  }
+
+  /* Live band canvas */
+  .band-canvas {
+    height: 56px !important;
+  }
+
+  /* Sim controls */
+  .ae-sim-controls {
+    padding: 4px 6px !important;
+  }
+
+  /* Touch buttons inside simulators */
+  .ae-sim-btn {
+    font-size: 10px !important;
+    padding: 4px 10px !important;
+  }
+
+  /* Responsive Table Wrap */
+  table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+
 
 
 

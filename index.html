@@ -452,14 +452,14 @@
       class="fixed top-0 left-0 right-0 z-[100] w-full bg-[#050d1a]/80 backdrop-blur-md border-b border-[#38bdf8]/15 transition-all duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.45)]"
     >
       <div
-        class="max-w-[1540px] w-full mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4"
+        class="max-w-[1540px] w-full mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-3"
       >
         <!-- Logo -->
         <a href="index.html" class="flex items-center shrink-0">
           <img
             src="./image/Glossy Blue Analytics Head Logo.png"
             alt="Alpha Edge Pro Academy"
-            class="h-16 md:h-20 w-auto object-contain ae-header-logo-img"
+            class="h-12 sm:h-16 md:h-20 w-auto object-contain ae-header-logo-img"
           />
         </a>
 
@@ -538,7 +538,7 @@
             href="https://tradevisor-apa-dashboard.abc2317.chatgpt.site/"
             target="_blank"
             rel="noopener noreferrer"
-            class="relative group hidden sm:inline-flex items-center justify-center gap-2 px-5 py-3 rounded-sm font-extrabold text-[12px] tracking-[0.16em] uppercase text-white transition-all duration-300 overflow-hidden ae-btn-dashboard"
+            class="relative group hidden lg:inline-flex items-center justify-center gap-2 px-5 py-3 rounded-sm font-extrabold text-[12px] tracking-[0.16em] uppercase text-white transition-all duration-300 overflow-hidden ae-btn-dashboard"
           >
             <!-- Shimmer Highlight Effect -->
             <span
@@ -555,7 +555,7 @@
 
           <a
             href="contact.html"
-            class="hidden sm:inline-flex items-center justify-center px-6 md:px-7 py-3 bg-gradient-to-r from-[#d39316] to-[#f3c578] text-black font-extrabold text-[12px] tracking-[0.2em] uppercase hover:brightness-110 transition-all rounded-sm shadow-[0_4px_15px_rgba(211,147,22,0.3)] ae-btn-header-admission"
+            class="hidden lg:inline-flex items-center justify-center px-6 md:px-7 py-3 bg-gradient-to-r from-[#d39316] to-[#f3c578] text-black font-extrabold text-[12px] tracking-[0.2em] uppercase hover:brightness-110 transition-all rounded-sm shadow-[0_4px_15px_rgba(211,147,22,0.3)] ae-btn-header-admission"
           >
             ADMISSION
           </a>
@@ -570,14 +570,18 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon theme-icon-sun" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
           </button>
 
-          <!-- Mobile Hamburger Button -->
+          <!-- Mobile Hamburger Button (3 lines only) -->
           <button
             id="mobile-menu-btn"
-            class="lg:hidden p-2 text-white hover:text-[#f3c578] transition-colors"
+            class="lg:hidden p-2 rounded-lg flex items-center justify-center transition-all shrink-0 cursor-pointer"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            title="Open navigation menu"
           >
-            <span class="material-symbols-outlined text-[28px]" id="menu-icon"
-              >menu</span
-            >
+            <!-- 3 Line Hamburger Icon -->
+            <svg class="w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
           </button>
         </div>
       </div>
@@ -585,7 +589,7 @@
       <!-- Mobile Dropdown Menu -->
       <div
         id="mobile-menu-items"
-        class="hidden lg:hidden bg-[#050d1a]/95 backdrop-blur-xl border-t border-[#38bdf8]/15 w-full absolute top-full left-0 max-h-[75vh] overflow-y-auto shadow-2xl"
+        class="hidden lg:hidden bg-[#050d1a]/95 backdrop-blur-xl border-t border-[#38bdf8]/15 w-full absolute top-full left-0 max-h-[80vh] overflow-y-auto shadow-2xl transition-all"
       >
         <div
           class="flex flex-col py-4 px-6 gap-2 text-slate-300 font-medium tracking-wide"
@@ -650,7 +654,7 @@
 
           <!-- MOBILE THEME TOGGLE BUTTON (Placed At Very Last) -->
           <button
-            class="tb ae-theme-toggle w-full justify-center mt-2.5 py-3 font-bold text-xs tracking-wider uppercase rounded-sm"
+            class="tb-mobile w-full justify-center mt-3 py-3 font-bold text-xs tracking-wider uppercase rounded-sm"
             id="theme-mobile"
             aria-label="Toggle theme"
             title="Toggle Light / Dark Theme"
@@ -661,7 +665,7 @@
       </div>
     </header>
     <main
-      class="w-full max-w-[100vw] overflow-x-hidden pt-[80px] bg-transparent min-h-screen"
+      class="w-full max-w-[100vw] overflow-x-hidden pt-[64px] sm:pt-[80px] bg-transparent min-h-screen"
     >
       <div class="flex flex-col w-full">
         <!-- REDESIGN DEMO: FINANCIAL TICKER TAPE -->
@@ -681,7 +685,7 @@
             <canvas id="rb-particle-canvas" style="position:absolute; inset:0; z-index:2; pointer-events:none;"></canvas>
           </div>
           <div
-            class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 animate-fade-in-up"
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10 animate-fade-in-up"
           >
             <!-- Institutional Proof Pill & Status: Single Tight Row -->
             <div class="flex flex-wrap items-center gap-2 sm:gap-2.5 mb-3 sm:mb-4">
@@ -715,7 +719,7 @@
               <!-- Left: Strategic Narrative -->
               <div class="lg:col-span-7 flex flex-col gap-4 sm:gap-5">
                 <h1
-                  class="font-display-hero text-3xl sm:text-4xl lg:text-[44px] xl:text-[50px] leading-[1.3] text-on-surface tracking-tight"
+                  class="font-display-hero text-2xl sm:text-4xl lg:text-[44px] xl:text-[50px] leading-[1.25] sm:leading-[1.3] text-on-surface tracking-tight"
                 >
                   <span class="block">Building Market Knowledge</span>
                   <span class="block my-1">
@@ -828,7 +832,7 @@
             <div class="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
               <!-- Left: The Foundational Thesis (lg:col-span-7) -->
               <div
-                class="lg:col-span-7 relative bg-inverse-surface text-inverse-on-surface rounded-3xl p-6 sm:p-7 shadow-2xl overflow-hidden card-hover rb-tilt-card rb-spotlight-card flex flex-col justify-between"
+                class="lg:col-span-7 relative bg-inverse-surface text-inverse-on-surface rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-2xl overflow-hidden card-hover rb-tilt-card rb-spotlight-card flex flex-col justify-between"
                 data-tilt-max="6"
               >
                 <div class="rb-tilt-sheen"></div>
@@ -842,7 +846,7 @@
                 <div class="relative z-10 flex flex-col gap-5">
                   <div class="flex items-center justify-between gap-3">
                     <div
-                      class="flex items-center gap-2 font-sans text-xs sm:text-sm font-bold text-primary-container uppercase tracking-wider whitespace-nowrap"
+                      class="flex items-center gap-2 font-sans text-xs sm:text-sm font-bold text-primary-container uppercase tracking-wider"
                     >
                       <span class="material-symbols-outlined text-[18px]"
                         >verified</span
@@ -866,12 +870,12 @@
                   >
                     <div class="min-w-0">
                       <p
-                        class="font-headline-sm text-sm sm:text-base font-bold text-inverse-on-surface whitespace-nowrap"
+                        class="font-headline-sm text-sm sm:text-base font-bold text-inverse-on-surface"
                       >
                         Alpha Edge Pro Research Desk
                       </p>
                       <p
-                        class="font-sans text-xs text-inverse-on-surface/70 mt-0.5 whitespace-nowrap"
+                        class="font-sans text-xs text-inverse-on-surface/70 mt-0.5"
                       >
                         Historical Price &amp; Volume Analytics Division
                       </p>
@@ -889,7 +893,7 @@
                     <div
                       class="flex items-center justify-between text-xs sm:text-[13px] text-inverse-on-surface/80 font-sans gap-2"
                     >
-                      <span class="whitespace-nowrap font-medium"
+                      <span class="font-medium"
                         >U.O.P. Structural Convergence</span
                       >
                       <span
@@ -911,7 +915,7 @@
 
               <!-- Right: Trading Mentorship Philosophy (lg:col-span-5) -->
               <div
-                class="lg:col-span-5 glassmorphism-dark p-6 sm:p-7 rounded-3xl shadow-sm flex flex-col justify-between gap-6 rb-spotlight-card rb-tilt-card"
+                class="lg:col-span-5 glassmorphism-dark p-4 sm:p-7 rounded-2xl sm:rounded-3xl shadow-sm flex flex-col justify-between gap-5 sm:gap-6 rb-spotlight-card rb-tilt-card"
                 data-tilt-max="5"
               >
                 <div class="rb-tilt-sheen"></div>
@@ -965,10 +969,10 @@
             </div>
             <!-- Quantitative Proof Metrics Strip -->
             <div
-              class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 animate-fade-in-up delay-300"
+              class="mt-10 sm:mt-16 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 animate-fade-in-up delay-300"
             >
               <div
-                class="glassmorphism-dark p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col group"
+                class="glassmorphism-dark p-3.5 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col group overflow-hidden"
               >
                 <div
                   class="flex items-center justify-between text-primary mb-2"
@@ -983,21 +987,21 @@
                   >
                 </div>
                 <span
-                  class="font-display-hero text-4xl md:text-5xl lg:text-[64px] leading-tight text-on-surface leading-none"
+                  class="font-display-hero text-2xl sm:text-4xl md:text-5xl lg:text-[64px] leading-none text-on-surface mt-1 sm:mt-2"
                   data-count="21" data-suffix="+"
                   >21+</span
                 >
                 <span
-                  class="font-headline-sm text-headline-sm text-on-surface mt-2"
+                  class="font-headline-sm text-xs sm:text-sm md:text-base font-bold text-on-surface mt-1 sm:mt-2 leading-tight"
                   >Years Market Experience</span
                 >
                 <span
-                  class="font-body-sm text-body-sm text-on-surface-variant mt-1"
+                  class="font-body-sm text-[11px] sm:text-xs text-on-surface-variant mt-0.5 sm:mt-1 leading-snug line-clamp-2 sm:line-clamp-none"
                   >Real-time data observation &amp; quant studies</span
                 >
               </div>
               <div
-                class="glassmorphism-dark p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col group"
+                class="glassmorphism-dark p-3.5 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col group overflow-hidden"
               >
                 <div
                   class="flex items-center justify-between text-secondary mb-2"
@@ -1012,21 +1016,21 @@
                   >
                 </div>
                 <span
-                  class="font-display-hero text-4xl md:text-5xl lg:text-[64px] leading-tight text-on-surface leading-none"
+                  class="font-display-hero text-2xl sm:text-4xl md:text-5xl lg:text-[64px] leading-none text-on-surface mt-1 sm:mt-2"
                   data-count="2000" data-suffix="+"
                   >2,000+</span
                 >
                 <span
-                  class="font-headline-sm text-headline-sm text-on-surface mt-2"
+                  class="font-headline-sm text-xs sm:text-sm md:text-base font-bold text-on-surface mt-1 sm:mt-2 leading-tight"
                   >Traders Mentored</span
                 >
                 <span
-                  class="font-body-sm text-body-sm text-on-surface-variant mt-1"
+                  class="font-body-sm text-[11px] sm:text-xs text-on-surface-variant mt-0.5 sm:mt-1 leading-snug line-clamp-2 sm:line-clamp-none"
                   >Aspiring individuals to institutional desk traders</span
                 >
               </div>
               <div
-                class="glassmorphism-dark p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col group"
+                class="glassmorphism-dark p-3.5 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col group overflow-hidden"
               >
                 <div
                   class="flex items-center justify-between text-tertiary-container mb-2"
@@ -1041,21 +1045,21 @@
                   >
                 </div>
                 <span
-                  class="font-display-hero text-4xl md:text-5xl lg:text-[64px] leading-tight text-on-surface leading-none"
+                  class="font-display-hero text-2xl sm:text-4xl md:text-5xl lg:text-[64px] leading-none text-on-surface mt-1 sm:mt-2"
                   data-count="7" data-suffix=""
                   >7</span
                 >
                 <span
-                  class="font-headline-sm text-headline-sm text-on-surface mt-2"
+                  class="font-headline-sm text-xs sm:text-sm md:text-base font-bold text-on-surface mt-1 sm:mt-2 leading-tight"
                   >In-House Frameworks</span
                 >
                 <span
-                  class="font-body-sm text-body-sm text-on-surface-variant mt-1"
+                  class="font-body-sm text-[11px] sm:text-xs text-on-surface-variant mt-0.5 sm:mt-1 leading-snug line-clamp-2 sm:line-clamp-none"
                   >Mathematically modeled distinct market edges</span
                 >
               </div>
               <div
-                class="glassmorphism-dark p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col group"
+                class="glassmorphism-dark p-3.5 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col group overflow-hidden"
               >
                 <div
                   class="flex items-center justify-between text-primary mb-2"
@@ -1070,15 +1074,15 @@
                   >
                 </div>
                 <span
-                  class="font-display-hero text-4xl md:text-5xl lg:text-[64px] leading-tight text-on-surface leading-none"
+                  class="font-display-hero text-2xl sm:text-4xl md:text-5xl lg:text-[64px] leading-none text-on-surface mt-1 sm:mt-2"
                   >VIII</span
                 >
                 <span
-                  class="font-headline-sm text-headline-sm text-on-surface mt-2"
+                  class="font-headline-sm text-xs sm:text-sm md:text-base font-bold text-on-surface mt-1 sm:mt-2 leading-tight"
                   >NISM Series Standard</span
                 >
                 <span
-                  class="font-body-sm text-body-sm text-on-surface-variant mt-1"
+                  class="font-body-sm text-[11px] sm:text-xs text-on-surface-variant mt-0.5 sm:mt-1 leading-snug line-clamp-2 sm:line-clamp-none"
                   >Equity derivatives &amp; risk compliance verified</span
                 >
               </div>
@@ -1112,9 +1116,9 @@
         </section>
 
         <!-- SECTION 2: INSTITUTIONAL OVERVIEW & THE DIFFERENTIATION -->
-        <section class="w-full bg-transparent py-24 border-y border-outline/10">
+        <section class="w-full bg-transparent py-12 sm:py-20 md:py-24 border-y border-outline/10">
           <div
-            class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col gap-16 animate-fade-in-up"
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex flex-col gap-10 sm:gap-16 animate-fade-in-up"
           >
             <!-- Section Header -->
             <div
@@ -1126,7 +1130,7 @@
                   >ACADEMIC CHARTER &amp; PHILOSOPHY</span
                 >
                 <h2
-                  class="font-headline-lg text-3xl md:text-4xl lg:text-5xl leading-tight text-on-surface mt-2"
+                  class="font-headline-lg text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight text-on-surface mt-2"
                 >
                   What Makes Alpha Edge Pro Radically Different From
                   Conventional Institutes
@@ -1225,7 +1229,7 @@
 
               <!-- The Alpha Edge Institutional Pedagogy Box -->
               <div
-                class="glassmorphism-dark p-8 rounded-3xl flex flex-col gap-6 relative overflow-hidden border border-primary/30 shadow-sm transition-all rb-spotlight-card rb-tilt-card"
+                class="glassmorphism-dark p-5 sm:p-8 rounded-2xl sm:rounded-3xl flex flex-col gap-5 sm:gap-6 relative overflow-hidden border border-primary/30 shadow-sm transition-all rb-spotlight-card rb-tilt-card"
                 data-tilt-max="6"
               >
                 <div class="rb-tilt-sheen"></div>
@@ -1468,11 +1472,11 @@
         </section>
 
         <!-- SECTION 3: THE 6 PROPRIETARY TRADING FRAMEWORKS & COURSES -->
-        <section class="w-full bg-transparent py-24 relative overflow-hidden">
+        <section class="w-full bg-transparent py-12 sm:py-20 md:py-24 relative overflow-hidden">
           <div class="glow"><b></b><b></b></div>
           <div class="gridbg"></div>
           <div
-            class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col gap-16 animate-fade-in-up scroll-mt-24 relative z-10"
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex flex-col gap-10 sm:gap-16 animate-fade-in-up scroll-mt-24 relative z-10"
             id="proprietary-frameworks"
           >
             <!-- Section Title & Narrative -->
@@ -2071,10 +2075,10 @@
 
         <!-- SECTION 3.5: STUDY GUIDES LIBRARY -->
         <section
-          class="w-full bg-transparent py-16 scroll-mt-24 border-y border-outline/10 relative overflow-hidden"
+          class="w-full bg-transparent py-10 sm:py-16 scroll-mt-24 border-y border-outline/10 relative overflow-hidden"
         >
           <div
-            class="max-w-7xl mx-auto px-6 lg:px-12 p-8 md:p-12 rounded-3xl glassmorphism-dark border border-outline/15 flex flex-col md:flex-row items-center justify-between gap-8 animate-fade-in-up rb-spotlight-card rb-tilt-card"
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 p-5 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl glassmorphism-dark border border-outline/15 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 sm:gap-8 animate-fade-in-up rb-spotlight-card rb-tilt-card"
             data-tilt-max="5"
           >
             <div class="rb-tilt-sheen"></div>
@@ -2110,7 +2114,7 @@
 
         <!-- SECTION 3.8: PROPRIETARY TRADINGVIEW INDICATORS SUITE (V2.1) -->
         <section
-          class="w-full bg-transparent py-24 scroll-mt-24 border-y border-outline/10"
+          class="w-full bg-transparent py-12 sm:py-20 md:py-24 scroll-mt-24 border-y border-outline/10"
           id="proprietary-indicators"
         >
           <div
@@ -2440,7 +2444,7 @@
 
         <!-- SECTION 4: THE 11 PRACTICAL EDUCATION PILLARS -->
         <section
-          class="w-full bg-transparent py-24 scroll-mt-24 border-y border-outline/10"
+          class="w-full bg-transparent py-12 sm:py-20 md:py-24 scroll-mt-24 border-y border-outline/10"
           id="education-pillars"
         >
           <div
@@ -2465,7 +2469,7 @@
 
             <!-- 11 Pillars Interactive Grid -->
             <div
-              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+              class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
             >
               <!-- Pillar 1 -->
               <div
@@ -3358,9 +3362,10 @@
               </div>
             </div>
           </div>
+        </section>
         <!-- CALL TO ACTION BAND (AURORA & SHINYTEXT) -->
         <section
-          class="w-full text-center py-24 relative overflow-hidden border-t border-outline/10 final"
+          class="w-full text-center py-12 sm:py-20 md:py-24 relative overflow-hidden border-t border-outline/10 final"
           id="admission-cta"
         >
           <!-- Redesign Demo Glowing Orbs Background & 54px Grid -->
@@ -3371,7 +3376,7 @@
               <span class="dot"></span>
               ADMISSION &amp; DESK ONBOARDING 2026
             </div>
-            <h2 class="font-headline-lg text-3xl md:text-5xl lg:text-6xl leading-tight text-on-surface">
+            <h2 class="font-headline-lg text-2xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight text-on-surface">
               <span class="rb-shiny-text">Build a Repeatable Process.</span><br />
               <span class="text-white">Never Trade On Guesses Again.</span>
             </h2>
@@ -3381,13 +3386,13 @@
             <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
               <a
                 href="contact.html"
-                class="rb-magnet-btn rb-btn-gold px-8 py-4 rounded-xl text-black font-extrabold text-[13px] tracking-wider uppercase shadow-xl"
+                class="rb-magnet-btn rb-btn-gold w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl text-black font-extrabold text-[12px] sm:text-[13px] tracking-wider uppercase shadow-xl text-center"
               >
                 Apply For Admission
               </a>
               <a
                 href="tel:+919173905201"
-                class="rb-magnet-btn px-8 py-4 rounded-xl bg-surface-container-high text-on-surface font-headline-sm text-headline-sm hover:bg-surface-container-highest transition-all flex items-center gap-2 border border-outline/20"
+                class="rb-magnet-btn w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-surface-container-high text-on-surface font-headline-sm text-xs sm:text-sm hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2 border border-outline/20"
               >
                 <span class="material-symbols-outlined text-[18px] text-primary">call</span>
                 <span>Call +91 91739 05201</span>
@@ -3399,7 +3404,7 @@
         <!-- Footer -->
         <footer
           id="contact"
-          class="w-full bg-[#0B111E] text-white py-16 border-t border-white/5 relative overflow-hidden"
+          class="w-full bg-[#0B111E] text-white py-10 sm:py-16 border-t border-white/5 relative overflow-hidden"
         >
           <!-- Decorative background blur -->
           <div
@@ -3672,27 +3677,44 @@
       document.addEventListener("DOMContentLoaded", () => {
         const menuBtn = document.getElementById("mobile-menu-btn");
         const menuItems = document.getElementById("mobile-menu-items");
-        const menuIcon = document.getElementById("menu-icon");
 
-        if (menuBtn) {
-          menuBtn.addEventListener("click", () => {
-            menuItems.classList.toggle("hidden");
-            if (menuItems.classList.contains("hidden")) {
-              menuIcon.textContent = "menu";
-            } else {
-              menuIcon.textContent = "close";
-            }
+        function setMenuOpen(open) {
+          if (!menuItems) return;
+          if (open) {
+            menuItems.classList.remove("hidden");
+            if (menuBtn) menuBtn.setAttribute("aria-expanded", "true");
+          } else {
+            menuItems.classList.add("hidden");
+            if (menuBtn) menuBtn.setAttribute("aria-expanded", "false");
+          }
+        }
+
+        if (menuBtn && menuItems) {
+          menuBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const isOpen = !menuItems.classList.contains("hidden");
+            setMenuOpen(!isOpen);
           });
         }
 
-        const menuLinks = menuItems.querySelectorAll("a");
-        menuLinks.forEach((link) => {
-          link.addEventListener("click", () => {
-            if (window.innerWidth < 1024) {
-              menuItems.classList.add("hidden");
-              menuIcon.textContent = "menu";
-            }
+        if (menuItems) {
+          const menuLinks = menuItems.querySelectorAll("a");
+          menuLinks.forEach((link) => {
+            link.addEventListener("click", () => {
+              if (window.innerWidth < 1024) {
+                setMenuOpen(false);
+              }
+            });
           });
+        }
+
+        // Close mobile drawer when clicking outside
+        document.addEventListener("click", (e) => {
+          if (menuItems && !menuItems.classList.contains("hidden")) {
+            if (!menuItems.contains(e.target) && !menuBtn.contains(e.target)) {
+              setMenuOpen(false);
+            }
+          }
         });
       });
     </script>
