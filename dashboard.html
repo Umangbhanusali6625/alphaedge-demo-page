@@ -39,7 +39,13 @@
       }, false);
     })();
   </script>
-  <!-- Theme Pre-hydration Script to eliminate flash -->
+
+  <!-- Firebase App & Services (Compat CDN) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <!-- Theme Pre-hydration Script -->
   <script>
     (function() {
       try {
@@ -53,16 +59,17 @@
       } catch(e) {}
     })();
   </script>
-  <!-- Link custom theme & animation styles -->
+
   <link rel="stylesheet" href="./css/react-bits-styles.css?v=3.4">
   <meta name="theme-color" content="#061f50">
-  <meta name="description" content="APA + Momentum Dashboard - AlphaEdge Pro. Live market levels including APA Fix, APA Extension and Momentum indicators.">
-  <title>APA + Momentum Dashboard · ALPHAEDGEPRO</title>
+  <meta name="description" content="AlphaEdge Pro Member Terminal - Live quantitative momentum and institutional option chain.">
+  <title>Member Dashboard · ALPHAEDGEPRO</title>
   <link rel="icon" type="image/png" href="./image/Glossy Blue Analytics Head Logo.png">
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: "Segoe UI", sans-serif;
+      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
       background: var(--bg, #03060a);
       color: var(--text, #e2e8f0);
       display: flex;
@@ -70,15 +77,18 @@
       height: 100vh;
       overflow: hidden;
     }
+
+    /* Topbar */
     .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 20px;
-      height: 52px;
+      height: 54px;
       background: var(--surf, #070d18);
       border-bottom: 1px solid var(--line, rgba(255,255,255,0.07));
       flex-shrink: 0;
+      z-index: 50;
     }
     .brand {
       display: flex;
@@ -101,7 +111,12 @@
     }
     .live-dot {
       width: 8px; height: 8px; border-radius: 50%;
-      background: #35d1c4; box-shadow: 0 0 8px #35d1c4;
+      background: #64748b;
+      transition: all 0.3s;
+    }
+    .live-dot.active {
+      background: #35d1c4;
+      box-shadow: 0 0 8px #35d1c4;
       animation: pulse 1.5s infinite;
     }
     @keyframes pulse {
@@ -111,37 +126,169 @@
     .topbar-right {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
+
+    /* Buttons & Badges */
+    .user-pill {
+      display: none; align-items: center; gap: 8px;
+      padding: 5px 12px; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 9999px;
+      font-size: 12px; color: #cbd5e1; font-weight: 600;
+    }
+    .user-pill img { width: 20px; height: 20px; border-radius: 50%; object-fit: cover; }
+    .admin-badge-btn {
+      display: none; align-items: center; gap: 6px;
+      padding: 6px 14px; background: linear-gradient(135deg, #1e3a8a, #0284c7);
+      border: 1px solid rgba(56,189,248,0.4); border-radius: 6px;
+      color: #fff; font-size: 11px; font-weight: 800; letter-spacing: 0.08em;
+      text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+    }
+    .admin-badge-btn:hover { transform: translateY(-1px); box-shadow: 0 0 15px rgba(56,189,248,0.4); }
+    .admin-count {
+      background: #ef4444; color: #fff; border-radius: 9999px;
+      padding: 1px 6px; font-size: 10px; font-weight: 900;
+    }
+    .logout-btn {
+      display: none; align-items: center; gap: 6px;
+      padding: 6px 14px; background: rgba(239,68,68,0.12);
+      border: 1px solid rgba(239,68,68,0.3); border-radius: 6px;
+      color: #fca5a5; font-size: 11px; font-weight: 700; cursor: pointer;
+      letter-spacing: 0.06em; text-transform: uppercase; transition: all 0.2s;
+    }
+    .logout-btn:hover { background: rgba(239,68,68,0.25); color: #fff; }
     .back-btn {
       display: flex; align-items: center; gap: 6px; text-decoration: none;
       color: var(--mute, #94a3b8); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; transition: color 0.2s;
     }
     .back-btn:hover { color: var(--gold, #f3c578); }
-    #dashboard-frame { flex: 1; width: 100%; border: none; background: #061220; display: none; }
-    #fallback {
-      display: flex; flex: 1; flex-direction: column;
-      align-items: center; justify-content: center; gap: 16px; padding: 40px 20px; text-align: center;
-      background: radial-gradient(circle at center, #0a1322 0%, #03060a 100%);
+
+    /* Main View Containers */
+    .view-container {
+      flex: 1; width: 100%; display: flex; flex-direction: column;
+      position: relative; overflow: hidden;
     }
-    .fallback-icon { font-size: 56px; opacity: 0.4; }
-    .fallback-title { font-size: 24px; font-weight: 800; color: #fff; letter-spacing: -0.01em; }
-    .fallback-sub { font-size: 14px; color: #94a3b8; max-width: 460px; line-height: 1.6; }
+
+    /* Live Iframe */
+    #dashboard-frame {
+      flex: 1; width: 100%; height: 100%; border: none;
+      background: #061220; display: none;
+    }
+
+    /* Cards (Auth Gate, Pending, Offline) */
+    .center-card {
+      display: flex; flex: 1; flex-direction: column;
+      align-items: center; justify-content: center; gap: 18px;
+      padding: 30px 20px; text-align: center;
+      background: radial-gradient(circle at center, #0a1322 0%, #03060a 100%);
+      z-index: 10;
+    }
+    .card-box {
+      max-width: 440px; width: 100%;
+      background: rgba(13, 21, 39, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(53, 209, 196, 0.25);
+      border-radius: 16px; padding: 36px 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+    }
+    .card-logo { width: 56px; height: 56px; object-fit: contain; }
+    .card-title { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -0.01em; }
+    .card-sub { font-size: 13px; color: #94a3b8; line-height: 1.6; }
+
+    /* Google Button */
+    .google-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+      width: 100%; padding: 14px 20px;
+      background: #ffffff; color: #1f2937;
+      border: none; border-radius: 8px;
+      font-size: 14px; font-weight: 700; cursor: pointer;
+      transition: all 0.2s; box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    }
+    .google-btn:hover { background: #f1f5f9; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,255,255,0.2); }
+    .google-btn svg { width: 20px; height: 20px; }
+
+    .trust-footer {
+      font-size: 11px; color: #64748b; letter-spacing: 0.04em;
+      margin-top: 6px; display: flex; align-items: center; gap: 6px;
+    }
+
+    /* Offline State Card */
+    #fallback { display: none; }
+    .fallback-icon { font-size: 52px; opacity: 0.4; }
     .standby-badge {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 6px 16px; background: rgba(59,130,246,0.1);
       border: 1px solid rgba(59,130,246,0.25); border-radius: 9999px;
       font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-      color: #93c5fd; margin-top: 8px;
+      color: #93c5fd; margin-top: 4px;
     }
     .standby-dot {
       width: 6px; height: 6px; border-radius: 50%;
       background: #60a5fa; box-shadow: 0 0 6px #60a5fa;
       animation: pulse 2s infinite;
     }
+
+    /* Admin Slide-Over Modal */
+    #admin-modal {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.75); backdrop-filter: blur(8px);
+      z-index: 1000; align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .admin-box {
+      max-width: 620px; width: 100%; max-height: 85vh;
+      background: #0d1527; border: 1px solid rgba(56,189,248,0.3);
+      border-radius: 16px; display: flex; flex-direction: column;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.8); overflow: hidden;
+    }
+    .admin-header {
+      padding: 18px 24px; border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: space-between;
+      background: #09101d;
+    }
+    .admin-header h3 { font-size: 16px; font-weight: 800; color: #fff; margin: 0; }
+    .admin-close {
+      background: transparent; border: none; color: #94a3b8;
+      font-size: 20px; cursor: pointer; padding: 4px 8px;
+    }
+    .admin-close:hover { color: #fff; }
+    .admin-content {
+      padding: 20px 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px;
+    }
+    .roster-sec-title {
+      font-size: 12px; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 0.1em; color: #38bdf8; margin-bottom: 10px;
+    }
+    .student-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 14px; background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06); border-radius: 8px;
+      margin-bottom: 8px; gap: 12px;
+    }
+    .student-info { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .student-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; background: #1e293b; }
+    .student-text { display: flex; flex-direction: column; min-width: 0; }
+    .student-name { font-size: 13px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .student-email { font-size: 11px; color: #94a3b8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .action-group { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+    .btn-approve {
+      background: #16a34a; color: #fff; border: none; border-radius: 6px;
+      padding: 6px 12px; font-size: 11px; font-weight: 800; cursor: pointer;
+    }
+    .btn-approve:hover { background: #22c55e; }
+    .btn-reject {
+      background: rgba(239,68,68,0.15); color: #fca5a5;
+      border: 1px solid rgba(239,68,68,0.3); border-radius: 6px;
+      padding: 6px 10px; font-size: 11px; font-weight: 700; cursor: pointer;
+    }
+    .btn-reject:hover { background: rgba(239,68,68,0.3); color: #fff; }
+    .empty-state { font-size: 12px; color: #64748b; font-style: italic; padding: 8px 0; }
   </style>
 </head>
 <body>
+
+  <!-- Topbar -->
   <div class="topbar">
     <a href="index.html" class="brand">
       <img src="./image/Glossy Blue Analytics Head Logo.png" alt="AlphaEdge logo">
@@ -155,44 +302,317 @@
       <span id="header-status">APA + Momentum Dashboard</span>
     </div>
     <div class="topbar-right">
-      <a href="index.html" class="back-btn">&#8592; Back to Home</a>
-      <button class="tb ae-theme-toggle" id="theme" aria-label="Toggle theme" title="Toggle Light / Dark Theme">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon theme-icon-sun" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+      <!-- Student Info Pill -->
+      <div class="user-pill" id="user-pill">
+        <img id="user-avatar" src="./image/Glossy Blue Analytics Head Logo.png" alt="User">
+        <span id="user-name">Student</span>
+      </div>
+
+      <!-- Admin Manager Button (Only shown to client) -->
+      <button class="admin-badge-btn" id="admin-mgr-btn">
+        <span>⚙️ Approvals</span>
+        <span class="admin-count" id="admin-count">0</span>
+      </button>
+
+      <!-- Logout Button -->
+      <button class="logout-btn" id="logout-btn">Log Out</button>
+
+      <a href="index.html" class="back-btn">&#8592; Back</a>
+      <button class="tb ae-theme-toggle" id="theme" aria-label="Toggle theme" title="Toggle Theme">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon theme-icon-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
       </button>
     </div>
   </div>
 
-  <iframe
-    id="dashboard-frame"
-    title="AlphaEdge Pro Live Market Dashboard"
-    allowfullscreen
-  ></iframe>
+  <div class="view-container">
 
-  <div id="fallback">
-    <div class="fallback-icon">&#128202;</div>
-    <div class="fallback-title">Trading Desk Offline or Market Closed</div>
-    <div class="fallback-sub">
-      The live institutional trading engine is currently offline or the session has ended.<br>
-      Live momentum and option chain stream automatically during active market hours.
+    <!-- STATE 1: Visitor Login Gate -->
+    <div class="center-card" id="auth-gate" style="display: flex;">
+      <div class="card-box">
+        <img class="card-logo" src="./image/Glossy Blue Analytics Head Logo.png" alt="AlphaEdge">
+        <div class="card-title">Member Dashboard Access</div>
+        <div class="card-sub">
+          Sign in with your Google account to access live institutional market flow, APA Fix levels, and real-time Pro-OI chains.
+        </div>
+
+        <button class="google-btn" id="google-login-btn">
+          <svg viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
+            <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 10.04 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+            <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+          </svg>
+          Continue with Google
+        </button>
+
+        <div id="login-error" style="color: #f87171; font-size: 12px; display: none; line-height: 1.5;"></div>
+
+        <div class="trust-footer">
+          <span>🔒 256-Bit SSL Encrypted · AlphaEdge Pro Academy</span>
+        </div>
+      </div>
     </div>
-    <div class="standby-badge">
-      <span class="standby-dot"></span>
-      Standby &middot; Auto-Connecting
+
+    <!-- STATE 2: Pending Approval Screen -->
+    <div class="center-card" id="pending-gate" style="display: none;">
+      <div class="card-box" style="border-color: rgba(251, 191, 36, 0.4);">
+        <div style="font-size: 52px;">⏳</div>
+        <div class="card-title" style="color: #fde047;">Access Pending Approval</div>
+        <div class="card-sub" id="pending-msg">
+          Welcome! Your Google account registration has been submitted to your AlphaEdge instructor.
+        </div>
+        <div style="background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.25); border-radius: 8px; padding: 12px; font-size: 12px; color: #fef08a;">
+          ⚡ As soon as your client/instructor taps <strong>Approve</strong>, this page will unlock automatically. No need to reload!
+        </div>
+        <button class="logout-btn" style="display: inline-flex; margin-top: 8px;" onclick="handleLogout()">Log Out / Switch Account</button>
+      </div>
+    </div>
+
+    <!-- STATE 3: Rejected / Revoked Screen -->
+    <div class="center-card" id="rejected-gate" style="display: none;">
+      <div class="card-box" style="border-color: rgba(239, 68, 68, 0.4);">
+        <div style="font-size: 52px;">🛑</div>
+        <div class="card-title" style="color: #f87171;">Access Inactive</div>
+        <div class="card-sub">
+          Your account is currently inactive on the AlphaEdge Pro institutional roster. Please contact the academy administration to renew access.
+        </div>
+        <button class="logout-btn" style="display: inline-flex; margin-top: 8px;" onclick="handleLogout()">Log Out</button>
+      </div>
+    </div>
+
+    <!-- STATE 4: Approved Live Dashboard Stream -->
+    <iframe
+      id="dashboard-frame"
+      title="AlphaEdge Pro Live Market Dashboard"
+      allowfullscreen
+    ></iframe>
+
+    <!-- Offline Fallback (Shown when PC is closed) -->
+    <div class="center-card" id="fallback">
+      <div class="fallback-icon">📊</div>
+      <div class="card-title">Trading Desk Offline or Market Closed</div>
+      <div class="card-sub">
+        The live institutional trading engine is currently offline or the session has ended.<br>
+        Live momentum and option chain stream automatically during active market hours.
+      </div>
+      <div class="standby-badge">
+        <span class="standby-dot"></span>
+        Standby &middot; Auto-Connecting
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Admin 1-Click Approvals Modal (Only for Client) -->
+  <div id="admin-modal">
+    <div class="admin-box">
+      <div class="admin-header">
+        <h3>🎓 Student Access Manager</h3>
+        <button class="admin-close" id="admin-close-btn">&times;</button>
+      </div>
+      <div class="admin-content">
+        <div>
+          <div class="roster-sec-title">🔔 Pending Student Requests (<span id="pending-count-label">0</span>)</div>
+          <div id="pending-list">
+            <div class="empty-state">No students currently waiting for approval.</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="roster-sec-title">✅ Approved Students (<span id="approved-count-label">0</span>)</div>
+          <div id="approved-list">
+            <div class="empty-state">No approved students yet.</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <script>
+    // 1. Firebase Initialization
+    const firebaseConfig = {
+      apiKey: "AIzaSyD05Gpo5aOrwVjYn9S9blYpUL3Lo3nQocM",
+      authDomain: "alphaedge-pro-a8181.firebaseapp.com",
+      projectId: "alphaedge-pro-a8181",
+      storageBucket: "alphaedge-pro-a8181.firebasestorage.app",
+      messagingSenderId: "46039834400",
+      appId: "1:46039834400:web:d027d4fec801a844848145",
+      measurementId: "G-290RG629ZV"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // Master Admin Accounts
+    const ADMIN_EMAILS = [
+      "alphaedgeproacademy@gmail.com",
+      "umangbhanusali6625@gmail.com"
+    ];
+
+    // DOM Elements
+    const authGate = document.getElementById("auth-gate");
+    const pendingGate = document.getElementById("pending-gate");
+    const rejectedGate = document.getElementById("rejected-gate");
     const frame = document.getElementById("dashboard-frame");
     const fallback = document.getElementById("fallback");
+
     const headerDot = document.getElementById("header-dot");
     const headerStatus = document.getElementById("header-status");
+    const userPill = document.getElementById("user-pill");
+    const userAvatar = document.getElementById("user-avatar");
+    const userName = document.getElementById("user-name");
+    const adminMgrBtn = document.getElementById("admin-mgr-btn");
+    const adminCount = document.getElementById("admin-count");
+    const logoutBtn = document.getElementById("logout-btn");
+    const googleLoginBtn = document.getElementById("google-login-btn");
+    const loginError = document.getElementById("login-error");
+
+    const adminModal = document.getElementById("admin-modal");
+    const adminCloseBtn = document.getElementById("admin-close-btn");
+    const pendingList = document.getElementById("pending-list");
+    const approvedList = document.getElementById("approved-list");
+    const pendingCountLabel = document.getElementById("pending-count-label");
+    const approvedCountLabel = document.getElementById("approved-count-label");
 
     const isLocal = window.location.hostname === "localhost" ||
                     window.location.hostname === "127.0.0.1" ||
                     window.location.protocol === "file:";
 
     const liveTarget = isLocal ? "http://localhost:3000" : "https://live.alphaedgeproacademy.com";
-    let isConnected = false;
+
+    let currentUser = null;
+    let studentUnsub = null;
+    let enginePollInterval = null;
+
+    // 2. Google Sign-In Trigger
+    googleLoginBtn.addEventListener("click", () => {
+      loginError.style.display = "none";
+      const provider = new firebase.auth.GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: 'select_account' });
+
+      auth.signInWithPopup(provider).catch(err => {
+        loginError.innerText = err.message;
+        loginError.style.display = "block";
+      });
+    });
+
+    // 3. Auth State Observer
+    auth.onAuthStateChanged(async (user) => {
+      if (studentUnsub) { studentUnsub(); studentUnsub = null; }
+
+      if (!user) {
+        // Logged Out
+        currentUser = null;
+        showView("auth");
+        userPill.style.display = "none";
+        adminMgrBtn.style.display = "none";
+        logoutBtn.style.display = "none";
+        if (headerDot) headerDot.className = "live-dot";
+        if (headerStatus) headerStatus.innerText = "APA + Momentum Dashboard";
+        stopEnginePolling();
+        return;
+      }
+
+      currentUser = user;
+      const userEmail = (user.email || "").toLowerCase().trim();
+      const isAdmin = ADMIN_EMAILS.includes(userEmail);
+
+      // Setup Topbar
+      userPill.style.display = "inline-flex";
+      userAvatar.src = user.photoURL || "./image/Glossy Blue Analytics Head Logo.png";
+      userName.innerText = user.displayName || userEmail;
+      logoutBtn.style.display = "inline-flex";
+
+      if (isAdmin) {
+        // ADMIN FLOW: Unlocked by default + Show Manager Button
+        adminMgrBtn.style.display = "inline-flex";
+        initAdminManager();
+        unlockDashboard();
+        return;
+      }
+
+      // STUDENT FLOW: Check / Register in Firestore
+      const userRef = db.collection("students").doc(userEmail);
+
+      try {
+        const docSnap = await userRef.get();
+        if (!docSnap.exists) {
+          // New student: Auto-register with 'pending' status
+          await userRef.set({
+            name: user.displayName || "Student",
+            email: userEmail,
+            photo: user.photoURL || "",
+            status: "pending",
+            requestedAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+        }
+      } catch (err) {
+        console.error("Student auto-registration error:", err);
+      }
+
+      // Realtime listener for Instant 1-Click Approval
+      studentUnsub = userRef.onSnapshot((doc) => {
+        if (!doc.exists) {
+          showView("pending");
+          return;
+        }
+        const data = doc.data() || {};
+        const status = data.status || "pending";
+
+        if (status === "approved") {
+          unlockDashboard();
+        } else if (status === "rejected") {
+          showView("rejected");
+          stopEnginePolling();
+        } else {
+          showView("pending");
+          stopEnginePolling();
+          const pMsg = document.getElementById("pending-msg");
+          if (pMsg) {
+            pMsg.innerHTML = `Welcome, <strong>${data.name || user.displayName}</strong> (${userEmail})!<br>Your request has been submitted to your AlphaEdge instructor.`;
+          }
+        }
+      });
+    });
+
+    // 4. View Switcher
+    function showView(view) {
+      authGate.style.display = (view === "auth") ? "flex" : "none";
+      pendingGate.style.display = (view === "pending") ? "flex" : "none";
+      rejectedGate.style.display = (view === "rejected") ? "flex" : "none";
+
+      if (view !== "live") {
+        frame.style.display = "none";
+        frame.src = "about:blank";
+        fallback.style.display = "none";
+      }
+    }
+
+    // 5. Unlock Live Dashboard & Poll Trading PC Engine
+    function unlockDashboard() {
+      authGate.style.display = "none";
+      pendingGate.style.display = "none";
+      rejectedGate.style.display = "none";
+
+      startEnginePolling();
+    }
+
+    function startEnginePolling() {
+      if (enginePollInterval) return;
+      checkEngine();
+      enginePollInterval = setInterval(checkEngine, 8000);
+    }
+
+    function stopEnginePolling() {
+      if (enginePollInterval) {
+        clearInterval(enginePollInterval);
+        enginePollInterval = null;
+      }
+      frame.style.display = "none";
+      frame.src = "about:blank";
+      fallback.style.display = "none";
+    }
 
     async function checkEngine() {
       try {
@@ -205,40 +625,119 @@
         clearTimeout(timer);
 
         if (res.ok) {
-          // PC IS RUNNING & ONLINE: Show live dashboard, hide offline card
-          if (!isConnected) {
-            isConnected = true;
+          // PC ONLINE: Show live iframe
+          if (frame.src !== liveTarget) {
             frame.src = liveTarget;
-            frame.style.display = "block";
-            fallback.style.display = "none";
-            if (headerDot) {
-              headerDot.style.background = "#35d1c4";
-              headerDot.style.boxShadow = "0 0 8px #35d1c4";
-            }
-            if (headerStatus) headerStatus.innerText = "APA + Momentum Dashboard (LIVE)";
           }
+          frame.style.display = "block";
+          fallback.style.display = "none";
+          if (headerDot) headerDot.className = "live-dot active";
+          if (headerStatus) headerStatus.innerText = "APA + Momentum Dashboard (LIVE)";
           return;
         }
-      } catch (e) {
-        // PC IS CLOSED / OFFLINE
-      }
+      } catch (e) {}
 
-      // PC is CLOSED: Hide frame, show offline screen without any button
-      isConnected = false;
+      // PC OFFLINE: Hide iframe, show clean standby screen
       frame.style.display = "none";
       fallback.style.display = "flex";
-      if (headerDot) {
-        headerDot.style.background = "#64748b";
-        headerDot.style.boxShadow = "none";
-      }
+      if (headerDot) headerDot.className = "live-dot";
       if (headerStatus) headerStatus.innerText = "APA + Momentum Dashboard (OFFLINE)";
     }
 
-    // Check immediately on page load
-    checkEngine();
+    // 6. Admin 1-Click Approval Manager
+    function initAdminManager() {
+      db.collection("students").onSnapshot((snapshot) => {
+        let pending = [];
+        let approved = [];
 
-    // Re-check automatically every 8 seconds
-    setInterval(checkEngine, 8000);
+        snapshot.forEach((doc) => {
+          const item = doc.data();
+          item.id = doc.id;
+          if (item.status === "approved") {
+            approved.push(item);
+          } else {
+            pending.push(item);
+          }
+        });
+
+        // Update counts
+        adminCount.innerText = pending.length;
+        pendingCountLabel.innerText = pending.length;
+        approvedCountLabel.innerText = approved.length;
+
+        // Render Pending List
+        if (pending.length === 0) {
+          pendingList.innerHTML = '<div class="empty-state">No students currently waiting for approval.</div>';
+        } else {
+          pendingList.innerHTML = pending.map(s => `
+            <div class="student-item">
+              <div class="student-info">
+                <img class="student-avatar" src="${s.photo || './image/Glossy Blue Analytics Head Logo.png'}" alt="Avatar">
+                <div class="student-text">
+                  <div class="student-name">${escapeHtml(s.name || 'Student')}</div>
+                  <div class="student-email">${escapeHtml(s.email)}</div>
+                </div>
+              </div>
+              <div class="action-group">
+                <button class="btn-approve" onclick="updateStudentStatus('${s.id}', 'approved')">✅ Approve</button>
+                <button class="btn-reject" onclick="updateStudentStatus('${s.id}', 'rejected')">❌ Reject</button>
+              </div>
+            </div>
+          `).join('');
+        }
+
+        // Render Approved List
+        if (approved.length === 0) {
+          approvedList.innerHTML = '<div class="empty-state">No approved students yet.</div>';
+        } else {
+          approvedList.innerHTML = approved.map(s => `
+            <div class="student-item">
+              <div class="student-info">
+                <img class="student-avatar" src="${s.photo || './image/Glossy Blue Analytics Head Logo.png'}" alt="Avatar">
+                <div class="student-text">
+                  <div class="student-name">${escapeHtml(s.name || 'Student')}</div>
+                  <div class="student-email">${escapeHtml(s.email)}</div>
+                </div>
+              </div>
+              <div class="action-group">
+                <button class="btn-reject" onclick="updateStudentStatus('${s.id}', 'rejected')">🚫 Revoke</button>
+              </div>
+            </div>
+          `).join('');
+        }
+      });
+    }
+
+    // Admin Status Updater (1-Click)
+    window.updateStudentStatus = async function(emailId, status) {
+      try {
+        await db.collection("students").doc(emailId).update({
+          status: status,
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      } catch (err) {
+        alert("Error updating status: " + err.message);
+      }
+    };
+
+    // Modal Toggles
+    adminMgrBtn.addEventListener("click", () => { adminModal.style.display = "flex"; });
+    adminCloseBtn.addEventListener("click", () => { adminModal.style.display = "none"; });
+    adminModal.addEventListener("click", (e) => {
+      if (e.target === adminModal) adminModal.style.display = "none";
+    });
+
+    // Logout
+    window.handleLogout = function() {
+      auth.signOut();
+    };
+    logoutBtn.addEventListener("click", handleLogout);
+
+    function escapeHtml(str) {
+      return (str || '').replace(/[&<>"']/g, function(m) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+      });
+    }
   </script>
   <script src="./js/react-bits.js?v=3.4"></script>
 </body>
