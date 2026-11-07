@@ -138,22 +138,23 @@
     }
     .user-pill img { width: 20px; height: 20px; border-radius: 50%; object-fit: cover; }
     .admin-badge-btn {
-      display: none; align-items: center; gap: 6px;
-      padding: 6px 14px; background: linear-gradient(135deg, #1e3a8a, #0284c7);
-      border: 1px solid rgba(56,189,248,0.4); border-radius: 6px;
-      color: #fff; font-size: 11px; font-weight: 800; letter-spacing: 0.08em;
+      display: none; align-items: center; gap: 8px;
+      padding: 8px 18px; background: linear-gradient(135deg, #1e3a8a, #0284c7);
+      border: 1px solid rgba(56,189,248,0.5); border-radius: 8px;
+      color: #fff; font-size: 12px; font-weight: 800; letter-spacing: 0.08em;
       text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+      box-shadow: 0 0 15px rgba(2,132,199,0.3);
     }
-    .admin-badge-btn:hover { transform: translateY(-1px); box-shadow: 0 0 15px rgba(56,189,248,0.4); }
+    .admin-badge-btn:hover { transform: translateY(-1px); box-shadow: 0 0 25px rgba(56,189,248,0.5); }
     .admin-count {
       background: #ef4444; color: #fff; border-radius: 9999px;
-      padding: 1px 6px; font-size: 10px; font-weight: 900;
+      padding: 2px 8px; font-size: 11px; font-weight: 900;
     }
     .logout-btn {
       display: none; align-items: center; gap: 6px;
-      padding: 6px 14px; background: rgba(239,68,68,0.12);
-      border: 1px solid rgba(239,68,68,0.3); border-radius: 6px;
-      color: #fca5a5; font-size: 11px; font-weight: 700; cursor: pointer;
+      padding: 8px 16px; background: rgba(239,68,68,0.12);
+      border: 1px solid rgba(239,68,68,0.3); border-radius: 8px;
+      color: #fca5a5; font-size: 12px; font-weight: 700; cursor: pointer;
       letter-spacing: 0.06em; text-transform: uppercase; transition: all 0.2s;
     }
     .logout-btn:hover { background: rgba(239,68,68,0.25); color: #fff; }
@@ -232,52 +233,67 @@
     /* Admin Slide-Over Modal */
     #admin-modal {
       display: none; position: fixed; inset: 0;
-      background: rgba(0,0,0,0.75); backdrop-filter: blur(8px);
+      background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
       z-index: 1000; align-items: center; justify-content: center;
-      padding: 20px;
+      padding: 24px;
     }
     .admin-box {
-      max-width: 620px; width: 100%; max-height: 85vh;
-      background: #0d1527; border: 1px solid rgba(56,189,248,0.3);
-      border-radius: 16px; display: flex; flex-direction: column;
-      box-shadow: 0 25px 70px rgba(0,0,0,0.8); overflow: hidden;
+      max-width: 820px; width: 100%; max-height: 88vh;
+      background: #0d1527; border: 1px solid rgba(56,189,248,0.4);
+      border-radius: 20px; display: flex; flex-direction: column;
+      box-shadow: 0 30px 90px rgba(0,0,0,0.85); overflow: hidden;
     }
     .admin-header {
-      padding: 18px 24px; border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 22px 28px; border-bottom: 1px solid rgba(255,255,255,0.08);
       display: flex; align-items: center; justify-content: space-between;
       background: #09101d;
     }
-    .admin-header h3 { font-size: 16px; font-weight: 800; color: #fff; margin: 0; }
+    .admin-header-titles { display: flex; flex-direction: column; gap: 4px; }
+    .admin-header h3 { font-size: 20px; font-weight: 800; color: #fff; margin: 0; }
+    .admin-header span { font-size: 12px; color: #94a3b8; }
     .admin-close {
-      background: transparent; border: none; color: #94a3b8;
-      font-size: 20px; cursor: pointer; padding: 4px 8px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      color: #94a3b8; font-size: 22px; cursor: pointer;
+      width: 38px; height: 38px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
     }
-    .admin-close:hover { color: #fff; }
+    .admin-close:hover { background: rgba(239,68,68,0.2); color: #fca5a5; }
     .admin-content {
-      padding: 20px 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px;
+      padding: 24px 28px; overflow-y: auto; display: flex; flex-direction: column; gap: 24px;
     }
     .roster-sec-title {
-      font-size: 12px; font-weight: 800; text-transform: uppercase;
-      letter-spacing: 0.1em; color: #38bdf8; margin-bottom: 10px;
+      font-size: 13px; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 0.12em; color: #38bdf8; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px;
     }
     .student-item {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 14px; background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06); border-radius: 8px;
-      margin-bottom: 8px; gap: 12px;
+      padding: 16px 18px; background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07); border-radius: 12px;
+      margin-bottom: 10px; gap: 14px; transition: all 0.2s;
     }
-    .student-info { display: flex; align-items: center; gap: 10px; min-width: 0; }
-    .student-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; background: #1e293b; }
-    .student-text { display: flex; flex-direction: column; min-width: 0; }
-    .student-name { font-size: 13px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .student-email { font-size: 11px; color: #94a3b8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .action-group { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+    .student-item:hover { background: rgba(255,255,255,0.05); border-color: rgba(56,189,248,0.3); }
+    .student-info { display: flex; align-items: center; gap: 14px; min-width: 0; }
+    .student-avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; background: #1e293b; border: 2px solid rgba(56,189,248,0.3); }
+    .student-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .student-name { font-size: 15px; font-weight: 800; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .student-email { font-size: 13px; color: #94a3b8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .action-group { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
     .btn-approve {
-      background: #16a34a; color: #fff; border: none; border-radius: 6px;
-      padding: 6px 12px; font-size: 11px; font-weight: 800; cursor: pointer;
+      background: linear-gradient(135deg, #16a34a, #22c55e); color: #fff; border: none; border-radius: 8px;
+      padding: 9px 18px; font-size: 12px; font-weight: 800; cursor: pointer;
+      box-shadow: 0 4px 12px rgba(34,197,94,0.3); transition: all 0.2s;
     }
-    .btn-approve:hover { background: #22c55e; }
+    .btn-approve:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(34,197,94,0.5); }
     .btn-reject {
+      background: rgba(239,68,68,0.15); color: #fca5a5;
+      border: 1px solid rgba(239,68,68,0.35); border-radius: 8px;
+      padding: 9px 16px; font-size: 12px; font-weight: 800; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-reject:hover { background: rgba(239,68,68,0.3); color: #fff; }
+    .empty-state { font-size: 13px; color: #64748b; font-style: italic; padding: 12px 4px; }
       background: rgba(239,68,68,0.15); color: #fca5a5;
       border: 1px solid rgba(239,68,68,0.3); border-radius: 6px;
       padding: 6px 10px; font-size: 11px; font-weight: 700; cursor: pointer;
@@ -407,7 +423,10 @@
   <div id="admin-modal">
     <div class="admin-box">
       <div class="admin-header">
-        <h3>🎓 Student Access Manager</h3>
+        <div class="admin-header-titles">
+          <h3>🎓 Student Access Manager</h3>
+          <span>1-Click Student Authorization &amp; Roster Control</span>
+        </div>
         <button class="admin-close" id="admin-close-btn">&times;</button>
       </div>
       <div class="admin-content">
@@ -429,10 +448,10 @@
   </div>
 
   <script>
-    // 1. Firebase Initialization
+    // 1. Firebase Initialization (Custom Branded Auth Domain & Obfuscated Web Key)
     const firebaseConfig = {
-      apiKey: "AIzaSyD05Gpo5aOrwVjYn9S9blYpUL3Lo3nQocM",
-      authDomain: "alphaedge-pro-a8181.firebaseapp.com",
+      apiKey: atob("QUl6YVN5RDA1R3BvNWFPcndWalluOVM5YmxZcFVMM0xvM25Rb2NN"),
+      authDomain: "alphaedgeproacademy.com",
       projectId: "alphaedge-pro-a8181",
       storageBucket: "alphaedge-pro-a8181.firebasestorage.app",
       messagingSenderId: "46039834400",
@@ -444,10 +463,8 @@
     const auth = firebase.auth();
     const db = firebase.firestore();
 
-    // Master Admin Accounts (ONLY this master email can approve students)
-    const ADMIN_EMAILS = [
-      "alphaedgeproacademy@gmail.com"
-    ];
+    // Zero Hardcoded Emails: All Admins & Student Approvals are managed 100% in Firebase Firestore
+    // Collection 'admins' contains Admin accounts; Collection 'students' contains Student roster & approvals
 
     // DOM Elements
     const authGate = document.getElementById("auth-gate");
@@ -483,6 +500,8 @@
     let currentUser = null;
     let studentUnsub = null;
     let enginePollInterval = null;
+    let iframeLoaded = false;
+    let offlineFailures = 0;
 
     // 2. Google Sign-In Trigger
     googleLoginBtn.addEventListener("click", () => {
@@ -515,7 +534,23 @@
 
       currentUser = user;
       const userEmail = (user.email || "").toLowerCase().trim();
-      const isAdmin = ADMIN_EMAILS.includes(userEmail);
+
+      // Check Admin status dynamically from Firebase Firestore (No emails stored in frontend code!)
+      let isAdmin = false;
+      try {
+        const adminDoc = await db.collection("admins").doc(userEmail).get();
+        if (adminDoc.exists && adminDoc.data().active !== false) {
+          isAdmin = true;
+        } else {
+          // Also check if marked as admin in students collection
+          const studentDoc = await db.collection("students").doc(userEmail).get();
+          if (studentDoc.exists && studentDoc.data().role === "admin") {
+            isAdmin = true;
+          }
+        }
+      } catch (err) {
+        console.warn("Firebase admin verification:", err);
+      }
 
       // Setup Topbar
       userPill.style.display = "inline-flex";
@@ -608,6 +643,8 @@
         clearInterval(enginePollInterval);
         enginePollInterval = null;
       }
+      iframeLoaded = false;
+      offlineFailures = 0;
       frame.style.display = "none";
       frame.src = "about:blank";
       fallback.style.display = "none";
@@ -616,7 +653,7 @@
     async function checkEngine() {
       try {
         const controller = new AbortController();
-        const timer = setTimeout(() => controller.abort(), 3500);
+        const timer = setTimeout(() => controller.abort(), 4000);
         const res = await fetch(liveTarget + "/api/connection-code", {
           signal: controller.signal,
           cache: "no-store"
@@ -624,8 +661,10 @@
         clearTimeout(timer);
 
         if (res.ok) {
-          // PC ONLINE: Show live iframe
-          if (frame.src !== liveTarget) {
+          offlineFailures = 0;
+          // PC ONLINE: Load iframe ONLY ONCE. Do NOT reload it!
+          if (!iframeLoaded) {
+            iframeLoaded = true;
             frame.src = liveTarget;
           }
           frame.style.display = "block";
@@ -634,13 +673,17 @@
           if (headerStatus) headerStatus.innerText = "APA + Momentum Dashboard (LIVE)";
           return;
         }
-      } catch (e) {}
+      } catch (e) {
+        offlineFailures++;
+      }
 
-      // PC OFFLINE: Hide iframe, show clean standby screen
-      frame.style.display = "none";
-      fallback.style.display = "flex";
-      if (headerDot) headerDot.className = "live-dot";
-      if (headerStatus) headerStatus.innerText = "APA + Momentum Dashboard (OFFLINE)";
+      // Only switch to offline card if 3 consecutive checks fail (prevents brief flickers)
+      if (offlineFailures >= 3 || !iframeLoaded) {
+        frame.style.display = "none";
+        fallback.style.display = "flex";
+        if (headerDot) headerDot.className = "live-dot";
+        if (headerStatus) headerStatus.innerText = "APA + Momentum Dashboard (OFFLINE)";
+      }
     }
 
     // 6. Admin 1-Click Approval Manager

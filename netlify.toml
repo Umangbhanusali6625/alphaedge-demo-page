@@ -1,6 +1,13 @@
 [build]
   publish = "."
 
+# Custom Branded Auth Proxy (Shows 'alphaedgeproacademy.com' instead of firebaseapp.com)
+[[redirects]]
+  from = "/__/auth/*"
+  to = "https://alphaedge-pro-a8181.firebaseapp.com/__/auth/:splat"
+  status = 200
+  force = true
+
 # Block Sensitive Hidden Files & Internal Git Repos
 [[redirects]]
   from = "/.git/*"
