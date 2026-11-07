@@ -165,47 +165,18 @@
     id="dashboard-frame"
     title="AlphaEdge Pro Live Market Dashboard"
     allowfullscreen
+    src="https://live.alphaedgeproacademy.com"
   ></iframe>
-
-  <div id="fallback">
-    <div class="fallback-icon">&#128202;</div>
-    <div class="fallback-title">Trading Desk Offline or Market Closed</div>
-    <div class="fallback-sub">
-      The live trading engine on the client PC is currently offline or the session has ended.<br>
-      Live feed streams automatically during market hours.
-    </div>
-    <a id="direct-link" href="https://live.alphaedgeproacademy.com" target="_blank" rel="noopener noreferrer" class="open-btn">
-      &#128202; Open Dashboard Directly
-    </a>
-  </div>
 
   <script>
     const frame = document.getElementById("dashboard-frame");
-    const fallback = document.getElementById("fallback");
-    const directLink = document.getElementById("direct-link");
-
     const isLocal = window.location.hostname === "localhost" ||
                     window.location.hostname === "127.0.0.1" ||
                     window.location.protocol === "file:";
 
-    const liveTarget = isLocal ? "http://localhost:3000" : "https://live.alphaedgeproacademy.com";
-
-    if (directLink) directLink.href = liveTarget;
-    frame.src = liveTarget;
-
-    let loaded = false;
-    frame.addEventListener("load", function() {
-      loaded = true;
-      frame.style.display = "block";
-      fallback.classList.remove("visible");
-    });
-
-    setTimeout(function() {
-      if (!loaded) {
-        frame.style.display = "none";
-        fallback.classList.add("visible");
-      }
-    }, 9000);
+    if (isLocal) {
+      frame.src = "http://localhost:3000";
+    }
   </script>
   <script src="./js/react-bits.js?v=3.4"></script>
 </body>
