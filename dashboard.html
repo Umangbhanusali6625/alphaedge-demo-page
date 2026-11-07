@@ -3,6 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Anti-Injection & Cyber Security Shield -->
+  <script>
+    (function() {
+      'use strict';
+      var dangerous = [
+        /<[^>]*>/i, /%3c[^%]*%3e/i, /javascript:/i, /vbscript:/i, /data:\s*text\/html/i,
+        /on(load|error|click|mouse|key)\s*=/i, /\b(eval|alert|prompt|confirm|document\.cookie)\b/i,
+        /\b(select\s+.*from|union\s+select|insert\s+into|drop\s+table|delete\s+from)\b/i,
+        /\.\.[\/\\]/, /(%27)|(')|(--)|(%23)|(#)/i, /%00|\\x00/
+      ];
+      function detect() {
+        var targets = [window.location.href, window.location.search, window.location.hash, window.location.pathname];
+        for (var i = 0; i < targets.length; i++) {
+          var s = targets[i];
+          if (!s) continue;
+          var dec = s;
+          try { dec = decodeURIComponent(s); } catch(e) {}
+          for (var p = 0; p < dangerous.length; p++) {
+            if (dangerous[p].test(s) || dangerous[p].test(dec)) return true;
+          }
+        }
+        return false;
+      }
+      if (detect()) {
+        try { window.stop(); } catch(e) {}
+        document.documentElement.innerHTML = '<div style="position:fixed;inset:0;background:#050914;color:#f87171;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,sans-serif;z-index:99999999;padding:24px;text-align:center;"><div style="max-width:520px;background:#0d1527;border:2px solid #ef4444;border-radius:12px;padding:36px;box-shadow:0 0 50px rgba(239,68,68,0.4);"><div style="font-size:48px;margin-bottom:16px;">🛑</div><h1 style="color:#ffffff;font-size:22px;font-weight:800;margin-bottom:12px;">SECURITY VIOLATION: URL INJECTION DETECTED</h1><p style="color:#fca5a5;font-size:14px;line-height:1.6;margin-bottom:20px;">A malicious URL injection or parameter exploit attempt was intercepted. Website execution has been halted.</p><div style="background:#050914;border:1px solid #374151;border-radius:6px;padding:12px;font-family:monospace;font-size:12px;color:#94a3b8;margin-bottom:24px;">STATUS: 403 FORBIDDEN · THREAT BLOCKED</div><a href="https://alphaedgeproacademy.com/" style="display:inline-block;background:#ef4444;color:#fff;text-decoration:none;padding:10px 24px;border-radius:6px;font-weight:700;font-size:13px;">RETURN TO HOME</a></div></div>';
+        throw new Error("Execution blocked: URL injection attempt.");
+      }
+      document.addEventListener('contextmenu', function(e) { e.preventDefault(); }, false);
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S'))) {
+          e.preventDefault(); return false;
+        }
+      }, false);
+    })();
+  </script>
   <!-- Theme Pre-hydration Script to eliminate flash -->
   <script>
     (function() {
@@ -127,27 +163,33 @@
 
   <iframe
     id="dashboard-frame"
-    src="https://tradevisor-apa-dashboard.abc2317.chatgpt.site/"
-    title="APA + Momentum Dashboard"
+    src="https://live.alphaedgeproacademy.com"
+    title="AlphaEdge Pro Live Market Dashboard"
     allowfullscreen
     loading="lazy"
   ></iframe>
 
   <div id="fallback">
     <div class="fallback-icon">&#128202;</div>
-    <div class="fallback-title">Dashboard Blocked by Browser</div>
+    <div class="fallback-title">Trading Desk Offline or Market Closed</div>
     <div class="fallback-sub">
-      The dashboard could not be embedded due to browser security policies.<br>
-      Click below to open it directly.
+      The live trading engine on the client PC is currently offline or the session has ended.<br>
+      Live feed streams automatically during market hours.
     </div>
-    <a href="https://tradevisor-apa-dashboard.abc2317.chatgpt.site/" target="_blank" rel="noopener noreferrer" class="open-btn">
-      &#128202; Open Dashboard
+    <a href="https://live.alphaedgeproacademy.com" target="_blank" rel="noopener noreferrer" class="open-btn">
+      &#128202; Open Dashboard Directly
     </a>
   </div>
 
   <script>
     const frame = document.getElementById("dashboard-frame");
     const fallback = document.getElementById("fallback");
+
+    // If testing locally on PC (file:// or localhost), connect directly to local trading server
+    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.protocol === "file:") {
+      frame.src = "http://localhost:3000";
+    }
+
     let loaded = false;
     frame.addEventListener("load", function() { loaded = true; });
     setTimeout(function() {
