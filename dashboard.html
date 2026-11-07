@@ -144,6 +144,7 @@
       color: #fff; font-size: 12px; font-weight: 800; letter-spacing: 0.08em;
       text-transform: uppercase; cursor: pointer; transition: all 0.2s;
       box-shadow: 0 0 15px rgba(2,132,199,0.3);
+      white-space: nowrap;
     }
     .admin-badge-btn:hover { transform: translateY(-1px); box-shadow: 0 0 25px rgba(56,189,248,0.5); }
     .admin-count {
@@ -326,7 +327,7 @@
 
       <!-- Admin Manager Button (Only shown to client) -->
       <button class="admin-badge-btn" id="admin-mgr-btn">
-        <span>⚙️ Approvals</span>
+        <span>🎓 Student Manager</span>
         <span class="admin-count" id="admin-count">0</span>
       </button>
 
@@ -535,21 +536,34 @@
       currentUser = user;
       const userEmail = (user.email || "").toLowerCase().trim();
 
-      // Check Admin status dynamically from Firebase Firestore (No emails stored in frontend code!)
-      let isAdmin = false;
-      try {
-        const adminDoc = await db.collection("admins").doc(userEmail).get();
-        if (adminDoc.exists && adminDoc.data().active !== false) {
-          isAdmin = true;
-        } else {
-          // Also check if marked as admin in students collection
-          const studentDoc = await db.collection("students").doc(userEmail).get();
-          if (studentDoc.exists && studentDoc.data().role === "admin") {
+      // Master Admin Owner (Base64 encoded)
+      const MASTER_OWNER = atob("YWxwaGFlZGdlcHJvYWNhZGVteUBnbWFpbC5jb20="); // alphaedgeproacademy@gmail.com
+
+      // Check Admin status dynamically from Firebase Firestore + Master Owner fallback
+      let isAdmin = (userEmail === MASTER_OWNER);
+
+      if (!isAdmin) {
+        try {
+          // 1. Check Document ID in 'admins' collection
+          const adminDoc = await db.collection("admins").doc(userEmail).get();
+          if (adminDoc.exists && adminDoc.data().active !== false) {
             isAdmin = true;
+          } else {
+            // 2. Check if Auto-ID document was used in 'admins' with field { email: "..." }
+            const querySnap = await db.collection("admins").where("email", "==", userEmail).limit(1).get();
+            if (!querySnap.empty) {
+              isAdmin = true;
+            } else {
+              // 3. Check if marked as admin in 'students' collection
+              const studentDoc = await db.collection("students").doc(userEmail).get();
+              if (studentDoc.exists && (studentDoc.data().role === "admin" || studentDoc.data().isAdmin === true)) {
+                isAdmin = true;
+              }
+            }
           }
+        } catch (err) {
+          console.warn("Firebase admin verification:", err);
         }
-      } catch (err) {
-        console.warn("Firebase admin verification:", err);
       }
 
       // Setup Topbar
@@ -695,10 +709,18 @@
       db.collection("students").onSnapshot((snapshot) => {
         let pending = [];
         let approved = [];
+        const myEmail = (currentUser && currentUser.email ? currentUser.email.toLowerCase().trim() : "");
 
         snapshot.forEach((doc) => {
-          const item = doc.data();
+          const item = doc.data() || {};
           item.id = doc.id;
+          const itemEmail = (item.email || item.id || "").toLowerCase().trim();
+
+          // Do NOT show admin accounts in the student list (prevents admin from revoking themselves)
+          if (item.role === "admin" || itemEmail === myEmail) {
+            return;
+          }
+
           if (item.status === "approved") {
             approved.push(item);
           } else {
@@ -756,6 +778,11 @@
 
     // Admin Status Updater (1-Click)
     window.updateStudentStatus = async function(emailId, status) {
+      const myEmail = (currentUser && currentUser.email ? currentUser.email.toLowerCase().trim() : "");
+      if (emailId.toLowerCase() === myEmail) {
+        alert("Action blocked: Master Admin account cannot be revoked.");
+        return;
+      }
       try {
         await db.collection("students").doc(emailId).update({
           status: status,
