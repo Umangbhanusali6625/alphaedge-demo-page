@@ -118,26 +118,27 @@
       color: var(--mute, #94a3b8); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; transition: color 0.2s;
     }
     .back-btn:hover { color: var(--gold, #f3c578); }
-    #dashboard-frame { flex: 1; width: 100%; border: none; background: #061220; display: block; }
+    #dashboard-frame { flex: 1; width: 100%; border: none; background: #061220; display: none; }
     #fallback {
-      display: none; flex: 1; flex-direction: column;
-      align-items: center; justify-content: center; gap: 20px; padding: 40px 20px; text-align: center;
+      display: flex; flex: 1; flex-direction: column;
+      align-items: center; justify-content: center; gap: 16px; padding: 40px 20px; text-align: center;
+      background: radial-gradient(circle at center, #0a1322 0%, #03060a 100%);
     }
-    #fallback.visible { display: flex; }
-    .fallback-icon { font-size: 56px; opacity: 0.3; }
-    .fallback-title { font-size: 22px; font-weight: 800; color: #fff; }
-    .fallback-sub { font-size: 14px; color: #64748b; max-width: 420px; line-height: 1.6; }
-    .open-btn {
+    .fallback-icon { font-size: 56px; opacity: 0.4; }
+    .fallback-title { font-size: 24px; font-weight: 800; color: #fff; letter-spacing: -0.01em; }
+    .fallback-sub { font-size: 14px; color: #94a3b8; max-width: 460px; line-height: 1.6; }
+    .standby-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 14px 32px;
-      background: linear-gradient(135deg, #07242c, #0b3844);
-      border: 1px solid rgba(53,209,196,0.5); border-radius: 6px;
-      color: #fff; font-size: 13px; font-weight: 800;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      text-decoration: none; transition: all 0.3s;
-      box-shadow: 0 0 20px rgba(53,209,196,0.25);
+      padding: 6px 16px; background: rgba(59,130,246,0.1);
+      border: 1px solid rgba(59,130,246,0.25); border-radius: 9999px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: #93c5fd; margin-top: 8px;
     }
-    .open-btn:hover { box-shadow: 0 0 35px rgba(53,209,196,0.55); transform: translateY(-2px); }
+    .standby-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #60a5fa; box-shadow: 0 0 6px #60a5fa;
+      animation: pulse 2s infinite;
+    }
   </style>
 </head>
 <body>
@@ -150,8 +151,8 @@
       </div>
     </a>
     <div class="topbar-center">
-      <span class="live-dot"></span>
-      APA + Momentum Dashboard
+      <span class="live-dot" id="header-dot"></span>
+      <span id="header-status">APA + Momentum Dashboard</span>
     </div>
     <div class="topbar-right">
       <a href="index.html" class="back-btn">&#8592; Back to Home</a>
@@ -165,18 +166,79 @@
     id="dashboard-frame"
     title="AlphaEdge Pro Live Market Dashboard"
     allowfullscreen
-    src="https://live.alphaedgeproacademy.com"
   ></iframe>
+
+  <div id="fallback">
+    <div class="fallback-icon">&#128202;</div>
+    <div class="fallback-title">Trading Desk Offline or Market Closed</div>
+    <div class="fallback-sub">
+      The live institutional trading engine is currently offline or the session has ended.<br>
+      Live momentum and option chain stream automatically during active market hours.
+    </div>
+    <div class="standby-badge">
+      <span class="standby-dot"></span>
+      Standby &middot; Auto-Connecting
+    </div>
+  </div>
 
   <script>
     const frame = document.getElementById("dashboard-frame");
+    const fallback = document.getElementById("fallback");
+    const headerDot = document.getElementById("header-dot");
+    const headerStatus = document.getElementById("header-status");
+
     const isLocal = window.location.hostname === "localhost" ||
                     window.location.hostname === "127.0.0.1" ||
                     window.location.protocol === "file:";
 
-    if (isLocal) {
-      frame.src = "http://localhost:3000";
+    const liveTarget = isLocal ? "http://localhost:3000" : "https://live.alphaedgeproacademy.com";
+    let isConnected = false;
+
+    async function checkEngine() {
+      try {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 3500);
+        const res = await fetch(liveTarget + "/api/connection-code", {
+          signal: controller.signal,
+          cache: "no-store"
+        });
+        clearTimeout(timer);
+
+        if (res.ok) {
+          // PC IS RUNNING & ONLINE: Show live dashboard, hide offline card
+          if (!isConnected) {
+            isConnected = true;
+            frame.src = liveTarget;
+            frame.style.display = "block";
+            fallback.style.display = "none";
+            if (headerDot) {
+              headerDot.style.background = "#35d1c4";
+              headerDot.style.boxShadow = "0 0 8px #35d1c4";
+            }
+            if (headerStatus) headerStatus.innerText = "APA + Momentum Dashboard (LIVE)";
+          }
+          return;
+        }
+      } catch (e) {
+        // PC IS CLOSED / OFFLINE
+      }
+
+      // PC is CLOSED: Hide frame, show offline screen without any button
+      isConnected = false;
+      frame.style.display = "none";
+      fallback.style.display = "flex";
+      if (headerDot) {
+        headerDot.style.background = "#64748b";
+        headerDot.style.boxShadow = "none";
+      }
+      if (headerStatus) headerStatus.innerText = "APA + Momentum Dashboard (OFFLINE)";
     }
+
+    // Check immediately on page load
+    checkEngine();
+
+    // Re-check automatically every 8 seconds
+    setInterval(checkEngine, 8000);
   </script>
   <script src="./js/react-bits.js?v=3.4"></script>
 </body>
