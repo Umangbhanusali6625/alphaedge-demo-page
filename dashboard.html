@@ -594,7 +594,11 @@
         const data = doc.data() || {};
         const status = data.status || "pending";
 
-        if (status === "approved") {
+        if (status === "approved" || data.role === "admin") {
+          if (data.role === "admin") {
+            adminMgrBtn.style.display = "inline-flex";
+            initAdminManager();
+          }
           unlockDashboard();
         } else if (status === "rejected") {
           showView("rejected");
