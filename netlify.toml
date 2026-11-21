@@ -44,6 +44,16 @@
   status = 200
 
 [[redirects]]
+  from = "/terminal"
+  to = "/terminal/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/market-data/*"
+  to = "/market-data/:splat"
+  status = 200
+
+[[redirects]]
   from = "/contact"
   to = "/contact.html"
   status = 200
