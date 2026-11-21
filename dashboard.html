@@ -827,33 +827,46 @@
       }
 
       async function checkEngine() {
+        let isAlive = false;
         try {
           const controller = new AbortController();
           const timer = setTimeout(() => controller.abort(), 4000);
-          const res = await fetch(liveTarget + "/api/connection-code", {
-            signal: controller.signal,
-            cache: "no-store",
-          });
-          clearTimeout(timer);
-
-          if (res.ok) {
-            offlineFailures = 0;
-            // PC ONLINE: Load iframe ONLY ONCE. Do NOT reload it!
-            if (!iframeLoaded) {
-              iframeLoaded = true;
-              frame.src = liveTarget;
-            }
-            frame.style.display = "block";
-            fallback.style.display = "none";
-            if (headerDot) headerDot.className = "live-dot active";
-            if (headerStatus)
-              headerStatus.innerText = "APA + Momentum Dashboard (LIVE)";
-            return;
+          try {
+            const res = await fetch(liveTarget + "/api/connection-code", {
+              signal: controller.signal,
+              cache: "no-store",
+            });
+            clearTimeout(timer);
+            if (res.ok) isAlive = true;
+          } catch (err) {
+            clearTimeout(timer);
+            // Robust fallback probe in case of strict browser CORS policies
+            try {
+              const res2 = await fetch(liveTarget + "/api/connection-code", {
+                mode: "no-cors",
+                cache: "no-store"
+              });
+              if (res2.type === "opaque" || res2.ok) isAlive = true;
+            } catch (_) {}
           }
-        } catch (e) {
-          offlineFailures++;
+        } catch (_) {}
+
+        if (isAlive) {
+          offlineFailures = 0;
+          // PC ONLINE: Load iframe ONLY ONCE. Do NOT reload it!
+          if (!iframeLoaded) {
+            iframeLoaded = true;
+            frame.src = liveTarget;
+          }
+          frame.style.display = "block";
+          fallback.style.display = "none";
+          if (headerDot) headerDot.className = "live-dot active";
+          if (headerStatus)
+            headerStatus.innerText = "APA + Momentum Dashboard (LIVE)";
+          return;
         }
 
+        offlineFailures++;
         // Only switch to offline card if 3 consecutive checks fail (prevents brief flickers)
         if (offlineFailures >= 3 || !iframeLoaded) {
           frame.style.display = "none";
