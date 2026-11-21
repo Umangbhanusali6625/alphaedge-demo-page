@@ -1564,9 +1564,9 @@
     window.isValidIndexPrice = isValidIndexPrice;
 
     const DEFAULT_SPOT_BY_INDEX = {
-      'NIFTY': { last_price: 25328.10, ohlc: { open: 25243.95, high: 25335.25, low: 25227.95, close: 25328.10 } },
-      'SENSEX': { last_price: 82360.83, ohlc: { open: 82074.16, high: 82365.32, low: 81698.63, close: 82360.83 } },
-      'BANKNIFTY': { last_price: 62499.60, ohlc: { open: 62081.30, high: 62626.45, low: 61951.10, close: 62499.60 } }
+      'NIFTY': { last_price: 25800.60, ohlc: { open: 25770.00, high: 25830.00, low: 25730.00, close: 25800.60 } },
+      'SENSEX': { last_price: 83919.71, ohlc: { open: 83800.00, high: 84100.00, low: 83700.00, close: 83919.71 } },
+      'BANKNIFTY': { last_price: 64635.20, ohlc: { open: 64500.00, high: 64800.00, low: 64400.00, close: 64635.20 } }
     };
     window.DEFAULT_SPOT_BY_INDEX = DEFAULT_SPOT_BY_INDEX;
 
@@ -1675,6 +1675,12 @@
               const frames = await feedRes.json();
               if (Array.isArray(frames)) {
                 let foundIndexTick = false;
+                const nowUtc = new Date();
+                const nowIst = new Date(nowUtc.getTime() + 19800000);
+                const dayOfWeek = nowIst.getUTCDay(); // 0 = Sun, 6 = Sat
+                const istMins = nowIst.getUTCHours() * 60 + nowIst.getUTCMinutes();
+                const isMarketOpen = (dayOfWeek >= 1 && dayOfWeek <= 5) && (istMins >= 555 && istMins <= 930);
+
                 for (let i = frames.length - 1; i >= 0; i--) {
                   const frame = frames[i];
                   if (!frame || frame.message !== 'feed' || !frame.data) continue;
@@ -1684,16 +1690,27 @@
                   const isIndexTick = (reqIndex === 'NIFTY' && (code === 20000 || name === 'NIFTY')) ||
                                       (reqIndex === 'SENSEX' && (code === 999901 || name === 'SENSEX')) ||
                                       (reqIndex === 'BANKNIFTY' && (code === 26009 || name.includes('BANK')));
-                  if (isIndexTick && typeof d.ltp === 'number' && isValidIndexPrice(reqIndex, d.ltp)) {
-                    if (!foundIndexTick) {
-                      foundIndexTick = true;
-                      liveSpotPrice = d.ltp;
-                      liveSpotOHLC = {
-                        open: (typeof d.open === 'number' && d.open > 0) ? d.open : d.ltp,
-                        high: (typeof d.high === 'number' && d.high >= d.ltp) ? d.high : d.ltp,
-                        low: (typeof d.low === 'number' && d.low > 0 && d.low <= d.ltp) ? d.low : d.ltp,
-                        close: (typeof d.close === 'number' && d.close > 0) ? d.close : d.ltp
-                      };
+                  if (isIndexTick) {
+                    let candidatePrice = null;
+                    if (!isMarketOpen && typeof d.close === 'number' && isValidIndexPrice(reqIndex, d.close)) {
+                      candidatePrice = d.close;
+                    } else if (typeof d.ltp === 'number' && isValidIndexPrice(reqIndex, d.ltp)) {
+                      candidatePrice = d.ltp;
+                    } else if (typeof d.close === 'number' && isValidIndexPrice(reqIndex, d.close)) {
+                      candidatePrice = d.close;
+                    }
+                    if (candidatePrice !== null) {
+                      if (!foundIndexTick) {
+                        foundIndexTick = true;
+                        liveSpotPrice = candidatePrice;
+                        const finalClose = (typeof d.close === 'number' && isValidIndexPrice(reqIndex, d.close)) ? d.close : candidatePrice;
+                        liveSpotOHLC = {
+                          open: (typeof d.open === 'number' && d.open > 0) ? d.open : candidatePrice,
+                          high: (typeof d.high === 'number' && d.high >= candidatePrice) ? d.high : candidatePrice,
+                          low: (typeof d.low === 'number' && d.low > 0 && d.low <= candidatePrice) ? d.low : candidatePrice,
+                          close: finalClose
+                        };
+                      }
                     }
                   } else if (!foundIndexTick && typeof d.spotPrice === 'number' && isValidIndexPrice(reqIndex, d.spotPrice)) {
                     if (!liveSpotPrice) {
@@ -1740,7 +1757,7 @@
                 if (data.spot.ohlc) {
                   data.spot.ohlc.high = Math.max(data.spot.ohlc.high || liveSpotPrice, liveSpotPrice);
                   data.spot.ohlc.low = Math.min(data.spot.ohlc.low || liveSpotPrice, liveSpotPrice);
-                  data.spot.ohlc.close = liveSpotPrice;
+                  data.spot.ohlc.close = liveSpotOHLC?.close || data.spot.ohlc.close || liveSpotPrice;
                 }
               }
             } else if (typeof liveSpotPrice === 'number' && isValidIndexPrice(reqIndex, liveSpotPrice)) {
