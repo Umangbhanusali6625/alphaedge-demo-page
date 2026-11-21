@@ -637,8 +637,8 @@
         window.location.protocol === "file:";
 
       const liveTarget = isLocal
-        ? "http://localhost:3000"
-        : "https://live.alphaedgeproacademy.com";
+        ? "http://localhost:3000/"
+        : "https://live.alphaedgeproacademy.com/";
 
       let currentUser = null;
       let studentUnsub = null;
@@ -808,8 +808,8 @@
         rejectedGate.style.display = "none";
 
         const targetUrl = liveTarget + (isAdmin ? "?role=admin&u=" + encodeURIComponent(currentEmail) : "?role=student&u=" + encodeURIComponent(currentEmail));
-        // INSTANT DISPLAY: Display iframe immediately so user never sees a blank screen
-        if (!iframeLoaded || frame.src !== targetUrl) {
+        // INSTANT DISPLAY: Load iframe once; never re-assign frame.src once loaded
+        if (!iframeLoaded) {
           iframeLoaded = true;
           frame.src = targetUrl;
         }
@@ -824,7 +824,7 @@
       function startEnginePolling() {
         if (enginePollInterval) return;
         checkEngine();
-        enginePollInterval = setInterval(checkEngine, 8000);
+        enginePollInterval = setInterval(checkEngine, 15000);
       }
 
       function stopEnginePolling() {
@@ -843,9 +843,9 @@
         let isAlive = false;
         try {
           const controller = new AbortController();
-          const timer = setTimeout(() => controller.abort(), 2500);
+          const timer = setTimeout(() => controller.abort(), 6000);
           try {
-            const res = await fetch(liveTarget + "/api/connection-code", {
+            const res = await fetch(liveTarget + "api/connection-code", {
               signal: controller.signal,
               cache: "no-store",
             });
@@ -855,8 +855,8 @@
             clearTimeout(timer);
             try {
               const ctrl2 = new AbortController();
-              const timer2 = setTimeout(() => ctrl2.abort(), 2000);
-              const res2 = await fetch(liveTarget + "/api/connection-code", {
+              const timer2 = setTimeout(() => ctrl2.abort(), 4000);
+              const res2 = await fetch(liveTarget + "api/connection-code", {
                 signal: ctrl2.signal,
                 mode: "no-cors",
                 cache: "no-store"
@@ -871,7 +871,7 @@
 
         if (isAlive) {
           offlineFailures = 0;
-          if (!iframeLoaded || frame.src !== targetUrl) {
+          if (!iframeLoaded) {
             iframeLoaded = true;
             frame.src = targetUrl;
           }
@@ -894,12 +894,15 @@
         }
 
         offlineFailures++;
-        if (offlineFailures >= 3) {
-          frame.style.display = "none";
-          fallback.style.display = "flex";
+        if (offlineFailures >= 5) {
           if (headerDot) headerDot.className = "live-dot";
           if (headerStatus)
-            headerStatus.innerText = "APA + Momentum Dashboard (OFFLINE)";
+            headerStatus.innerText = "APA + Momentum Dashboard (RECONNECTING)";
+          // Never blank out loaded iframe; user keeps seeing live data
+          if (!iframeLoaded) {
+            frame.style.display = "none";
+            fallback.style.display = "flex";
+          }
         }
       }
 
