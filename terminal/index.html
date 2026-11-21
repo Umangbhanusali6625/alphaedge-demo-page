@@ -862,6 +862,23 @@
       z-index: 50;
       white-space: nowrap;
     }
+  
+    /* STRICT ADMIN VISIBILITY: HIDE UOP UPLOAD FROM ALL STUDENTS */
+    body:not(.is-admin-mode) .btn-upload-uop-csv,
+    body:not(.is-admin-mode) #btn-upload-uop-csv,
+    body:not(.is-admin-mode) button[title*="Upload UOP"],
+    body:not(.is-admin-mode) button[title*="Admin Access Required"] {
+      display: none !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+    body.is-admin-mode .btn-upload-uop-csv,
+    body.is-admin-mode #btn-upload-uop-csv {
+      display: inline-flex !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+    }
+
   </style>
 
   <script>
@@ -994,8 +1011,20 @@
     };
 
     window.__updateAdminUi = function() {
-      const isAdmin = window.__isAdminUser();
+      const isAdmin = (typeof window.__isAdminUser === 'function') ? window.__isAdminUser() : false;
+      if (isAdmin) {
+        document.body.classList.add('is-admin-mode');
+      } else {
+        document.body.classList.remove('is-admin-mode');
+      }
       const uploadBtn = document.getElementById('btn-upload-uop-csv');
+      if (uploadBtn) {
+        uploadBtn.style.setProperty('display', isAdmin ? 'inline-flex' : 'none', 'important');
+      }
+      document.querySelectorAll('.btn-upload-uop-csv, button[title*="Upload UOP"], button[title*="Admin Access Required"]').forEach(b => {
+        b.style.setProperty('display', isAdmin ? 'inline-flex' : 'none', 'important');
+      });
+      
       let adminBadge = document.getElementById('admin-status-badge');
 
       if (uploadBtn) {
@@ -2303,7 +2332,7 @@
       </div>
     </div>
     <div class="header-right">
-      <button type="button" id="btn-upload-uop-csv" class="btn-action" style="background: linear-gradient(135deg, #374151, #4b5563); border: 1px solid #6b7280; font-weight: 700; cursor: pointer; padding: 5px 12px; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; color: white; margin-right: 8px; font-size: 13px;" title="Upload UOP CSV — Admin Access Required">
+      <button type="button" id="btn-upload-uop-csv" class="btn-action" style="display: none !important; background: linear-gradient(135deg, #374151, #4b5563); border: 1px solid #6b7280; font-weight: 700; cursor: pointer; padding: 5px 12px; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; color: white; margin-right: 8px; font-size: 13px;" title="Upload UOP CSV — Admin Access Required">
         🔒 Upload UOP CSV (Admin)
       </button>
       <input type="file" id="uop-csv-file-input" style="display: none;">
@@ -3847,5 +3876,29 @@
   })();
   </script>
 
+<script>
+    // Continuous Admin UI enforcement & server UOP auto-sync for all students
+    window.__autoSyncUopInterval = setInterval(function() {
+      if (typeof window.__updateAdminUi === 'function') {
+        window.__updateAdminUi();
+      }
+    }, 800);
+
+    // Auto-poll latest server UOP_LEVELS.csv every 12 seconds so normal students see admin uploads
+    setInterval(function() {
+      try {
+        fetch('/market-data/UOP_LEVELS.csv?v=' + Date.now(), { cache: 'no-store' })
+          .then(r => r.ok ? r.text() : '')
+          .then(txt => {
+            if (txt && txt.length > 50 && typeof parseUopCsvText === 'function') {
+              const rows = parseUopCsvText(txt);
+              if (rows.length > 0) {
+                window.__UOP_CUSTOM_ROWS = rows;
+              }
+            }
+          }).catch(function() {});
+      } catch(e) {}
+    }, 12000);
+    </script>
 </body>
 </html>

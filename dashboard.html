@@ -807,6 +807,17 @@
         pendingGate.style.display = "none";
         rejectedGate.style.display = "none";
 
+        const targetUrl = liveTarget + (isAdmin ? "?role=admin&u=" + encodeURIComponent(currentEmail) : "?role=student&u=" + encodeURIComponent(currentEmail));
+        // INSTANT DISPLAY: Display iframe immediately so user never sees a blank screen
+        if (!iframeLoaded || frame.src !== targetUrl) {
+          iframeLoaded = true;
+          frame.src = targetUrl;
+        }
+        frame.style.display = "block";
+        fallback.style.display = "none";
+        if (headerDot) headerDot.className = "live-dot active";
+        if (headerStatus) headerStatus.innerText = "APA + Momentum Dashboard (LIVE)";
+
         startEnginePolling();
       }
 
@@ -832,7 +843,7 @@
         let isAlive = false;
         try {
           const controller = new AbortController();
-          const timer = setTimeout(() => controller.abort(), 4000);
+          const timer = setTimeout(() => controller.abort(), 2500);
           try {
             const res = await fetch(liveTarget + "/api/connection-code", {
               signal: controller.signal,
@@ -842,21 +853,24 @@
             if (res.ok) isAlive = true;
           } catch (err) {
             clearTimeout(timer);
-            // Robust fallback probe in case of strict browser CORS policies
             try {
+              const ctrl2 = new AbortController();
+              const timer2 = setTimeout(() => ctrl2.abort(), 2000);
               const res2 = await fetch(liveTarget + "/api/connection-code", {
+                signal: ctrl2.signal,
                 mode: "no-cors",
                 cache: "no-store"
               });
+              clearTimeout(timer2);
               if (res2.type === "opaque" || res2.ok) isAlive = true;
             } catch (_) {}
           }
         } catch (_) {}
 
+        const targetUrl = liveTarget + (isAdmin ? "?role=admin&u=" + encodeURIComponent(currentEmail) : "?role=student&u=" + encodeURIComponent(currentEmail));
+
         if (isAlive) {
           offlineFailures = 0;
-          const targetUrl = liveTarget + (isAdmin ? "?role=admin&u=" + encodeURIComponent(currentEmail) : "?role=student&u=" + encodeURIComponent(currentEmail));
-          // PC ONLINE: Load iframe ONLY ONCE or if target URL changed
           if (!iframeLoaded || frame.src !== targetUrl) {
             iframeLoaded = true;
             frame.src = targetUrl;
@@ -880,8 +894,7 @@
         }
 
         offlineFailures++;
-        // Only switch to offline card if 3 consecutive checks fail (prevents brief flickers)
-        if (offlineFailures >= 3 || !iframeLoaded) {
+        if (offlineFailures >= 3) {
           frame.style.display = "none";
           fallback.style.display = "flex";
           if (headerDot) headerDot.className = "live-dot";
