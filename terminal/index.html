@@ -42,7 +42,7 @@
       }, false);
     })();
   </script>
-  <title>AlphaEdge Pro Live Terminal</title>
+  <title>ProDeskView — Sharekhan Pro-OI Chain & UOP</title>
   <link rel="stylesheet" href="./index.DAixF4LZ.css">
   <style>
     :root {
@@ -973,6 +973,11 @@
     window.__isAdminUser = function() {
       try {
         const params = new URLSearchParams(window.location.search);
+        // Explicit non-admin / student role
+        if (params.get('role') === 'student' || params.get('admin') === 'false' || params.get('admin') === '0') {
+          sessionStorage.removeItem('prodesk.is_admin');
+          return false;
+        }
         if (params.get('admin') === 'true' || params.get('admin') === '1' || params.get('role') === 'admin' || params.get('key') === 'admin2026') {
           sessionStorage.setItem('prodesk.is_admin', 'true');
           return true;
@@ -1002,7 +1007,7 @@
           uploadBtn.style.borderColor = '#34d399';
           uploadBtn.style.color = '#ffffff';
         } else {
-          uploadBtn.style.display = 'none'; // Strictly hidden for non-admin students
+          uploadBtn.style.display = 'none'; // 100% hidden for all normal users
         }
       }
 
@@ -1035,10 +1040,30 @@
           btn.style.borderColor = '#059669';
           btn.style.color = '#6ee7b7';
         } else {
-          btn.style.display = 'none'; // Strictly hidden for non-admin students
+          btn.style.display = 'none'; // 100% hidden for all normal users
         }
       });
     };
+
+    // Cross-frame messaging listener for role synchronization and real-time Firestore sync
+    window.addEventListener('message', function(ev) {
+      if (ev && ev.data) {
+        if (ev.data.type === 'ALPHAEDGE_AUTH_ROLE') {
+          if (ev.data.isAdmin) {
+            sessionStorage.setItem('prodesk.is_admin', 'true');
+          } else {
+            sessionStorage.removeItem('prodesk.is_admin');
+          }
+          window.__updateAdminUi();
+        }
+        if (ev.data.type === 'ALPHAEDGE_UOP_SYNC' && Array.isArray(ev.data.rows) && ev.data.rows.length > 0) {
+          window.__UOP_CUSTOM_ROWS = ev.data.rows;
+          try { localStorage.setItem('prodesk.custom_uop_levels', JSON.stringify(ev.data.rows)); } catch (_) {}
+          window.dispatchEvent(new CustomEvent('prodesk:uop-updated', { detail: { rows: ev.data.rows, filename: 'FIRESTORE_SYNC' } }));
+          console.log('🔄 Live UOP levels updated from Admin upload:', ev.data.rows.length);
+        }
+      }
+    });
 
     window.__promptAdminLogin = function(callback) {
       if (window.__isAdminUser()) {
@@ -1162,9 +1187,8 @@
 
     function initUopRows() {
       // ALWAYS fetch latest UOP_LEVELS.csv from server to ensure latest data is loaded
-      const csvPath = (window.location.pathname.includes('/terminal') ? './market-data/UOP_LEVELS.csv?v=' : '/market-data/UOP_LEVELS.csv?v=') + Date.now();
-      rawFetch(csvPath)
-        .then(r => r.ok ? r.text() : rawFetch('/market-data/UOP_LEVELS.csv?v=' + Date.now()).then(r2 => r2.ok ? r2.text() : ''))
+      rawFetch('/market-data/UOP_LEVELS.csv?v=' + Date.now())
+        .then(r => r.ok ? r.text() : '')
         .then(txt => {
           if (txt && txt.length > 50) {
             const parsed = parseUopCsvText(txt);
@@ -1194,16 +1218,6 @@
           } catch (e) {}
         });
     }
-
-    // Listen for live Firestore sync messages from parent dashboard
-    window.addEventListener('message', function(ev) {
-      if (ev && ev.data && ev.data.type === 'ALPHAEDGE_UOP_SYNC' && Array.isArray(ev.data.rows) && ev.data.rows.length > 0) {
-        window.__UOP_CUSTOM_ROWS = ev.data.rows;
-        try { localStorage.setItem('prodesk.custom_uop_levels', JSON.stringify(ev.data.rows)); } catch (_) {}
-        window.dispatchEvent(new CustomEvent('prodesk:uop-updated', { detail: { rows: ev.data.rows, filename: 'FIRESTORE_UOP_SYNC' } }));
-        console.log('🔄 Live Firestore UOP sync active:', ev.data.rows.length, 'levels updated.');
-      }
-    });
 
     function showToast(msg, duration = 3500) {
       const t = document.getElementById('toast');
@@ -1386,7 +1400,16 @@
 
       window.dispatchEvent(new CustomEvent('prodesk:uop-updated', { detail: { rows, filename } }));
 
-      // Broadcast to parent dashboard to sync with Firebase Firestore
+      // 1. Post to live server backend so market-data/UOP_LEVELS.csv is updated for all normal users
+      try {
+        fetch('/api/uop/upload', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ rows: rows, filename: filename })
+        }).catch(() => {});
+      } catch (_) {}
+
+      // 2. Broadcast to parent window so Firebase Firestore syncs to all student sessions
       try {
         if (window.parent && window.parent !== window) {
           window.parent.postMessage({
@@ -1618,11 +1641,7 @@
         try {
           // Actively fetch live feed frames directly from engine/market-data feed-sample
           try {
-            const feedPath = (window.location.pathname.includes('/terminal') ? './market-data/' : '/market-data/') + 'feed-sample-' + reqIndex + '.json?_t=' + Date.now();
-            let feedRes = await rawFetch(feedPath, { cache: 'no-store' });
-            if (!feedRes || !feedRes.ok) {
-              feedRes = await rawFetch('/market-data/feed-sample-' + reqIndex + '.json?_t=' + Date.now(), { cache: 'no-store' });
-            }
+            const feedRes = await rawFetch('/market-data/feed-sample-' + reqIndex + '.json?_t=' + Date.now(), { cache: 'no-store' });
             if (feedRes && feedRes.ok) {
               const frames = await feedRes.json();
               if (Array.isArray(frames)) {
