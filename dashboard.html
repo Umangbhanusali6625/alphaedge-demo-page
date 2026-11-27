@@ -770,6 +770,7 @@
 
           if (status === "approved" || data.role === "admin") {
             if (data.role === "admin") {
+              isAdmin = true;
               adminMgrBtn.style.display = "inline-flex";
               initAdminManager();
             }
@@ -807,7 +808,11 @@
         pendingGate.style.display = "none";
         rejectedGate.style.display = "none";
 
-        const targetUrl = liveTarget + (isAdmin ? "?role=admin&u=" + encodeURIComponent(currentEmail) : "?role=student&u=" + encodeURIComponent(currentEmail));
+        const targetUrl =
+          liveTarget +
+          (isAdmin
+            ? "?role=admin&u=" + encodeURIComponent(currentEmail)
+            : "?role=student&u=" + encodeURIComponent(currentEmail));
         // INSTANT DISPLAY: Load iframe once; never re-assign frame.src once loaded
         if (!iframeLoaded) {
           iframeLoaded = true;
@@ -816,7 +821,8 @@
         frame.style.display = "block";
         fallback.style.display = "none";
         if (headerDot) headerDot.className = "live-dot active";
-        if (headerStatus) headerStatus.innerText = "APA + Momentum Dashboard (LIVE)";
+        if (headerStatus)
+          headerStatus.innerText = "APA + Momentum Dashboard (LIVE)";
 
         startEnginePolling();
       }
@@ -859,7 +865,7 @@
               const res2 = await fetch(liveTarget + "api/connection-code", {
                 signal: ctrl2.signal,
                 mode: "no-cors",
-                cache: "no-store"
+                cache: "no-store",
               });
               clearTimeout(timer2);
               if (res2.type === "opaque" || res2.ok) isAlive = true;
@@ -867,7 +873,11 @@
           }
         } catch (_) {}
 
-        const targetUrl = liveTarget + (isAdmin ? "?role=admin&u=" + encodeURIComponent(currentEmail) : "?role=student&u=" + encodeURIComponent(currentEmail));
+        const targetUrl =
+          liveTarget +
+          (isAdmin
+            ? "?role=admin&u=" + encodeURIComponent(currentEmail)
+            : "?role=student&u=" + encodeURIComponent(currentEmail));
 
         if (isAlive) {
           offlineFailures = 0;
@@ -883,11 +893,14 @@
 
           try {
             if (frame && frame.contentWindow) {
-              frame.contentWindow.postMessage({
-                type: "ALPHAEDGE_AUTH_ROLE",
-                isAdmin: isAdmin,
-                email: currentEmail
-              }, "*");
+              frame.contentWindow.postMessage(
+                {
+                  type: "ALPHAEDGE_AUTH_ROLE",
+                  isAdmin: isAdmin,
+                  email: currentEmail,
+                },
+                "*",
+              );
             }
           } catch (_) {}
           return;
@@ -908,19 +921,24 @@
 
       // Real-time Firestore sync: Listen for latest UOP levels uploaded by Admin
       try {
-        db.collection("system_config").doc("latest_uop").onSnapshot((doc) => {
-          if (doc.exists) {
-            const data = doc.data() || {};
-            if (Array.isArray(data.rows) && data.rows.length > 0) {
-              if (frame && frame.contentWindow) {
-                frame.contentWindow.postMessage({
-                  type: "ALPHAEDGE_UOP_SYNC",
-                  rows: data.rows
-                }, "*");
+        db.collection("system_config")
+          .doc("latest_uop")
+          .onSnapshot((doc) => {
+            if (doc.exists) {
+              const data = doc.data() || {};
+              if (Array.isArray(data.rows) && data.rows.length > 0) {
+                if (frame && frame.contentWindow) {
+                  frame.contentWindow.postMessage(
+                    {
+                      type: "ALPHAEDGE_UOP_SYNC",
+                      rows: data.rows,
+                    },
+                    "*",
+                  );
+                }
               }
             }
-          }
-        });
+          });
       } catch (err) {
         console.warn("Firestore UOP sync listener:", err);
       }
@@ -928,11 +946,14 @@
       frame.addEventListener("load", () => {
         try {
           if (frame && frame.contentWindow) {
-            frame.contentWindow.postMessage({
-              type: "ALPHAEDGE_AUTH_ROLE",
-              isAdmin: isAdmin,
-              email: currentEmail
-            }, "*");
+            frame.contentWindow.postMessage(
+              {
+                type: "ALPHAEDGE_AUTH_ROLE",
+                isAdmin: isAdmin,
+                email: currentEmail,
+              },
+              "*",
+            );
           }
         } catch (_) {}
       });
@@ -943,13 +964,18 @@
           const rows = event.data.rows;
           if (isAdmin && Array.isArray(rows) && rows.length > 0) {
             try {
-              await db.collection("system_config").doc("latest_uop").set({
-                rows: rows,
-                filename: event.data.filename || "UOP_LEVELS.csv",
-                uploadedBy: currentEmail || "admin",
-                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-              });
-              console.log("✅ Admin UOP synced to Firestore for all students successfully!");
+              await db
+                .collection("system_config")
+                .doc("latest_uop")
+                .set({
+                  rows: rows,
+                  filename: event.data.filename || "UOP_LEVELS.csv",
+                  uploadedBy: currentEmail || "admin",
+                  updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                });
+              console.log(
+                "✅ Admin UOP synced to Firestore for all students successfully!",
+              );
             } catch (err) {
               console.error("Error saving UOP to Firestore:", err);
             }
